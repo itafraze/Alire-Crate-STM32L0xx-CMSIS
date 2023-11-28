@@ -1,0 +1,23 @@
+= Alire Crate - Stm32l0xx Cmsis
+:toc:
+
+This repository provides the link:https://www.arm.com/technologies/cmsis[Common
+Microcontroller Software Interface Standard] (CMSIS) library for
+STMicroelectronics's MCU series
+link:https://www.st.com/en/microcontrollers-microprocessors/stm32l0-series.html[STM32L0]
+and intended to be distribute through the link:https://alire.ada.dev/[Alire]
+package manager. This library, ported from C to Ada, is based on:
+
+.Sources
+[cols="3,^1",width=75%,frame=none,grid=rows,role=center]
+|===
+| | Version
+
+| Arm Software's CMSIS Version 5 |
+link:https://github.com/ARM-software/CMSIS_5/tree/5.9.0[5.9.0]
+
+| STMicroelectronics's STM32CubeL0 CMSIS Device MCU Component |
+link:https://github.com/STMicroelectronics/cmsis_device_l0/tree/v1.9.3[v1.9.3]
+
+|===
+
