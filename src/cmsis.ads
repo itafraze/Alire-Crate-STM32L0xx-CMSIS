@@ -25,5 +25,6 @@
 --  CMSIS
 ------------------------------------------------------------------------------
 package Cmsis is
+   pragma Preelaborate;
 
 end Cmsis;
