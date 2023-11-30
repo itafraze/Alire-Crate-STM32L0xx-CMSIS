@@ -5,3 +5,6 @@ version = "0.0.0-dev"
 authors = ["Emanuele Zarfati"]
 maintainers = ["Emanuele Zarfati <zarfati.tecno@gmail.com>"]
 maintainers-logins = ["ezetec"]
+
+[[depends-on]]
+hal = "~0.3.0"
