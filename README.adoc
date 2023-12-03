@@ -11,13 +11,26 @@ package manager. This library, ported from C to Ada, is based on:
 .Sources
 [cols="3,^1",width=75%,frame=none,grid=rows,role=center]
 |===
-| | Version
+|Project|Version
 
 | Arm Software's CMSIS Version 5 |
 link:https://github.com/ARM-software/CMSIS_5/tree/5.9.0[5.9.0]
 
 | STMicroelectronics's STM32CubeL0 CMSIS Device MCU Component |
 link:https://github.com/STMicroelectronics/cmsis_device_l0/tree/v1.9.3[v1.9.3]
+
+|===
+
+== Repository structure
+
+.Content
+[cols="1,3",width=75%,frame=none,grid=rows,role=center]
+|===
+|Path|Description
+
+|link:./src/[`src/`] | Library source files
+
+|link:./src/[`tests/`] | Library test files
 
 |===
 
@@ -30,3 +43,19 @@ Unless required by applicable law or agreed to in writing, software distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
+
+== Development
+
+System View Description (SVD) files::
+The link:https://github.com/AdaCore/svd2ada[svd2ada] utility is used to
+generate the device source files that contain descriptions of the
+memory-mapped registers of peripherals. The utility can be retrieved through
+Alire with `alr get svd2ada` and built once the `gnat-native` toolchain is
+added as dependency with `alr with gnat-native`. As an example, the device
+files for STM32L0x1 MCUs are generated with command:
++
+[source,bash]
+----
+svd2ada --gen-interrupts --gen-uint-always --no-uint-subtypes \
+   --base-types-package HAL -o src/stm32l0x1/ src/stm32l0x1/stm32l0x1.svd
+----
