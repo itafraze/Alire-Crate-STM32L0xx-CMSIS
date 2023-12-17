@@ -48,14 +48,25 @@ specific language governing permissions and limitations under the License.
 
 System View Description (SVD) files::
 The link:https://github.com/AdaCore/svd2ada[svd2ada] utility is used to
-generate the device source files that contain descriptions of the
-memory-mapped registers of peripherals. The utility can be retrieved through
-Alire with `alr get svd2ada` and built once the `gnat-native` toolchain is
-added as dependency with `alr with gnat-native`. As an example, the device
-files for STM32L0x1 MCUs are generated with command:
+generate the source files with descriptions of the memory-mapped registers of
+peripherals. This utility can be retrieved through Alire with `alr get
+svd2ada` and built with `alr with gnat-native` once the `gnat-native`
+toolchain is added as dependency. As an example, the device files for
+STM32L0x1 MCUs are generated with command:
 +
 [source,bash]
 ----
 svd2ada --gen-interrupts --gen-uint-always --no-uint-subtypes \
    --base-types-package HAL -o src/stm32l0x1/ src/stm32l0x1/stm32l0x1.svd
 ----
++
+The official SVD files can be obtained directly from STMicroelectronics,
+located within the CAD resources section of each device webpage (for example
+link:https://www.st.com/en/microcontrollers-microprocessors/stm32l011d4.html#cad-resources[stm32l011d4's
+webpage]). At the time of writing, the SVD files supplied by
+STMicroelectronics are affected by errors, as demonstrated by the effort spent
+by the Rust community on project
+link:https://github.com/stm32-rs/stm32-rs[stm32-rs] to patch and keep them up
+to date. Unfavourably, these patched SVD cannot be supplied to `svd2ada` as
+the tool does not yet support the latest SVD specification. As a consequence,
+the device files here committed contain errors. Double check them before use.
