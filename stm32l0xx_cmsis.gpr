@@ -6,7 +6,17 @@ project Stm32l0xx_Cmsis is
    for Library_Version use
       Project'Library_Name & ".so." & Stm32l0xx_Cmsis_Config.Crate_Version;
 
-   for Source_Dirs use ("src/", "config/");
+   --  Surce directories
+   Device_Source_Dirs := ();
+   case Stm32l0xx_Cmsis_Config.Device is
+      --  Category 1 devices
+      when "stm32l011d4" =>
+         Device_Source_Dirs := Device_Source_Dirs & (
+               "src/stm32l0x1/"
+            );
+   end case;
+
+   for Source_Dirs use ("src/", "config/") & Device_Source_Dirs;
    for Object_Dir use "obj/" & Stm32l0xx_Cmsis_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";

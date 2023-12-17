@@ -11,3 +11,6 @@ hal = "~0.3.0"
 
 [build-switches]
 "*".Ada_Version = "Ada2022"
+
+[configuration.variables]
+Device = {type = "Enum", values = ["stm32l011d4"], default = "stm32l011d4"}
