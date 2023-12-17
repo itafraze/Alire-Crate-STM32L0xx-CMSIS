@@ -8,3 +8,6 @@ maintainers-logins = ["ezetec"]
 
 [[depends-on]]
 hal = "~0.3.0"
+
+[build-switches]
+"*".Ada_Version = "Ada2022"
