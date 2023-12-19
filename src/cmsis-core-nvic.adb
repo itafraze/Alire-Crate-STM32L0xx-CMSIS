@@ -21,6 +21,8 @@
 --
 ------------------------------------------------------------------------------
 
+with Interfaces;
+
 with HAL;
 
 with Cmsis.Device.NVIC;
@@ -37,6 +39,25 @@ package body Cmsis.Core.NVIC is
 
    use type HAL.UInt8;
    subtype NVIC_PRI_Type is HAL.UInt8;
+
+   ---------------------------------------------------------------------------
+   --  Enable_IRQ
+   --
+   --    Enables a device specific interrupt in the NVIC interrupt controller.
+   --
+   procedure Enable_IRQ (IRQ : Interrupt_Type)
+   is
+      use Interfaces;
+      use Cmsis.Device.NVIC;
+
+      subtype NVIC_ISER_Type is HAL.UInt32;
+
+      Bit_0 : constant Unsigned_32 := 2#1#;
+   begin
+
+      NVIC_Periph.ISER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+
+   end Enable_IRQ;
 
    ---------------------------------------------------------------------------
    --  Priority_To_PRI_Value

@@ -35,6 +35,13 @@ with Cmsis.Core.Types;
 package Cmsis.Core.NVIC is
 
    ---------------------------------------------------------------------------
+   --  Enable_IRQ
+   --
+   --    Enables a device specific interrupt.
+   --
+   procedure Enable_IRQ (IRQ : Interrupt_Type);
+
+   ---------------------------------------------------------------------------
    --  Set_Priority
    --
    --    Sets the priority for the device-specific interrupt specified by
