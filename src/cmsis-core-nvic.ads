@@ -35,37 +35,34 @@ with Cmsis.Core.Types;
 package Cmsis.Core.NVIC is
 
    ---------------------------------------------------------------------------
-   --  NVIC_Set_Priority
+   --  Set_Priority
    --
-   --    Sets the priority for the interrupt specified by IRQ_Number.
-   --    IRQ_Number can specify any device specific interrupt, or processor
-   --    exception. The priority specifies the interrupt priority value,
-   --    whereby lower values indicate a higher priority. The default priority
-   --    is 0 for every interrupt. This is the highest possible priority.
+   --    Sets the priority for the device-specific interrupt specified by
+   --    IRQ. The priority specifies the interrupt priority value, whereby
+   --    lower values indicate a higher priority. The default priority is 0
+   --    for every interrupt. This is the highest possible priority.
    --
    --  Notes:
    --    - Dynamic switching of interrupt priority levels is not supported.
    --      The priority level of an interrupt should not be changed after it
    --      has been enabled.
    --
-   procedure Set_Priority (IRQn     : Interrupt_Type;
+   procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type);
 
    ---------------------------------------------------------------------------
-   --  NVIC_Set_Priority
+   --  Set_Priority
    --
-   --    Sets the priority for the interrupt specified by IRQ_Number.
-   --    IRQ_Number can specify any device specific interrupt, or processor
-   --    exception. The priority specifies the interrupt priority value,
-   --    whereby lower values indicate a higher priority. The default priority
-   --    is 0 for every interrupt. This is the highest possible priority.
+   --    Sets the priority for the processor exception specified by IRQ. The
+   --    priority specifies the interrupt priority value, whereby lower values
+   --    indicate a higher priority.
    --
    --  Notes:
    --    - Dynamic switching of interrupt priority levels is not supported.
    --      The priority level of an interrupt should not be changed after it
    --      has been enabled.
    --
-   procedure Set_Priority (IRQn     : Exception_Type;
+   procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type);
 
 end Cmsis.Core.NVIC;

@@ -55,13 +55,13 @@ package body Cmsis.Core.NVIC is
    --
    --  Implementation notes:
    --
-   procedure Set_Priority (IRQn     : Interrupt_Type;
+   procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type)
    is
       use Cmsis.Device.NVIC;
 
       --  NVIC support up to 32 interrupts. The first device-specific
-      --  interrupt has the IRQn value 0.
+      --  interrupt has the IRQ value 0.
       type NVIC_PRI_Range_Type is range 0 .. Interrupt_Type'Last'Enum_Rep;
 
       --  Map the array of PRI registers
@@ -71,11 +71,11 @@ package body Cmsis.Core.NVIC is
       PRI_Value : constant NVIC_PRI_Type := Priority_To_PRI_Value (Priority);
    begin
 
-      NVIC_PRI_Fields_Array (IRQn'Enum_Rep) := PRI_Value;
+      NVIC_PRI_Fields_Array (IRQ'Enum_Rep) := PRI_Value;
 
    end Set_Priority;
 
-   procedure Set_Priority (IRQn     : Exception_Type;
+   procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type)
    is
       use Cmsis.Device.SCB;
@@ -83,7 +83,7 @@ package body Cmsis.Core.NVIC is
       PRI_Value : constant NVIC_PRI_Type := Priority_To_PRI_Value (Priority);
    begin
 
-      case IRQn is
+      case IRQ is
          when IRQ_SV_CALL     => SCB_Periph.SHPR2.PRI_11 := PRI_Value;
          when IRQ_PEND_SV     => SCB_Periph.SHPR3.PRI_14 := PRI_Value;
          when IRQ_SYSTEM_TICK => SCB_Periph.SHPR3.PRI_15 := PRI_Value;
