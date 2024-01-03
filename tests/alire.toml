@@ -19,3 +19,4 @@ stm32l0xx_cmsis = "validation"
 
 [configuration.values]
 stm32l0xx_cmsis.Device = "stm32l011d4"
+stm32l0xx_cmsis.With_Startup = true

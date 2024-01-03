@@ -14,3 +14,4 @@ hal = "~0.3.0"
 
 [configuration.variables]
 Device = {type = "Enum", values = ["stm32l011d4"], default = "stm32l011d4"}
+With_Startup = {type = "Boolean", default = true}

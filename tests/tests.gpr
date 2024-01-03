@@ -1,6 +1,12 @@
 with "config/tests_config.gpr";
+with "stm32l0xx_cmsis.gpr";
+
 project Tests is
 
+   --  The list of languages of the sources of the project.
+   for Languages use ("Ada");
+
+   --  Target platform and Runtime environment
    for Target use "arm-eabi";
    for Runtime ("Ada") use "light-cortex-m0p";
 
@@ -10,6 +16,10 @@ project Tests is
    for Exec_Dir use "bin";
    for Main use ("tests.adb");
 
+   package Builder is
+      for Switches ("tests") use ("--create-map-file");
+   end Builder;
+
    package Compiler is
       for Default_Switches ("Ada") use Tests_Config.Ada_Compiler_Switches;
    end Compiler;
@@ -18,4 +28,8 @@ project Tests is
       for Switches ("Ada") use ("-Es"); --  Symbolic traceback
    end Binder;
 
+   package Linker is
+      for Switches ("Ada") use (
+         "-T", Stm32l0xx_Cmsis.Linker.Default_Script);
+   end Linker;
 end Tests;

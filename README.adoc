@@ -70,3 +70,18 @@ link:https://github.com/stm32-rs/stm32-rs[stm32-rs] to patch and keep them up
 to date. Unfavourably, these patched SVD cannot be supplied to `svd2ada` as
 the tool does not yet support the latest SVD specification. As a consequence,
 the device files here committed contain errors. Double check them before use.
+
+Startup file and linker script::
+The link:https://github.com/AdaCore/startup-gen[startup-gen] utility is used
+to generate the startup file `crt0.S` and the linker script `link.ld` based on
+the template files `crt0.S.tmplt` and `link.ld.tmplt` respectively. Similarly
+to link:https://github.com/AdaCore/svd2ada[svd2ada], this utility can be
+retrieved with `alr get startup-gen` and built with `alr with gnat-native`
+once the `gnat-native` toolchain is added as dependency. The files cen be
+generated with, for example, executing:
++
+[source,bash]
+----
+startup_gen -P stm32l0xx_cmsis.gpr \
+   -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
+----
