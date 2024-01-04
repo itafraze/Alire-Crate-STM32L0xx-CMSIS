@@ -10,6 +10,7 @@ executables = ["tests"]
 
 [[depends-on]]
 stm32l0xx_cmsis = "*"
+gnat_arm_elf = "^13.2.1"
 
 [[pins]]
 stm32l0xx_cmsis = { path='..' }

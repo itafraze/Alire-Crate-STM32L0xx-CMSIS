@@ -18,6 +18,7 @@ project Tests is
 
    package Builder is
       for Switches ("tests") use ("--create-map-file");
+      for Executable_Suffix use ".elf";
    end Builder;
 
    package Compiler is
