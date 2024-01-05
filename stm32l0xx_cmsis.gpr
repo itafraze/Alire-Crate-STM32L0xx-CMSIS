@@ -47,6 +47,18 @@ project Stm32l0xx_Cmsis is
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
 
+   --  Properties of the target device to generate startup files (crt0 and
+   --  linker script)
+   Flash_Addr := "0x08000000";
+   Flash_Size := "";
+   Sram_Addr := "0x20000000";
+   Sram_Size := "";
+   case Stm32l0xx_Cmsis_Config.Device is
+      when "stm32l011d4" =>
+         Flash_Size := "16K";
+         Sram_Size := "2K";
+   end case;
+
    package Compiler is
       for Default_Switches ("Ada") use
          Stm32l0xx_Cmsis_Config.Ada_Compiler_Switches;
@@ -64,8 +76,6 @@ project Stm32l0xx_Cmsis is
       for Artifacts (".") use ("share");
    end Install;
 
-   --  Properties of the target device to generate startup files (crt0 and
-   --  linker script)
    package Device_Configuration is
 
       -- Templates
@@ -82,16 +92,12 @@ project Stm32l0xx_Cmsis is
       for Main_Stack_Memory use "SRAM";
 
       for Mem_Kind ("FLASH") use "ROM";
-      for Address ("FLASH") use "16#08000000#";
+      for Address ("FLASH") use Flash_Addr;
+      for Size ("FLASH") use Flash_Size;
 
       for Mem_Kind ("SRAM") use "RAM";
-      for Address ("SRAM") use "16#20000000#";
-
-      case Stm32l0xx_Cmsis_Config.Device is
-         when "stm32l011d4" =>
-            for Size ("FLASH") use "16K";
-            for Size ("SRAM")  use "2K";
-      end case;
+      for Address ("SRAM") use Sram_Addr;
+      for Size ("SRAM")  use Sram_Size;
 
       --  Interrupts
       for Number_Of_Interrupts use "32";

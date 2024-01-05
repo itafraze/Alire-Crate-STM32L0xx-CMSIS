@@ -85,3 +85,28 @@ generated with, for example, executing:
 startup_gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
+
+Tests on emulated target::
+The target platform can be emulated using GNATemu, which cannot be found
+available through Alire at the time of writing. However non-GNATPro users may
+still find available ARM ELF GNAT Community Edition, which ships also the
+`arm-eabi-gnatemu` binary, at AdaCore's
+link:https://www.adacore.com/download[Download page].
++
+Sub-crate project link:./tests/tests.gpr[`tests/tests.gpr`] supplies the
+`Emulator` package with minimal working configuration. Assuming
+`arm-eabi-gnatemu` exists in `PATH`, create for convenience the Alire alias
+`gnatemu` with
++
+[source,bash]
+----
+alr config --global --set alias.gnatemu "exec -P1 arm-eabi-gnatemu -P"
+----
++
+and start the emulator within the `tests` subfolder with `alr gnatemu`. In
+another terminal window launch GDB with
++
+[source,bash]
+----
+arm-eabi-gdb -x share/tests/gdbinit
+----
