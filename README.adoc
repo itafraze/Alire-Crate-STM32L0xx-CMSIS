@@ -30,7 +30,7 @@ link:https://github.com/STMicroelectronics/cmsis_device_l0/tree/v1.9.3[v1.9.3]
 
 |link:./src/[`src/`] | Library source files
 
-|link:./src/[`tests/`] | Library test files
+|link:./tests/[`tests/`] | Library test files
 
 |===
 
