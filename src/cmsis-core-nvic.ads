@@ -44,10 +44,11 @@ package Cmsis.Core.NVIC is
    ---------------------------------------------------------------------------
    --  Set_Priority
    --
-   --    Sets the priority for the device-specific interrupt specified by
-   --    IRQ. The priority specifies the interrupt priority value, whereby
-   --    lower values indicate a higher priority. The default priority is 0
-   --    for every interrupt. This is the highest possible priority.
+   --    Sets the priority for the processor exception or device-specific
+   --    interrupt specified by IRQ. The priority specifies the exception or
+   --    interrupt priority value, whereby lower values indicate a higher
+   --    priority. The default interrupt priority is 0, the highest possible
+   --    interrupt priority.
    --
    --  Notes:
    --    - Dynamic switching of interrupt priority levels is not supported.
@@ -56,19 +57,6 @@ package Cmsis.Core.NVIC is
    --
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type);
-
-   ---------------------------------------------------------------------------
-   --  Set_Priority
-   --
-   --    Sets the priority for the processor exception specified by IRQ. The
-   --    priority specifies the interrupt priority value, whereby lower values
-   --    indicate a higher priority.
-   --
-   --  Notes:
-   --    - Dynamic switching of interrupt priority levels is not supported.
-   --      The priority level of an interrupt should not be changed after it
-   --      has been enabled.
-   --
    procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type);
 

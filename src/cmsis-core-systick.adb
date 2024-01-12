@@ -40,7 +40,7 @@ package body Cmsis.Core.SysTick is
    --
    --  Implementation notes:
    --     No check is enforced on the input parater as its type already
-   --     enforces its allowed range.
+   --     enforces the allowed values.
    --
    procedure Config (Ticks : Ticks_Type)
    is

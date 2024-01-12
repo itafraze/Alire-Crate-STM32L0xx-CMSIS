@@ -66,6 +66,7 @@ package body Cmsis.Core.NVIC is
    --     Each PRI_N field is 8 bits wide, but the processor implements only
    --     bits[7:6] of each field, and bits[5:0] read as zero and ignore
    --     writes.
+   --
    function Priority_To_PRI_Value (Priority : Priority_Type)
       return NVIC_PRI_Type
       is (NVIC_PRI_Type (Priority) * (2 ** 6))
@@ -74,7 +75,9 @@ package body Cmsis.Core.NVIC is
    ---------------------------------------------------------------------------
    --  Set_Priority
    --
-   --  Implementation notes:
+   --  Implementation notes: Based on __NVIC_SetPriority, however the function
+   --     has been split into two separate implementations to handle
+   --     exceptions and interrupts separately. thank you overloading
    --
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type)
