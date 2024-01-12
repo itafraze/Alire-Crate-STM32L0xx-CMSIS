@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,7 +18,8 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
---
+--    2024.01 E. Zarfati
+--       - Supply interface Disable_IRQ
 ------------------------------------------------------------------------------
 
 with Cmsis.Core.Types;
@@ -40,6 +41,13 @@ package Cmsis.Core.NVIC is
    --    Enables a device specific interrupt.
    --
    procedure Enable_IRQ (IRQ : Interrupt_Type);
+
+   ---------------------------------------------------------------------------
+   --  Disable_IRQ
+   --
+   --    Disable a device specific interrupt.
+   --
+   procedure Disable_IRQ (IRQ : Interrupt_Type);
 
    ---------------------------------------------------------------------------
    --  Set_Priority

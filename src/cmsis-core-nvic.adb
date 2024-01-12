@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,7 +18,8 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
---
+--    2024.01 E. Zarfati
+--       - Implement procedure Disable_IRQ
 ------------------------------------------------------------------------------
 
 with Interfaces;
@@ -58,6 +59,26 @@ package body Cmsis.Core.NVIC is
       NVIC_Periph.ISER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
 
    end Enable_IRQ;
+
+   ---------------------------------------------------------------------------
+   --  Disable_IRQ
+   --
+   --    Disables a device specific interrupt in the NVIC interrupt
+   --    controller.
+   --
+   procedure Disable_IRQ (IRQ : Interrupt_Type)
+   is
+      use Interfaces;
+      use Cmsis.Device.NVIC;
+
+      subtype NVIC_ISER_Type is HAL.UInt32;
+
+      Bit_0 : constant Unsigned_32 := 2#1#;
+   begin
+
+      NVIC_Periph.ICER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+
+   end Disable_IRQ;
 
    ---------------------------------------------------------------------------
    --  Priority_To_PRI_Value
