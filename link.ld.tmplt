@@ -93,6 +93,9 @@ MEMORY
 
 ENTRY(Reset_Handler)
 
+/*
+   @_BOOT_MEM_@
+*/
 SECTIONS
 {
    .isr_vector __@_BOOT_MEM_@_BASE :
@@ -115,7 +118,13 @@ SECTIONS
       _etext = .;
    } > @_BOOT_MEM_@
    _wtext = (_etext - _stext) >> 2;
+}
 
+/*
+   @_MAIN_RAM_@
+ */
+SECTIONS
+{
    .data :
    {
       . = ALIGN(4);
@@ -160,4 +169,22 @@ SECTIONS
       _estack = .;
    } > @_MAIN_RAM_@
    _wstack = (_estack - _sstack) >> 2;
+}
+
+/*
+   EEPROM
+ */
+SECTIONS
+{
+   .eeprom :
+   {
+      . = ALIGN(4);
+      _seeprom = .;
+
+      *(.eeprom*)
+
+      . = ALIGN(4);
+      _eeeprom = .;
+   } > EEPROM
+   _weeprom = (_eeeprom - _seeprom) >> 2;
 }

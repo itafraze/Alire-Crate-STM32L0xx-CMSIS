@@ -11,6 +11,9 @@
 __FLASH_BASE = 0x8000000;
 __FLASH_LEN = 0x4000;
 
+__EEPROM_BASE = 0x8080000;
+__EEPROM_LEN = 0x200;
+
 __SRAM_BASE = 0x20000000;
 __SRAM_LEN = 0x800;
 
@@ -23,6 +26,7 @@ MEMORY
 {
    /*  ROM memories  */
    FLASH (rx) : ORIGIN = __FLASH_BASE, LENGTH = __FLASH_LEN
+   EEPROM (rx) : ORIGIN = __EEPROM_BASE, LENGTH = __EEPROM_LEN
 
    /*  RAM memories  */
    SRAM (rwx) : ORIGIN = __SRAM_BASE, LENGTH = __SRAM_LEN
@@ -34,6 +38,9 @@ MEMORY
 
 ENTRY(Reset_Handler)
 
+/*
+   FLASH
+*/
 SECTIONS
 {
    .isr_vector __FLASH_BASE :
@@ -56,7 +63,13 @@ SECTIONS
       _etext = .;
    } > FLASH
    _wtext = (_etext - _stext) >> 2;
+}
 
+/*
+   SRAM
+ */
+SECTIONS
+{
    .data :
    {
       . = ALIGN(4);
@@ -101,4 +114,22 @@ SECTIONS
       _estack = .;
    } > SRAM
    _wstack = (_estack - _sstack) >> 2;
+}
+
+/*
+   EEPROM
+ */
+SECTIONS
+{
+   .eeprom :
+   {
+      . = ALIGN(4);
+      _seeprom = .;
+
+      *(.eeprom*)
+
+      . = ALIGN(4);
+      _eeeprom = .;
+   } > EEPROM
+   _weeprom = (_eeeprom - _seeprom) >> 2;
 }

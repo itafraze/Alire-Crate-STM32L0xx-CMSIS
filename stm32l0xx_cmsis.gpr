@@ -50,13 +50,16 @@ project Stm32l0xx_Cmsis is
    --  Properties of the target device to generate startup files (crt0 and
    --  linker script)
    Flash_Addr := "0x08000000";
-   Flash_Size := "";
+   Flash_Size := "0";
    Sram_Addr := "0x20000000";
-   Sram_Size := "";
+   Sram_Size := "0";
+   Eeprom_Addr := "0x08080000";
+   Eeprom_Size := "0";
    case Stm32l0xx_Cmsis_Config.Device is
       when "stm32l011d4" =>
          Flash_Size := "16K";
          Sram_Size := "2K";
+         Eeprom_Size := "512";
    end case;
 
    package Compiler is
@@ -87,7 +90,7 @@ project Stm32l0xx_Cmsis is
       for Float_Handling use "soft";
 
       --  Memory map
-      for Memories use ("FLASH", "SRAM");
+      for Memories use ("FLASH", "SRAM", "EEPROM");
       for Boot_Memory use "FLASH";
       for Main_Stack_Memory use "SRAM";
 
@@ -98,6 +101,10 @@ project Stm32l0xx_Cmsis is
       for Mem_Kind ("SRAM") use "RAM";
       for Address ("SRAM") use Sram_Addr;
       for Size ("SRAM")  use Sram_Size;
+
+      for Mem_Kind ("EEPROM") use "ROM";
+      for Address ("EEPROM") use Eeprom_Addr;
+      for Size ("EEPROM")  use Eeprom_Size;
 
       --  Interrupts
       for Number_Of_Interrupts use "32";
