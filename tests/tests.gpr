@@ -31,7 +31,8 @@ project Tests is
 
    package Linker is
       for Switches ("Ada") use (
-         "-T", Stm32l0xx_Cmsis.Linker.Default_Script);
+         "-T", Stm32l0xx_Cmsis.Linker.Default_Script,
+         "-Wl,--print-memory-usage");
    end Linker;
 
    package Emulator is
