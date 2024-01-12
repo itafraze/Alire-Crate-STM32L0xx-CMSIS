@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,7 +18,8 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
---
+--    2024.01 E. Zarfati
+--       - Make procedure Init visible the start-up code
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
@@ -52,6 +53,10 @@ package Cmsis.System is
    --  Purpose:
    --     Initializes the microcontroller system.
    --
-   procedure Init;
+   procedure Init
+      with
+         Export        => True,
+         Convention    => Asm,
+         External_Name => "Cmsis_System_Init";
 
 end Cmsis.System;

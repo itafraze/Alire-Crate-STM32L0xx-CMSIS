@@ -166,12 +166,11 @@ Reset_Handler:
    bl    __fill_words
 
    /*  Execute the system initialization procedure if it exists  */
-   .weak SystemInit
-   ldr   r0,=SystemInit
+   ldr   r0,=Cmsis_System_Init
    cmp   r0,#0
-   beq   __skip_SystemInit
+   beq   __skip_cmsis_system_init
    blx    r0
-__skip_SystemInit:
+__skip_cmsis_system_init:
 
    /*  Execute the libc initialization procedure if it exists  */
    .weak __libc_init_array

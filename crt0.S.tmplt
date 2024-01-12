@@ -1,5 +1,5 @@
 @@----------------------------------------------------------------------------
-@@--  Copyright 2023, Emanuele Zarfati
+@@--  Copyright 2024, Emanuele Zarfati
 @@--
 @@--  Licensed under the Apache License, Version 2.0 (the "License");
 @@--  you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 @@--  Revision History:
 @@--    2024.01 E. Zarfati
 @@--       - First version
-@@--
+@@--       - Strictly require linking to Cmsis_System_Init
 @@----------------------------------------------------------------------------
 
 /*----------------------------------------------------------------------------
@@ -132,12 +132,11 @@ Reset_Handler:
    bl    __fill_words
 
    /*  Execute the system initialization procedure if it exists  */
-   .weak SystemInit
-   ldr   r0,=SystemInit
+   ldr   r0,=Cmsis_System_Init
    cmp   r0,#0
-   beq   __skip_SystemInit
+   beq   __skip_cmsis_system_init
    blx    r0
-__skip_SystemInit:
+__skip_cmsis_system_init:
 
    /*  Execute the libc initialization procedure if it exists  */
    .weak __libc_init_array
