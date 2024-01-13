@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,7 +18,8 @@
 --  Revision History:
 --    2023.11 E. Zarfati
 --       - First version
---
+--    2024.01 E. Zarfati
+--       - Add interface Compiler_Barrier
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
@@ -48,5 +49,35 @@
 ------------------------------------------------------------------------------
 package Cmsis.Core is
    pragma Preelaborate;
+
+   ---------------------------------------------------------------------------
+   --  Compiler_Barrier
+   --
+   --    This barrier limits the compilers reordering optimizations. It
+   --    prevents the compiler from swapping instructions resulting from code
+   --    before and after the barrier.
+   --
+   procedure Compiler_Barrier
+      with Inline;
+
+   ---------------------------------------------------------------------------
+   --  Data_Synchronization_Barrier
+   --
+   --    This function acts as a special kind of Data Memory Barrier. It
+   --    completes when all explicit memory accesses before this instruction
+   --    complete.
+   --
+   procedure Data_Synchronization_Barrier
+      with Inline;
+
+   ---------------------------------------------------------------------------
+   --  Data_Synchronization_Barrier
+   --
+   --    Instruction Synchronization Barrier flushes the pipeline in the
+   --    processor, so that all instructions following the ISB are fetched
+   --    from cache or memory, after the instruction has been completed.
+   --
+   procedure Instruction_Synchronization_Barrier
+      with Inline;
 
 end Cmsis.Core;
