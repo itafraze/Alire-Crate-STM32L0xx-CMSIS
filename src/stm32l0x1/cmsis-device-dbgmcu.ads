@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.DBGMCU is
+package Cmsis.Device.DBGMCU is
    pragma Preelaborate;
 
    ---------------
@@ -150,4 +150,4 @@ package STM32L0x1.DBGMCU is
    DBG_Periph : aliased DBG_Peripheral
      with Import, Address => DBG_Base;
 
-end STM32L0x1.DBGMCU;
+end Cmsis.Device.DBGMCU;

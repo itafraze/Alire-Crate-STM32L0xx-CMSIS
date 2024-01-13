@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.RTC is
+package Cmsis.Device.RTC is
    pragma Preelaborate;
 
    ---------------
@@ -726,4 +726,4 @@ package STM32L0x1.RTC is
    RTC_Periph : aliased RTC_Peripheral
      with Import, Address => RTC_Base;
 
-end STM32L0x1.RTC;
+end Cmsis.Device.RTC;

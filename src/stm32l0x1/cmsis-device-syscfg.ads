@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.SYSCFG is
+package Cmsis.Device.SYSCFG is
    pragma Preelaborate;
 
    ---------------
@@ -431,4 +431,4 @@ package STM32L0x1.SYSCFG is
    SYSCFG_COMP_Periph : aliased SYSCFG_COMP_Peripheral
      with Import, Address => SYSCFG_COMP_Base;
 
-end STM32L0x1.SYSCFG;
+end Cmsis.Device.SYSCFG;

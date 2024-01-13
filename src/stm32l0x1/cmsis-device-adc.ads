@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.ADC is
+package Cmsis.Device.ADC is
    pragma Preelaborate;
 
    ---------------
@@ -409,4 +409,4 @@ package STM32L0x1.ADC is
    ADC_Periph : aliased ADC_Peripheral
      with Import, Address => ADC_Base;
 
-end STM32L0x1.ADC;
+end Cmsis.Device.ADC;

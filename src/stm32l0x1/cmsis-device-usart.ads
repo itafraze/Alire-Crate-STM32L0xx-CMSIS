@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.USART is
+package Cmsis.Device.USART is
    pragma Preelaborate;
 
    ---------------
@@ -1002,4 +1002,4 @@ package STM32L0x1.USART is
    USART5_Periph : aliased USART_Peripheral
      with Import, Address => USART5_Base;
 
-end STM32L0x1.USART;
+end Cmsis.Device.USART;

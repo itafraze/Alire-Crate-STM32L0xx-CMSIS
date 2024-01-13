@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.Firewall is
+package Cmsis.Device.Firewall is
    pragma Preelaborate;
 
    ---------------
@@ -180,4 +180,4 @@ package STM32L0x1.Firewall is
    Firewall_Periph : aliased Firewall_Peripheral
      with Import, Address => Firewall_Base;
 
-end STM32L0x1.Firewall;
+end Cmsis.Device.Firewall;

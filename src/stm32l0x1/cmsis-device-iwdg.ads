@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.IWDG is
+package Cmsis.Device.IWDG is
    pragma Preelaborate;
 
    ---------------
@@ -126,4 +126,4 @@ package STM32L0x1.IWDG is
    IWDG_Periph : aliased IWDG_Peripheral
      with Import, Address => IWDG_Base;
 
-end STM32L0x1.IWDG;
+end Cmsis.Device.IWDG;

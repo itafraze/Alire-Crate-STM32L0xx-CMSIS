@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.RCC is
+package Cmsis.Device.RCC is
    pragma Preelaborate;
 
    ---------------
@@ -1222,4 +1222,4 @@ package STM32L0x1.RCC is
    RCC_Periph : aliased RCC_Peripheral
      with Import, Address => RCC_Base;
 
-end STM32L0x1.RCC;
+end Cmsis.Device.RCC;

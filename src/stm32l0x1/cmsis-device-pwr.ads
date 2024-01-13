@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.PWR is
+package Cmsis.Device.PWR is
    pragma Preelaborate;
 
    ---------------
@@ -123,4 +123,4 @@ package STM32L0x1.PWR is
    PWR_Periph : aliased PWR_Peripheral
      with Import, Address => PWR_Base;
 
-end STM32L0x1.PWR;
+end Cmsis.Device.PWR;

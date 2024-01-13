@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.AES is
+package Cmsis.Device.AES is
    pragma Preelaborate;
 
    ---------------
@@ -130,4 +130,4 @@ package STM32L0x1.AES is
    AES_Periph : aliased AES_Peripheral
      with Import, Address => AES_Base;
 
-end STM32L0x1.AES;
+end Cmsis.Device.AES;

@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.GPIO is
+package Cmsis.Device.GPIO is
    pragma Preelaborate;
 
    ---------------
@@ -510,4 +510,4 @@ package STM32L0x1.GPIO is
    GPIOH_Periph : aliased GPIO_Peripheral
      with Import, Address => GPIOH_Base;
 
-end STM32L0x1.GPIO;
+end Cmsis.Device.GPIO;

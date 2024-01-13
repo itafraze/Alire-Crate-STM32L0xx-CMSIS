@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.Flash is
+package Cmsis.Device.Flash is
    pragma Preelaborate;
 
    ---------------
@@ -237,4 +237,4 @@ package STM32L0x1.Flash is
    Flash_Periph : aliased Flash_Peripheral
      with Import, Address => Flash_Base;
 
-end STM32L0x1.Flash;
+end Cmsis.Device.Flash;

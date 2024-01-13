@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.DMA is
+package Cmsis.Device.DMA is
    pragma Preelaborate;
 
    ---------------
@@ -411,4 +411,4 @@ package STM32L0x1.DMA is
    DMA1_Periph : aliased DMA1_Peripheral
      with Import, Address => DMA1_Base;
 
-end STM32L0x1.DMA;
+end Cmsis.Device.DMA;

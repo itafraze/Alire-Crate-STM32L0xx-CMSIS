@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.STK is
+package Cmsis.Device.STK is
    pragma Preelaborate;
 
    ---------------
@@ -120,4 +120,4 @@ package STM32L0x1.STK is
    STK_Periph : aliased STK_Peripheral
      with Import, Address => STK_Base;
 
-end STM32L0x1.STK;
+end Cmsis.Device.STK;

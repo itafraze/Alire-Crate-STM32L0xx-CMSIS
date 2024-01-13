@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.LPTIM is
+package Cmsis.Device.LPTIM is
    pragma Preelaborate;
 
    ---------------
@@ -282,4 +282,4 @@ package STM32L0x1.LPTIM is
    LPTIM_Periph : aliased LPTIM_Peripheral
      with Import, Address => LPTIM_Base;
 
-end STM32L0x1.LPTIM;
+end Cmsis.Device.LPTIM;

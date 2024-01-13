@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.CRC is
+package Cmsis.Device.CRC is
    pragma Preelaborate;
 
    ---------------
@@ -87,4 +87,4 @@ package STM32L0x1.CRC is
    CRC_Periph : aliased CRC_Peripheral
      with Import, Address => CRC_Base;
 
-end STM32L0x1.CRC;
+end Cmsis.Device.CRC;

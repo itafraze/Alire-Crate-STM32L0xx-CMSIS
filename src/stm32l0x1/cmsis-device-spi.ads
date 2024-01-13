@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.SPI is
+package Cmsis.Device.SPI is
    pragma Preelaborate;
 
    ---------------
@@ -310,4 +310,4 @@ package STM32L0x1.SPI is
    SPI2_Periph : aliased SPI_Peripheral
      with Import, Address => SPI2_Base;
 
-end STM32L0x1.SPI;
+end Cmsis.Device.SPI;

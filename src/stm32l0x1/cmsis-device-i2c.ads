@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.I2C is
+package Cmsis.Device.I2C is
    pragma Preelaborate;
 
    ---------------
@@ -455,4 +455,4 @@ package STM32L0x1.I2C is
    I2C3_Periph : aliased I2C_Peripheral
      with Import, Address => I2C3_Base;
 
-end STM32L0x1.I2C;
+end Cmsis.Device.I2C;

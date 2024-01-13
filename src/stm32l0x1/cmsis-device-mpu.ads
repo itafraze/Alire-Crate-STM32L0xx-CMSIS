@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.MPU is
+package Cmsis.Device.MPU is
    pragma Preelaborate;
 
    ---------------
@@ -171,4 +171,4 @@ package STM32L0x1.MPU is
    MPU_Periph : aliased MPU_Peripheral
      with Import, Address => MPU_Base;
 
-end STM32L0x1.MPU;
+end Cmsis.Device.MPU;

@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.WWDG is
+package Cmsis.Device.WWDG is
    pragma Preelaborate;
 
    ---------------
@@ -117,4 +117,4 @@ package STM32L0x1.WWDG is
    WWDG_Periph : aliased WWDG_Peripheral
      with Import, Address => WWDG_Base;
 
-end STM32L0x1.WWDG;
+end Cmsis.Device.WWDG;

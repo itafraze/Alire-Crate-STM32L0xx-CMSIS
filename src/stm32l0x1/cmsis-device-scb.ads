@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.SCB is
+package Cmsis.Device.SCB is
    pragma Preelaborate;
 
    ---------------
@@ -264,4 +264,4 @@ package STM32L0x1.SCB is
    SCB_Periph : aliased SCB_Peripheral
      with Import, Address => SCB_Base;
 
-end STM32L0x1.SCB;
+end Cmsis.Device.SCB;

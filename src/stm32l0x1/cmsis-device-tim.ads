@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.TIM is
+package Cmsis.Device.TIM is
    pragma Preelaborate;
 
    ---------------
@@ -1241,4 +1241,4 @@ package STM32L0x1.TIM is
    TIM22_Periph : aliased TIM22_Peripheral
      with Import, Address => TIM22_Base;
 
-end STM32L0x1.TIM;
+end Cmsis.Device.TIM;

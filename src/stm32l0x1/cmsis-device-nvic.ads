@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.NVIC is
+package Cmsis.Device.NVIC is
    pragma Preelaborate;
 
    ---------------
@@ -234,4 +234,4 @@ package STM32L0x1.NVIC is
    NVIC_Periph : aliased NVIC_Peripheral
      with Import, Address => NVIC_Base;
 
-end STM32L0x1.NVIC;
+end Cmsis.Device.NVIC;

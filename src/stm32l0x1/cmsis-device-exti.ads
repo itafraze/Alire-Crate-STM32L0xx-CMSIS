@@ -7,7 +7,7 @@ pragma Restrictions (No_Elaboration_Code);
 with HAL;
 with System;
 
-package STM32L0x1.EXTI is
+package Cmsis.Device.EXTI is
    pragma Preelaborate;
 
    ---------------
@@ -462,4 +462,4 @@ package STM32L0x1.EXTI is
    EXTI_Periph : aliased EXTI_Peripheral
      with Import, Address => EXTI_Base;
 
-end STM32L0x1.EXTI;
+end Cmsis.Device.EXTI;
