@@ -20,6 +20,7 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Implement procedure Disable_IRQ
+--       - Use *_Barrier in NVIC's IRQ-related procedures
 ------------------------------------------------------------------------------
 
 with Interfaces;
@@ -27,14 +28,14 @@ with Interfaces;
 with HAL;
 
 with Cmsis.Device.NVIC;
-
 with Cmsis.Device.SCB;
 
 ------------------------------------------------------------------------------
 --  CMSIS CORE NVIC
 --
 --  Implementation Notes:
---     Based on source file CMSIS/Core/Include/core_cm0plus.h
+--    Based on source files
+--      CMSIS:Core/Include/core_cm0plus.h
 ------------------------------------------------------------------------------
 package body Cmsis.Core.NVIC is
 
@@ -43,8 +44,6 @@ package body Cmsis.Core.NVIC is
 
    ---------------------------------------------------------------------------
    --  Enable_IRQ
-   --
-   --    Enables a device specific interrupt in the NVIC interrupt controller.
    --
    procedure Enable_IRQ (IRQ : Interrupt_Type)
    is
@@ -56,27 +55,28 @@ package body Cmsis.Core.NVIC is
       Bit_0 : constant Unsigned_32 := 2#1#;
    begin
 
+      Compiler_Barrier;
       NVIC_Periph.ISER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+      Compiler_Barrier;
 
    end Enable_IRQ;
 
    ---------------------------------------------------------------------------
    --  Disable_IRQ
    --
-   --    Disables a device specific interrupt in the NVIC interrupt
-   --    controller.
-   --
    procedure Disable_IRQ (IRQ : Interrupt_Type)
    is
       use Interfaces;
       use Cmsis.Device.NVIC;
 
-      subtype NVIC_ISER_Type is HAL.UInt32;
+      subtype NVIC_ICER_Type is HAL.UInt32;
 
       Bit_0 : constant Unsigned_32 := 2#1#;
    begin
 
-      NVIC_Periph.ICER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+      NVIC_Periph.ICER := NVIC_ICER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+      Data_Synchronization_Barrier;
+      Instruction_Synchronization_Barrier;
 
    end Disable_IRQ;
 
@@ -84,9 +84,9 @@ package body Cmsis.Core.NVIC is
    --  Priority_To_PRI_Value
    --
    --  Implementation notes:
-   --     Each PRI_N field is 8 bits wide, but the processor implements only
-   --     bits[7:6] of each field, and bits[5:0] read as zero and ignore
-   --     writes.
+   --     - Each PRI_N field is 8 bits wide, but the processor implements only
+   --       bits[7:6] of each field, and bits[5:0] read as zero and ignore
+   --       writes.
    --
    function Priority_To_PRI_Value (Priority : Priority_Type)
       return NVIC_PRI_Type
@@ -96,9 +96,10 @@ package body Cmsis.Core.NVIC is
    ---------------------------------------------------------------------------
    --  Set_Priority
    --
-   --  Implementation notes: Based on __NVIC_SetPriority, however the function
-   --     has been split into two separate implementations to handle
-   --     exceptions and interrupts separately. thank you overloading
+   --  Implementation notes:
+   --    - Based on __NVIC_SetPriority, however the function has been split
+   --      into two separate implementations to handle exceptions and
+   --      interrupts separately. thank you overloading
    --
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type)

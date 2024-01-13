@@ -38,14 +38,23 @@ package Cmsis.Core.NVIC is
    ---------------------------------------------------------------------------
    --  Enable_IRQ
    --
-   --    Enables a device specific interrupt.
+   --    Enables a device specific interrupt in the NVIC interrupt controller.
+   --
+   --  Notes:
+   --    - The number of supported interrupts depends on the implementation of
+   --      the chip designer
    --
    procedure Enable_IRQ (IRQ : Interrupt_Type);
 
    ---------------------------------------------------------------------------
    --  Disable_IRQ
    --
-   --    Disable a device specific interrupt.
+   --    Disables a device specific interrupt in the NVIC interrupt
+   --    controller.
+   --
+   --  Notes:
+   --    - The number of supported interrupts depends on the implementation of
+   --      the chip designer
    --
    procedure Disable_IRQ (IRQ : Interrupt_Type);
 
