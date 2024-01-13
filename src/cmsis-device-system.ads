@@ -19,40 +19,35 @@
 --    2023.12 E. Zarfati
 --       - First version
 --    2024.01 E. Zarfati
+--       - Make procedure Init visible the start-up code
 --       - Reformat comments for GNATdoc
+--       - Rename package to Cmsis.Device.System
 --
 ------------------------------------------------------------------------------
 
-with Interfaces;
-with System.Storage_Elements;
-with HAL;
-with Cmsis.Device.SCB;
+package Cmsis.Device.System is
+   --  System and Clock Configuration
+   --
+   --  CMSIS-Core(M) Device Peripheral Access Layer provides as a minimum the
+   --  functions for system and clock setup.
 
-package body Cmsis.System is
+   Core_Clock : Natural := 32_768 * (2 ** 6);
+   --  System clock frequency
+   --
+   --  Contains the core clock (HCLK), it can be used by the user application
+   --  to setup the SysTick timer or configure other parameters.
+   --
    --  Implementation Notes:
-   --  - Based on source file
-   --    - cmsis_device_l0:Source/Templates/system_stm32l0xx.c
+   --  - Initialised to CPU's reset value. See RCC.ICSCR.MSIRANGE
 
+   ---------------------------------------------------------------------------
    procedure Init
-   is
-      use Interfaces;
-      package SysStor renames Standard.System.Storage_Elements;
-      use Cmsis.Device.SCB;
+      with
+         Export        => True,
+         Convention    => Asm,
+         External_Name => "Cmsis_Device_System_Init";
+   --  Initializes the microcontroller system.
+   --
+   --  A device-specific system configuration function
 
-      subtype VTOR_TBLOFF_Type is HAL.UInt25;
-
-      Vectors : aliased HAL.UInt32;
-      pragma Import (C, Vectors, "__vectors");
-
-      Vactors_Address : constant Unsigned_32 :=
-         Unsigned_32 (SysStor.To_Integer (Vectors'Address));
-   begin
-
-         --  Configure the Vector Table location. TBLOFF contains bits[31:7]
-         --  of the offset of the table base from the memory map bottom.
-      SCB_Periph.VTOR.TBLOFF :=
-         VTOR_TBLOFF_Type (Shift_Right (Vactors_Address, 7));
-
-   end Init;
-
-end Cmsis.System;
+end Cmsis.Device.System;

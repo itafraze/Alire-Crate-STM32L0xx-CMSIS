@@ -57,7 +57,8 @@ STM32L0x1 MCUs are generated with command:
 [source,bash]
 ----
 svd2ada --gen-interrupts --gen-uint-always --no-uint-subtypes \
-   --base-types-package HAL -o src/stm32l0x1/ src/stm32l0x1/stm32l0x1.svd
+   --base-types-package HAL --package Cmsis.Device --output src/stm32l0x1/ \
+   src/stm32l0x1/stm32l0x1.svd
 ----
 +
 The official SVD files can be obtained directly from STMicroelectronics,
