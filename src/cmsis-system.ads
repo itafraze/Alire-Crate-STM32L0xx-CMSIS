@@ -20,43 +20,32 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Make procedure Init visible the start-up code
-------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------
---  CMSIS SYSTEM
 --
---  Purpose:
---     CMSIS-Core(M) Device Peripheral Access Layer provides as a minimum the
---     functions for system and clock setup. As a minimum requirement, this
---     file must provide:
---     - A device-specific system configuration function, Init()
---     - A global variable that contains the system frequency, CoreClock
 ------------------------------------------------------------------------------
-package Cmsis.System is
 
-   ---------------------------------------------------------------------------
-   --  Core_Clock
+package Cmsis.System is
+   --  System and Clock Configuration
    --
-   --  Purpose:
-   --     Contains the core clock (HCLK), it can be used by the user
-   --     application to setup the SysTick timer or configure other
-   --     parameters.
+   --  CMSIS-Core(M) Device Peripheral Access Layer provides as a minimum the
+   --  functions for system and clock setup.
+
+   Core_Clock : Natural := 32_768 * (2 ** 6);
+   --  System clock frequency
+   --
+   --  Contains the core clock (HCLK), it can be used by the user application
+   --  to setup the SysTick timer or configure other parameters.
    --
    --  Implementation Notes:
-   --     Initialised to CPU's reset value. See RCC.ICSCR.MSIRANGE
-   --
-   Core_Clock : Natural := 32_768 * (2 ** 6);
+   --  - Initialised to CPU's reset value. See RCC.ICSCR.MSIRANGE
 
    ---------------------------------------------------------------------------
-   --  Init
-   --
-   --  Purpose:
-   --     Initializes the microcontroller system.
-   --
    procedure Init
       with
          Export        => True,
          Convention    => Asm,
          External_Name => "Cmsis_System_Init";
+   --  Initializes the microcontroller system.
+   --
+   --  A device-specific system configuration function
 
 end Cmsis.System;

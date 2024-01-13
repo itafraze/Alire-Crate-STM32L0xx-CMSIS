@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,37 +18,40 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
+--    2024.01 E. Zarfati
+--       - Reformat comments for GNATdoc
 --
 ------------------------------------------------------------------------------
 
 with HAL;
-
-------------------------------------------------------------------------------
---  CMSIS CORE SYSTICK
---
---  Purpose:
---
---  Implementation Notes:
---     Based on source file CMSIS/Core/Include/core_cm0plus.h
-------------------------------------------------------------------------------
-package Cmsis.Core.SysTick is
-
-   --  Type of SysTick's Tick value
-   --  Note: See implementation of SysTick_LOAD_RELOAD_Msk
    use type HAL.UInt24;
-   type Ticks_Type is range 1 .. HAL.UInt24'Last + 1;
 
-   ---------------------------------------------------------------------------
-   --  SysTick_Config
+package Cmsis.Core.SysTick is
+   --  Systick Timer
    --
-   --  Purpose: Initializes the System Timer and its interrupt, and starts the
-   --     System Tick Timer. Counter is in free running mode to generate
-   --     periodic interrupts.
-   --  Parameters:
-   --     - Ticks: Number of ticks between two interrupts.
-   --  Returns:
-   --     Operation success status.
+   --  Initialize and start the SysTick timer. The System Tick Time (SysTick)
+   --  generates interrupt requests on a regular basis. This allows an OS to
+   --  carry out context switching to support multiple tasking. For
+   --  applications that do not require an OS, the SysTick can be used for
+   --  time keeping, time measurement, or as an interrupt source for tasks
+   --  that need to be executed regularly.
+
+   type Ticks_Type is range 1 .. HAL.UInt24'Last + 1;
+   --  Type of SysTick's Tick value
+   --
+   --  Notes:
+   --  - Based on the SysTick Reload Register. See CMSIS
+   --    SysTick_LOAD_RELOAD_Msk
+
    ---------------------------------------------------------------------------
    procedure Config (Ticks : Ticks_Type);
+   --  System Tick Timer Configuration.
+   --
+   --  Initialises and starts the System Tick Timer and its interrupt. After
+   --  this call, the SysTick timer creates interrupts with the specified time
+   --  interval. Counter is in free running mode to generate periodical
+   --  interrupts.
+   --
+   --  @param Ticks Number of ticks between two interrupts.
 
 end Cmsis.Core.SysTick;

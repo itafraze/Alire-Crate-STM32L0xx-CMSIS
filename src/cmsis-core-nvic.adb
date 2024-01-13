@@ -21,30 +21,24 @@
 --    2024.01 E. Zarfati
 --       - Implement procedure Disable_IRQ
 --       - Use *_Barrier in NVIC's IRQ-related procedures
+--       - Reformat comments for GNATdoc
+--
 ------------------------------------------------------------------------------
 
 with Interfaces;
-
 with HAL;
-
+   use type HAL.UInt8;
 with Cmsis.Device.NVIC;
 with Cmsis.Device.SCB;
 
-------------------------------------------------------------------------------
---  CMSIS CORE NVIC
---
---  Implementation Notes:
---    Based on source files
---      CMSIS:Core/Include/core_cm0plus.h
-------------------------------------------------------------------------------
 package body Cmsis.Core.NVIC is
+   --  Implementation Notes:
+   --  - Based on source files
+   --    - CMSIS:Core/Include/core_cm0plus.h
 
-   use type HAL.UInt8;
    subtype NVIC_PRI_Type is HAL.UInt8;
 
    ---------------------------------------------------------------------------
-   --  Enable_IRQ
-   --
    procedure Enable_IRQ (IRQ : Interrupt_Type)
    is
       use Interfaces;
@@ -62,8 +56,6 @@ package body Cmsis.Core.NVIC is
    end Enable_IRQ;
 
    ---------------------------------------------------------------------------
-   --  Disable_IRQ
-   --
    procedure Disable_IRQ (IRQ : Interrupt_Type)
    is
       use Interfaces;
@@ -81,26 +73,16 @@ package body Cmsis.Core.NVIC is
    end Disable_IRQ;
 
    ---------------------------------------------------------------------------
-   --  Priority_To_PRI_Value
-   --
-   --  Implementation notes:
-   --     - Each PRI_N field is 8 bits wide, but the processor implements only
-   --       bits[7:6] of each field, and bits[5:0] read as zero and ignore
-   --       writes.
-   --
    function Priority_To_PRI_Value (Priority : Priority_Type)
       return NVIC_PRI_Type
       is (NVIC_PRI_Type (Priority) * (2 ** 6))
       with Inline;
+   --  Implementation notes:
+   --  - Each PRI_N field is 8 bits wide, but the processor implements only
+   --    bits[7:6] of each field, and bits[5:0] read as zero and ignore
+   --    writes.
 
    ---------------------------------------------------------------------------
-   --  Set_Priority
-   --
-   --  Implementation notes:
-   --    - Based on __NVIC_SetPriority, however the function has been split
-   --      into two separate implementations to handle exceptions and
-   --      interrupts separately. thank you overloading
-   --
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type)
    is
@@ -121,6 +103,7 @@ package body Cmsis.Core.NVIC is
 
    end Set_Priority;
 
+   ---------------------------------------------------------------------------
    procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type)
    is

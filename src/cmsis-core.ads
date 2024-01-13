@@ -20,64 +20,54 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Add interface Compiler_Barrier
+--       - Reformat comments for GNATdoc
+--
 ------------------------------------------------------------------------------
 
-------------------------------------------------------------------------------
---  CMSIS CORE
---
---  Purpose:
---     CMSIS-Core (Cortex-M) implements the basic run-time system for a
---     Cortex-M device and gives the user access to the processor core and the
---     device peripherals. In detail it defines:
---
---     - Hardware Abstraction Layer (HAL) for Cortex-M processor registers
---       with standardized definitions for the SysTick, NVIC, System Control
---       Block registers, MPU registers, FPU registers, and core access
---       functions.
---     - System exception names to interface to system exceptions without
---       having compatibility issues.
---     - Methods to organize header files that makes it easy to learn new
---       Cortex-M microcontroller products and improve software portability.
---       This includes naming conventions for device-specific interrupts.
---     - Methods for system initialization to be used by each MCU vendor. For
---       example, the standardized SystemInit() function is essential for
---       configuring the clock system of the device.
---     - Intrinsic functions used to generate CPU instructions that are not
---       supported by standard C functions.
---     - A variable to determine the system clock frequency which simplifies
---       the setup the SysTick timer.
-------------------------------------------------------------------------------
 package Cmsis.Core is
+   --  Standardized API for the Cortex-M processor core and peripherals.
+   --
+   --  CMSIS-Core (Cortex-M) implements the basic run-time system for a
+   --  Cortex-M device and gives the user access to the processor core and the
+   --  device peripherals. In detail it defines:
+   --  - Hardware Abstraction Layer (HAL) for Cortex-M processor registers
+   --    with standardized definitions for the SysTick, NVIC, System Control
+   --    Block registers, MPU registers, FPU registers, and core access
+   --    functions.
+   --  - System exception names to interface to system exceptions without
+   --    having compatibility issues.
+   --  - Methods to organize header files that makes it easy to learn new
+   --    Cortex-M microcontroller products and improve software portability.
+   --    This includes naming conventions for device-specific interrupts.
+   --  - Methods for system initialization to be used by each MCU vendor. For
+   --    example, the standardized SystemInit() function is essential for
+   --    configuring the clock system of the device.
+   --  - Intrinsic functions used to generate CPU instructions that are not
+   --    supported by standard C functions.
+   --  - A variable to determine the system clock frequency which simplifies
+   --    the setup the SysTick timer.
+
    pragma Preelaborate;
 
    ---------------------------------------------------------------------------
-   --  Compiler_Barrier
-   --
-   --    This barrier limits the compilers reordering optimizations. It
-   --    prevents the compiler from swapping instructions resulting from code
-   --    before and after the barrier.
-   --
    procedure Compiler_Barrier
       with Inline;
+   --  This barrier limits the compilers reordering optimizations. It prevents
+   --  the compiler from swapping instructions resulting from code before and
+   --  after the barrier.
 
    ---------------------------------------------------------------------------
-   --  Data_Synchronization_Barrier
-   --
-   --    This function acts as a special kind of Data Memory Barrier. It
-   --    completes when all explicit memory accesses before this instruction
-   --    complete.
-   --
    procedure Data_Synchronization_Barrier
       with Inline;
+   --  This function acts as a special kind of Data Memory Barrier. It
+   --  completes when all explicit memory accesses before this instruction
+   --  complete.
 
    ---------------------------------------------------------------------------
-   --  Data_Synchronization_Barrier
-   --
-   --    Instruction Synchronization Barrier flushes the pipeline in the
-   --    processor, so that all instructions following the ISB are fetched
-   --    from cache or memory, after the instruction has been completed.
-   --
    procedure Instruction_Synchronization_Barrier
       with Inline;
+   --  Instruction Synchronization Barrier flushes the pipeline in the
+   --  processor, so that all instructions following the ISB are fetched from
+   --  cache or memory, after the instruction has been completed.
 
 end Cmsis.Core;

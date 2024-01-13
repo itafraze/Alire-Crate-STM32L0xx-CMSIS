@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License");
 --  you may not use this file except in compliance with the License.
@@ -18,13 +18,19 @@
 --  Revision History:
 --    2023.11 E. Zarfati
 --       - First version
+--    2024.01 E. Zarfati
+--       - Reformat comments for GNATdoc
 --
 ------------------------------------------------------------------------------
 
-------------------------------------------------------------------------------
---  CMSIS
-------------------------------------------------------------------------------
 package Cmsis is
+   --  Common Microcontroller Software Interface Standard (CMSIS)
+   --
+   --  The CMSIS is a set of tools, APIs, frameworks, and work flows that help
+   --  to simplify software re-use, reduce the learning curve for
+   --  microcontroller developers, speed-up project build and debug, and thus
+   --  reduce the time to market for new applications.
+
    pragma Preelaborate;
 
 end Cmsis;

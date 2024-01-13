@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,31 +18,21 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
+--    2024.01 E. Zarfati
+--       - Reformat comments for GNATdoc
 --
 ------------------------------------------------------------------------------
 
 with Interfaces;
-
 with System.Storage_Elements;
-
 with HAL;
-
 with Cmsis.Device.SCB;
 
-------------------------------------------------------------------------------
---  CMSIS SYSTEM
---
---  Implementation Notes:
---     Based on source file
---     cmsis_device_l0/Source/Templates/system_stm32l0xx.c
-------------------------------------------------------------------------------
 package body Cmsis.System is
-
-   ---------------------------------------------------------------------------
-   --  Init
-   --
    --  Implementation Notes:
-   --
+   --  - Based on source file
+   --    - cmsis_device_l0:Source/Templates/system_stm32l0xx.c
+
    procedure Init
    is
       use Interfaces;

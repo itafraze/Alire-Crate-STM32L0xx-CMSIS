@@ -18,24 +18,19 @@
 --  Revision History:
 --    2024.01 E. Zarfati
 --       - First version
+--       - Reformat comments for GNATdoc
 --
 ------------------------------------------------------------------------------
 
 with System.Machine_Code;
 
-------------------------------------------------------------------------------
---  CMSIS CORE
---
---  Implementation Notes:
---     Based on source files
---     cmsis_device_l0:Source/Templates/system_stm32l0xx.c
---     CMSIS:Core/Include/cmsis_gcc.h
-------------------------------------------------------------------------------
 package body Cmsis.Core is
+   --  Implementation Notes:
+   --  - Based on source files
+   --    - cmsis_device_l0:Source/Templates/system_stm32l0xx.c
+   --    - CMSIS:Core/Include/cmsis_gcc.h
 
    ---------------------------------------------------------------------------
-   --  Compiler_Barrier
-   --
    procedure Compiler_Barrier
    is
       use System.Machine_Code;
@@ -48,8 +43,6 @@ package body Cmsis.Core is
    end Compiler_Barrier;
 
    ---------------------------------------------------------------------------
-   --  Compiler_Barrier
-   --
    procedure Data_Synchronization_Barrier
    is
       use System.Machine_Code;
@@ -62,8 +55,6 @@ package body Cmsis.Core is
    end Data_Synchronization_Barrier;
 
    ---------------------------------------------------------------------------
-   --  Instruction_Synchronization_Barrier
-   --
    procedure Instruction_Synchronization_Barrier
    is
       use System.Machine_Code;

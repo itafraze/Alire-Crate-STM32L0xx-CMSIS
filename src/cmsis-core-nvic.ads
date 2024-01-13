@@ -20,61 +20,61 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Supply interface Disable_IRQ
+--       - Reformat comments for GNATdoc
+--
 ------------------------------------------------------------------------------
 
 with Cmsis.Core.Types;
    use Cmsis.Core.Types;
 
-------------------------------------------------------------------------------
---  CMSIS CORE NVIC
---
---  Purpose:
---
---  Implementation Notes:
---     Based on source file CMSIS/Core/Include/core_cm0plus.h
-------------------------------------------------------------------------------
 package Cmsis.Core.NVIC is
+   --  Functions to access the Nested Vector Interrupt Controller (NVIC).
 
    ---------------------------------------------------------------------------
-   --  Enable_IRQ
-   --
-   --    Enables a device specific interrupt in the NVIC interrupt controller.
-   --
-   --  Notes:
-   --    - The number of supported interrupts depends on the implementation of
-   --      the chip designer
-   --
    procedure Enable_IRQ (IRQ : Interrupt_Type);
-
-   ---------------------------------------------------------------------------
-   --  Disable_IRQ
-   --
-   --    Disables a device specific interrupt in the NVIC interrupt
-   --    controller.
+   --  Enables a device specific interrupt in the NVIC interrupt controller.
    --
    --  Notes:
-   --    - The number of supported interrupts depends on the implementation of
-   --      the chip designer
+   --  - The number of supported interrupts depends on the implementation of
+   --    the chip designer
    --
+   --  @param IRQ Interrupt identifier
+
    procedure Disable_IRQ (IRQ : Interrupt_Type);
-
-   ---------------------------------------------------------------------------
-   --  Set_Priority
-   --
-   --    Sets the priority for the processor exception or device-specific
-   --    interrupt specified by IRQ. The priority specifies the exception or
-   --    interrupt priority value, whereby lower values indicate a higher
-   --    priority. The default interrupt priority is 0, the highest possible
-   --    interrupt priority.
+   --  Disables a device specific interrupt in the NVIC interrupt controller.
    --
    --  Notes:
-   --    - Dynamic switching of interrupt priority levels is not supported.
-   --      The priority level of an interrupt should not be changed after it
-   --      has been enabled.
+   --  - The number of supported interrupts depends on the implementation of
+   --    the chip designer
    --
+   --  @param IRQ Interrupt identifier
+
+   ---------------------------------------------------------------------------
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type);
+   --  Set the priority for an interrupt.
+   --
+   --  Notes:
+   --  - Dynamic switching of interrupt priority levels is not supported. The
+   --    priority level of an interrupt should not be changed after it has
+   --    been enabled.
+   --
+   --  @param IRQ Device specific interrupt identifier
+   --  @param Priority The interrupt priority value, whereby lower values
+   --    indicate a higher priority. The default priority is 0 for every
+   --    interrupt
+
+   ---------------------------------------------------------------------------
    procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type);
+   --  Set the priority for an exception.
+   --
+   --  Notes:
+   --  - The priority cannot be set for every core interrupt. HardFault and
+   --    NMI have a fixed (negative) priority that is higher than any
+   --    configurable exception or interrupt.
+   --
+   --  @param IRQ Processor exception identifier
+   --  @param Priority The exception priority value
 
 end Cmsis.Core.NVIC;

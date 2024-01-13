@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------------
---  Copyright 2023, Emanuele Zarfati
+--  Copyright 2023-2024, Emanuele Zarfati
 --
 --  Licensed under the Apache License, Version 2.0 (the "License"); you may
 --  not use this file except in compliance with the License. You may obtain a
@@ -18,33 +18,26 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
+--    2024.01 E. Zarfati
+--       - Reformat comments for GNATdoc
 --
 ------------------------------------------------------------------------------
 
 with Cmsis.Core.Types;
-
 with Cmsis.Core.NVIC;
-
 with Cmsis.Device.STK;
 
-------------------------------------------------------------------------------
---  CMSIS CORE
---
---  Implementation Notes:
---     Based on source file CMSIS/Core/Include/core_cm0plus.h
-------------------------------------------------------------------------------
 package body Cmsis.Core.SysTick is
+   --  Implementation Notes:
+   --  - Based on source files
+   --    - CMSIS:Core/Include/core_cm0plus.h
 
    ---------------------------------------------------------------------------
-   --  SysTick_Config
-   --
-   --  Implementation notes:
-   --     No check is enforced on the input parater as its type already
-   --     enforces the allowed values.
-   --
    procedure Config (Ticks : Ticks_Type)
+   --  Implementation Notes:
+   --  - No check is enforced on the input parater as its type already
+   --    enforces the allowed values.
    is
-      --
       use Cmsis.Core.Types;
       use Cmsis.Device.STK;
 
