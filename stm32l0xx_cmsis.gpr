@@ -76,10 +76,6 @@ project Stm32l0xx_Cmsis is
       Default_Script := Project'Project_Dir & "share/stm32l0xx_cmsis/link.ld";
    end Linker;
 
-   package Install is
-      for Artifacts (".") use ("share");
-   end Install;
-
    package Device_Configuration is
 
       -- Templates
