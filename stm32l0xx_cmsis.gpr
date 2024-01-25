@@ -16,6 +16,7 @@ project Stm32l0xx_Cmsis is
    for Languages use ("Ada");
 
    --  Device information
+   Device := Stm32l0xx_Cmsis_Config.Device;
    Device_Series := "";
    Device_Category := "";
    case Stm32l0xx_Cmsis_Config.Device is
