@@ -23,16 +23,3 @@
 
 echo \n(gdbinit) Loading program...\n
 file ./bin/tests.elf
-
-echo \n(gdbinit) Connecting to target...\n
-target extended-remote localhost:4444
-
-echo \n(gdbinit) Running up to main...\n
-set pagination off
-b main
-c
-d 1
-l
-
-echo \n(gdbinit) Done.\n
-set pagination on

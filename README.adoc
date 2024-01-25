@@ -87,27 +87,43 @@ startup_gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
 
-Tests on emulated target::
-The target platform can be emulated using GNATemu, which cannot be found
-available through Alire at the time of writing. However non-GNATPro users may
-still find available ARM ELF GNAT Community Edition, which ships also the
-`arm-eabi-gnatemu` binary, at AdaCore's
+Tests and debug on emulated target::
+The target platform can be emulated using GNATemu. Sub-crate project
+link:./tests/tests.gpr[`tests/tests.gpr`] supplies the `Emulator` package with
+minimal working configuration. First, from within the `tests` project
+directory create the following Alire aliases to simplify the launch of GNATemu
+and GDB. They require `arm-eabi-gnatemu` and `arm-eabi-gdb` to be available in
+`$PATH`. At the time of writing, the former is not available through Alire.
+However non-GNATPro users may still find available ARM ELF GNAT Community
+Edition, which ships also the `arm-eabi-gnatemu` binary, at AdaCore's
 link:https://www.adacore.com/download[Download page].
 +
-Sub-crate project link:./tests/tests.gpr[`tests/tests.gpr`] supplies the
-`Emulator` package with minimal working configuration. Assuming
-`arm-eabi-gnatemu` exists in `PATH`, create for convenience the Alire alias
-`gnatemu` with
-+
-[source,bash]
+.Local alias to launch target emulation
+[source, console]
 ----
-alr config --global --set alias.gnatemu "exec -P1 arm-eabi-gnatemu -P"
+$ alr config --set alias.emu \
+   "exec -P1 arm-eabi-gnatemu"
 ----
 +
-and start the emulator within the `tests` subfolder with `alr gnatemu`. In
-another terminal window launch GDB with
-+
-[source,bash]
+.Local alias to launch GDB with target emulation
+[source, console]
 ----
-arm-eabi-gdb -x share/tests/gdbinit
+$ alr config --set alias.gdbemu \
+   "exec sh -- \
+   -c arm-eabi-gdb\\ -q\\ -x\\ ./share/tests/gdbinit.1\\ -x\\ ./share/tests/gdbinit-emu.2"
+----
++
+In two separated terminals execute the following commands start GNATemu
+followed by GDB.
++
+.Start GNATemu
+[source,console]
+----
+$ alr emu
+----
++
+.Start GDB
+[source,console]
+----
+$ alr gdbemu
 ----
