@@ -21,14 +21,15 @@
 --    2024.01 E. Zarfati
 --       - Reformat comments for GNATdoc
 --       - Remove HAL dependency
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-with Cmsis.Core.Types;
-with Cmsis.Core.NVIC;
-with Cmsis.Device.STK;
+with CMSIS.Core.Types;
+with CMSIS.Core.NVIC;
+with CMSIS.Device.STK;
 
-package body Cmsis.Core.SysTick is
+package body CMSIS.Core.SysTick is
    --  Implementation Notes:
    --  - Based on source files
    --    - CMSIS:Core/Include/core_cm0plus.h
@@ -39,8 +40,8 @@ package body Cmsis.Core.SysTick is
    --  - No check is enforced on the input parater as its type already
    --    enforces the allowed values.
    is
-      use Cmsis.Core.Types;
-      use Cmsis.Device.STK;
+      use CMSIS.Core.Types;
+      use CMSIS.Device.STK;
 
       CSR_Field_Value : constant CSR_Register := (
          CLKSOURCE => 2#1#,
@@ -56,4 +57,4 @@ package body Cmsis.Core.SysTick is
 
    end Config;
 
-end Cmsis.Core.SysTick;
+end CMSIS.Core.SysTick;

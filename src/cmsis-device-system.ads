@@ -21,12 +21,12 @@
 --    2024.01 E. Zarfati
 --       - Make procedure Init visible the start-up code
 --       - Reformat comments for GNATdoc
---       - Rename package to Cmsis.Device.System
+--       - Rename package to CMSIS.Device.System
 --       - Remove HAL dependency
 --
 ------------------------------------------------------------------------------
 
-package Cmsis.Device.System is
+package CMSIS.Device.System is
    --  System and Clock Configuration
    --
    --  CMSIS-Core(M) Device Peripheral Access Layer provides as a minimum the
@@ -51,4 +51,4 @@ package Cmsis.Device.System is
    --
    --  A device-specific system configuration function
 
-end Cmsis.Device.System;
+end CMSIS.Device.System;

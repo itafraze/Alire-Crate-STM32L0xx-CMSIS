@@ -6,17 +6,17 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.NVIC is
+package CMSIS.Device.NVIC is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype IPR0_PRI_0_Field is Cmsis.Device.UInt8;
-   subtype IPR0_PRI_1_Field is Cmsis.Device.UInt8;
-   subtype IPR0_PRI_2_Field is Cmsis.Device.UInt8;
-   subtype IPR0_PRI_3_Field is Cmsis.Device.UInt8;
+   subtype IPR0_PRI_0_Field is CMSIS.Device.UInt8;
+   subtype IPR0_PRI_1_Field is CMSIS.Device.UInt8;
+   subtype IPR0_PRI_2_Field is CMSIS.Device.UInt8;
+   subtype IPR0_PRI_3_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 0
    type IPR0_Register is record
@@ -39,10 +39,10 @@ package Cmsis.Device.NVIC is
       PRI_3 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR1_PRI_4_Field is Cmsis.Device.UInt8;
-   subtype IPR1_PRI_5_Field is Cmsis.Device.UInt8;
-   subtype IPR1_PRI_6_Field is Cmsis.Device.UInt8;
-   subtype IPR1_PRI_7_Field is Cmsis.Device.UInt8;
+   subtype IPR1_PRI_4_Field is CMSIS.Device.UInt8;
+   subtype IPR1_PRI_5_Field is CMSIS.Device.UInt8;
+   subtype IPR1_PRI_6_Field is CMSIS.Device.UInt8;
+   subtype IPR1_PRI_7_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 1
    type IPR1_Register is record
@@ -65,10 +65,10 @@ package Cmsis.Device.NVIC is
       PRI_7 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR2_PRI_8_Field is Cmsis.Device.UInt8;
-   subtype IPR2_PRI_9_Field is Cmsis.Device.UInt8;
-   subtype IPR2_PRI_10_Field is Cmsis.Device.UInt8;
-   subtype IPR2_PRI_11_Field is Cmsis.Device.UInt8;
+   subtype IPR2_PRI_8_Field is CMSIS.Device.UInt8;
+   subtype IPR2_PRI_9_Field is CMSIS.Device.UInt8;
+   subtype IPR2_PRI_10_Field is CMSIS.Device.UInt8;
+   subtype IPR2_PRI_11_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 2
    type IPR2_Register is record
@@ -91,10 +91,10 @@ package Cmsis.Device.NVIC is
       PRI_11 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR3_PRI_12_Field is Cmsis.Device.UInt8;
-   subtype IPR3_PRI_13_Field is Cmsis.Device.UInt8;
-   subtype IPR3_PRI_14_Field is Cmsis.Device.UInt8;
-   subtype IPR3_PRI_15_Field is Cmsis.Device.UInt8;
+   subtype IPR3_PRI_12_Field is CMSIS.Device.UInt8;
+   subtype IPR3_PRI_13_Field is CMSIS.Device.UInt8;
+   subtype IPR3_PRI_14_Field is CMSIS.Device.UInt8;
+   subtype IPR3_PRI_15_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 3
    type IPR3_Register is record
@@ -117,10 +117,10 @@ package Cmsis.Device.NVIC is
       PRI_15 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR4_PRI_16_Field is Cmsis.Device.UInt8;
-   subtype IPR4_PRI_17_Field is Cmsis.Device.UInt8;
-   subtype IPR4_PRI_18_Field is Cmsis.Device.UInt8;
-   subtype IPR4_PRI_19_Field is Cmsis.Device.UInt8;
+   subtype IPR4_PRI_16_Field is CMSIS.Device.UInt8;
+   subtype IPR4_PRI_17_Field is CMSIS.Device.UInt8;
+   subtype IPR4_PRI_18_Field is CMSIS.Device.UInt8;
+   subtype IPR4_PRI_19_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 4
    type IPR4_Register is record
@@ -143,10 +143,10 @@ package Cmsis.Device.NVIC is
       PRI_19 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR5_PRI_20_Field is Cmsis.Device.UInt8;
-   subtype IPR5_PRI_21_Field is Cmsis.Device.UInt8;
-   subtype IPR5_PRI_22_Field is Cmsis.Device.UInt8;
-   subtype IPR5_PRI_23_Field is Cmsis.Device.UInt8;
+   subtype IPR5_PRI_20_Field is CMSIS.Device.UInt8;
+   subtype IPR5_PRI_21_Field is CMSIS.Device.UInt8;
+   subtype IPR5_PRI_22_Field is CMSIS.Device.UInt8;
+   subtype IPR5_PRI_23_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 5
    type IPR5_Register is record
@@ -169,10 +169,10 @@ package Cmsis.Device.NVIC is
       PRI_23 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR6_PRI_24_Field is Cmsis.Device.UInt8;
-   subtype IPR6_PRI_25_Field is Cmsis.Device.UInt8;
-   subtype IPR6_PRI_26_Field is Cmsis.Device.UInt8;
-   subtype IPR6_PRI_27_Field is Cmsis.Device.UInt8;
+   subtype IPR6_PRI_24_Field is CMSIS.Device.UInt8;
+   subtype IPR6_PRI_25_Field is CMSIS.Device.UInt8;
+   subtype IPR6_PRI_26_Field is CMSIS.Device.UInt8;
+   subtype IPR6_PRI_27_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 6
    type IPR6_Register is record
@@ -195,10 +195,10 @@ package Cmsis.Device.NVIC is
       PRI_27 at 0 range 24 .. 31;
    end record;
 
-   subtype IPR7_PRI_28_Field is Cmsis.Device.UInt8;
-   subtype IPR7_PRI_29_Field is Cmsis.Device.UInt8;
-   subtype IPR7_PRI_30_Field is Cmsis.Device.UInt8;
-   subtype IPR7_PRI_31_Field is Cmsis.Device.UInt8;
+   subtype IPR7_PRI_28_Field is CMSIS.Device.UInt8;
+   subtype IPR7_PRI_29_Field is CMSIS.Device.UInt8;
+   subtype IPR7_PRI_30_Field is CMSIS.Device.UInt8;
+   subtype IPR7_PRI_31_Field is CMSIS.Device.UInt8;
 
    --  Interrupt Priority Register 7
    type IPR7_Register is record
@@ -228,13 +228,13 @@ package Cmsis.Device.NVIC is
    --  Nested Vectored Interrupt Controller
    type NVIC_Peripheral is record
       --  Interrupt Set Enable Register
-      ISER : aliased Cmsis.Device.UInt32;
+      ISER : aliased CMSIS.Device.UInt32;
       --  Interrupt Clear Enable Register
-      ICER : aliased Cmsis.Device.UInt32;
+      ICER : aliased CMSIS.Device.UInt32;
       --  Interrupt Set-Pending Register
-      ISPR : aliased Cmsis.Device.UInt32;
+      ISPR : aliased CMSIS.Device.UInt32;
       --  Interrupt Clear-Pending Register
-      ICPR : aliased Cmsis.Device.UInt32;
+      ICPR : aliased CMSIS.Device.UInt32;
       --  Interrupt Priority Register 0
       IPR0 : aliased IPR0_Register;
       --  Interrupt Priority Register 1
@@ -273,4 +273,4 @@ package Cmsis.Device.NVIC is
    NVIC_Periph : aliased NVIC_Peripheral
      with Import, Address => NVIC_Base;
 
-end Cmsis.Device.NVIC;
+end CMSIS.Device.NVIC;

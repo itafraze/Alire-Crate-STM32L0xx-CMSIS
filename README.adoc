@@ -56,7 +56,7 @@ STM32L0x1 MCUs are generated with command:
 +
 [source,bash]
 ----
-svd2ada --gen-interrupts --gen-uint-always --package Cmsis.Device \
+svd2ada --gen-interrupts --gen-uint-always --package CMSIS.Device \
    --output src/stm32l0x1/ \
    src/stm32l0x1/stm32l0x1.svd
 ----

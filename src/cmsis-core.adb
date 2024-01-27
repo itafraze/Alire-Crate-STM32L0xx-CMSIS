@@ -19,12 +19,13 @@
 --    2024.01 E. Zarfati
 --       - First version
 --       - Reformat comments for GNATdoc
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
 with System.Machine_Code;
 
-package body Cmsis.Core is
+package body CMSIS.Core is
    --  Implementation Notes:
    --  - Based on source files
    --    - cmsis_device_l0:Source/Templates/system_stm32l0xx.c
@@ -66,4 +67,4 @@ package body Cmsis.Core is
 
    end Instruction_Synchronization_Barrier;
 
-end Cmsis.Core;
+end CMSIS.Core;

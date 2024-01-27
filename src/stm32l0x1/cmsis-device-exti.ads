@@ -6,7 +6,7 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.EXTI is
+package CMSIS.Device.EXTI is
    pragma Preelaborate;
 
    ---------------
@@ -14,7 +14,7 @@ package Cmsis.Device.EXTI is
    ---------------
 
    --  IMR_IM array element
-   subtype IMR_IM_Element is Cmsis.Device.Bit;
+   subtype IMR_IM_Element is CMSIS.Device.Bit;
 
    --  IMR_IM array
    type IMR_IM_Field_Array is array (0 .. 26) of IMR_IM_Element
@@ -27,7 +27,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  IM as a value
-            Val : Cmsis.Device.UInt27;
+            Val : CMSIS.Device.UInt27;
          when True =>
             --  IM as an array
             Arr : IMR_IM_Field_Array;
@@ -51,7 +51,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  IM as a value
-            Val : Cmsis.Device.UInt2;
+            Val : CMSIS.Device.UInt2;
          when True =>
             --  IM as an array
             Arr : IMR_IM_Field_Array_1;
@@ -69,11 +69,11 @@ package Cmsis.Device.EXTI is
       --  Interrupt Mask on line 0
       IM             : IMR_IM_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_27_27 : Cmsis.Device.Bit := 16#1#;
+      Reserved_27_27 : CMSIS.Device.Bit := 16#1#;
       --  Interrupt Mask on line 27
       IM_1           : IMR_IM_Field_1 := (As_Array => False, Val => 16#1#);
       --  unspecified
-      Reserved_30_31 : Cmsis.Device.UInt2 := 16#3#;
+      Reserved_30_31 : CMSIS.Device.UInt2 := 16#3#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -86,7 +86,7 @@ package Cmsis.Device.EXTI is
    end record;
 
    --  EMR_EM array element
-   subtype EMR_EM_Element is Cmsis.Device.Bit;
+   subtype EMR_EM_Element is CMSIS.Device.Bit;
 
    --  EMR_EM array
    type EMR_EM_Field_Array is array (0 .. 26) of EMR_EM_Element
@@ -99,7 +99,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  EM as a value
-            Val : Cmsis.Device.UInt27;
+            Val : CMSIS.Device.UInt27;
          when True =>
             --  EM as an array
             Arr : EMR_EM_Field_Array;
@@ -123,7 +123,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  EM as a value
-            Val : Cmsis.Device.UInt2;
+            Val : CMSIS.Device.UInt2;
          when True =>
             --  EM as an array
             Arr : EMR_EM_Field_Array_1;
@@ -141,11 +141,11 @@ package Cmsis.Device.EXTI is
       --  Event Mask on line 0
       EM             : EMR_EM_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_27_27 : Cmsis.Device.Bit := 16#0#;
+      Reserved_27_27 : CMSIS.Device.Bit := 16#0#;
       --  Event Mask on line 28
       EM_1           : EMR_EM_Field_1 := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_30_31 : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_30_31 : CMSIS.Device.UInt2 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -158,7 +158,7 @@ package Cmsis.Device.EXTI is
    end record;
 
    --  RTSR_RT array element
-   subtype RTSR_RT_Element is Cmsis.Device.Bit;
+   subtype RTSR_RT_Element is CMSIS.Device.Bit;
 
    --  RTSR_RT array
    type RTSR_RT_Field_Array is array (0 .. 17) of RTSR_RT_Element
@@ -171,7 +171,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  RT as a value
-            Val : Cmsis.Device.UInt18;
+            Val : CMSIS.Device.UInt18;
          when True =>
             --  RT as an array
             Arr : RTSR_RT_Field_Array;
@@ -195,7 +195,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  RT as a value
-            Val : Cmsis.Device.UInt4;
+            Val : CMSIS.Device.UInt4;
          when True =>
             --  RT as an array
             Arr : RTSR_RT_Field_Array_1;
@@ -213,11 +213,11 @@ package Cmsis.Device.EXTI is
       --  Rising trigger event configuration of line 0
       RT             : RTSR_RT_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_18_18 : Cmsis.Device.Bit := 16#0#;
+      Reserved_18_18 : CMSIS.Device.Bit := 16#0#;
       --  Rising trigger event configuration of line 19
       RT_1           : RTSR_RT_Field_1 := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -230,7 +230,7 @@ package Cmsis.Device.EXTI is
    end record;
 
    --  FTSR_FT array element
-   subtype FTSR_FT_Element is Cmsis.Device.Bit;
+   subtype FTSR_FT_Element is CMSIS.Device.Bit;
 
    --  FTSR_FT array
    type FTSR_FT_Field_Array is array (0 .. 17) of FTSR_FT_Element
@@ -243,7 +243,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  FT as a value
-            Val : Cmsis.Device.UInt18;
+            Val : CMSIS.Device.UInt18;
          when True =>
             --  FT as an array
             Arr : FTSR_FT_Field_Array;
@@ -267,7 +267,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  FT as a value
-            Val : Cmsis.Device.UInt4;
+            Val : CMSIS.Device.UInt4;
          when True =>
             --  FT as an array
             Arr : FTSR_FT_Field_Array_1;
@@ -285,11 +285,11 @@ package Cmsis.Device.EXTI is
       --  Falling trigger event configuration of line 0
       FT             : FTSR_FT_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_18_18 : Cmsis.Device.Bit := 16#0#;
+      Reserved_18_18 : CMSIS.Device.Bit := 16#0#;
       --  Falling trigger event configuration of line 19
       FT_1           : FTSR_FT_Field_1 := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -302,7 +302,7 @@ package Cmsis.Device.EXTI is
    end record;
 
    --  SWIER_SWI array element
-   subtype SWIER_SWI_Element is Cmsis.Device.Bit;
+   subtype SWIER_SWI_Element is CMSIS.Device.Bit;
 
    --  SWIER_SWI array
    type SWIER_SWI_Field_Array is array (0 .. 17) of SWIER_SWI_Element
@@ -315,7 +315,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  SWI as a value
-            Val : Cmsis.Device.UInt18;
+            Val : CMSIS.Device.UInt18;
          when True =>
             --  SWI as an array
             Arr : SWIER_SWI_Field_Array;
@@ -339,7 +339,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  SWI as a value
-            Val : Cmsis.Device.UInt4;
+            Val : CMSIS.Device.UInt4;
          when True =>
             --  SWI as an array
             Arr : SWIER_SWI_Field_Array_1;
@@ -357,11 +357,11 @@ package Cmsis.Device.EXTI is
       --  Software Interrupt on line 0
       SWI            : SWIER_SWI_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_18_18 : Cmsis.Device.Bit := 16#0#;
+      Reserved_18_18 : CMSIS.Device.Bit := 16#0#;
       --  Software Interrupt on line 19
       SWI_1          : SWIER_SWI_Field_1 := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -374,7 +374,7 @@ package Cmsis.Device.EXTI is
    end record;
 
    --  PR_PIF array element
-   subtype PR_PIF_Element is Cmsis.Device.Bit;
+   subtype PR_PIF_Element is CMSIS.Device.Bit;
 
    --  PR_PIF array
    type PR_PIF_Field_Array is array (0 .. 17) of PR_PIF_Element
@@ -387,7 +387,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  PIF as a value
-            Val : Cmsis.Device.UInt18;
+            Val : CMSIS.Device.UInt18;
          when True =>
             --  PIF as an array
             Arr : PR_PIF_Field_Array;
@@ -411,7 +411,7 @@ package Cmsis.Device.EXTI is
       case As_Array is
          when False =>
             --  PIF as a value
-            Val : Cmsis.Device.UInt4;
+            Val : CMSIS.Device.UInt4;
          when True =>
             --  PIF as an array
             Arr : PR_PIF_Field_Array_1;
@@ -429,11 +429,11 @@ package Cmsis.Device.EXTI is
       --  Pending bit 0
       PIF            : PR_PIF_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_18_18 : Cmsis.Device.Bit := 16#0#;
+      Reserved_18_18 : CMSIS.Device.Bit := 16#0#;
       --  Pending bit 19
       PIF_1          : PR_PIF_Field_1 := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -479,4 +479,4 @@ package Cmsis.Device.EXTI is
    EXTI_Periph : aliased EXTI_Peripheral
      with Import, Address => EXTI_Base;
 
-end Cmsis.Device.EXTI;
+end CMSIS.Device.EXTI;

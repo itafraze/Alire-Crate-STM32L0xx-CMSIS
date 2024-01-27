@@ -6,20 +6,20 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.RTC is
+package CMSIS.Device.RTC is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype TR_SU_Field is Cmsis.Device.UInt4;
-   subtype TR_ST_Field is Cmsis.Device.UInt3;
-   subtype TR_MNU_Field is Cmsis.Device.UInt4;
-   subtype TR_MNT_Field is Cmsis.Device.UInt3;
-   subtype TR_HU_Field is Cmsis.Device.UInt4;
-   subtype TR_HT_Field is Cmsis.Device.UInt2;
-   subtype TR_PM_Field is Cmsis.Device.Bit;
+   subtype TR_SU_Field is CMSIS.Device.UInt4;
+   subtype TR_ST_Field is CMSIS.Device.UInt3;
+   subtype TR_MNU_Field is CMSIS.Device.UInt4;
+   subtype TR_MNT_Field is CMSIS.Device.UInt3;
+   subtype TR_HU_Field is CMSIS.Device.UInt4;
+   subtype TR_HT_Field is CMSIS.Device.UInt2;
+   subtype TR_PM_Field is CMSIS.Device.Bit;
 
    --  RTC time register
    type TR_Register is record
@@ -28,13 +28,13 @@ package Cmsis.Device.RTC is
       --  Second tens in BCD format
       ST             : TR_ST_Field := 16#0#;
       --  unspecified
-      Reserved_7_7   : Cmsis.Device.Bit := 16#0#;
+      Reserved_7_7   : CMSIS.Device.Bit := 16#0#;
       --  Minute units in BCD format
       MNU            : TR_MNU_Field := 16#0#;
       --  Minute tens in BCD format
       MNT            : TR_MNT_Field := 16#0#;
       --  unspecified
-      Reserved_15_15 : Cmsis.Device.Bit := 16#0#;
+      Reserved_15_15 : CMSIS.Device.Bit := 16#0#;
       --  Hour units in BCD format
       HU             : TR_HU_Field := 16#0#;
       --  Hour tens in BCD format
@@ -42,7 +42,7 @@ package Cmsis.Device.RTC is
       --  AM/PM notation
       PM             : TR_PM_Field := 16#0#;
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -60,13 +60,13 @@ package Cmsis.Device.RTC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
-   subtype DR_DU_Field is Cmsis.Device.UInt4;
-   subtype DR_DT_Field is Cmsis.Device.UInt2;
-   subtype DR_MU_Field is Cmsis.Device.UInt4;
-   subtype DR_MT_Field is Cmsis.Device.Bit;
-   subtype DR_WDU_Field is Cmsis.Device.UInt3;
-   subtype DR_YU_Field is Cmsis.Device.UInt4;
-   subtype DR_YT_Field is Cmsis.Device.UInt4;
+   subtype DR_DU_Field is CMSIS.Device.UInt4;
+   subtype DR_DT_Field is CMSIS.Device.UInt2;
+   subtype DR_MU_Field is CMSIS.Device.UInt4;
+   subtype DR_MT_Field is CMSIS.Device.Bit;
+   subtype DR_WDU_Field is CMSIS.Device.UInt3;
+   subtype DR_YU_Field is CMSIS.Device.UInt4;
+   subtype DR_YT_Field is CMSIS.Device.UInt4;
 
    --  RTC date register
    type DR_Register is record
@@ -75,7 +75,7 @@ package Cmsis.Device.RTC is
       --  Date tens in BCD format
       DT             : DR_DT_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_6_7   : CMSIS.Device.UInt2 := 16#0#;
       --  Month units in BCD format
       MU             : DR_MU_Field := 16#0#;
       --  Month tens in BCD format
@@ -87,7 +87,7 @@ package Cmsis.Device.RTC is
       --  Year tens in BCD format
       YT             : DR_YT_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -104,26 +104,26 @@ package Cmsis.Device.RTC is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype CR_WUCKSEL_Field is Cmsis.Device.UInt3;
-   subtype CR_TSEDGE_Field is Cmsis.Device.Bit;
-   subtype CR_REFCKON_Field is Cmsis.Device.Bit;
-   subtype CR_BYPSHAD_Field is Cmsis.Device.Bit;
-   subtype CR_FMT_Field is Cmsis.Device.Bit;
-   subtype CR_ALRAE_Field is Cmsis.Device.Bit;
-   subtype CR_ALRBE_Field is Cmsis.Device.Bit;
-   subtype CR_WUTE_Field is Cmsis.Device.Bit;
-   subtype CR_TSE_Field is Cmsis.Device.Bit;
-   subtype CR_ALRAIE_Field is Cmsis.Device.Bit;
-   subtype CR_ALRBIE_Field is Cmsis.Device.Bit;
-   subtype CR_WUTIE_Field is Cmsis.Device.Bit;
-   subtype CR_TSIE_Field is Cmsis.Device.Bit;
-   subtype CR_ADD1H_Field is Cmsis.Device.Bit;
-   subtype CR_SUB1H_Field is Cmsis.Device.Bit;
-   subtype CR_BKP_Field is Cmsis.Device.Bit;
-   subtype CR_COSEL_Field is Cmsis.Device.Bit;
-   subtype CR_POL_Field is Cmsis.Device.Bit;
-   subtype CR_OSEL_Field is Cmsis.Device.UInt2;
-   subtype CR_COE_Field is Cmsis.Device.Bit;
+   subtype CR_WUCKSEL_Field is CMSIS.Device.UInt3;
+   subtype CR_TSEDGE_Field is CMSIS.Device.Bit;
+   subtype CR_REFCKON_Field is CMSIS.Device.Bit;
+   subtype CR_BYPSHAD_Field is CMSIS.Device.Bit;
+   subtype CR_FMT_Field is CMSIS.Device.Bit;
+   subtype CR_ALRAE_Field is CMSIS.Device.Bit;
+   subtype CR_ALRBE_Field is CMSIS.Device.Bit;
+   subtype CR_WUTE_Field is CMSIS.Device.Bit;
+   subtype CR_TSE_Field is CMSIS.Device.Bit;
+   subtype CR_ALRAIE_Field is CMSIS.Device.Bit;
+   subtype CR_ALRBIE_Field is CMSIS.Device.Bit;
+   subtype CR_WUTIE_Field is CMSIS.Device.Bit;
+   subtype CR_TSIE_Field is CMSIS.Device.Bit;
+   subtype CR_ADD1H_Field is CMSIS.Device.Bit;
+   subtype CR_SUB1H_Field is CMSIS.Device.Bit;
+   subtype CR_BKP_Field is CMSIS.Device.Bit;
+   subtype CR_COSEL_Field is CMSIS.Device.Bit;
+   subtype CR_POL_Field is CMSIS.Device.Bit;
+   subtype CR_OSEL_Field is CMSIS.Device.UInt2;
+   subtype CR_COE_Field is CMSIS.Device.Bit;
 
    --  RTC control register
    type CR_Register is record
@@ -138,7 +138,7 @@ package Cmsis.Device.RTC is
       --  Hour format
       FMT            : CR_FMT_Field := 16#0#;
       --  unspecified
-      Reserved_7_7   : Cmsis.Device.Bit := 16#0#;
+      Reserved_7_7   : CMSIS.Device.Bit := 16#0#;
       --  Alarm A enable
       ALRAE          : CR_ALRAE_Field := 16#0#;
       --  Alarm B enable
@@ -170,7 +170,7 @@ package Cmsis.Device.RTC is
       --  Calibration output enable
       COE            : CR_COE_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -200,21 +200,21 @@ package Cmsis.Device.RTC is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype ISR_ALRAWF_Field is Cmsis.Device.Bit;
-   subtype ISR_ALRBWF_Field is Cmsis.Device.Bit;
-   subtype ISR_WUTWF_Field is Cmsis.Device.Bit;
-   subtype ISR_SHPF_Field is Cmsis.Device.Bit;
-   subtype ISR_INITS_Field is Cmsis.Device.Bit;
-   subtype ISR_RSF_Field is Cmsis.Device.Bit;
-   subtype ISR_INITF_Field is Cmsis.Device.Bit;
-   subtype ISR_INIT_Field is Cmsis.Device.Bit;
-   subtype ISR_ALRAF_Field is Cmsis.Device.Bit;
-   subtype ISR_ALRBF_Field is Cmsis.Device.Bit;
-   subtype ISR_WUTF_Field is Cmsis.Device.Bit;
-   subtype ISR_TSF_Field is Cmsis.Device.Bit;
-   subtype ISR_TSOVF_Field is Cmsis.Device.Bit;
-   subtype ISR_TAMP1F_Field is Cmsis.Device.Bit;
-   subtype ISR_TAMP2F_Field is Cmsis.Device.Bit;
+   subtype ISR_ALRAWF_Field is CMSIS.Device.Bit;
+   subtype ISR_ALRBWF_Field is CMSIS.Device.Bit;
+   subtype ISR_WUTWF_Field is CMSIS.Device.Bit;
+   subtype ISR_SHPF_Field is CMSIS.Device.Bit;
+   subtype ISR_INITS_Field is CMSIS.Device.Bit;
+   subtype ISR_RSF_Field is CMSIS.Device.Bit;
+   subtype ISR_INITF_Field is CMSIS.Device.Bit;
+   subtype ISR_INIT_Field is CMSIS.Device.Bit;
+   subtype ISR_ALRAF_Field is CMSIS.Device.Bit;
+   subtype ISR_ALRBF_Field is CMSIS.Device.Bit;
+   subtype ISR_WUTF_Field is CMSIS.Device.Bit;
+   subtype ISR_TSF_Field is CMSIS.Device.Bit;
+   subtype ISR_TSOVF_Field is CMSIS.Device.Bit;
+   subtype ISR_TAMP1F_Field is CMSIS.Device.Bit;
+   subtype ISR_TAMP2F_Field is CMSIS.Device.Bit;
 
    --  RTC initialization and status register
    type ISR_Register is record
@@ -249,7 +249,7 @@ package Cmsis.Device.RTC is
       --  RTC_TAMP2 detection flag
       TAMP2F         : ISR_TAMP2F_Field := 16#0#;
       --  unspecified
-      Reserved_15_31 : Cmsis.Device.UInt17 := 16#0#;
+      Reserved_15_31 : CMSIS.Device.UInt17 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -273,8 +273,8 @@ package Cmsis.Device.RTC is
       Reserved_15_31 at 0 range 15 .. 31;
    end record;
 
-   subtype PRER_PREDIV_S_Field is Cmsis.Device.UInt16;
-   subtype PRER_PREDIV_A_Field is Cmsis.Device.UInt7;
+   subtype PRER_PREDIV_S_Field is CMSIS.Device.UInt16;
+   subtype PRER_PREDIV_A_Field is CMSIS.Device.UInt7;
 
    --  RTC prescaler register
    type PRER_Register is record
@@ -283,7 +283,7 @@ package Cmsis.Device.RTC is
       --  Asynchronous prescaler factor
       PREDIV_A       : PRER_PREDIV_A_Field := 16#0#;
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_23_31 : CMSIS.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -294,14 +294,14 @@ package Cmsis.Device.RTC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
-   subtype WUTR_WUT_Field is Cmsis.Device.UInt16;
+   subtype WUTR_WUT_Field is CMSIS.Device.UInt16;
 
    --  RTC wakeup timer register
    type WUTR_Register is record
       --  Wakeup auto-reload value bits
       WUT            : WUTR_WUT_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -311,20 +311,20 @@ package Cmsis.Device.RTC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype ALRMAR_SU_Field is Cmsis.Device.UInt4;
-   subtype ALRMAR_ST_Field is Cmsis.Device.UInt3;
-   subtype ALRMAR_MSK1_Field is Cmsis.Device.Bit;
-   subtype ALRMAR_MNU_Field is Cmsis.Device.UInt4;
-   subtype ALRMAR_MNT_Field is Cmsis.Device.UInt3;
-   subtype ALRMAR_MSK2_Field is Cmsis.Device.Bit;
-   subtype ALRMAR_HU_Field is Cmsis.Device.UInt4;
-   subtype ALRMAR_HT_Field is Cmsis.Device.UInt2;
-   subtype ALRMAR_PM_Field is Cmsis.Device.Bit;
-   subtype ALRMAR_MSK3_Field is Cmsis.Device.Bit;
-   subtype ALRMAR_DU_Field is Cmsis.Device.UInt4;
-   subtype ALRMAR_DT_Field is Cmsis.Device.UInt2;
-   subtype ALRMAR_WDSEL_Field is Cmsis.Device.Bit;
-   subtype ALRMAR_MSK4_Field is Cmsis.Device.Bit;
+   subtype ALRMAR_SU_Field is CMSIS.Device.UInt4;
+   subtype ALRMAR_ST_Field is CMSIS.Device.UInt3;
+   subtype ALRMAR_MSK1_Field is CMSIS.Device.Bit;
+   subtype ALRMAR_MNU_Field is CMSIS.Device.UInt4;
+   subtype ALRMAR_MNT_Field is CMSIS.Device.UInt3;
+   subtype ALRMAR_MSK2_Field is CMSIS.Device.Bit;
+   subtype ALRMAR_HU_Field is CMSIS.Device.UInt4;
+   subtype ALRMAR_HT_Field is CMSIS.Device.UInt2;
+   subtype ALRMAR_PM_Field is CMSIS.Device.Bit;
+   subtype ALRMAR_MSK3_Field is CMSIS.Device.Bit;
+   subtype ALRMAR_DU_Field is CMSIS.Device.UInt4;
+   subtype ALRMAR_DT_Field is CMSIS.Device.UInt2;
+   subtype ALRMAR_WDSEL_Field is CMSIS.Device.Bit;
+   subtype ALRMAR_MSK4_Field is CMSIS.Device.Bit;
 
    --  RTC alarm A register
    type ALRMAR_Register is record
@@ -377,20 +377,20 @@ package Cmsis.Device.RTC is
       MSK4  at 0 range 31 .. 31;
    end record;
 
-   subtype ALRMBR_SU_Field is Cmsis.Device.UInt4;
-   subtype ALRMBR_ST_Field is Cmsis.Device.UInt3;
-   subtype ALRMBR_MSK1_Field is Cmsis.Device.Bit;
-   subtype ALRMBR_MNU_Field is Cmsis.Device.UInt4;
-   subtype ALRMBR_MNT_Field is Cmsis.Device.UInt3;
-   subtype ALRMBR_MSK2_Field is Cmsis.Device.Bit;
-   subtype ALRMBR_HU_Field is Cmsis.Device.UInt4;
-   subtype ALRMBR_HT_Field is Cmsis.Device.UInt2;
-   subtype ALRMBR_PM_Field is Cmsis.Device.Bit;
-   subtype ALRMBR_MSK3_Field is Cmsis.Device.Bit;
-   subtype ALRMBR_DU_Field is Cmsis.Device.UInt4;
-   subtype ALRMBR_DT_Field is Cmsis.Device.UInt2;
-   subtype ALRMBR_WDSEL_Field is Cmsis.Device.Bit;
-   subtype ALRMBR_MSK4_Field is Cmsis.Device.Bit;
+   subtype ALRMBR_SU_Field is CMSIS.Device.UInt4;
+   subtype ALRMBR_ST_Field is CMSIS.Device.UInt3;
+   subtype ALRMBR_MSK1_Field is CMSIS.Device.Bit;
+   subtype ALRMBR_MNU_Field is CMSIS.Device.UInt4;
+   subtype ALRMBR_MNT_Field is CMSIS.Device.UInt3;
+   subtype ALRMBR_MSK2_Field is CMSIS.Device.Bit;
+   subtype ALRMBR_HU_Field is CMSIS.Device.UInt4;
+   subtype ALRMBR_HT_Field is CMSIS.Device.UInt2;
+   subtype ALRMBR_PM_Field is CMSIS.Device.Bit;
+   subtype ALRMBR_MSK3_Field is CMSIS.Device.Bit;
+   subtype ALRMBR_DU_Field is CMSIS.Device.UInt4;
+   subtype ALRMBR_DT_Field is CMSIS.Device.UInt2;
+   subtype ALRMBR_WDSEL_Field is CMSIS.Device.Bit;
+   subtype ALRMBR_MSK4_Field is CMSIS.Device.Bit;
 
    --  RTC alarm B register
    type ALRMBR_Register is record
@@ -443,14 +443,14 @@ package Cmsis.Device.RTC is
       MSK4  at 0 range 31 .. 31;
    end record;
 
-   subtype WPR_KEY_Field is Cmsis.Device.UInt8;
+   subtype WPR_KEY_Field is CMSIS.Device.UInt8;
 
    --  write protection register
    type WPR_Register is record
       --  Write-only. Write protection key
       KEY           : WPR_KEY_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
+      Reserved_8_31 : CMSIS.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -460,14 +460,14 @@ package Cmsis.Device.RTC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype SSR_SS_Field is Cmsis.Device.UInt16;
+   subtype SSR_SS_Field is CMSIS.Device.UInt16;
 
    --  RTC sub second register
    type SSR_Register is record
       --  Read-only. Sub second value
       SS             : SSR_SS_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -477,15 +477,15 @@ package Cmsis.Device.RTC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype SHIFTR_SUBFS_Field is Cmsis.Device.UInt15;
-   subtype SHIFTR_ADD1S_Field is Cmsis.Device.Bit;
+   subtype SHIFTR_SUBFS_Field is CMSIS.Device.UInt15;
+   subtype SHIFTR_ADD1S_Field is CMSIS.Device.Bit;
 
    --  RTC shift control register
    type SHIFTR_Register is record
       --  Write-only. Subtract a fraction of a second
       SUBFS          : SHIFTR_SUBFS_Field := 16#0#;
       --  unspecified
-      Reserved_15_30 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_15_30 : CMSIS.Device.UInt16 := 16#0#;
       --  Write-only. Add one second
       ADD1S          : SHIFTR_ADD1S_Field := 16#0#;
    end record
@@ -498,13 +498,13 @@ package Cmsis.Device.RTC is
       ADD1S          at 0 range 31 .. 31;
    end record;
 
-   subtype TSTR_SU_Field is Cmsis.Device.UInt4;
-   subtype TSTR_ST_Field is Cmsis.Device.UInt3;
-   subtype TSTR_MNU_Field is Cmsis.Device.UInt4;
-   subtype TSTR_MNT_Field is Cmsis.Device.UInt3;
-   subtype TSTR_HU_Field is Cmsis.Device.UInt4;
-   subtype TSTR_HT_Field is Cmsis.Device.UInt2;
-   subtype TSTR_PM_Field is Cmsis.Device.Bit;
+   subtype TSTR_SU_Field is CMSIS.Device.UInt4;
+   subtype TSTR_ST_Field is CMSIS.Device.UInt3;
+   subtype TSTR_MNU_Field is CMSIS.Device.UInt4;
+   subtype TSTR_MNT_Field is CMSIS.Device.UInt3;
+   subtype TSTR_HU_Field is CMSIS.Device.UInt4;
+   subtype TSTR_HT_Field is CMSIS.Device.UInt2;
+   subtype TSTR_PM_Field is CMSIS.Device.Bit;
 
    --  RTC timestamp time register
    type TSTR_Register is record
@@ -513,13 +513,13 @@ package Cmsis.Device.RTC is
       --  Read-only. Second tens in BCD format.
       ST             : TSTR_ST_Field;
       --  unspecified
-      Reserved_7_7   : Cmsis.Device.Bit;
+      Reserved_7_7   : CMSIS.Device.Bit;
       --  Read-only. Minute units in BCD format.
       MNU            : TSTR_MNU_Field;
       --  Read-only. Minute tens in BCD format.
       MNT            : TSTR_MNT_Field;
       --  unspecified
-      Reserved_15_15 : Cmsis.Device.Bit;
+      Reserved_15_15 : CMSIS.Device.Bit;
       --  Read-only. Hour units in BCD format.
       HU             : TSTR_HU_Field;
       --  Read-only. Hour tens in BCD format.
@@ -527,7 +527,7 @@ package Cmsis.Device.RTC is
       --  Read-only. AM/PM notation
       PM             : TSTR_PM_Field;
       --  unspecified
-      Reserved_23_31 : Cmsis.Device.UInt9;
+      Reserved_23_31 : CMSIS.Device.UInt9;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -545,11 +545,11 @@ package Cmsis.Device.RTC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
-   subtype TSDR_DU_Field is Cmsis.Device.UInt4;
-   subtype TSDR_DT_Field is Cmsis.Device.UInt2;
-   subtype TSDR_MU_Field is Cmsis.Device.UInt4;
-   subtype TSDR_MT_Field is Cmsis.Device.Bit;
-   subtype TSDR_WDU_Field is Cmsis.Device.UInt3;
+   subtype TSDR_DU_Field is CMSIS.Device.UInt4;
+   subtype TSDR_DT_Field is CMSIS.Device.UInt2;
+   subtype TSDR_MU_Field is CMSIS.Device.UInt4;
+   subtype TSDR_MT_Field is CMSIS.Device.Bit;
+   subtype TSDR_WDU_Field is CMSIS.Device.UInt3;
 
    --  RTC timestamp date register
    type TSDR_Register is record
@@ -558,7 +558,7 @@ package Cmsis.Device.RTC is
       --  Read-only. Date tens in BCD format
       DT             : TSDR_DT_Field;
       --  unspecified
-      Reserved_6_7   : Cmsis.Device.UInt2;
+      Reserved_6_7   : CMSIS.Device.UInt2;
       --  Read-only. Month units in BCD format
       MU             : TSDR_MU_Field;
       --  Read-only. Month tens in BCD format
@@ -566,7 +566,7 @@ package Cmsis.Device.RTC is
       --  Read-only. Week day units
       WDU            : TSDR_WDU_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -581,14 +581,14 @@ package Cmsis.Device.RTC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype TSSSR_SS_Field is Cmsis.Device.UInt16;
+   subtype TSSSR_SS_Field is CMSIS.Device.UInt16;
 
    --  RTC time-stamp sub second register
    type TSSSR_Register is record
       --  Read-only. Sub second value
       SS             : TSSSR_SS_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -598,17 +598,17 @@ package Cmsis.Device.RTC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CALR_CALM_Field is Cmsis.Device.UInt9;
-   subtype CALR_CALW16_Field is Cmsis.Device.Bit;
-   subtype CALR_CALW8_Field is Cmsis.Device.Bit;
-   subtype CALR_CALP_Field is Cmsis.Device.Bit;
+   subtype CALR_CALM_Field is CMSIS.Device.UInt9;
+   subtype CALR_CALW16_Field is CMSIS.Device.Bit;
+   subtype CALR_CALW8_Field is CMSIS.Device.Bit;
+   subtype CALR_CALP_Field is CMSIS.Device.Bit;
 
    --  RTC calibration register
    type CALR_Register is record
       --  Calibration minus
       CALM           : CALR_CALM_Field := 16#0#;
       --  unspecified
-      Reserved_9_12  : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_9_12  : CMSIS.Device.UInt4 := 16#0#;
       --  Use a 16-second calibration cycle period
       CALW16         : CALR_CALW16_Field := 16#0#;
       --  Use an 8-second calibration cycle period
@@ -616,7 +616,7 @@ package Cmsis.Device.RTC is
       --  Increase frequency of RTC by 488.5 ppm
       CALP           : CALR_CALP_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -630,22 +630,22 @@ package Cmsis.Device.RTC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype TAMPCR_TAMP1E_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP1TRG_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMPIE_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP2E_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP2_TRG_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMPTS_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMPFREQ_Field is Cmsis.Device.UInt3;
-   subtype TAMPCR_TAMPFLT_Field is Cmsis.Device.UInt2;
-   subtype TAMPCR_TAMPPRCH_Field is Cmsis.Device.UInt2;
-   subtype TAMPCR_TAMPPUDIS_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP1IE_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP1NOERASE_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP1MF_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP2IE_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP2NOERASE_Field is Cmsis.Device.Bit;
-   subtype TAMPCR_TAMP2MF_Field is Cmsis.Device.Bit;
+   subtype TAMPCR_TAMP1E_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP1TRG_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMPIE_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP2E_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP2_TRG_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMPTS_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMPFREQ_Field is CMSIS.Device.UInt3;
+   subtype TAMPCR_TAMPFLT_Field is CMSIS.Device.UInt2;
+   subtype TAMPCR_TAMPPRCH_Field is CMSIS.Device.UInt2;
+   subtype TAMPCR_TAMPPUDIS_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP1IE_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP1NOERASE_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP1MF_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP2IE_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP2NOERASE_Field is CMSIS.Device.Bit;
+   subtype TAMPCR_TAMP2MF_Field is CMSIS.Device.Bit;
 
    --  RTC tamper configuration register
    type TAMPCR_Register is record
@@ -660,7 +660,7 @@ package Cmsis.Device.RTC is
       --  Active level for RTC_TAMP2 input
       TAMP2_TRG      : TAMPCR_TAMP2_TRG_Field := 16#0#;
       --  unspecified
-      Reserved_5_6   : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_5_6   : CMSIS.Device.UInt2 := 16#0#;
       --  Activate timestamp on tamper detection event
       TAMPTS         : TAMPCR_TAMPTS_Field := 16#0#;
       --  Tamper sampling frequency
@@ -684,7 +684,7 @@ package Cmsis.Device.RTC is
       --  Tamper 2 mask flag
       TAMP2MF        : TAMPCR_TAMP2MF_Field := 16#0#;
       --  unspecified
-      Reserved_22_31 : Cmsis.Device.UInt10 := 16#0#;
+      Reserved_22_31 : CMSIS.Device.UInt10 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -710,19 +710,19 @@ package Cmsis.Device.RTC is
       Reserved_22_31 at 0 range 22 .. 31;
    end record;
 
-   subtype ALRMASSR_SS_Field is Cmsis.Device.UInt15;
-   subtype ALRMASSR_MASKSS_Field is Cmsis.Device.UInt4;
+   subtype ALRMASSR_SS_Field is CMSIS.Device.UInt15;
+   subtype ALRMASSR_MASKSS_Field is CMSIS.Device.UInt4;
 
    --  RTC alarm A sub second register
    type ALRMASSR_Register is record
       --  Sub seconds value
       SS             : ALRMASSR_SS_Field := 16#0#;
       --  unspecified
-      Reserved_15_23 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_15_23 : CMSIS.Device.UInt9 := 16#0#;
       --  Mask the most-significant bits starting at this bit
       MASKSS         : ALRMASSR_MASKSS_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_28_31 : CMSIS.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -734,19 +734,19 @@ package Cmsis.Device.RTC is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
-   subtype ALRMBSSR_SS_Field is Cmsis.Device.UInt15;
-   subtype ALRMBSSR_MASKSS_Field is Cmsis.Device.UInt4;
+   subtype ALRMBSSR_SS_Field is CMSIS.Device.UInt15;
+   subtype ALRMBSSR_MASKSS_Field is CMSIS.Device.UInt4;
 
    --  RTC alarm B sub second register
    type ALRMBSSR_Register is record
       --  Sub seconds value
       SS             : ALRMBSSR_SS_Field := 16#0#;
       --  unspecified
-      Reserved_15_23 : Cmsis.Device.UInt9 := 16#0#;
+      Reserved_15_23 : CMSIS.Device.UInt9 := 16#0#;
       --  Mask the most-significant bits starting at this bit
       MASKSS         : ALRMBSSR_MASKSS_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_28_31 : CMSIS.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -758,8 +758,8 @@ package Cmsis.Device.RTC is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
-   subtype OR_RTC_ALARM_TYPE_Field is Cmsis.Device.Bit;
-   subtype OR_RTC_OUT_RMP_Field is Cmsis.Device.Bit;
+   subtype OR_RTC_ALARM_TYPE_Field is CMSIS.Device.Bit;
+   subtype OR_RTC_OUT_RMP_Field is CMSIS.Device.Bit;
 
    --  option register
    type OR_Register is record
@@ -768,7 +768,7 @@ package Cmsis.Device.RTC is
       --  RTC_ALARM on PC13 output type
       RTC_OUT_RMP    : OR_RTC_OUT_RMP_Field := 16#0#;
       --  unspecified
-      Reserved_2_31  : Cmsis.Device.UInt30 := 16#0#;
+      Reserved_2_31  : CMSIS.Device.UInt30 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -824,15 +824,15 @@ package Cmsis.Device.RTC is
       --  option register
       OR_k     : aliased OR_Register;
       --  RTC backup registers
-      BKP0R    : aliased Cmsis.Device.UInt32;
+      BKP0R    : aliased CMSIS.Device.UInt32;
       --  RTC backup registers
-      BKP1R    : aliased Cmsis.Device.UInt32;
+      BKP1R    : aliased CMSIS.Device.UInt32;
       --  RTC backup registers
-      BKP2R    : aliased Cmsis.Device.UInt32;
+      BKP2R    : aliased CMSIS.Device.UInt32;
       --  RTC backup registers
-      BKP3R    : aliased Cmsis.Device.UInt32;
+      BKP3R    : aliased CMSIS.Device.UInt32;
       --  RTC backup registers
-      BKP4R    : aliased Cmsis.Device.UInt32;
+      BKP4R    : aliased CMSIS.Device.UInt32;
    end record
      with Volatile;
 
@@ -867,4 +867,4 @@ package Cmsis.Device.RTC is
    RTC_Periph : aliased RTC_Peripheral
      with Import, Address => RTC_Base;
 
-end Cmsis.Device.RTC;
+end CMSIS.Device.RTC;

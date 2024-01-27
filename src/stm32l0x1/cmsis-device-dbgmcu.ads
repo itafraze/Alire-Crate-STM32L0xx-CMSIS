@@ -6,22 +6,22 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.DBGMCU is
+package CMSIS.Device.DBGMCU is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype IDCODE_DEV_ID_Field is Cmsis.Device.UInt12;
-   subtype IDCODE_REV_ID_Field is Cmsis.Device.UInt16;
+   subtype IDCODE_DEV_ID_Field is CMSIS.Device.UInt12;
+   subtype IDCODE_REV_ID_Field is CMSIS.Device.UInt16;
 
    --  MCU Device ID Code Register
    type IDCODE_Register is record
       --  Read-only. Device Identifier
       DEV_ID         : IDCODE_DEV_ID_Field;
       --  unspecified
-      Reserved_12_15 : Cmsis.Device.UInt4;
+      Reserved_12_15 : CMSIS.Device.UInt4;
       --  Read-only. Revision Identifier
       REV_ID         : IDCODE_REV_ID_Field;
    end record
@@ -34,9 +34,9 @@ package Cmsis.Device.DBGMCU is
       REV_ID         at 0 range 16 .. 31;
    end record;
 
-   subtype CR_DBG_SLEEP_Field is Cmsis.Device.Bit;
-   subtype CR_DBG_STOP_Field is Cmsis.Device.Bit;
-   subtype CR_DBG_STANDBY_Field is Cmsis.Device.Bit;
+   subtype CR_DBG_SLEEP_Field is CMSIS.Device.Bit;
+   subtype CR_DBG_STOP_Field is CMSIS.Device.Bit;
+   subtype CR_DBG_STANDBY_Field is CMSIS.Device.Bit;
 
    --  Debug MCU Configuration Register
    type CR_Register is record
@@ -47,7 +47,7 @@ package Cmsis.Device.DBGMCU is
       --  Debug Standby Mode
       DBG_STANDBY   : CR_DBG_STANDBY_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
+      Reserved_3_31 : CMSIS.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -59,25 +59,25 @@ package Cmsis.Device.DBGMCU is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
-   subtype APB1_FZ_DBG_TIMER2_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_TIMER6_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_RTC_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_WWDG_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_IWDG_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_I2C1_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_I2C2_STOP_Field is Cmsis.Device.Bit;
-   subtype APB1_FZ_DBG_LPTIMER_STOP_Field is Cmsis.Device.Bit;
+   subtype APB1_FZ_DBG_TIMER2_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_TIMER6_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_RTC_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_WWDG_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_IWDG_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_I2C1_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_I2C2_STOP_Field is CMSIS.Device.Bit;
+   subtype APB1_FZ_DBG_LPTIMER_STOP_Field is CMSIS.Device.Bit;
 
    --  APB Low Freeze Register
    type APB1_FZ_Register is record
       --  Debug Timer 2 stopped when Core is halted
       DBG_TIMER2_STOP  : APB1_FZ_DBG_TIMER2_STOP_Field := 16#0#;
       --  unspecified
-      Reserved_1_3     : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_1_3     : CMSIS.Device.UInt3 := 16#0#;
       --  Debug Timer 6 stopped when Core is halted
       DBG_TIMER6_STOP  : APB1_FZ_DBG_TIMER6_STOP_Field := 16#0#;
       --  unspecified
-      Reserved_5_9     : Cmsis.Device.UInt5 := 16#0#;
+      Reserved_5_9     : CMSIS.Device.UInt5 := 16#0#;
       --  Debug RTC stopped when Core is halted
       DBG_RTC_STOP     : APB1_FZ_DBG_RTC_STOP_Field := 16#0#;
       --  Debug Window Wachdog stopped when Core is halted
@@ -85,13 +85,13 @@ package Cmsis.Device.DBGMCU is
       --  Debug Independent Wachdog stopped when Core is halted
       DBG_IWDG_STOP    : APB1_FZ_DBG_IWDG_STOP_Field := 16#0#;
       --  unspecified
-      Reserved_13_20   : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_13_20   : CMSIS.Device.UInt8 := 16#0#;
       --  I2C1 SMBUS timeout mode stopped when core is halted
       DBG_I2C1_STOP    : APB1_FZ_DBG_I2C1_STOP_Field := 16#0#;
       --  I2C2 SMBUS timeout mode stopped when core is halted
       DBG_I2C2_STOP    : APB1_FZ_DBG_I2C2_STOP_Field := 16#0#;
       --  unspecified
-      Reserved_23_30   : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_23_30   : CMSIS.Device.UInt8 := 16#0#;
       --  LPTIM1 counter stopped when core is halted
       DBG_LPTIMER_STOP : APB1_FZ_DBG_LPTIMER_STOP_Field := 16#0#;
    end record
@@ -113,21 +113,21 @@ package Cmsis.Device.DBGMCU is
       DBG_LPTIMER_STOP at 0 range 31 .. 31;
    end record;
 
-   subtype APB2_FZ_DBG_TIMER21_STOP_Field is Cmsis.Device.Bit;
-   subtype APB2_FZ_DBG_TIMER22_STO_Field is Cmsis.Device.Bit;
+   subtype APB2_FZ_DBG_TIMER21_STOP_Field is CMSIS.Device.Bit;
+   subtype APB2_FZ_DBG_TIMER22_STO_Field is CMSIS.Device.Bit;
 
    --  APB High Freeze Register
    type APB2_FZ_Register is record
       --  unspecified
-      Reserved_0_1     : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_0_1     : CMSIS.Device.UInt2 := 16#0#;
       --  Debug Timer 21 stopped when Core is halted
       DBG_TIMER21_STOP : APB2_FZ_DBG_TIMER21_STOP_Field := 16#0#;
       --  unspecified
-      Reserved_3_5     : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_3_5     : CMSIS.Device.UInt3 := 16#0#;
       --  Debug Timer 22 stopped when Core is halted
       DBG_TIMER22_STO  : APB2_FZ_DBG_TIMER22_STO_Field := 16#0#;
       --  unspecified
-      Reserved_7_31    : Cmsis.Device.UInt25 := 16#0#;
+      Reserved_7_31    : CMSIS.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -168,4 +168,4 @@ package Cmsis.Device.DBGMCU is
    DBG_Periph : aliased DBG_Peripheral
      with Import, Address => DBG_Base;
 
-end Cmsis.Device.DBGMCU;
+end CMSIS.Device.DBGMCU;

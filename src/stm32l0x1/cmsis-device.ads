@@ -8,7 +8,7 @@ with Interfaces;
 with System;
 
 --  STM32L0x1
-package Cmsis.Device is
+package CMSIS.Device is
    pragma Preelaborate;
 
    ---------------
@@ -123,4 +123,4 @@ package Cmsis.Device is
    STK_Base : constant System.Address := System'To_Address (16#E000E010#);
    SCB_Base : constant System.Address := System'To_Address (16#E000ED00#);
 
-end Cmsis.Device;
+end CMSIS.Device;

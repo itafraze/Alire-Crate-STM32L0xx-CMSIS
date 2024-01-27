@@ -6,15 +6,15 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.WWDG is
+package CMSIS.Device.WWDG is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CR_T_Field is Cmsis.Device.UInt7;
-   subtype CR_WDGA_Field is Cmsis.Device.Bit;
+   subtype CR_T_Field is CMSIS.Device.UInt7;
+   subtype CR_WDGA_Field is CMSIS.Device.Bit;
 
    --  Control register
    type CR_Register is record
@@ -23,7 +23,7 @@ package Cmsis.Device.WWDG is
       --  Activation bit
       WDGA          : CR_WDGA_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
+      Reserved_8_31 : CMSIS.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -34,9 +34,9 @@ package Cmsis.Device.WWDG is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype CFR_W_Field is Cmsis.Device.UInt7;
+   subtype CFR_W_Field is CMSIS.Device.UInt7;
    --  CFR_WDGTB array element
-   subtype CFR_WDGTB_Element is Cmsis.Device.Bit;
+   subtype CFR_WDGTB_Element is CMSIS.Device.Bit;
 
    --  CFR_WDGTB array
    type CFR_WDGTB_Field_Array is array (0 .. 1) of CFR_WDGTB_Element
@@ -49,7 +49,7 @@ package Cmsis.Device.WWDG is
       case As_Array is
          when False =>
             --  WDGTB as a value
-            Val : Cmsis.Device.UInt2;
+            Val : CMSIS.Device.UInt2;
          when True =>
             --  WDGTB as an array
             Arr : CFR_WDGTB_Field_Array;
@@ -62,7 +62,7 @@ package Cmsis.Device.WWDG is
       Arr at 0 range 0 .. 1;
    end record;
 
-   subtype CFR_EWI_Field is Cmsis.Device.Bit;
+   subtype CFR_EWI_Field is CMSIS.Device.Bit;
 
    --  Configuration register
    type CFR_Register is record
@@ -73,7 +73,7 @@ package Cmsis.Device.WWDG is
       --  Early wakeup interrupt
       EWI            : CFR_EWI_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
+      Reserved_10_31 : CMSIS.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -85,14 +85,14 @@ package Cmsis.Device.WWDG is
       Reserved_10_31 at 0 range 10 .. 31;
    end record;
 
-   subtype SR_EWIF_Field is Cmsis.Device.Bit;
+   subtype SR_EWIF_Field is CMSIS.Device.Bit;
 
    --  Status register
    type SR_Register is record
       --  Early wakeup interrupt flag
       EWIF          : SR_EWIF_Field := 16#0#;
       --  unspecified
-      Reserved_1_31 : Cmsis.Device.UInt31 := 16#0#;
+      Reserved_1_31 : CMSIS.Device.UInt31 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -127,4 +127,4 @@ package Cmsis.Device.WWDG is
    WWDG_Periph : aliased WWDG_Peripheral
      with Import, Address => WWDG_Base;
 
-end Cmsis.Device.WWDG;
+end CMSIS.Device.WWDG;

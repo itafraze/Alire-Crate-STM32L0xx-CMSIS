@@ -20,15 +20,15 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Reformat comments for GNATdoc
---       - Rename package to Cmsis.Device.System
+--       - Rename package to CMSIS.Device.System
 --       - Remove HAL dependency
 --
 ------------------------------------------------------------------------------
 
 with System.Storage_Elements;
-with Cmsis.Device.SCB;
+with CMSIS.Device.SCB;
 
-package body Cmsis.Device.System is
+package body CMSIS.Device.System is
    --  Implementation Notes:
    --  - Based on source file
    --    - cmsis_device_l0:Source/Templates/system_stm32l0xx.c
@@ -36,7 +36,7 @@ package body Cmsis.Device.System is
    procedure Init
    is
       package SysStor renames Standard.System.Storage_Elements;
-      use Cmsis.Device.SCB;
+      use CMSIS.Device.SCB;
 
       Vectors : aliased UInt32;
       pragma Import (C, Vectors, "__vectors");
@@ -52,4 +52,4 @@ package body Cmsis.Device.System is
 
    end Init;
 
-end Cmsis.Device.System;
+end CMSIS.Device.System;

@@ -6,17 +6,17 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.STK is
+package CMSIS.Device.STK is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CSR_ENABLE_Field is Cmsis.Device.Bit;
-   subtype CSR_TICKINT_Field is Cmsis.Device.Bit;
-   subtype CSR_CLKSOURCE_Field is Cmsis.Device.Bit;
-   subtype CSR_COUNTFLAG_Field is Cmsis.Device.Bit;
+   subtype CSR_ENABLE_Field is CMSIS.Device.Bit;
+   subtype CSR_TICKINT_Field is CMSIS.Device.Bit;
+   subtype CSR_CLKSOURCE_Field is CMSIS.Device.Bit;
+   subtype CSR_COUNTFLAG_Field is CMSIS.Device.Bit;
 
    --  SysTick control and status register
    type CSR_Register is record
@@ -27,11 +27,11 @@ package Cmsis.Device.STK is
       --  Clock source selection
       CLKSOURCE      : CSR_CLKSOURCE_Field := 16#0#;
       --  unspecified
-      Reserved_3_15  : Cmsis.Device.UInt13 := 16#0#;
+      Reserved_3_15  : CMSIS.Device.UInt13 := 16#0#;
       --  COUNTFLAG
       COUNTFLAG      : CSR_COUNTFLAG_Field := 16#0#;
       --  unspecified
-      Reserved_17_31 : Cmsis.Device.UInt15 := 16#0#;
+      Reserved_17_31 : CMSIS.Device.UInt15 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -45,14 +45,14 @@ package Cmsis.Device.STK is
       Reserved_17_31 at 0 range 17 .. 31;
    end record;
 
-   subtype RVR_RELOAD_Field is Cmsis.Device.UInt24;
+   subtype RVR_RELOAD_Field is CMSIS.Device.UInt24;
 
    --  SysTick reload value register
    type RVR_Register is record
       --  RELOAD value
       RELOAD         : RVR_RELOAD_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -62,14 +62,14 @@ package Cmsis.Device.STK is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype CVR_CURRENT_Field is Cmsis.Device.UInt24;
+   subtype CVR_CURRENT_Field is CMSIS.Device.UInt24;
 
    --  SysTick current value register
    type CVR_Register is record
       --  Current counter value
       CURRENT        : CVR_CURRENT_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -79,16 +79,16 @@ package Cmsis.Device.STK is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype CALIB_TENMS_Field is Cmsis.Device.UInt24;
-   subtype CALIB_SKEW_Field is Cmsis.Device.Bit;
-   subtype CALIB_NOREF_Field is Cmsis.Device.Bit;
+   subtype CALIB_TENMS_Field is CMSIS.Device.UInt24;
+   subtype CALIB_SKEW_Field is CMSIS.Device.Bit;
+   subtype CALIB_NOREF_Field is CMSIS.Device.Bit;
 
    --  SysTick calibration value register
    type CALIB_Register is record
       --  Calibration value
       TENMS          : CALIB_TENMS_Field := 16#0#;
       --  unspecified
-      Reserved_24_29 : Cmsis.Device.UInt6 := 16#0#;
+      Reserved_24_29 : CMSIS.Device.UInt6 := 16#0#;
       --  SKEW flag: Indicates whether the TENMS value is exact
       SKEW           : CALIB_SKEW_Field := 16#0#;
       --  NOREF flag. Reads as zero
@@ -132,4 +132,4 @@ package Cmsis.Device.STK is
    STK_Periph : aliased STK_Peripheral
      with Import, Address => STK_Base;
 
-end Cmsis.Device.STK;
+end CMSIS.Device.STK;

@@ -21,13 +21,14 @@
 --    2024.01 E. Zarfati
 --       - Supply interface Disable_IRQ
 --       - Reformat comments for GNATdoc
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-with Cmsis.Core.Types;
-   use Cmsis.Core.Types;
+with CMSIS.Core.Types;
+   use CMSIS.Core.Types;
 
-package Cmsis.Core.NVIC is
+package CMSIS.Core.NVIC is
    --  Functions to access the Nested Vector Interrupt Controller (NVIC).
 
    ---------------------------------------------------------------------------
@@ -77,4 +78,4 @@ package Cmsis.Core.NVIC is
    --  @param IRQ Processor exception identifier
    --  @param Priority The exception priority value
 
-end Cmsis.Core.NVIC;
+end CMSIS.Core.NVIC;

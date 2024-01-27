@@ -6,27 +6,27 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.SPI is
+package CMSIS.Device.SPI is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CR1_CPHA_Field is Cmsis.Device.Bit;
-   subtype CR1_CPOL_Field is Cmsis.Device.Bit;
-   subtype CR1_MSTR_Field is Cmsis.Device.Bit;
-   subtype CR1_BR_Field is Cmsis.Device.UInt3;
-   subtype CR1_SPE_Field is Cmsis.Device.Bit;
-   subtype CR1_LSBFIRST_Field is Cmsis.Device.Bit;
-   subtype CR1_SSI_Field is Cmsis.Device.Bit;
-   subtype CR1_SSM_Field is Cmsis.Device.Bit;
-   subtype CR1_RXONLY_Field is Cmsis.Device.Bit;
-   subtype CR1_DFF_Field is Cmsis.Device.Bit;
-   subtype CR1_CRCNEXT_Field is Cmsis.Device.Bit;
-   subtype CR1_CRCEN_Field is Cmsis.Device.Bit;
-   subtype CR1_BIDIOE_Field is Cmsis.Device.Bit;
-   subtype CR1_BIDIMODE_Field is Cmsis.Device.Bit;
+   subtype CR1_CPHA_Field is CMSIS.Device.Bit;
+   subtype CR1_CPOL_Field is CMSIS.Device.Bit;
+   subtype CR1_MSTR_Field is CMSIS.Device.Bit;
+   subtype CR1_BR_Field is CMSIS.Device.UInt3;
+   subtype CR1_SPE_Field is CMSIS.Device.Bit;
+   subtype CR1_LSBFIRST_Field is CMSIS.Device.Bit;
+   subtype CR1_SSI_Field is CMSIS.Device.Bit;
+   subtype CR1_SSM_Field is CMSIS.Device.Bit;
+   subtype CR1_RXONLY_Field is CMSIS.Device.Bit;
+   subtype CR1_DFF_Field is CMSIS.Device.Bit;
+   subtype CR1_CRCNEXT_Field is CMSIS.Device.Bit;
+   subtype CR1_CRCEN_Field is CMSIS.Device.Bit;
+   subtype CR1_BIDIOE_Field is CMSIS.Device.Bit;
+   subtype CR1_BIDIMODE_Field is CMSIS.Device.Bit;
 
    --  control register 1
    type CR1_Register is record
@@ -59,7 +59,7 @@ package Cmsis.Device.SPI is
       --  Bidirectional data mode enable
       BIDIMODE       : CR1_BIDIMODE_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -82,13 +82,13 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CR2_RXDMAEN_Field is Cmsis.Device.Bit;
-   subtype CR2_TXDMAEN_Field is Cmsis.Device.Bit;
-   subtype CR2_SSOE_Field is Cmsis.Device.Bit;
-   subtype CR2_FRF_Field is Cmsis.Device.Bit;
-   subtype CR2_ERRIE_Field is Cmsis.Device.Bit;
-   subtype CR2_RXNEIE_Field is Cmsis.Device.Bit;
-   subtype CR2_TXEIE_Field is Cmsis.Device.Bit;
+   subtype CR2_RXDMAEN_Field is CMSIS.Device.Bit;
+   subtype CR2_TXDMAEN_Field is CMSIS.Device.Bit;
+   subtype CR2_SSOE_Field is CMSIS.Device.Bit;
+   subtype CR2_FRF_Field is CMSIS.Device.Bit;
+   subtype CR2_ERRIE_Field is CMSIS.Device.Bit;
+   subtype CR2_RXNEIE_Field is CMSIS.Device.Bit;
+   subtype CR2_TXEIE_Field is CMSIS.Device.Bit;
 
    --  control register 2
    type CR2_Register is record
@@ -99,7 +99,7 @@ package Cmsis.Device.SPI is
       --  SS output enable
       SSOE          : CR2_SSOE_Field := 16#0#;
       --  unspecified
-      Reserved_3_3  : Cmsis.Device.Bit := 16#0#;
+      Reserved_3_3  : CMSIS.Device.Bit := 16#0#;
       --  Frame format
       FRF           : CR2_FRF_Field := 16#0#;
       --  Error interrupt enable
@@ -109,7 +109,7 @@ package Cmsis.Device.SPI is
       --  Tx buffer empty interrupt enable
       TXEIE         : CR2_TXEIE_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
+      Reserved_8_31 : CMSIS.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -126,15 +126,15 @@ package Cmsis.Device.SPI is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype SR_RXNE_Field is Cmsis.Device.Bit;
-   subtype SR_TXE_Field is Cmsis.Device.Bit;
-   subtype SR_CHSIDE_Field is Cmsis.Device.Bit;
-   subtype SR_UDR_Field is Cmsis.Device.Bit;
-   subtype SR_CRCERR_Field is Cmsis.Device.Bit;
-   subtype SR_MODF_Field is Cmsis.Device.Bit;
-   subtype SR_OVR_Field is Cmsis.Device.Bit;
-   subtype SR_BSY_Field is Cmsis.Device.Bit;
-   subtype SR_TIFRFE_Field is Cmsis.Device.Bit;
+   subtype SR_RXNE_Field is CMSIS.Device.Bit;
+   subtype SR_TXE_Field is CMSIS.Device.Bit;
+   subtype SR_CHSIDE_Field is CMSIS.Device.Bit;
+   subtype SR_UDR_Field is CMSIS.Device.Bit;
+   subtype SR_CRCERR_Field is CMSIS.Device.Bit;
+   subtype SR_MODF_Field is CMSIS.Device.Bit;
+   subtype SR_OVR_Field is CMSIS.Device.Bit;
+   subtype SR_BSY_Field is CMSIS.Device.Bit;
+   subtype SR_TIFRFE_Field is CMSIS.Device.Bit;
 
    --  status register
    type SR_Register is record
@@ -157,7 +157,7 @@ package Cmsis.Device.SPI is
       --  Read-only. TI frame format error
       TIFRFE        : SR_TIFRFE_Field := 16#0#;
       --  unspecified
-      Reserved_9_31 : Cmsis.Device.UInt23 := 16#0#;
+      Reserved_9_31 : CMSIS.Device.UInt23 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -175,14 +175,14 @@ package Cmsis.Device.SPI is
       Reserved_9_31 at 0 range 9 .. 31;
    end record;
 
-   subtype DR_DR_Field is Cmsis.Device.UInt16;
+   subtype DR_DR_Field is CMSIS.Device.UInt16;
 
    --  data register
    type DR_Register is record
       --  Data register
       DR             : DR_DR_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -192,14 +192,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CRCPR_CRCPOLY_Field is Cmsis.Device.UInt16;
+   subtype CRCPR_CRCPOLY_Field is CMSIS.Device.UInt16;
 
    --  CRC polynomial register
    type CRCPR_Register is record
       --  CRC polynomial register
       CRCPOLY        : CRCPR_CRCPOLY_Field := 16#7#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -209,14 +209,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype RXCRCR_RxCRC_Field is Cmsis.Device.UInt16;
+   subtype RXCRCR_RxCRC_Field is CMSIS.Device.UInt16;
 
    --  RX CRC register
    type RXCRCR_Register is record
       --  Read-only. Rx CRC register
       RxCRC          : RXCRCR_RxCRC_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -226,14 +226,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype TXCRCR_TxCRC_Field is Cmsis.Device.UInt16;
+   subtype TXCRCR_TxCRC_Field is CMSIS.Device.UInt16;
 
    --  TX CRC register
    type TXCRCR_Register is record
       --  Read-only. Tx CRC register
       TxCRC          : TXCRCR_TxCRC_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -243,14 +243,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype I2SCFGR_CHLEN_Field is Cmsis.Device.Bit;
-   subtype I2SCFGR_DATLEN_Field is Cmsis.Device.UInt2;
-   subtype I2SCFGR_CKPOL_Field is Cmsis.Device.Bit;
-   subtype I2SCFGR_I2SSTD_Field is Cmsis.Device.UInt2;
-   subtype I2SCFGR_PCMSYNC_Field is Cmsis.Device.Bit;
-   subtype I2SCFGR_I2SCFG_Field is Cmsis.Device.UInt2;
-   subtype I2SCFGR_I2SE_Field is Cmsis.Device.Bit;
-   subtype I2SCFGR_I2SMOD_Field is Cmsis.Device.Bit;
+   subtype I2SCFGR_CHLEN_Field is CMSIS.Device.Bit;
+   subtype I2SCFGR_DATLEN_Field is CMSIS.Device.UInt2;
+   subtype I2SCFGR_CKPOL_Field is CMSIS.Device.Bit;
+   subtype I2SCFGR_I2SSTD_Field is CMSIS.Device.UInt2;
+   subtype I2SCFGR_PCMSYNC_Field is CMSIS.Device.Bit;
+   subtype I2SCFGR_I2SCFG_Field is CMSIS.Device.UInt2;
+   subtype I2SCFGR_I2SE_Field is CMSIS.Device.Bit;
+   subtype I2SCFGR_I2SMOD_Field is CMSIS.Device.Bit;
 
    --  I2S configuration register
    type I2SCFGR_Register is record
@@ -263,7 +263,7 @@ package Cmsis.Device.SPI is
       --  I2S standard selection
       I2SSTD         : I2SCFGR_I2SSTD_Field := 16#0#;
       --  unspecified
-      Reserved_6_6   : Cmsis.Device.Bit := 16#0#;
+      Reserved_6_6   : CMSIS.Device.Bit := 16#0#;
       --  PCM frame synchronization
       PCMSYNC        : I2SCFGR_PCMSYNC_Field := 16#0#;
       --  I2S configuration mode
@@ -273,7 +273,7 @@ package Cmsis.Device.SPI is
       --  I2S mode selection
       I2SMOD         : I2SCFGR_I2SMOD_Field := 16#0#;
       --  unspecified
-      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
+      Reserved_12_31 : CMSIS.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -291,9 +291,9 @@ package Cmsis.Device.SPI is
       Reserved_12_31 at 0 range 12 .. 31;
    end record;
 
-   subtype I2SPR_I2SDIV_Field is Cmsis.Device.UInt8;
-   subtype I2SPR_ODD_Field is Cmsis.Device.Bit;
-   subtype I2SPR_MCKOE_Field is Cmsis.Device.Bit;
+   subtype I2SPR_I2SDIV_Field is CMSIS.Device.UInt8;
+   subtype I2SPR_ODD_Field is CMSIS.Device.Bit;
+   subtype I2SPR_MCKOE_Field is CMSIS.Device.Bit;
 
    --  I2S prescaler register
    type I2SPR_Register is record
@@ -304,7 +304,7 @@ package Cmsis.Device.SPI is
       --  Master clock output enable
       MCKOE          : I2SPR_MCKOE_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
+      Reserved_10_31 : CMSIS.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -363,4 +363,4 @@ package Cmsis.Device.SPI is
    SPI2_Periph : aliased SPI_Peripheral
      with Import, Address => SPI2_Base;
 
-end Cmsis.Device.SPI;
+end CMSIS.Device.SPI;

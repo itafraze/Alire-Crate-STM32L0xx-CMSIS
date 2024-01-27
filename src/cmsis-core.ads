@@ -21,10 +21,11 @@
 --    2024.01 E. Zarfati
 --       - Add interface Compiler_Barrier
 --       - Reformat comments for GNATdoc
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-package Cmsis.Core is
+package CMSIS.Core is
    --  Standardized API for the Cortex-M processor core and peripherals.
    --
    --  CMSIS-Core (Cortex-M) implements the basic run-time system for a
@@ -70,4 +71,4 @@ package Cmsis.Core is
    --  processor, so that all instructions following the ISB are fetched from
    --  cache or memory, after the instruction has been completed.
 
-end Cmsis.Core;
+end CMSIS.Core;

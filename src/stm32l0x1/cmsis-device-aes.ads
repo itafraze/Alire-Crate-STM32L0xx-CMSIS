@@ -6,23 +6,23 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.AES is
+package CMSIS.Device.AES is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CR_EN_Field is Cmsis.Device.Bit;
-   subtype CR_DATATYPE_Field is Cmsis.Device.UInt2;
-   subtype CR_MODE_Field is Cmsis.Device.UInt2;
-   subtype CR_CHMOD_Field is Cmsis.Device.UInt2;
-   subtype CR_CCFC_Field is Cmsis.Device.Bit;
-   subtype CR_ERRC_Field is Cmsis.Device.Bit;
-   subtype CR_CCFIE_Field is Cmsis.Device.Bit;
-   subtype CR_ERRIE_Field is Cmsis.Device.Bit;
-   subtype CR_DMAINEN_Field is Cmsis.Device.Bit;
-   subtype CR_DMAOUTEN_Field is Cmsis.Device.Bit;
+   subtype CR_EN_Field is CMSIS.Device.Bit;
+   subtype CR_DATATYPE_Field is CMSIS.Device.UInt2;
+   subtype CR_MODE_Field is CMSIS.Device.UInt2;
+   subtype CR_CHMOD_Field is CMSIS.Device.UInt2;
+   subtype CR_CCFC_Field is CMSIS.Device.Bit;
+   subtype CR_ERRC_Field is CMSIS.Device.Bit;
+   subtype CR_CCFIE_Field is CMSIS.Device.Bit;
+   subtype CR_ERRIE_Field is CMSIS.Device.Bit;
+   subtype CR_DMAINEN_Field is CMSIS.Device.Bit;
+   subtype CR_DMAOUTEN_Field is CMSIS.Device.Bit;
 
    --  control register
    type CR_Register is record
@@ -48,7 +48,7 @@ package Cmsis.Device.AES is
       --  Enable DMA management of data output phase
       DMAOUTEN       : CR_DMAOUTEN_Field := 16#0#;
       --  unspecified
-      Reserved_13_31 : Cmsis.Device.UInt19 := 16#0#;
+      Reserved_13_31 : CMSIS.Device.UInt19 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -67,9 +67,9 @@ package Cmsis.Device.AES is
       Reserved_13_31 at 0 range 13 .. 31;
    end record;
 
-   subtype SR_CCF_Field is Cmsis.Device.Bit;
-   subtype SR_RDERR_Field is Cmsis.Device.Bit;
-   subtype SR_WRERR_Field is Cmsis.Device.Bit;
+   subtype SR_CCF_Field is CMSIS.Device.Bit;
+   subtype SR_RDERR_Field is CMSIS.Device.Bit;
+   subtype SR_WRERR_Field is CMSIS.Device.Bit;
 
    --  status register
    type SR_Register is record
@@ -80,7 +80,7 @@ package Cmsis.Device.AES is
       --  Read-only. Write error flag
       WRERR         : SR_WRERR_Field;
       --  unspecified
-      Reserved_3_31 : Cmsis.Device.UInt29;
+      Reserved_3_31 : CMSIS.Device.UInt29;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -103,25 +103,25 @@ package Cmsis.Device.AES is
       --  status register
       SR    : aliased SR_Register;
       --  data input register
-      DINR  : aliased Cmsis.Device.UInt32;
+      DINR  : aliased CMSIS.Device.UInt32;
       --  data output register
-      DOUTR : aliased Cmsis.Device.UInt32;
+      DOUTR : aliased CMSIS.Device.UInt32;
       --  key register 0
-      KEYR0 : aliased Cmsis.Device.UInt32;
+      KEYR0 : aliased CMSIS.Device.UInt32;
       --  key register 1
-      KEYR1 : aliased Cmsis.Device.UInt32;
+      KEYR1 : aliased CMSIS.Device.UInt32;
       --  key register 2
-      KEYR2 : aliased Cmsis.Device.UInt32;
+      KEYR2 : aliased CMSIS.Device.UInt32;
       --  key register 3
-      KEYR3 : aliased Cmsis.Device.UInt32;
+      KEYR3 : aliased CMSIS.Device.UInt32;
       --  initialization vector register 0
-      IVR0  : aliased Cmsis.Device.UInt32;
+      IVR0  : aliased CMSIS.Device.UInt32;
       --  initialization vector register 1
-      IVR1  : aliased Cmsis.Device.UInt32;
+      IVR1  : aliased CMSIS.Device.UInt32;
       --  initialization vector register 2
-      IVR2  : aliased Cmsis.Device.UInt32;
+      IVR2  : aliased CMSIS.Device.UInt32;
       --  initialization vector register 3
-      IVR3  : aliased Cmsis.Device.UInt32;
+      IVR3  : aliased CMSIS.Device.UInt32;
    end record
      with Volatile;
 
@@ -144,4 +144,4 @@ package Cmsis.Device.AES is
    AES_Periph : aliased AES_Peripheral
      with Import, Address => AES_Base;
 
-end Cmsis.Device.AES;
+end CMSIS.Device.AES;

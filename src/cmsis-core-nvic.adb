@@ -24,16 +24,17 @@
 --       - Reformat comments for GNATdoc
 --       - Remove HAL dependency
 --       - Implement IRQ_To_Bit_Mask
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-with Cmsis.Device.NVIC;
-   use Cmsis.Device;
-   use Cmsis.Device.NVIC;
-   use type Cmsis.Device.NVIC.IPR0_PRI_0_Field;
-with Cmsis.Device.SCB;
+with CMSIS.Device.NVIC;
+   use CMSIS.Device;
+   use CMSIS.Device.NVIC;
+   use type CMSIS.Device.NVIC.IPR0_PRI_0_Field;
+with CMSIS.Device.SCB;
 
-package body Cmsis.Core.NVIC is
+package body CMSIS.Core.NVIC is
    --  Implementation Notes:
    --  - Based on source files
    --    - CMSIS:Core/Include/core_cm0plus.h
@@ -102,7 +103,7 @@ package body Cmsis.Core.NVIC is
    procedure Set_Priority (IRQ      : Exception_Type;
                            Priority : Priority_Type)
    is
-      use Cmsis.Device.SCB;
+      use CMSIS.Device.SCB;
 
       PRI_Value : constant IPR0_PRI_0_Field :=
          Priority_To_PRI_Value (Priority);
@@ -116,4 +117,4 @@ package body Cmsis.Core.NVIC is
 
    end Set_Priority;
 
-end Cmsis.Core.NVIC;
+end CMSIS.Core.NVIC;

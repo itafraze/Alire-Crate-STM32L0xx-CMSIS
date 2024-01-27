@@ -20,10 +20,11 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Reformat comments for GNATdoc
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-package Cmsis is
+package CMSIS is
    --  Common Microcontroller Software Interface Standard (CMSIS)
    --
    --  The CMSIS is a set of tools, APIs, frameworks, and work flows that help
@@ -33,4 +34,4 @@ package Cmsis is
 
    pragma Preelaborate;
 
-end Cmsis;
+end CMSIS;

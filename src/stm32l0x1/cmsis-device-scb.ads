@@ -6,18 +6,18 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.SCB is
+package CMSIS.Device.SCB is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CPUID_Revision_Field is Cmsis.Device.UInt4;
-   subtype CPUID_PartNo_Field is Cmsis.Device.UInt12;
-   subtype CPUID_Architecture_Field is Cmsis.Device.UInt4;
-   subtype CPUID_Variant_Field is Cmsis.Device.UInt4;
-   subtype CPUID_Implementer_Field is Cmsis.Device.UInt8;
+   subtype CPUID_Revision_Field is CMSIS.Device.UInt4;
+   subtype CPUID_PartNo_Field is CMSIS.Device.UInt12;
+   subtype CPUID_Architecture_Field is CMSIS.Device.UInt4;
+   subtype CPUID_Variant_Field is CMSIS.Device.UInt4;
+   subtype CPUID_Implementer_Field is CMSIS.Device.UInt8;
 
    --  CPUID base register
    type CPUID_Register is record
@@ -43,32 +43,32 @@ package Cmsis.Device.SCB is
       Implementer  at 0 range 24 .. 31;
    end record;
 
-   subtype ICSR_VECTACTIVE_Field is Cmsis.Device.UInt9;
-   subtype ICSR_RETTOBASE_Field is Cmsis.Device.Bit;
-   subtype ICSR_VECTPENDING_Field is Cmsis.Device.UInt7;
-   subtype ICSR_ISRPENDING_Field is Cmsis.Device.Bit;
-   subtype ICSR_PENDSTCLR_Field is Cmsis.Device.Bit;
-   subtype ICSR_PENDSTSET_Field is Cmsis.Device.Bit;
-   subtype ICSR_PENDSVCLR_Field is Cmsis.Device.Bit;
-   subtype ICSR_PENDSVSET_Field is Cmsis.Device.Bit;
-   subtype ICSR_NMIPENDSET_Field is Cmsis.Device.Bit;
+   subtype ICSR_VECTACTIVE_Field is CMSIS.Device.UInt9;
+   subtype ICSR_RETTOBASE_Field is CMSIS.Device.Bit;
+   subtype ICSR_VECTPENDING_Field is CMSIS.Device.UInt7;
+   subtype ICSR_ISRPENDING_Field is CMSIS.Device.Bit;
+   subtype ICSR_PENDSTCLR_Field is CMSIS.Device.Bit;
+   subtype ICSR_PENDSTSET_Field is CMSIS.Device.Bit;
+   subtype ICSR_PENDSVCLR_Field is CMSIS.Device.Bit;
+   subtype ICSR_PENDSVSET_Field is CMSIS.Device.Bit;
+   subtype ICSR_NMIPENDSET_Field is CMSIS.Device.Bit;
 
    --  Interrupt control and state register
    type ICSR_Register is record
       --  Active vector
       VECTACTIVE     : ICSR_VECTACTIVE_Field := 16#0#;
       --  unspecified
-      Reserved_9_10  : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_9_10  : CMSIS.Device.UInt2 := 16#0#;
       --  Return to base level
       RETTOBASE      : ICSR_RETTOBASE_Field := 16#0#;
       --  Pending vector
       VECTPENDING    : ICSR_VECTPENDING_Field := 16#0#;
       --  unspecified
-      Reserved_19_21 : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_19_21 : CMSIS.Device.UInt3 := 16#0#;
       --  Interrupt pending flag
       ISRPENDING     : ICSR_ISRPENDING_Field := 16#0#;
       --  unspecified
-      Reserved_23_24 : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_23_24 : CMSIS.Device.UInt2 := 16#0#;
       --  SysTick exception clear-pending bit
       PENDSTCLR      : ICSR_PENDSTCLR_Field := 16#0#;
       --  SysTick exception set-pending bit
@@ -78,7 +78,7 @@ package Cmsis.Device.SCB is
       --  PendSV set-pending bit
       PENDSVSET      : ICSR_PENDSVSET_Field := 16#0#;
       --  unspecified
-      Reserved_29_30 : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_29_30 : CMSIS.Device.UInt2 := 16#0#;
       --  NMI set-pending bit.
       NMIPENDSET     : ICSR_NMIPENDSET_Field := 16#0#;
    end record
@@ -101,12 +101,12 @@ package Cmsis.Device.SCB is
       NMIPENDSET     at 0 range 31 .. 31;
    end record;
 
-   subtype VTOR_TBLOFF_Field is Cmsis.Device.UInt25;
+   subtype VTOR_TBLOFF_Field is CMSIS.Device.UInt25;
 
    --  Vector table offset register
    type VTOR_Register is record
       --  unspecified
-      Reserved_0_6 : Cmsis.Device.UInt7 := 16#0#;
+      Reserved_0_6 : CMSIS.Device.UInt7 := 16#0#;
       --  Vector table base offset field
       TBLOFF       : VTOR_TBLOFF_Field := 16#0#;
    end record
@@ -118,21 +118,21 @@ package Cmsis.Device.SCB is
       TBLOFF       at 0 range 7 .. 31;
    end record;
 
-   subtype AIRCR_VECTCLRACTIVE_Field is Cmsis.Device.Bit;
-   subtype AIRCR_SYSRESETREQ_Field is Cmsis.Device.Bit;
-   subtype AIRCR_ENDIANESS_Field is Cmsis.Device.Bit;
-   subtype AIRCR_VECTKEYSTAT_Field is Cmsis.Device.UInt16;
+   subtype AIRCR_VECTCLRACTIVE_Field is CMSIS.Device.Bit;
+   subtype AIRCR_SYSRESETREQ_Field is CMSIS.Device.Bit;
+   subtype AIRCR_ENDIANESS_Field is CMSIS.Device.Bit;
+   subtype AIRCR_VECTKEYSTAT_Field is CMSIS.Device.UInt16;
 
    --  Application interrupt and reset control register
    type AIRCR_Register is record
       --  unspecified
-      Reserved_0_0  : Cmsis.Device.Bit := 16#0#;
+      Reserved_0_0  : CMSIS.Device.Bit := 16#0#;
       --  VECTCLRACTIVE
       VECTCLRACTIVE : AIRCR_VECTCLRACTIVE_Field := 16#0#;
       --  SYSRESETREQ
       SYSRESETREQ   : AIRCR_SYSRESETREQ_Field := 16#0#;
       --  unspecified
-      Reserved_3_14 : Cmsis.Device.UInt12 := 16#0#;
+      Reserved_3_14 : CMSIS.Device.UInt12 := 16#0#;
       --  ENDIANESS
       ENDIANESS     : AIRCR_ENDIANESS_Field := 16#0#;
       --  Register key
@@ -150,24 +150,24 @@ package Cmsis.Device.SCB is
       VECTKEYSTAT   at 0 range 16 .. 31;
    end record;
 
-   subtype SCR_SLEEPONEXIT_Field is Cmsis.Device.Bit;
-   subtype SCR_SLEEPDEEP_Field is Cmsis.Device.Bit;
-   subtype SCR_SEVEONPEND_Field is Cmsis.Device.Bit;
+   subtype SCR_SLEEPONEXIT_Field is CMSIS.Device.Bit;
+   subtype SCR_SLEEPDEEP_Field is CMSIS.Device.Bit;
+   subtype SCR_SEVEONPEND_Field is CMSIS.Device.Bit;
 
    --  System control register
    type SCR_Register is record
       --  unspecified
-      Reserved_0_0  : Cmsis.Device.Bit := 16#0#;
+      Reserved_0_0  : CMSIS.Device.Bit := 16#0#;
       --  SLEEPONEXIT
       SLEEPONEXIT   : SCR_SLEEPONEXIT_Field := 16#0#;
       --  SLEEPDEEP
       SLEEPDEEP     : SCR_SLEEPDEEP_Field := 16#0#;
       --  unspecified
-      Reserved_3_3  : Cmsis.Device.Bit := 16#0#;
+      Reserved_3_3  : CMSIS.Device.Bit := 16#0#;
       --  Send Event on Pending bit
       SEVEONPEND    : SCR_SEVEONPEND_Field := 16#0#;
       --  unspecified
-      Reserved_5_31 : Cmsis.Device.UInt27 := 16#0#;
+      Reserved_5_31 : CMSIS.Device.UInt27 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -181,12 +181,12 @@ package Cmsis.Device.SCB is
       Reserved_5_31 at 0 range 5 .. 31;
    end record;
 
-   subtype CCR_NONBASETHRDENA_Field is Cmsis.Device.Bit;
-   subtype CCR_USERSETMPEND_Field is Cmsis.Device.Bit;
-   subtype CCR_UNALIGN_TRP_Field is Cmsis.Device.Bit;
-   subtype CCR_DIV_0_TRP_Field is Cmsis.Device.Bit;
-   subtype CCR_BFHFNMIGN_Field is Cmsis.Device.Bit;
-   subtype CCR_STKALIGN_Field is Cmsis.Device.Bit;
+   subtype CCR_NONBASETHRDENA_Field is CMSIS.Device.Bit;
+   subtype CCR_USERSETMPEND_Field is CMSIS.Device.Bit;
+   subtype CCR_UNALIGN_TRP_Field is CMSIS.Device.Bit;
+   subtype CCR_DIV_0_TRP_Field is CMSIS.Device.Bit;
+   subtype CCR_BFHFNMIGN_Field is CMSIS.Device.Bit;
+   subtype CCR_STKALIGN_Field is CMSIS.Device.Bit;
 
    --  Configuration and control register
    type CCR_Register is record
@@ -195,19 +195,19 @@ package Cmsis.Device.SCB is
       --  USERSETMPEND
       USERSETMPEND   : CCR_USERSETMPEND_Field := 16#0#;
       --  unspecified
-      Reserved_2_2   : Cmsis.Device.Bit := 16#0#;
+      Reserved_2_2   : CMSIS.Device.Bit := 16#0#;
       --  UNALIGN_ TRP
       UNALIGN_TRP    : CCR_UNALIGN_TRP_Field := 16#0#;
       --  DIV_0_TRP
       DIV_0_TRP      : CCR_DIV_0_TRP_Field := 16#0#;
       --  unspecified
-      Reserved_5_7   : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_5_7   : CMSIS.Device.UInt3 := 16#0#;
       --  BFHFNMIGN
       BFHFNMIGN      : CCR_BFHFNMIGN_Field := 16#0#;
       --  STKALIGN
       STKALIGN       : CCR_STKALIGN_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
+      Reserved_10_31 : CMSIS.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -224,12 +224,12 @@ package Cmsis.Device.SCB is
       Reserved_10_31 at 0 range 10 .. 31;
    end record;
 
-   subtype SHPR2_PRI_11_Field is Cmsis.Device.UInt8;
+   subtype SHPR2_PRI_11_Field is CMSIS.Device.UInt8;
 
    --  System handler priority registers
    type SHPR2_Register is record
       --  unspecified
-      Reserved_0_23 : Cmsis.Device.UInt24 := 16#0#;
+      Reserved_0_23 : CMSIS.Device.UInt24 := 16#0#;
       --  Priority of system handler 11
       PRI_11        : SHPR2_PRI_11_Field := 16#0#;
    end record
@@ -241,13 +241,13 @@ package Cmsis.Device.SCB is
       PRI_11        at 0 range 24 .. 31;
    end record;
 
-   subtype SHPR3_PRI_14_Field is Cmsis.Device.UInt8;
-   subtype SHPR3_PRI_15_Field is Cmsis.Device.UInt8;
+   subtype SHPR3_PRI_14_Field is CMSIS.Device.UInt8;
+   subtype SHPR3_PRI_15_Field is CMSIS.Device.UInt8;
 
    --  System handler priority registers
    type SHPR3_Register is record
       --  unspecified
-      Reserved_0_15 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_0_15 : CMSIS.Device.UInt16 := 16#0#;
       --  Priority of system handler 14
       PRI_14        : SHPR3_PRI_14_Field := 16#0#;
       --  Priority of system handler 15
@@ -302,4 +302,4 @@ package Cmsis.Device.SCB is
    SCB_Periph : aliased SCB_Peripheral
      with Import, Address => SCB_Base;
 
-end Cmsis.Device.SCB;
+end CMSIS.Device.SCB;

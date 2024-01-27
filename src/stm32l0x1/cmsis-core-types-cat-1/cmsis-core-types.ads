@@ -18,11 +18,12 @@
 --  Revision History:
 --    2023.12 E. Zarfati
 --       - First version
+--       - Capitalise CMSIS
 --
 ------------------------------------------------------------------------------
 
-with Cmsis.Device.Interrupts;
-   use Cmsis.Device.Interrupts;
+with CMSIS.Device.Interrupts;
+   use CMSIS.Device.Interrupts;
 
 ------------------------------------------------------------------------------
 --  CMSIS CORE TYPES
@@ -32,7 +33,7 @@ with Cmsis.Device.Interrupts;
 --  Implementation Notes:
 --
 ------------------------------------------------------------------------------
-package Cmsis.Core.Types is
+package CMSIS.Core.Types is
 
    --  Interrupt Number Definition
    type Exception_Type is (
@@ -76,4 +77,4 @@ private
       IRQ_LPUART1                      => AES_RNG_LPUART1_Interrupt
    );
 
-end Cmsis.Core.Types;
+end CMSIS.Core.Types;

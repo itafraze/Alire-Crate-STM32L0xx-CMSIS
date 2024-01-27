@@ -6,21 +6,21 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.IWDG is
+package CMSIS.Device.IWDG is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype KR_KEY_Field is Cmsis.Device.UInt16;
+   subtype KR_KEY_Field is CMSIS.Device.UInt16;
 
    --  Key register
    type KR_Register is record
       --  Write-only. Key value (write only, read 0x0000)
       KEY            : KR_KEY_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -30,14 +30,14 @@ package Cmsis.Device.IWDG is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype PR_PR_Field is Cmsis.Device.UInt3;
+   subtype PR_PR_Field is CMSIS.Device.UInt3;
 
    --  Prescaler register
    type PR_Register is record
       --  Prescaler divider
       PR            : PR_PR_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
+      Reserved_3_31 : CMSIS.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -47,14 +47,14 @@ package Cmsis.Device.IWDG is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
-   subtype RLR_RL_Field is Cmsis.Device.UInt12;
+   subtype RLR_RL_Field is CMSIS.Device.UInt12;
 
    --  Reload register
    type RLR_Register is record
       --  Watchdog counter reload value
       RL             : RLR_RL_Field := 16#FFF#;
       --  unspecified
-      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
+      Reserved_12_31 : CMSIS.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -64,9 +64,9 @@ package Cmsis.Device.IWDG is
       Reserved_12_31 at 0 range 12 .. 31;
    end record;
 
-   subtype SR_PVU_Field is Cmsis.Device.Bit;
-   subtype SR_RVU_Field is Cmsis.Device.Bit;
-   subtype SR_WVU_Field is Cmsis.Device.Bit;
+   subtype SR_PVU_Field is CMSIS.Device.Bit;
+   subtype SR_RVU_Field is CMSIS.Device.Bit;
+   subtype SR_WVU_Field is CMSIS.Device.Bit;
 
    --  Status register
    type SR_Register is record
@@ -77,7 +77,7 @@ package Cmsis.Device.IWDG is
       --  Read-only. Watchdog counter window value update
       WVU           : SR_WVU_Field;
       --  unspecified
-      Reserved_3_31 : Cmsis.Device.UInt29;
+      Reserved_3_31 : CMSIS.Device.UInt29;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -89,14 +89,14 @@ package Cmsis.Device.IWDG is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
-   subtype WINR_WIN_Field is Cmsis.Device.UInt12;
+   subtype WINR_WIN_Field is CMSIS.Device.UInt12;
 
    --  Window register
    type WINR_Register is record
       --  Watchdog counter window value
       WIN            : WINR_WIN_Field := 16#FFF#;
       --  unspecified
-      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
+      Reserved_12_31 : CMSIS.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -137,4 +137,4 @@ package Cmsis.Device.IWDG is
    IWDG_Periph : aliased IWDG_Peripheral
      with Import, Address => IWDG_Base;
 
-end Cmsis.Device.IWDG;
+end CMSIS.Device.IWDG;

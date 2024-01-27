@@ -6,20 +6,20 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.LPTIM is
+package CMSIS.Device.LPTIM is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype ISR_CMPM_Field is Cmsis.Device.Bit;
-   subtype ISR_ARRM_Field is Cmsis.Device.Bit;
-   subtype ISR_EXTTRIG_Field is Cmsis.Device.Bit;
-   subtype ISR_CMPOK_Field is Cmsis.Device.Bit;
-   subtype ISR_ARROK_Field is Cmsis.Device.Bit;
-   subtype ISR_UP_Field is Cmsis.Device.Bit;
-   subtype ISR_DOWN_Field is Cmsis.Device.Bit;
+   subtype ISR_CMPM_Field is CMSIS.Device.Bit;
+   subtype ISR_ARRM_Field is CMSIS.Device.Bit;
+   subtype ISR_EXTTRIG_Field is CMSIS.Device.Bit;
+   subtype ISR_CMPOK_Field is CMSIS.Device.Bit;
+   subtype ISR_ARROK_Field is CMSIS.Device.Bit;
+   subtype ISR_UP_Field is CMSIS.Device.Bit;
+   subtype ISR_DOWN_Field is CMSIS.Device.Bit;
 
    --  Interrupt and Status Register
    type ISR_Register is record
@@ -38,7 +38,7 @@ package Cmsis.Device.LPTIM is
       --  Read-only. Counter direction change up to down
       DOWN          : ISR_DOWN_Field;
       --  unspecified
-      Reserved_7_31 : Cmsis.Device.UInt25;
+      Reserved_7_31 : CMSIS.Device.UInt25;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -54,13 +54,13 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
-   subtype ICR_CMPMCF_Field is Cmsis.Device.Bit;
-   subtype ICR_ARRMCF_Field is Cmsis.Device.Bit;
-   subtype ICR_EXTTRIGCF_Field is Cmsis.Device.Bit;
-   subtype ICR_CMPOKCF_Field is Cmsis.Device.Bit;
-   subtype ICR_ARROKCF_Field is Cmsis.Device.Bit;
-   subtype ICR_UPCF_Field is Cmsis.Device.Bit;
-   subtype ICR_DOWNCF_Field is Cmsis.Device.Bit;
+   subtype ICR_CMPMCF_Field is CMSIS.Device.Bit;
+   subtype ICR_ARRMCF_Field is CMSIS.Device.Bit;
+   subtype ICR_EXTTRIGCF_Field is CMSIS.Device.Bit;
+   subtype ICR_CMPOKCF_Field is CMSIS.Device.Bit;
+   subtype ICR_ARROKCF_Field is CMSIS.Device.Bit;
+   subtype ICR_UPCF_Field is CMSIS.Device.Bit;
+   subtype ICR_DOWNCF_Field is CMSIS.Device.Bit;
 
    --  Interrupt Clear Register
    type ICR_Register is record
@@ -79,7 +79,7 @@ package Cmsis.Device.LPTIM is
       --  Write-only. Direction change to down Clear Flag
       DOWNCF        : ICR_DOWNCF_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
+      Reserved_7_31 : CMSIS.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -95,13 +95,13 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
-   subtype IER_CMPMIE_Field is Cmsis.Device.Bit;
-   subtype IER_ARRMIE_Field is Cmsis.Device.Bit;
-   subtype IER_EXTTRIGIE_Field is Cmsis.Device.Bit;
-   subtype IER_CMPOKIE_Field is Cmsis.Device.Bit;
-   subtype IER_ARROKIE_Field is Cmsis.Device.Bit;
-   subtype IER_UPIE_Field is Cmsis.Device.Bit;
-   subtype IER_DOWNIE_Field is Cmsis.Device.Bit;
+   subtype IER_CMPMIE_Field is CMSIS.Device.Bit;
+   subtype IER_ARRMIE_Field is CMSIS.Device.Bit;
+   subtype IER_EXTTRIGIE_Field is CMSIS.Device.Bit;
+   subtype IER_CMPOKIE_Field is CMSIS.Device.Bit;
+   subtype IER_ARROKIE_Field is CMSIS.Device.Bit;
+   subtype IER_UPIE_Field is CMSIS.Device.Bit;
+   subtype IER_DOWNIE_Field is CMSIS.Device.Bit;
 
    --  Interrupt Enable Register
    type IER_Register is record
@@ -120,7 +120,7 @@ package Cmsis.Device.LPTIM is
       --  Direction change to down Interrupt Enable
       DOWNIE        : IER_DOWNIE_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
+      Reserved_7_31 : CMSIS.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -136,19 +136,19 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
-   subtype CFGR_CKSEL_Field is Cmsis.Device.Bit;
-   subtype CFGR_CKPOL_Field is Cmsis.Device.UInt2;
-   subtype CFGR_CKFLT_Field is Cmsis.Device.UInt2;
-   subtype CFGR_TRGFLT_Field is Cmsis.Device.UInt2;
-   subtype CFGR_PRESC_Field is Cmsis.Device.UInt3;
-   subtype CFGR_TRIGSEL_Field is Cmsis.Device.UInt3;
-   subtype CFGR_TRIGEN_Field is Cmsis.Device.UInt2;
-   subtype CFGR_TIMOUT_Field is Cmsis.Device.Bit;
-   subtype CFGR_WAVE_Field is Cmsis.Device.Bit;
-   subtype CFGR_WAVPOL_Field is Cmsis.Device.Bit;
-   subtype CFGR_PRELOAD_Field is Cmsis.Device.Bit;
-   subtype CFGR_COUNTMODE_Field is Cmsis.Device.Bit;
-   subtype CFGR_ENC_Field is Cmsis.Device.Bit;
+   subtype CFGR_CKSEL_Field is CMSIS.Device.Bit;
+   subtype CFGR_CKPOL_Field is CMSIS.Device.UInt2;
+   subtype CFGR_CKFLT_Field is CMSIS.Device.UInt2;
+   subtype CFGR_TRGFLT_Field is CMSIS.Device.UInt2;
+   subtype CFGR_PRESC_Field is CMSIS.Device.UInt3;
+   subtype CFGR_TRIGSEL_Field is CMSIS.Device.UInt3;
+   subtype CFGR_TRIGEN_Field is CMSIS.Device.UInt2;
+   subtype CFGR_TIMOUT_Field is CMSIS.Device.Bit;
+   subtype CFGR_WAVE_Field is CMSIS.Device.Bit;
+   subtype CFGR_WAVPOL_Field is CMSIS.Device.Bit;
+   subtype CFGR_PRELOAD_Field is CMSIS.Device.Bit;
+   subtype CFGR_COUNTMODE_Field is CMSIS.Device.Bit;
+   subtype CFGR_ENC_Field is CMSIS.Device.Bit;
 
    --  Configuration Register
    type CFGR_Register is record
@@ -159,19 +159,19 @@ package Cmsis.Device.LPTIM is
       --  Configurable digital filter for external clock
       CKFLT          : CFGR_CKFLT_Field := 16#0#;
       --  unspecified
-      Reserved_5_5   : Cmsis.Device.Bit := 16#0#;
+      Reserved_5_5   : CMSIS.Device.Bit := 16#0#;
       --  Configurable digital filter for trigger
       TRGFLT         : CFGR_TRGFLT_Field := 16#0#;
       --  unspecified
-      Reserved_8_8   : Cmsis.Device.Bit := 16#0#;
+      Reserved_8_8   : CMSIS.Device.Bit := 16#0#;
       --  Clock prescaler
       PRESC          : CFGR_PRESC_Field := 16#0#;
       --  unspecified
-      Reserved_12_12 : Cmsis.Device.Bit := 16#0#;
+      Reserved_12_12 : CMSIS.Device.Bit := 16#0#;
       --  Trigger selector
       TRIGSEL        : CFGR_TRIGSEL_Field := 16#0#;
       --  unspecified
-      Reserved_16_16 : Cmsis.Device.Bit := 16#0#;
+      Reserved_16_16 : CMSIS.Device.Bit := 16#0#;
       --  Trigger enable and polarity
       TRIGEN         : CFGR_TRIGEN_Field := 16#0#;
       --  Timeout enable
@@ -187,7 +187,7 @@ package Cmsis.Device.LPTIM is
       --  Encoder mode enable
       ENC            : CFGR_ENC_Field := 16#0#;
       --  unspecified
-      Reserved_25_31 : Cmsis.Device.UInt7 := 16#0#;
+      Reserved_25_31 : CMSIS.Device.UInt7 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -213,9 +213,9 @@ package Cmsis.Device.LPTIM is
       Reserved_25_31 at 0 range 25 .. 31;
    end record;
 
-   subtype CR_ENABLE_Field is Cmsis.Device.Bit;
-   subtype CR_SNGSTRT_Field is Cmsis.Device.Bit;
-   subtype CR_CNTSTRT_Field is Cmsis.Device.Bit;
+   subtype CR_ENABLE_Field is CMSIS.Device.Bit;
+   subtype CR_SNGSTRT_Field is CMSIS.Device.Bit;
+   subtype CR_CNTSTRT_Field is CMSIS.Device.Bit;
 
    --  Control Register
    type CR_Register is record
@@ -226,7 +226,7 @@ package Cmsis.Device.LPTIM is
       --  Timer start in continuous mode
       CNTSTRT       : CR_CNTSTRT_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
+      Reserved_3_31 : CMSIS.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -238,14 +238,14 @@ package Cmsis.Device.LPTIM is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
-   subtype CMP_CMP_Field is Cmsis.Device.UInt16;
+   subtype CMP_CMP_Field is CMSIS.Device.UInt16;
 
    --  Compare Register
    type CMP_Register is record
       --  Compare value.
       CMP            : CMP_CMP_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -255,14 +255,14 @@ package Cmsis.Device.LPTIM is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype ARR_ARR_Field is Cmsis.Device.UInt16;
+   subtype ARR_ARR_Field is CMSIS.Device.UInt16;
 
    --  Autoreload Register
    type ARR_Register is record
       --  Auto reload value.
       ARR            : ARR_ARR_Field := 16#1#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -272,14 +272,14 @@ package Cmsis.Device.LPTIM is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CNT_CNT_Field is Cmsis.Device.UInt16;
+   subtype CNT_CNT_Field is CMSIS.Device.UInt16;
 
    --  Counter Register
    type CNT_Register is record
       --  Read-only. Counter value.
       CNT            : CNT_CNT_Field;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16;
+      Reserved_16_31 : CMSIS.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -329,4 +329,4 @@ package Cmsis.Device.LPTIM is
    LPTIM_Periph : aliased LPTIM_Peripheral
      with Import, Address => LPTIM_Base;
 
-end Cmsis.Device.LPTIM;
+end CMSIS.Device.LPTIM;

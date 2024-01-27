@@ -6,25 +6,25 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.PWR is
+package CMSIS.Device.PWR is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CR_LPDS_Field is Cmsis.Device.Bit;
-   subtype CR_PDDS_Field is Cmsis.Device.Bit;
-   subtype CR_CWUF_Field is Cmsis.Device.Bit;
-   subtype CR_CSBF_Field is Cmsis.Device.Bit;
-   subtype CR_PVDE_Field is Cmsis.Device.Bit;
-   subtype CR_PLS_Field is Cmsis.Device.UInt3;
-   subtype CR_DBP_Field is Cmsis.Device.Bit;
-   subtype CR_ULP_Field is Cmsis.Device.Bit;
-   subtype CR_FWU_Field is Cmsis.Device.Bit;
-   subtype CR_VOS_Field is Cmsis.Device.UInt2;
-   subtype CR_DS_EE_KOFF_Field is Cmsis.Device.Bit;
-   subtype CR_LPRUN_Field is Cmsis.Device.Bit;
+   subtype CR_LPDS_Field is CMSIS.Device.Bit;
+   subtype CR_PDDS_Field is CMSIS.Device.Bit;
+   subtype CR_CWUF_Field is CMSIS.Device.Bit;
+   subtype CR_CSBF_Field is CMSIS.Device.Bit;
+   subtype CR_PVDE_Field is CMSIS.Device.Bit;
+   subtype CR_PLS_Field is CMSIS.Device.UInt3;
+   subtype CR_DBP_Field is CMSIS.Device.Bit;
+   subtype CR_ULP_Field is CMSIS.Device.Bit;
+   subtype CR_FWU_Field is CMSIS.Device.Bit;
+   subtype CR_VOS_Field is CMSIS.Device.UInt2;
+   subtype CR_DS_EE_KOFF_Field is CMSIS.Device.Bit;
+   subtype CR_LPRUN_Field is CMSIS.Device.Bit;
 
    --  power control register
    type CR_Register is record
@@ -53,7 +53,7 @@ package Cmsis.Device.PWR is
       --  Low power run mode
       LPRUN          : CR_LPRUN_Field := 16#0#;
       --  unspecified
-      Reserved_15_31 : Cmsis.Device.UInt17 := 16#0#;
+      Reserved_15_31 : CMSIS.Device.UInt17 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -74,14 +74,14 @@ package Cmsis.Device.PWR is
       Reserved_15_31 at 0 range 15 .. 31;
    end record;
 
-   subtype CSR_WUF_Field is Cmsis.Device.Bit;
-   subtype CSR_SBF_Field is Cmsis.Device.Bit;
-   subtype CSR_PVDO_Field is Cmsis.Device.Bit;
-   subtype CSR_BRR_Field is Cmsis.Device.Bit;
-   subtype CSR_VOSF_Field is Cmsis.Device.Bit;
-   subtype CSR_REGLPF_Field is Cmsis.Device.Bit;
-   subtype CSR_EWUP_Field is Cmsis.Device.Bit;
-   subtype CSR_BRE_Field is Cmsis.Device.Bit;
+   subtype CSR_WUF_Field is CMSIS.Device.Bit;
+   subtype CSR_SBF_Field is CMSIS.Device.Bit;
+   subtype CSR_PVDO_Field is CMSIS.Device.Bit;
+   subtype CSR_BRR_Field is CMSIS.Device.Bit;
+   subtype CSR_VOSF_Field is CMSIS.Device.Bit;
+   subtype CSR_REGLPF_Field is CMSIS.Device.Bit;
+   subtype CSR_EWUP_Field is CMSIS.Device.Bit;
+   subtype CSR_BRE_Field is CMSIS.Device.Bit;
 
    --  power control/status register
    type CSR_Register is record
@@ -98,13 +98,13 @@ package Cmsis.Device.PWR is
       --  Read-only. Regulator LP flag
       REGLPF         : CSR_REGLPF_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_6_7   : CMSIS.Device.UInt2 := 16#0#;
       --  Enable WKUP pin
       EWUP           : CSR_EWUP_Field := 16#0#;
       --  Backup regulator enable
       BRE            : CSR_BRE_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
+      Reserved_10_31 : CMSIS.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -144,4 +144,4 @@ package Cmsis.Device.PWR is
    PWR_Periph : aliased PWR_Peripheral
      with Import, Address => PWR_Base;
 
-end Cmsis.Device.PWR;
+end CMSIS.Device.PWR;

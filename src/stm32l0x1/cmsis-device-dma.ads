@@ -6,41 +6,41 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.DMA is
+package CMSIS.Device.DMA is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype ISR_GIF1_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF1_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF1_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF1_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF2_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF2_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF2_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF2_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF3_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF3_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF3_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF3_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF4_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF4_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF4_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF4_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF5_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF5_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF5_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF5_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF6_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF6_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF6_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF6_Field is Cmsis.Device.Bit;
-   subtype ISR_GIF7_Field is Cmsis.Device.Bit;
-   subtype ISR_TCIF7_Field is Cmsis.Device.Bit;
-   subtype ISR_HTIF7_Field is Cmsis.Device.Bit;
-   subtype ISR_TEIF7_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF1_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF1_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF1_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF1_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF2_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF2_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF2_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF2_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF3_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF3_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF3_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF3_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF4_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF4_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF4_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF4_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF5_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF5_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF5_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF5_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF6_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF6_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF6_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF6_Field is CMSIS.Device.Bit;
+   subtype ISR_GIF7_Field is CMSIS.Device.Bit;
+   subtype ISR_TCIF7_Field is CMSIS.Device.Bit;
+   subtype ISR_HTIF7_Field is CMSIS.Device.Bit;
+   subtype ISR_TEIF7_Field is CMSIS.Device.Bit;
 
    --  interrupt status register
    type ISR_Register is record
@@ -101,7 +101,7 @@ package Cmsis.Device.DMA is
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
       TEIF7          : ISR_TEIF7_Field;
       --  unspecified
-      Reserved_28_31 : Cmsis.Device.UInt4;
+      Reserved_28_31 : CMSIS.Device.UInt4;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -138,34 +138,34 @@ package Cmsis.Device.DMA is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
-   subtype IFCR_CGIF1_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF1_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF1_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF1_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF2_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF2_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF2_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF2_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF3_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF3_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF3_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF3_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF4_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF4_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF4_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF4_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF5_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF5_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF5_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF5_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF6_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF6_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF6_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF6_Field is Cmsis.Device.Bit;
-   subtype IFCR_CGIF7_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTCIF7_Field is Cmsis.Device.Bit;
-   subtype IFCR_CHTIF7_Field is Cmsis.Device.Bit;
-   subtype IFCR_CTEIF7_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF1_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF1_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF1_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF1_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF2_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF2_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF2_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF2_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF3_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF3_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF3_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF3_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF4_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF4_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF4_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF4_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF5_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF5_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF5_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF5_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF6_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF6_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF6_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF6_Field is CMSIS.Device.Bit;
+   subtype IFCR_CGIF7_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTCIF7_Field is CMSIS.Device.Bit;
+   subtype IFCR_CHTIF7_Field is CMSIS.Device.Bit;
+   subtype IFCR_CTEIF7_Field is CMSIS.Device.Bit;
 
    --  interrupt flag clear register
    type IFCR_Register is record
@@ -226,7 +226,7 @@ package Cmsis.Device.DMA is
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
       CTEIF7         : IFCR_CTEIF7_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_28_31 : CMSIS.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -263,18 +263,18 @@ package Cmsis.Device.DMA is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
-   subtype CCR_EN_Field is Cmsis.Device.Bit;
-   subtype CCR_TCIE_Field is Cmsis.Device.Bit;
-   subtype CCR_HTIE_Field is Cmsis.Device.Bit;
-   subtype CCR_TEIE_Field is Cmsis.Device.Bit;
-   subtype CCR_DIR_Field is Cmsis.Device.Bit;
-   subtype CCR_CIRC_Field is Cmsis.Device.Bit;
-   subtype CCR_PINC_Field is Cmsis.Device.Bit;
-   subtype CCR_MINC_Field is Cmsis.Device.Bit;
-   subtype CCR_PSIZE_Field is Cmsis.Device.UInt2;
-   subtype CCR_MSIZE_Field is Cmsis.Device.UInt2;
-   subtype CCR_PL_Field is Cmsis.Device.UInt2;
-   subtype CCR_MEM2MEM_Field is Cmsis.Device.Bit;
+   subtype CCR_EN_Field is CMSIS.Device.Bit;
+   subtype CCR_TCIE_Field is CMSIS.Device.Bit;
+   subtype CCR_HTIE_Field is CMSIS.Device.Bit;
+   subtype CCR_TEIE_Field is CMSIS.Device.Bit;
+   subtype CCR_DIR_Field is CMSIS.Device.Bit;
+   subtype CCR_CIRC_Field is CMSIS.Device.Bit;
+   subtype CCR_PINC_Field is CMSIS.Device.Bit;
+   subtype CCR_MINC_Field is CMSIS.Device.Bit;
+   subtype CCR_PSIZE_Field is CMSIS.Device.UInt2;
+   subtype CCR_MSIZE_Field is CMSIS.Device.UInt2;
+   subtype CCR_PL_Field is CMSIS.Device.UInt2;
+   subtype CCR_MEM2MEM_Field is CMSIS.Device.Bit;
 
    --  channel x configuration register
    type CCR_Register is record
@@ -303,7 +303,7 @@ package Cmsis.Device.DMA is
       --  Memory to memory mode
       MEM2MEM        : CCR_MEM2MEM_Field := 16#0#;
       --  unspecified
-      Reserved_15_31 : Cmsis.Device.UInt17 := 16#0#;
+      Reserved_15_31 : CMSIS.Device.UInt17 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -324,14 +324,14 @@ package Cmsis.Device.DMA is
       Reserved_15_31 at 0 range 15 .. 31;
    end record;
 
-   subtype CNDTR_NDT_Field is Cmsis.Device.UInt16;
+   subtype CNDTR_NDT_Field is CMSIS.Device.UInt16;
 
    --  channel x number of data register
    type CNDTR_Register is record
       --  Number of data to transfer
       NDT            : CNDTR_NDT_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -341,13 +341,13 @@ package Cmsis.Device.DMA is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype CSELR_C1S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C2S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C3S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C4S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C5S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C6S_Field is Cmsis.Device.UInt4;
-   subtype CSELR_C7S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C1S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C2S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C3S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C4S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C5S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C6S_Field is CMSIS.Device.UInt4;
+   subtype CSELR_C7S_Field is CMSIS.Device.UInt4;
 
    --  channel selection register
    type CSELR_Register is record
@@ -366,7 +366,7 @@ package Cmsis.Device.DMA is
       --  DMA channel 7 selection
       C7S            : CSELR_C7S_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_28_31 : CMSIS.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -397,57 +397,57 @@ package Cmsis.Device.DMA is
       --  channel x number of data register
       CNDTR1 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR1  : aliased Cmsis.Device.UInt32;
+      CPAR1  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR1  : aliased Cmsis.Device.UInt32;
+      CMAR1  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR2   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR2 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR2  : aliased Cmsis.Device.UInt32;
+      CPAR2  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR2  : aliased Cmsis.Device.UInt32;
+      CMAR2  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR3   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR3 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR3  : aliased Cmsis.Device.UInt32;
+      CPAR3  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR3  : aliased Cmsis.Device.UInt32;
+      CMAR3  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR4   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR4 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR4  : aliased Cmsis.Device.UInt32;
+      CPAR4  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR4  : aliased Cmsis.Device.UInt32;
+      CMAR4  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR5   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR5 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR5  : aliased Cmsis.Device.UInt32;
+      CPAR5  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR5  : aliased Cmsis.Device.UInt32;
+      CMAR5  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR6   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR6 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR6  : aliased Cmsis.Device.UInt32;
+      CPAR6  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR6  : aliased Cmsis.Device.UInt32;
+      CMAR6  : aliased CMSIS.Device.UInt32;
       --  channel x configuration register
       CCR7   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR7 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR7  : aliased Cmsis.Device.UInt32;
+      CPAR7  : aliased CMSIS.Device.UInt32;
       --  channel x memory address register
-      CMAR7  : aliased Cmsis.Device.UInt32;
+      CMAR7  : aliased CMSIS.Device.UInt32;
       --  channel selection register
       CSELR  : aliased CSELR_Register;
    end record
@@ -491,4 +491,4 @@ package Cmsis.Device.DMA is
    DMA1_Periph : aliased DMA1_Peripheral
      with Import, Address => DMA1_Base;
 
-end Cmsis.Device.DMA;
+end CMSIS.Device.DMA;

@@ -6,33 +6,33 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.I2C is
+package CMSIS.Device.I2C is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype CR1_PE_Field is Cmsis.Device.Bit;
-   subtype CR1_TXIE_Field is Cmsis.Device.Bit;
-   subtype CR1_RXIE_Field is Cmsis.Device.Bit;
-   subtype CR1_ADDRIE_Field is Cmsis.Device.Bit;
-   subtype CR1_NACKIE_Field is Cmsis.Device.Bit;
-   subtype CR1_STOPIE_Field is Cmsis.Device.Bit;
-   subtype CR1_TCIE_Field is Cmsis.Device.Bit;
-   subtype CR1_ERRIE_Field is Cmsis.Device.Bit;
-   subtype CR1_DNF_Field is Cmsis.Device.UInt4;
-   subtype CR1_ANFOFF_Field is Cmsis.Device.Bit;
-   subtype CR1_TXDMAEN_Field is Cmsis.Device.Bit;
-   subtype CR1_RXDMAEN_Field is Cmsis.Device.Bit;
-   subtype CR1_SBC_Field is Cmsis.Device.Bit;
-   subtype CR1_NOSTRETCH_Field is Cmsis.Device.Bit;
-   subtype CR1_WUPEN_Field is Cmsis.Device.Bit;
-   subtype CR1_GCEN_Field is Cmsis.Device.Bit;
-   subtype CR1_SMBHEN_Field is Cmsis.Device.Bit;
-   subtype CR1_SMBDEN_Field is Cmsis.Device.Bit;
-   subtype CR1_ALERTEN_Field is Cmsis.Device.Bit;
-   subtype CR1_PECEN_Field is Cmsis.Device.Bit;
+   subtype CR1_PE_Field is CMSIS.Device.Bit;
+   subtype CR1_TXIE_Field is CMSIS.Device.Bit;
+   subtype CR1_RXIE_Field is CMSIS.Device.Bit;
+   subtype CR1_ADDRIE_Field is CMSIS.Device.Bit;
+   subtype CR1_NACKIE_Field is CMSIS.Device.Bit;
+   subtype CR1_STOPIE_Field is CMSIS.Device.Bit;
+   subtype CR1_TCIE_Field is CMSIS.Device.Bit;
+   subtype CR1_ERRIE_Field is CMSIS.Device.Bit;
+   subtype CR1_DNF_Field is CMSIS.Device.UInt4;
+   subtype CR1_ANFOFF_Field is CMSIS.Device.Bit;
+   subtype CR1_TXDMAEN_Field is CMSIS.Device.Bit;
+   subtype CR1_RXDMAEN_Field is CMSIS.Device.Bit;
+   subtype CR1_SBC_Field is CMSIS.Device.Bit;
+   subtype CR1_NOSTRETCH_Field is CMSIS.Device.Bit;
+   subtype CR1_WUPEN_Field is CMSIS.Device.Bit;
+   subtype CR1_GCEN_Field is CMSIS.Device.Bit;
+   subtype CR1_SMBHEN_Field is CMSIS.Device.Bit;
+   subtype CR1_SMBDEN_Field is CMSIS.Device.Bit;
+   subtype CR1_ALERTEN_Field is CMSIS.Device.Bit;
+   subtype CR1_PECEN_Field is CMSIS.Device.Bit;
 
    --  Control register 1
    type CR1_Register is record
@@ -57,7 +57,7 @@ package Cmsis.Device.I2C is
       --  Analog noise filter OFF
       ANFOFF         : CR1_ANFOFF_Field := 16#0#;
       --  unspecified
-      Reserved_13_13 : Cmsis.Device.Bit := 16#0#;
+      Reserved_13_13 : CMSIS.Device.Bit := 16#0#;
       --  DMA transmission requests enable
       TXDMAEN        : CR1_TXDMAEN_Field := 16#0#;
       --  DMA reception requests enable
@@ -79,7 +79,7 @@ package Cmsis.Device.I2C is
       --  PEC enable
       PECEN          : CR1_PECEN_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -109,17 +109,17 @@ package Cmsis.Device.I2C is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype CR2_SADD_Field is Cmsis.Device.UInt10;
-   subtype CR2_RD_WRN_Field is Cmsis.Device.Bit;
-   subtype CR2_ADD10_Field is Cmsis.Device.Bit;
-   subtype CR2_HEAD10R_Field is Cmsis.Device.Bit;
-   subtype CR2_START_Field is Cmsis.Device.Bit;
-   subtype CR2_STOP_Field is Cmsis.Device.Bit;
-   subtype CR2_NACK_Field is Cmsis.Device.Bit;
-   subtype CR2_NBYTES_Field is Cmsis.Device.UInt8;
-   subtype CR2_RELOAD_Field is Cmsis.Device.Bit;
-   subtype CR2_AUTOEND_Field is Cmsis.Device.Bit;
-   subtype CR2_PECBYTE_Field is Cmsis.Device.Bit;
+   subtype CR2_SADD_Field is CMSIS.Device.UInt10;
+   subtype CR2_RD_WRN_Field is CMSIS.Device.Bit;
+   subtype CR2_ADD10_Field is CMSIS.Device.Bit;
+   subtype CR2_HEAD10R_Field is CMSIS.Device.Bit;
+   subtype CR2_START_Field is CMSIS.Device.Bit;
+   subtype CR2_STOP_Field is CMSIS.Device.Bit;
+   subtype CR2_NACK_Field is CMSIS.Device.Bit;
+   subtype CR2_NBYTES_Field is CMSIS.Device.UInt8;
+   subtype CR2_RELOAD_Field is CMSIS.Device.Bit;
+   subtype CR2_AUTOEND_Field is CMSIS.Device.Bit;
+   subtype CR2_PECBYTE_Field is CMSIS.Device.Bit;
 
    --  Control register 2
    type CR2_Register is record
@@ -146,7 +146,7 @@ package Cmsis.Device.I2C is
       --  Packet error checking byte
       PECBYTE        : CR2_PECBYTE_Field := 16#0#;
       --  unspecified
-      Reserved_27_31 : Cmsis.Device.UInt5 := 16#0#;
+      Reserved_27_31 : CMSIS.Device.UInt5 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -166,9 +166,9 @@ package Cmsis.Device.I2C is
       Reserved_27_31 at 0 range 27 .. 31;
    end record;
 
-   subtype OAR1_OA1_Field is Cmsis.Device.UInt10;
-   subtype OAR1_OA1MODE_Field is Cmsis.Device.Bit;
-   subtype OAR1_OA1EN_Field is Cmsis.Device.Bit;
+   subtype OAR1_OA1_Field is CMSIS.Device.UInt10;
+   subtype OAR1_OA1MODE_Field is CMSIS.Device.Bit;
+   subtype OAR1_OA1EN_Field is CMSIS.Device.Bit;
 
    --  Own address register 1
    type OAR1_Register is record
@@ -177,11 +177,11 @@ package Cmsis.Device.I2C is
       --  Own Address 1 10-bit mode
       OA1MODE        : OAR1_OA1MODE_Field := 16#0#;
       --  unspecified
-      Reserved_11_14 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_11_14 : CMSIS.Device.UInt4 := 16#0#;
       --  Own Address 1 enable
       OA1EN          : OAR1_OA1EN_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -194,24 +194,24 @@ package Cmsis.Device.I2C is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype OAR2_OA2_Field is Cmsis.Device.UInt7;
-   subtype OAR2_OA2MSK_Field is Cmsis.Device.UInt3;
-   subtype OAR2_OA2EN_Field is Cmsis.Device.Bit;
+   subtype OAR2_OA2_Field is CMSIS.Device.UInt7;
+   subtype OAR2_OA2MSK_Field is CMSIS.Device.UInt3;
+   subtype OAR2_OA2EN_Field is CMSIS.Device.Bit;
 
    --  Own address register 2
    type OAR2_Register is record
       --  unspecified
-      Reserved_0_0   : Cmsis.Device.Bit := 16#0#;
+      Reserved_0_0   : CMSIS.Device.Bit := 16#0#;
       --  Interface address
       OA2            : OAR2_OA2_Field := 16#0#;
       --  Own Address 2 masks
       OA2MSK         : OAR2_OA2MSK_Field := 16#0#;
       --  unspecified
-      Reserved_11_14 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_11_14 : CMSIS.Device.UInt4 := 16#0#;
       --  Own Address 2 enable
       OA2EN          : OAR2_OA2EN_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -225,11 +225,11 @@ package Cmsis.Device.I2C is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
-   subtype TIMINGR_SCLL_Field is Cmsis.Device.UInt8;
-   subtype TIMINGR_SCLH_Field is Cmsis.Device.UInt8;
-   subtype TIMINGR_SDADEL_Field is Cmsis.Device.UInt4;
-   subtype TIMINGR_SCLDEL_Field is Cmsis.Device.UInt4;
-   subtype TIMINGR_PRESC_Field is Cmsis.Device.UInt4;
+   subtype TIMINGR_SCLL_Field is CMSIS.Device.UInt8;
+   subtype TIMINGR_SCLH_Field is CMSIS.Device.UInt8;
+   subtype TIMINGR_SDADEL_Field is CMSIS.Device.UInt4;
+   subtype TIMINGR_SCLDEL_Field is CMSIS.Device.UInt4;
+   subtype TIMINGR_PRESC_Field is CMSIS.Device.UInt4;
 
    --  Timing register
    type TIMINGR_Register is record
@@ -242,7 +242,7 @@ package Cmsis.Device.I2C is
       --  Data setup time
       SCLDEL         : TIMINGR_SCLDEL_Field := 16#0#;
       --  unspecified
-      Reserved_24_27 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_24_27 : CMSIS.Device.UInt4 := 16#0#;
       --  Timing prescaler
       PRESC          : TIMINGR_PRESC_Field := 16#0#;
    end record
@@ -258,11 +258,11 @@ package Cmsis.Device.I2C is
       PRESC          at 0 range 28 .. 31;
    end record;
 
-   subtype TIMEOUTR_TIMEOUTA_Field is Cmsis.Device.UInt12;
-   subtype TIMEOUTR_TIDLE_Field is Cmsis.Device.Bit;
-   subtype TIMEOUTR_TIMOUTEN_Field is Cmsis.Device.Bit;
-   subtype TIMEOUTR_TIMEOUTB_Field is Cmsis.Device.UInt12;
-   subtype TIMEOUTR_TEXTEN_Field is Cmsis.Device.Bit;
+   subtype TIMEOUTR_TIMEOUTA_Field is CMSIS.Device.UInt12;
+   subtype TIMEOUTR_TIDLE_Field is CMSIS.Device.Bit;
+   subtype TIMEOUTR_TIMOUTEN_Field is CMSIS.Device.Bit;
+   subtype TIMEOUTR_TIMEOUTB_Field is CMSIS.Device.UInt12;
+   subtype TIMEOUTR_TEXTEN_Field is CMSIS.Device.Bit;
 
    --  Status register 1
    type TIMEOUTR_Register is record
@@ -271,13 +271,13 @@ package Cmsis.Device.I2C is
       --  Idle clock timeout detection
       TIDLE          : TIMEOUTR_TIDLE_Field := 16#0#;
       --  unspecified
-      Reserved_13_14 : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_13_14 : CMSIS.Device.UInt2 := 16#0#;
       --  Clock timeout enable
       TIMOUTEN       : TIMEOUTR_TIMOUTEN_Field := 16#0#;
       --  Bus timeout B
       TIMEOUTB       : TIMEOUTR_TIMEOUTB_Field := 16#0#;
       --  unspecified
-      Reserved_28_30 : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_28_30 : CMSIS.Device.UInt3 := 16#0#;
       --  Extended clock timeout enable
       TEXTEN         : TIMEOUTR_TEXTEN_Field := 16#0#;
    end record
@@ -294,23 +294,23 @@ package Cmsis.Device.I2C is
       TEXTEN         at 0 range 31 .. 31;
    end record;
 
-   subtype ISR_TXE_Field is Cmsis.Device.Bit;
-   subtype ISR_TXIS_Field is Cmsis.Device.Bit;
-   subtype ISR_RXNE_Field is Cmsis.Device.Bit;
-   subtype ISR_ADDR_Field is Cmsis.Device.Bit;
-   subtype ISR_NACKF_Field is Cmsis.Device.Bit;
-   subtype ISR_STOPF_Field is Cmsis.Device.Bit;
-   subtype ISR_TC_Field is Cmsis.Device.Bit;
-   subtype ISR_TCR_Field is Cmsis.Device.Bit;
-   subtype ISR_BERR_Field is Cmsis.Device.Bit;
-   subtype ISR_ARLO_Field is Cmsis.Device.Bit;
-   subtype ISR_OVR_Field is Cmsis.Device.Bit;
-   subtype ISR_PECERR_Field is Cmsis.Device.Bit;
-   subtype ISR_TIMEOUT_Field is Cmsis.Device.Bit;
-   subtype ISR_ALERT_Field is Cmsis.Device.Bit;
-   subtype ISR_BUSY_Field is Cmsis.Device.Bit;
-   subtype ISR_DIR_Field is Cmsis.Device.Bit;
-   subtype ISR_ADDCODE_Field is Cmsis.Device.UInt7;
+   subtype ISR_TXE_Field is CMSIS.Device.Bit;
+   subtype ISR_TXIS_Field is CMSIS.Device.Bit;
+   subtype ISR_RXNE_Field is CMSIS.Device.Bit;
+   subtype ISR_ADDR_Field is CMSIS.Device.Bit;
+   subtype ISR_NACKF_Field is CMSIS.Device.Bit;
+   subtype ISR_STOPF_Field is CMSIS.Device.Bit;
+   subtype ISR_TC_Field is CMSIS.Device.Bit;
+   subtype ISR_TCR_Field is CMSIS.Device.Bit;
+   subtype ISR_BERR_Field is CMSIS.Device.Bit;
+   subtype ISR_ARLO_Field is CMSIS.Device.Bit;
+   subtype ISR_OVR_Field is CMSIS.Device.Bit;
+   subtype ISR_PECERR_Field is CMSIS.Device.Bit;
+   subtype ISR_TIMEOUT_Field is CMSIS.Device.Bit;
+   subtype ISR_ALERT_Field is CMSIS.Device.Bit;
+   subtype ISR_BUSY_Field is CMSIS.Device.Bit;
+   subtype ISR_DIR_Field is CMSIS.Device.Bit;
+   subtype ISR_ADDCODE_Field is CMSIS.Device.UInt7;
 
    --  Interrupt and Status register
    type ISR_Register is record
@@ -343,7 +343,7 @@ package Cmsis.Device.I2C is
       --  Read-only. SMBus alert
       ALERT          : ISR_ALERT_Field := 16#0#;
       --  unspecified
-      Reserved_14_14 : Cmsis.Device.Bit := 16#0#;
+      Reserved_14_14 : CMSIS.Device.Bit := 16#0#;
       --  Read-only. Bus busy
       BUSY           : ISR_BUSY_Field := 16#0#;
       --  Read-only. Transfer direction (Slave mode)
@@ -351,7 +351,7 @@ package Cmsis.Device.I2C is
       --  Read-only. Address match code (Slave mode)
       ADDCODE        : ISR_ADDCODE_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
+      Reserved_24_31 : CMSIS.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -378,20 +378,20 @@ package Cmsis.Device.I2C is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
-   subtype ICR_ADDRCF_Field is Cmsis.Device.Bit;
-   subtype ICR_NACKCF_Field is Cmsis.Device.Bit;
-   subtype ICR_STOPCF_Field is Cmsis.Device.Bit;
-   subtype ICR_BERRCF_Field is Cmsis.Device.Bit;
-   subtype ICR_ARLOCF_Field is Cmsis.Device.Bit;
-   subtype ICR_OVRCF_Field is Cmsis.Device.Bit;
-   subtype ICR_PECCF_Field is Cmsis.Device.Bit;
-   subtype ICR_TIMOUTCF_Field is Cmsis.Device.Bit;
-   subtype ICR_ALERTCF_Field is Cmsis.Device.Bit;
+   subtype ICR_ADDRCF_Field is CMSIS.Device.Bit;
+   subtype ICR_NACKCF_Field is CMSIS.Device.Bit;
+   subtype ICR_STOPCF_Field is CMSIS.Device.Bit;
+   subtype ICR_BERRCF_Field is CMSIS.Device.Bit;
+   subtype ICR_ARLOCF_Field is CMSIS.Device.Bit;
+   subtype ICR_OVRCF_Field is CMSIS.Device.Bit;
+   subtype ICR_PECCF_Field is CMSIS.Device.Bit;
+   subtype ICR_TIMOUTCF_Field is CMSIS.Device.Bit;
+   subtype ICR_ALERTCF_Field is CMSIS.Device.Bit;
 
    --  Interrupt clear register
    type ICR_Register is record
       --  unspecified
-      Reserved_0_2   : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_0_2   : CMSIS.Device.UInt3 := 16#0#;
       --  Write-only. Address Matched flag clear
       ADDRCF         : ICR_ADDRCF_Field := 16#0#;
       --  Write-only. Not Acknowledge flag clear
@@ -399,7 +399,7 @@ package Cmsis.Device.I2C is
       --  Write-only. Stop detection flag clear
       STOPCF         : ICR_STOPCF_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_6_7   : CMSIS.Device.UInt2 := 16#0#;
       --  Write-only. Bus error flag clear
       BERRCF         : ICR_BERRCF_Field := 16#0#;
       --  Write-only. Arbitration lost flag clear
@@ -413,7 +413,7 @@ package Cmsis.Device.I2C is
       --  Write-only. Alert flag clear
       ALERTCF        : ICR_ALERTCF_Field := 16#0#;
       --  unspecified
-      Reserved_14_31 : Cmsis.Device.UInt18 := 16#0#;
+      Reserved_14_31 : CMSIS.Device.UInt18 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -433,14 +433,14 @@ package Cmsis.Device.I2C is
       Reserved_14_31 at 0 range 14 .. 31;
    end record;
 
-   subtype PECR_PEC_Field is Cmsis.Device.UInt8;
+   subtype PECR_PEC_Field is CMSIS.Device.UInt8;
 
    --  PEC register
    type PECR_Register is record
       --  Read-only. Packet error checking register
       PEC           : PECR_PEC_Field;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24;
+      Reserved_8_31 : CMSIS.Device.UInt24;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -450,14 +450,14 @@ package Cmsis.Device.I2C is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype RXDR_RXDATA_Field is Cmsis.Device.UInt8;
+   subtype RXDR_RXDATA_Field is CMSIS.Device.UInt8;
 
    --  Receive data register
    type RXDR_Register is record
       --  Read-only. 8-bit receive data
       RXDATA        : RXDR_RXDATA_Field;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24;
+      Reserved_8_31 : CMSIS.Device.UInt24;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -467,14 +467,14 @@ package Cmsis.Device.I2C is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
-   subtype TXDR_TXDATA_Field is Cmsis.Device.UInt8;
+   subtype TXDR_TXDATA_Field is CMSIS.Device.UInt8;
 
    --  Transmit data register
    type TXDR_Register is record
       --  8-bit transmit data
       TXDATA        : TXDR_TXDATA_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
+      Reserved_8_31 : CMSIS.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -541,4 +541,4 @@ package Cmsis.Device.I2C is
    I2C3_Periph : aliased I2C_Peripheral
      with Import, Address => I2C3_Base;
 
-end Cmsis.Device.I2C;
+end CMSIS.Device.I2C;

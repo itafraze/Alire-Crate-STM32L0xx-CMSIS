@@ -3,7 +3,7 @@ pragma Style_Checks (Off);
 --  This spec has been automatically generated from stm32l0x1.svd
 
 --  Definition of the device's interrupts
-package Cmsis.Device.Interrupts is
+package CMSIS.Device.Interrupts is
 
    ----------------
    -- Interrupts --
@@ -94,4 +94,4 @@ package Cmsis.Device.Interrupts is
    --  through
    AES_RNG_LPUART1_Interrupt  : constant := 29;
 
-end Cmsis.Device.Interrupts;
+end CMSIS.Device.Interrupts;

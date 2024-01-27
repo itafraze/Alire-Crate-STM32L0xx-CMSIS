@@ -6,19 +6,19 @@ pragma Restrictions (No_Elaboration_Code);
 
 with System;
 
-package Cmsis.Device.Flash is
+package CMSIS.Device.Flash is
    pragma Preelaborate;
 
    ---------------
    -- Registers --
    ---------------
 
-   subtype ACR_LATENCY_Field is Cmsis.Device.Bit;
-   subtype ACR_PRFTEN_Field is Cmsis.Device.Bit;
-   subtype ACR_SLEEP_PD_Field is Cmsis.Device.Bit;
-   subtype ACR_RUN_PD_Field is Cmsis.Device.Bit;
-   subtype ACR_DESAB_BUF_Field is Cmsis.Device.Bit;
-   subtype ACR_PRE_READ_Field is Cmsis.Device.Bit;
+   subtype ACR_LATENCY_Field is CMSIS.Device.Bit;
+   subtype ACR_PRFTEN_Field is CMSIS.Device.Bit;
+   subtype ACR_SLEEP_PD_Field is CMSIS.Device.Bit;
+   subtype ACR_RUN_PD_Field is CMSIS.Device.Bit;
+   subtype ACR_DESAB_BUF_Field is CMSIS.Device.Bit;
+   subtype ACR_PRE_READ_Field is CMSIS.Device.Bit;
 
    --  Access control register
    type ACR_Register is record
@@ -27,7 +27,7 @@ package Cmsis.Device.Flash is
       --  Prefetch enable
       PRFTEN        : ACR_PRFTEN_Field := 16#0#;
       --  unspecified
-      Reserved_2_2  : Cmsis.Device.Bit := 16#0#;
+      Reserved_2_2  : CMSIS.Device.Bit := 16#0#;
       --  Flash mode during Sleep
       SLEEP_PD      : ACR_SLEEP_PD_Field := 16#0#;
       --  Flash mode during Run
@@ -37,7 +37,7 @@ package Cmsis.Device.Flash is
       --  Pre-read data address
       PRE_READ      : ACR_PRE_READ_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
+      Reserved_7_31 : CMSIS.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -53,18 +53,18 @@ package Cmsis.Device.Flash is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
-   subtype PECR_PELOCK_Field is Cmsis.Device.Bit;
-   subtype PECR_PRGLOCK_Field is Cmsis.Device.Bit;
-   subtype PECR_OPTLOCK_Field is Cmsis.Device.Bit;
-   subtype PECR_PROG_Field is Cmsis.Device.Bit;
-   subtype PECR_DATA_Field is Cmsis.Device.Bit;
-   subtype PECR_FTDW_Field is Cmsis.Device.Bit;
-   subtype PECR_ERASE_Field is Cmsis.Device.Bit;
-   subtype PECR_FPRG_Field is Cmsis.Device.Bit;
-   subtype PECR_PARALLELBANK_Field is Cmsis.Device.Bit;
-   subtype PECR_EOPIE_Field is Cmsis.Device.Bit;
-   subtype PECR_ERRIE_Field is Cmsis.Device.Bit;
-   subtype PECR_OBL_LAUNCH_Field is Cmsis.Device.Bit;
+   subtype PECR_PELOCK_Field is CMSIS.Device.Bit;
+   subtype PECR_PRGLOCK_Field is CMSIS.Device.Bit;
+   subtype PECR_OPTLOCK_Field is CMSIS.Device.Bit;
+   subtype PECR_PROG_Field is CMSIS.Device.Bit;
+   subtype PECR_DATA_Field is CMSIS.Device.Bit;
+   subtype PECR_FTDW_Field is CMSIS.Device.Bit;
+   subtype PECR_ERASE_Field is CMSIS.Device.Bit;
+   subtype PECR_FPRG_Field is CMSIS.Device.Bit;
+   subtype PECR_PARALLELBANK_Field is CMSIS.Device.Bit;
+   subtype PECR_EOPIE_Field is CMSIS.Device.Bit;
+   subtype PECR_ERRIE_Field is CMSIS.Device.Bit;
+   subtype PECR_OBL_LAUNCH_Field is CMSIS.Device.Bit;
 
    --  Program/erase control register
    type PECR_Register is record
@@ -79,7 +79,7 @@ package Cmsis.Device.Flash is
       --  Data EEPROM selection
       DATA           : PECR_DATA_Field := 16#0#;
       --  unspecified
-      Reserved_5_7   : Cmsis.Device.UInt3 := 16#0#;
+      Reserved_5_7   : CMSIS.Device.UInt3 := 16#0#;
       --  Fixed time data write for Byte, Half Word and Word programming
       FTDW           : PECR_FTDW_Field := 16#0#;
       --  Page or Double Word erase mode
@@ -87,7 +87,7 @@ package Cmsis.Device.Flash is
       --  Half Page/Double Word programming mode
       FPRG           : PECR_FPRG_Field := 16#0#;
       --  unspecified
-      Reserved_11_14 : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_11_14 : CMSIS.Device.UInt4 := 16#0#;
       --  Parallel bank mode
       PARALLELBANK   : PECR_PARALLELBANK_Field := 16#0#;
       --  End of programming interrupt enable
@@ -97,7 +97,7 @@ package Cmsis.Device.Flash is
       --  Launch the option byte loading
       OBL_LAUNCH     : PECR_OBL_LAUNCH_Field := 16#0#;
       --  unspecified
-      Reserved_19_31 : Cmsis.Device.UInt13 := 16#0#;
+      Reserved_19_31 : CMSIS.Device.UInt13 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -120,17 +120,17 @@ package Cmsis.Device.Flash is
       Reserved_19_31 at 0 range 19 .. 31;
    end record;
 
-   subtype SR_BSY_Field is Cmsis.Device.Bit;
-   subtype SR_EOP_Field is Cmsis.Device.Bit;
-   subtype SR_ENDHV_Field is Cmsis.Device.Bit;
-   subtype SR_READY_Field is Cmsis.Device.Bit;
-   subtype SR_WRPERR_Field is Cmsis.Device.Bit;
-   subtype SR_PGAERR_Field is Cmsis.Device.Bit;
-   subtype SR_SIZERR_Field is Cmsis.Device.Bit;
-   subtype SR_OPTVERR_Field is Cmsis.Device.Bit;
-   subtype SR_RDERR_Field is Cmsis.Device.Bit;
-   subtype SR_NOTZEROERR_Field is Cmsis.Device.Bit;
-   subtype SR_FWWERR_Field is Cmsis.Device.Bit;
+   subtype SR_BSY_Field is CMSIS.Device.Bit;
+   subtype SR_EOP_Field is CMSIS.Device.Bit;
+   subtype SR_ENDHV_Field is CMSIS.Device.Bit;
+   subtype SR_READY_Field is CMSIS.Device.Bit;
+   subtype SR_WRPERR_Field is CMSIS.Device.Bit;
+   subtype SR_PGAERR_Field is CMSIS.Device.Bit;
+   subtype SR_SIZERR_Field is CMSIS.Device.Bit;
+   subtype SR_OPTVERR_Field is CMSIS.Device.Bit;
+   subtype SR_RDERR_Field is CMSIS.Device.Bit;
+   subtype SR_NOTZEROERR_Field is CMSIS.Device.Bit;
+   subtype SR_FWWERR_Field is CMSIS.Device.Bit;
 
    --  Status register
    type SR_Register is record
@@ -143,7 +143,7 @@ package Cmsis.Device.Flash is
       --  Read-only. Flash memory module ready after low power mode
       READY          : SR_READY_Field := 16#0#;
       --  unspecified
-      Reserved_4_7   : Cmsis.Device.UInt4 := 16#0#;
+      Reserved_4_7   : CMSIS.Device.UInt4 := 16#0#;
       --  Write protected error
       WRPERR         : SR_WRPERR_Field := 16#0#;
       --  Programming alignment error
@@ -153,17 +153,17 @@ package Cmsis.Device.Flash is
       --  Option validity error
       OPTVERR        : SR_OPTVERR_Field := 16#0#;
       --  unspecified
-      Reserved_12_13 : Cmsis.Device.UInt2 := 16#0#;
+      Reserved_12_13 : CMSIS.Device.UInt2 := 16#0#;
       --  RDERR
       RDERR          : SR_RDERR_Field := 16#0#;
       --  unspecified
-      Reserved_15_15 : Cmsis.Device.Bit := 16#0#;
+      Reserved_15_15 : CMSIS.Device.Bit := 16#0#;
       --  NOTZEROERR
       NOTZEROERR     : SR_NOTZEROERR_Field := 16#0#;
       --  FWWERR
       FWWERR         : SR_FWWERR_Field := 16#0#;
       --  unspecified
-      Reserved_18_31 : Cmsis.Device.UInt14 := 16#0#;
+      Reserved_18_31 : CMSIS.Device.UInt14 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -186,9 +186,9 @@ package Cmsis.Device.Flash is
       Reserved_18_31 at 0 range 18 .. 31;
    end record;
 
-   subtype OBR_RDPRT_Field is Cmsis.Device.UInt8;
-   subtype OBR_SPRMOD_Field is Cmsis.Device.Bit;
-   subtype OBR_BOR_LEV_Field is Cmsis.Device.UInt4;
+   subtype OBR_RDPRT_Field is CMSIS.Device.UInt8;
+   subtype OBR_SPRMOD_Field is CMSIS.Device.Bit;
+   subtype OBR_BOR_LEV_Field is CMSIS.Device.UInt4;
 
    --  Option byte register
    type OBR_Register is record
@@ -197,11 +197,11 @@ package Cmsis.Device.Flash is
       --  Read-only. Selection of protection mode of WPR bits
       SPRMOD         : OBR_SPRMOD_Field;
       --  unspecified
-      Reserved_9_15  : Cmsis.Device.UInt7;
+      Reserved_9_15  : CMSIS.Device.UInt7;
       --  Read-only. BOR_LEV
       BOR_LEV        : OBR_BOR_LEV_Field;
       --  unspecified
-      Reserved_20_31 : Cmsis.Device.UInt12;
+      Reserved_20_31 : CMSIS.Device.UInt12;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -214,14 +214,14 @@ package Cmsis.Device.Flash is
       Reserved_20_31 at 0 range 20 .. 31;
    end record;
 
-   subtype WRPR_WRP_Field is Cmsis.Device.UInt16;
+   subtype WRPR_WRP_Field is CMSIS.Device.UInt16;
 
    --  Write protection register
    type WRPR_Register is record
       --  Write protection
       WRP            : WRPR_WRP_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
+      Reserved_16_31 : CMSIS.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -242,13 +242,13 @@ package Cmsis.Device.Flash is
       --  Program/erase control register
       PECR    : aliased PECR_Register;
       --  Power down key register
-      PDKEYR  : aliased Cmsis.Device.UInt32;
+      PDKEYR  : aliased CMSIS.Device.UInt32;
       --  Program/erase key register
-      PEKEYR  : aliased Cmsis.Device.UInt32;
+      PEKEYR  : aliased CMSIS.Device.UInt32;
       --  Program memory key register
-      PRGKEYR : aliased Cmsis.Device.UInt32;
+      PRGKEYR : aliased CMSIS.Device.UInt32;
       --  Option byte key register
-      OPTKEYR : aliased Cmsis.Device.UInt32;
+      OPTKEYR : aliased CMSIS.Device.UInt32;
       --  Status register
       SR      : aliased SR_Register;
       --  Option byte register
@@ -274,4 +274,4 @@ package Cmsis.Device.Flash is
    Flash_Periph : aliased Flash_Peripheral
      with Import, Address => Flash_Base;
 
-end Cmsis.Device.Flash;
+end CMSIS.Device.Flash;
