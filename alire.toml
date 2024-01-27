@@ -5,3 +5,13 @@ version = "0.0.0-dev"
 authors = ["Emanuele Zarfati"]
 maintainers = ["Emanuele Zarfati <zarfati.tecno@gmail.com>"]
 maintainers-logins = ["ezetec"]
+
+[[depends-on]]
+gnat_arm_elf = "^13.2.1"
+
+[build-switches]
+"*".Ada_Version = "Ada2022"
+
+[configuration.variables]
+Device = {type = "Enum", values = ["stm32l011d4"], default = "stm32l011d4"}
+With_Startup = {type = "Boolean", default = true}

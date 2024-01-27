@@ -2,20 +2,66 @@ with "config/stm32l0xx_cmsis_config.gpr";
 
 project Stm32l0xx_Cmsis is
 
+   --  Library specification
    for Library_Name use "stm32l0xx_cmsis";
    for Library_Version use
       Project'Library_Name & ".so." & Stm32l0xx_Cmsis_Config.Crate_Version;
+   for Library_Kind use "static";
 
-   for Source_Dirs use ("src/", "config/");
+   --  Target platform and Runtime environment
+   for Target use "arm-eabi";
+   for Runtime ("Ada") use "light-cortex-m0p";
+
+   --  Programming languages
+   for Languages use ("Ada");
+
+   --  Device information
+   Device := Stm32l0xx_Cmsis_Config.Device;
+   Device_Series := "";
+   Device_Category := "";
+   case Stm32l0xx_Cmsis_Config.Device is
+      when "stm32l011d4" => Device_Series := "1";
+   end case;
+   case Stm32l0xx_Cmsis_Config.Device is
+      when "stm32l011d4" => Device_Category := "1";
+   end case;
+
+   --  Source directories
+   for Source_Dirs use ();
+   for Source_Dirs use Project'Source_Dirs & ("src", "config");
+
+   Device_Source_Base_Dir := "src/stm32l0x" & Device_Series & "/";
+   for Source_Dirs use Project'Source_Dirs & (
+      Device_Source_Base_Dir,
+      Device_Source_Base_Dir & "cmsis-core-types-cat-" & Device_Category);
+
+   case Stm32l0xx_Cmsis_Config.With_Startup is
+      when "True" =>
+         for Source_Dirs use Project'Source_Dirs & (
+            Device_Source_Base_Dir & "startup");
+         for Languages use Project'Languages & "ASM_CPP";
+      when others => null;
+   end case;
+
+   --  Other project directories
    for Object_Dir use "obj/" & Stm32l0xx_Cmsis_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
 
-   type Library_Type_Type is ("relocatable", "static", "static-pic");
-   Library_Type : Library_Type_Type :=
-      external ("STM32L0XX_CMSIS_LIBRARY_TYPE",
-         external ("LIBRARY_TYPE", "static"));
-   for Library_Kind use Library_Type;
+   --  Properties of the target device to generate startup files (crt0 and
+   --  linker script)
+   Flash_Addr := "0x08000000";
+   Flash_Size := "0";
+   Sram_Addr := "0x20000000";
+   Sram_Size := "0";
+   Eeprom_Addr := "0x08080000";
+   Eeprom_Size := "0";
+   case Stm32l0xx_Cmsis_Config.Device is
+      when "stm32l011d4" =>
+         Flash_Size := "16K";
+         Sram_Size := "2K";
+         Eeprom_Size := "512";
+   end case;
 
    package Compiler is
       for Default_Switches ("Ada") use
@@ -26,8 +72,59 @@ project Stm32l0xx_Cmsis is
       for Switches ("Ada") use ("-Es"); --  Symbolic traceback
    end Binder;
 
-   package Install is
-      for Artifacts (".") use ("share");
-   end Install;
+   package Linker is
+      Default_Script := Project'Project_Dir & "share/stm32l0xx_cmsis/link.ld";
+   end Linker;
+
+   package Device_Configuration is
+
+      -- Templates
+      for Startup_Template use "crt0.S.tmplt";
+      for Linker_Template use "link.ld.tmplt";
+
+      --  Architecture and CPU
+      for CPU_Name use "cortex-m0p";
+      for Float_Handling use "soft";
+
+      --  Memory map
+      for Memories use ("FLASH", "SRAM", "EEPROM");
+      for Boot_Memory use "FLASH";
+      for Main_Stack_Memory use "SRAM";
+
+      for Mem_Kind ("FLASH") use "ROM";
+      for Address ("FLASH") use Flash_Addr;
+      for Size ("FLASH") use Flash_Size;
+
+      for Mem_Kind ("SRAM") use "RAM";
+      for Address ("SRAM") use Sram_Addr;
+      for Size ("SRAM")  use Sram_Size;
+
+      for Mem_Kind ("EEPROM") use "ROM";
+      for Address ("EEPROM") use Eeprom_Addr;
+      for Size ("EEPROM")  use Eeprom_Size;
+
+      --  Interrupts
+      for Number_Of_Interrupts use "32";
+      for Interrupt("0") use "WWDG";
+      for Interrupt("1") use "PVD";
+      for Interrupt("2") use "RTC";
+      for Interrupt("3") use "FLASH";
+      for Interrupt("4") use "RCC";
+      for Interrupt("5") use "EXTI0_1";
+      for Interrupt("6") use "EXTI2_3";
+      for Interrupt("7") use "EXTI4_15";
+      for Interrupt("9") use "DMA1_Channel1";
+      for Interrupt("10") use "DMA1_Channel2_3";
+      for Interrupt("11") use "DMA1_Channel4_5";
+      for Interrupt("12") use "ADC1_COMP";
+      for Interrupt("13") use "LPTIM1";
+      for Interrupt("15") use "TIM2";
+      for Interrupt("20") use "TIM21";
+      for Interrupt("23") use "I2C1";
+      for Interrupt("25") use "SPI1";
+      for Interrupt("28") use "USART2";
+      for Interrupt("29") use "LPUART1";
+
+   end Device_Configuration;
 
 end Stm32l0xx_Cmsis;
