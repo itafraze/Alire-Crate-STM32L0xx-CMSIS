@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.SYSCFG is
@@ -14,16 +13,19 @@ package Cmsis.Device.SYSCFG is
    -- Registers --
    ---------------
 
+   subtype CFGR1_MEM_MODE_Field is Cmsis.Device.UInt2;
+   subtype CFGR1_BOOT_MODE_Field is Cmsis.Device.UInt2;
+
    --  SYSCFG configuration register 1
    type CFGR1_Register is record
       --  Memory mapping selection bits
-      MEM_MODE       : HAL.UInt2 := 16#0#;
+      MEM_MODE       : CFGR1_MEM_MODE_Field := 16#0#;
       --  unspecified
-      Reserved_2_7   : HAL.UInt6 := 16#0#;
+      Reserved_2_7   : Cmsis.Device.UInt6 := 16#0#;
       --  Read-only. Boot mode selected by the boot pins status bits
-      BOOT_MODE      : HAL.UInt2 := 16#0#;
+      BOOT_MODE      : CFGR1_BOOT_MODE_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : HAL.UInt22 := 16#0#;
+      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -35,29 +37,38 @@ package Cmsis.Device.SYSCFG is
       Reserved_10_31 at 0 range 10 .. 31;
    end record;
 
+   subtype CFGR2_FWDISEN_Field is Cmsis.Device.Bit;
+   subtype CFGR2_CAPA_Field is Cmsis.Device.UInt3;
+   subtype CFGR2_I2C_PB6_FMP_Field is Cmsis.Device.Bit;
+   subtype CFGR2_I2C_PB7_FMP_Field is Cmsis.Device.Bit;
+   subtype CFGR2_I2C_PB8_FMP_Field is Cmsis.Device.Bit;
+   subtype CFGR2_I2C_PB9_FMP_Field is Cmsis.Device.Bit;
+   subtype CFGR2_I2C1_FMP_Field is Cmsis.Device.Bit;
+   subtype CFGR2_I2C2_FMP_Field is Cmsis.Device.Bit;
+
    --  SYSCFG configuration register 2
    type CFGR2_Register is record
       --  Firewall disable bit
-      FWDISEN        : HAL.Bit := 16#0#;
+      FWDISEN        : CFGR2_FWDISEN_Field := 16#0#;
       --  Configuration of internal VLCD rail connection to optional external
       --  capacitor
-      CAPA           : HAL.UInt3 := 16#0#;
+      CAPA           : CFGR2_CAPA_Field := 16#0#;
       --  unspecified
-      Reserved_4_7   : HAL.UInt4 := 16#0#;
+      Reserved_4_7   : Cmsis.Device.UInt4 := 16#0#;
       --  Fm+ drive capability on PB6 enable bit
-      I2C_PB6_FMP    : HAL.Bit := 16#0#;
+      I2C_PB6_FMP    : CFGR2_I2C_PB6_FMP_Field := 16#0#;
       --  Fm+ drive capability on PB7 enable bit
-      I2C_PB7_FMP    : HAL.Bit := 16#0#;
+      I2C_PB7_FMP    : CFGR2_I2C_PB7_FMP_Field := 16#0#;
       --  Fm+ drive capability on PB8 enable bit
-      I2C_PB8_FMP    : HAL.Bit := 16#0#;
+      I2C_PB8_FMP    : CFGR2_I2C_PB8_FMP_Field := 16#0#;
       --  Fm+ drive capability on PB9 enable bit
-      I2C_PB9_FMP    : HAL.Bit := 16#0#;
+      I2C_PB9_FMP    : CFGR2_I2C_PB9_FMP_Field := 16#0#;
       --  I2C1 Fm+ drive capability enable bit
-      I2C1_FMP       : HAL.Bit := 16#0#;
+      I2C1_FMP       : CFGR2_I2C1_FMP_Field := 16#0#;
       --  I2C2 Fm+ drive capability enable bit
-      I2C2_FMP       : HAL.Bit := 16#0#;
+      I2C2_FMP       : CFGR2_I2C2_FMP_Field := 16#0#;
       --  unspecified
-      Reserved_14_31 : HAL.UInt18 := 16#0#;
+      Reserved_14_31 : Cmsis.Device.UInt18 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -75,8 +86,11 @@ package Cmsis.Device.SYSCFG is
       Reserved_14_31 at 0 range 14 .. 31;
    end record;
 
+   --  EXTICR1_EXTI array element
+   subtype EXTICR1_EXTI_Element is Cmsis.Device.UInt4;
+
    --  EXTICR1_EXTI array
-   type EXTICR1_EXTI_Field_Array is array (0 .. 3) of HAL.UInt4
+   type EXTICR1_EXTI_Field_Array is array (0 .. 3) of EXTICR1_EXTI_Element
      with Component_Size => 4, Size => 16;
 
    --  Type definition for EXTICR1_EXTI
@@ -86,7 +100,7 @@ package Cmsis.Device.SYSCFG is
       case As_Array is
          when False =>
             --  EXTI as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  EXTI as an array
             Arr : EXTICR1_EXTI_Field_Array;
@@ -105,7 +119,7 @@ package Cmsis.Device.SYSCFG is
       EXTI           : EXTICR1_EXTI_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -115,8 +129,11 @@ package Cmsis.Device.SYSCFG is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  EXTICR2_EXTI array element
+   subtype EXTICR2_EXTI_Element is Cmsis.Device.UInt4;
+
    --  EXTICR2_EXTI array
-   type EXTICR2_EXTI_Field_Array is array (4 .. 7) of HAL.UInt4
+   type EXTICR2_EXTI_Field_Array is array (4 .. 7) of EXTICR2_EXTI_Element
      with Component_Size => 4, Size => 16;
 
    --  Type definition for EXTICR2_EXTI
@@ -126,7 +143,7 @@ package Cmsis.Device.SYSCFG is
       case As_Array is
          when False =>
             --  EXTI as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  EXTI as an array
             Arr : EXTICR2_EXTI_Field_Array;
@@ -145,7 +162,7 @@ package Cmsis.Device.SYSCFG is
       EXTI           : EXTICR2_EXTI_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -155,8 +172,11 @@ package Cmsis.Device.SYSCFG is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  EXTICR3_EXTI array element
+   subtype EXTICR3_EXTI_Element is Cmsis.Device.UInt4;
+
    --  EXTICR3_EXTI array
-   type EXTICR3_EXTI_Field_Array is array (8 .. 11) of HAL.UInt4
+   type EXTICR3_EXTI_Field_Array is array (8 .. 11) of EXTICR3_EXTI_Element
      with Component_Size => 4, Size => 16;
 
    --  Type definition for EXTICR3_EXTI
@@ -166,7 +186,7 @@ package Cmsis.Device.SYSCFG is
       case As_Array is
          when False =>
             --  EXTI as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  EXTI as an array
             Arr : EXTICR3_EXTI_Field_Array;
@@ -185,7 +205,7 @@ package Cmsis.Device.SYSCFG is
       EXTI           : EXTICR3_EXTI_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -195,8 +215,11 @@ package Cmsis.Device.SYSCFG is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  EXTICR4_EXTI array element
+   subtype EXTICR4_EXTI_Element is Cmsis.Device.UInt4;
+
    --  EXTICR4_EXTI array
-   type EXTICR4_EXTI_Field_Array is array (12 .. 15) of HAL.UInt4
+   type EXTICR4_EXTI_Field_Array is array (12 .. 15) of EXTICR4_EXTI_Element
      with Component_Size => 4, Size => 16;
 
    --  Type definition for EXTICR4_EXTI
@@ -206,7 +229,7 @@ package Cmsis.Device.SYSCFG is
       case As_Array is
          when False =>
             --  EXTI as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  EXTI as an array
             Arr : EXTICR4_EXTI_Field_Array;
@@ -225,7 +248,7 @@ package Cmsis.Device.SYSCFG is
       EXTI           : EXTICR4_EXTI_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -235,32 +258,40 @@ package Cmsis.Device.SYSCFG is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype COMP1_CTRL_COMP1EN_Field is Cmsis.Device.Bit;
+   subtype COMP1_CTRL_COMP1INNSEL_Field is Cmsis.Device.UInt2;
+   subtype COMP1_CTRL_COMP1WM_Field is Cmsis.Device.Bit;
+   subtype COMP1_CTRL_COMP1LPTIMIN1_Field is Cmsis.Device.Bit;
+   subtype COMP1_CTRL_COMP1POLARITY_Field is Cmsis.Device.Bit;
+   subtype COMP1_CTRL_COMP1VALUE_Field is Cmsis.Device.Bit;
+   subtype COMP1_CTRL_COMP1LOCK_Field is Cmsis.Device.Bit;
+
    --  Comparator 1 control and status register
    type COMP1_CTRL_Register is record
       --  Comparator 1 enable bit
-      COMP1EN        : HAL.Bit := 16#0#;
+      COMP1EN        : COMP1_CTRL_COMP1EN_Field := 16#0#;
       --  unspecified
-      Reserved_1_3   : HAL.UInt3 := 16#0#;
+      Reserved_1_3   : Cmsis.Device.UInt3 := 16#0#;
       --  Comparator 1 Input Minus connection configuration bit
-      COMP1INNSEL    : HAL.UInt2 := 16#0#;
+      COMP1INNSEL    : COMP1_CTRL_COMP1INNSEL_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : HAL.UInt2 := 16#0#;
+      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
       --  Comparator 1 window mode selection bit
-      COMP1WM        : HAL.Bit := 16#0#;
+      COMP1WM        : COMP1_CTRL_COMP1WM_Field := 16#0#;
       --  unspecified
-      Reserved_9_11  : HAL.UInt3 := 16#0#;
+      Reserved_9_11  : Cmsis.Device.UInt3 := 16#0#;
       --  Comparator 1 LPTIM input propagation bit
-      COMP1LPTIMIN1  : HAL.Bit := 16#0#;
+      COMP1LPTIMIN1  : COMP1_CTRL_COMP1LPTIMIN1_Field := 16#0#;
       --  unspecified
-      Reserved_13_14 : HAL.UInt2 := 16#0#;
+      Reserved_13_14 : Cmsis.Device.UInt2 := 16#0#;
       --  Comparator 1 polarity selection bit
-      COMP1POLARITY  : HAL.Bit := 16#0#;
+      COMP1POLARITY  : COMP1_CTRL_COMP1POLARITY_Field := 16#0#;
       --  unspecified
-      Reserved_16_29 : HAL.UInt14 := 16#0#;
+      Reserved_16_29 : Cmsis.Device.UInt14 := 16#0#;
       --  Comparator 1 output status bit
-      COMP1VALUE     : HAL.Bit := 16#0#;
+      COMP1VALUE     : COMP1_CTRL_COMP1VALUE_Field := 16#0#;
       --  COMP1_CSR register lock bit
-      COMP1LOCK      : HAL.Bit := 16#0#;
+      COMP1LOCK      : COMP1_CTRL_COMP1LOCK_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -280,36 +311,46 @@ package Cmsis.Device.SYSCFG is
       COMP1LOCK      at 0 range 31 .. 31;
    end record;
 
+   subtype COMP2_CTRL_COMP2EN_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2SPEED_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2INNSEL_Field is Cmsis.Device.UInt3;
+   subtype COMP2_CTRL_COMP2INPSEL_Field is Cmsis.Device.UInt3;
+   subtype COMP2_CTRL_COMP2LPTIMIN2_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2LPTIMIN1_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2POLARITY_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2VALUE_Field is Cmsis.Device.Bit;
+   subtype COMP2_CTRL_COMP2LOCK_Field is Cmsis.Device.Bit;
+
    --  Comparator 2 control and status register
    type COMP2_CTRL_Register is record
       --  Comparator 2 enable bit
-      COMP2EN        : HAL.Bit := 16#0#;
+      COMP2EN        : COMP2_CTRL_COMP2EN_Field := 16#0#;
       --  unspecified
-      Reserved_1_2   : HAL.UInt2 := 16#0#;
+      Reserved_1_2   : Cmsis.Device.UInt2 := 16#0#;
       --  Comparator 2 power mode selection bit
-      COMP2SPEED     : HAL.Bit := 16#0#;
+      COMP2SPEED     : COMP2_CTRL_COMP2SPEED_Field := 16#0#;
       --  Comparator 2 Input Minus connection configuration bit
-      COMP2INNSEL    : HAL.UInt3 := 16#0#;
+      COMP2INNSEL    : COMP2_CTRL_COMP2INNSEL_Field := 16#0#;
       --  unspecified
-      Reserved_7_7   : HAL.Bit := 16#0#;
+      Reserved_7_7   : Cmsis.Device.Bit := 16#0#;
       --  Comparator 2 Input Plus connection configuration bit
-      COMP2INPSEL    : HAL.UInt3 := 16#0#;
+      COMP2INPSEL    : COMP2_CTRL_COMP2INPSEL_Field := 16#0#;
       --  unspecified
-      Reserved_11_11 : HAL.Bit := 16#0#;
+      Reserved_11_11 : Cmsis.Device.Bit := 16#0#;
       --  Comparator 2 LPTIM input 2 propagation bit
-      COMP2LPTIMIN2  : HAL.Bit := 16#0#;
+      COMP2LPTIMIN2  : COMP2_CTRL_COMP2LPTIMIN2_Field := 16#0#;
       --  Comparator 2 LPTIM input 1 propagation bit
-      COMP2LPTIMIN1  : HAL.Bit := 16#0#;
+      COMP2LPTIMIN1  : COMP2_CTRL_COMP2LPTIMIN1_Field := 16#0#;
       --  unspecified
-      Reserved_14_14 : HAL.Bit := 16#0#;
+      Reserved_14_14 : Cmsis.Device.Bit := 16#0#;
       --  Comparator 2 polarity selection bit
-      COMP2POLARITY  : HAL.Bit := 16#0#;
+      COMP2POLARITY  : COMP2_CTRL_COMP2POLARITY_Field := 16#0#;
       --  unspecified
-      Reserved_16_29 : HAL.UInt14 := 16#0#;
+      Reserved_16_29 : Cmsis.Device.UInt14 := 16#0#;
       --  Comparator 2 output status bit
-      COMP2VALUE     : HAL.Bit := 16#0#;
+      COMP2VALUE     : COMP2_CTRL_COMP2VALUE_Field := 16#0#;
       --  COMP2_CSR register lock bit
-      COMP2LOCK      : HAL.Bit := 16#0#;
+      COMP2LOCK      : COMP2_CTRL_COMP2LOCK_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -331,40 +372,53 @@ package Cmsis.Device.SYSCFG is
       COMP2LOCK      at 0 range 31 .. 31;
    end record;
 
+   subtype CFGR3_EN_BGAP_Field is Cmsis.Device.Bit;
+   subtype CFGR3_SEL_VREF_OUT_Field is Cmsis.Device.UInt2;
+   subtype CFGR3_ENBUF_BGAP_ADC_Field is Cmsis.Device.Bit;
+   subtype CFGR3_ENBUF_SENSOR_ADC_Field is Cmsis.Device.Bit;
+   subtype CFGR3_ENBUF_VREFINT_COMP_Field is Cmsis.Device.Bit;
+   subtype CFGR3_ENREF_RC48MHz_Field is Cmsis.Device.Bit;
+   subtype CFGR3_REF_RC48MHz_RDYF_Field is Cmsis.Device.Bit;
+   subtype CFGR3_SENSOR_ADC_RDYF_Field is Cmsis.Device.Bit;
+   subtype CFGR3_VREFINT_ADC_RDYF_Field is Cmsis.Device.Bit;
+   subtype CFGR3_VREFINT_COMP_RDYF_Field is Cmsis.Device.Bit;
+   subtype CFGR3_VREFINT_RDYF_Field is Cmsis.Device.Bit;
+   subtype CFGR3_REF_LOCK_Field is Cmsis.Device.Bit;
+
    --  SYSCFG configuration register 3
    type CFGR3_Register is record
       --  Vref Enable bit
-      EN_BGAP            : HAL.Bit := 16#0#;
+      EN_BGAP            : CFGR3_EN_BGAP_Field := 16#0#;
       --  unspecified
-      Reserved_1_3       : HAL.UInt3 := 16#0#;
+      Reserved_1_3       : Cmsis.Device.UInt3 := 16#0#;
       --  BGAP_ADC connection bit
-      SEL_VREF_OUT       : HAL.UInt2 := 16#0#;
+      SEL_VREF_OUT       : CFGR3_SEL_VREF_OUT_Field := 16#0#;
       --  unspecified
-      Reserved_6_7       : HAL.UInt2 := 16#0#;
+      Reserved_6_7       : Cmsis.Device.UInt2 := 16#0#;
       --  VREFINT reference for ADC enable bit
-      ENBUF_BGAP_ADC     : HAL.Bit := 16#0#;
+      ENBUF_BGAP_ADC     : CFGR3_ENBUF_BGAP_ADC_Field := 16#0#;
       --  Sensor reference for ADC enable bit
-      ENBUF_SENSOR_ADC   : HAL.Bit := 16#0#;
+      ENBUF_SENSOR_ADC   : CFGR3_ENBUF_SENSOR_ADC_Field := 16#0#;
       --  unspecified
-      Reserved_10_11     : HAL.UInt2 := 16#0#;
+      Reserved_10_11     : Cmsis.Device.UInt2 := 16#0#;
       --  VREFINT reference for comparator 2 enable bit
-      ENBUF_VREFINT_COMP : HAL.Bit := 16#0#;
+      ENBUF_VREFINT_COMP : CFGR3_ENBUF_VREFINT_COMP_Field := 16#0#;
       --  VREFINT reference for 48 MHz RC oscillator enable bit
-      ENREF_RC48MHz      : HAL.Bit := 16#0#;
+      ENREF_RC48MHz      : CFGR3_ENREF_RC48MHz_Field := 16#0#;
       --  unspecified
-      Reserved_14_25     : HAL.UInt12 := 16#0#;
+      Reserved_14_25     : Cmsis.Device.UInt12 := 16#0#;
       --  Read-only. VREFINT for 48 MHz RC oscillator ready flag
-      REF_RC48MHz_RDYF   : HAL.Bit := 16#0#;
+      REF_RC48MHz_RDYF   : CFGR3_REF_RC48MHz_RDYF_Field := 16#0#;
       --  Read-only. Sensor for ADC ready flag
-      SENSOR_ADC_RDYF    : HAL.Bit := 16#0#;
+      SENSOR_ADC_RDYF    : CFGR3_SENSOR_ADC_RDYF_Field := 16#0#;
       --  Read-only. VREFINT for ADC ready flag
-      VREFINT_ADC_RDYF   : HAL.Bit := 16#0#;
+      VREFINT_ADC_RDYF   : CFGR3_VREFINT_ADC_RDYF_Field := 16#0#;
       --  Read-only. VREFINT for comparator ready flag
-      VREFINT_COMP_RDYF  : HAL.Bit := 16#0#;
+      VREFINT_COMP_RDYF  : CFGR3_VREFINT_COMP_RDYF_Field := 16#0#;
       --  Read-only. VREFINT ready flag
-      VREFINT_RDYF       : HAL.Bit := 16#0#;
+      VREFINT_RDYF       : CFGR3_VREFINT_RDYF_Field := 16#0#;
       --  Write-only. REF_CTRL lock bit
-      REF_LOCK           : HAL.Bit := 16#0#;
+      REF_LOCK           : CFGR3_REF_LOCK_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

@@ -20,11 +20,12 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Reformat comments for GNATdoc
+--       - Remove HAL dependency
 --
 ------------------------------------------------------------------------------
 
-with HAL;
-   use type HAL.UInt24;
+with Cmsis.Device;
+   use type Cmsis.Device.UInt24;
 
 package Cmsis.Core.SysTick is
    --  Systick Timer
@@ -36,7 +37,7 @@ package Cmsis.Core.SysTick is
    --  time keeping, time measurement, or as an interrupt source for tasks
    --  that need to be executed regularly.
 
-   type Ticks_Type is range 1 .. HAL.UInt24'Last + 1;
+   type Ticks_Type is range 1 .. Cmsis.Device.UInt24'Last + 1;
    --  Type of SysTick's Tick value
    --
    --  Notes:

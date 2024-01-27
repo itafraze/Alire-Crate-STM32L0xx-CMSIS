@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.LPTIM is
@@ -14,24 +13,32 @@ package Cmsis.Device.LPTIM is
    -- Registers --
    ---------------
 
+   subtype ISR_CMPM_Field is Cmsis.Device.Bit;
+   subtype ISR_ARRM_Field is Cmsis.Device.Bit;
+   subtype ISR_EXTTRIG_Field is Cmsis.Device.Bit;
+   subtype ISR_CMPOK_Field is Cmsis.Device.Bit;
+   subtype ISR_ARROK_Field is Cmsis.Device.Bit;
+   subtype ISR_UP_Field is Cmsis.Device.Bit;
+   subtype ISR_DOWN_Field is Cmsis.Device.Bit;
+
    --  Interrupt and Status Register
    type ISR_Register is record
       --  Read-only. Compare match
-      CMPM          : HAL.Bit;
+      CMPM          : ISR_CMPM_Field;
       --  Read-only. Autoreload match
-      ARRM          : HAL.Bit;
+      ARRM          : ISR_ARRM_Field;
       --  Read-only. External trigger edge event
-      EXTTRIG       : HAL.Bit;
+      EXTTRIG       : ISR_EXTTRIG_Field;
       --  Read-only. Compare register update OK
-      CMPOK         : HAL.Bit;
+      CMPOK         : ISR_CMPOK_Field;
       --  Read-only. Autoreload register update OK
-      ARROK         : HAL.Bit;
+      ARROK         : ISR_ARROK_Field;
       --  Read-only. Counter direction change down to up
-      UP            : HAL.Bit;
+      UP            : ISR_UP_Field;
       --  Read-only. Counter direction change up to down
-      DOWN          : HAL.Bit;
+      DOWN          : ISR_DOWN_Field;
       --  unspecified
-      Reserved_7_31 : HAL.UInt25;
+      Reserved_7_31 : Cmsis.Device.UInt25;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -47,24 +54,32 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
+   subtype ICR_CMPMCF_Field is Cmsis.Device.Bit;
+   subtype ICR_ARRMCF_Field is Cmsis.Device.Bit;
+   subtype ICR_EXTTRIGCF_Field is Cmsis.Device.Bit;
+   subtype ICR_CMPOKCF_Field is Cmsis.Device.Bit;
+   subtype ICR_ARROKCF_Field is Cmsis.Device.Bit;
+   subtype ICR_UPCF_Field is Cmsis.Device.Bit;
+   subtype ICR_DOWNCF_Field is Cmsis.Device.Bit;
+
    --  Interrupt Clear Register
    type ICR_Register is record
       --  Write-only. compare match Clear Flag
-      CMPMCF        : HAL.Bit := 16#0#;
+      CMPMCF        : ICR_CMPMCF_Field := 16#0#;
       --  Write-only. Autoreload match Clear Flag
-      ARRMCF        : HAL.Bit := 16#0#;
+      ARRMCF        : ICR_ARRMCF_Field := 16#0#;
       --  Write-only. External trigger valid edge Clear Flag
-      EXTTRIGCF     : HAL.Bit := 16#0#;
+      EXTTRIGCF     : ICR_EXTTRIGCF_Field := 16#0#;
       --  Write-only. Compare register update OK Clear Flag
-      CMPOKCF       : HAL.Bit := 16#0#;
+      CMPOKCF       : ICR_CMPOKCF_Field := 16#0#;
       --  Write-only. Autoreload register update OK Clear Flag
-      ARROKCF       : HAL.Bit := 16#0#;
+      ARROKCF       : ICR_ARROKCF_Field := 16#0#;
       --  Write-only. Direction change to UP Clear Flag
-      UPCF          : HAL.Bit := 16#0#;
+      UPCF          : ICR_UPCF_Field := 16#0#;
       --  Write-only. Direction change to down Clear Flag
-      DOWNCF        : HAL.Bit := 16#0#;
+      DOWNCF        : ICR_DOWNCF_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : HAL.UInt25 := 16#0#;
+      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -80,24 +95,32 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
+   subtype IER_CMPMIE_Field is Cmsis.Device.Bit;
+   subtype IER_ARRMIE_Field is Cmsis.Device.Bit;
+   subtype IER_EXTTRIGIE_Field is Cmsis.Device.Bit;
+   subtype IER_CMPOKIE_Field is Cmsis.Device.Bit;
+   subtype IER_ARROKIE_Field is Cmsis.Device.Bit;
+   subtype IER_UPIE_Field is Cmsis.Device.Bit;
+   subtype IER_DOWNIE_Field is Cmsis.Device.Bit;
+
    --  Interrupt Enable Register
    type IER_Register is record
       --  Compare match Interrupt Enable
-      CMPMIE        : HAL.Bit := 16#0#;
+      CMPMIE        : IER_CMPMIE_Field := 16#0#;
       --  Autoreload match Interrupt Enable
-      ARRMIE        : HAL.Bit := 16#0#;
+      ARRMIE        : IER_ARRMIE_Field := 16#0#;
       --  External trigger valid edge Interrupt Enable
-      EXTTRIGIE     : HAL.Bit := 16#0#;
+      EXTTRIGIE     : IER_EXTTRIGIE_Field := 16#0#;
       --  Compare register update OK Interrupt Enable
-      CMPOKIE       : HAL.Bit := 16#0#;
+      CMPOKIE       : IER_CMPOKIE_Field := 16#0#;
       --  Autoreload register update OK Interrupt Enable
-      ARROKIE       : HAL.Bit := 16#0#;
+      ARROKIE       : IER_ARROKIE_Field := 16#0#;
       --  Direction change to UP Interrupt Enable
-      UPIE          : HAL.Bit := 16#0#;
+      UPIE          : IER_UPIE_Field := 16#0#;
       --  Direction change to down Interrupt Enable
-      DOWNIE        : HAL.Bit := 16#0#;
+      DOWNIE        : IER_DOWNIE_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : HAL.UInt25 := 16#0#;
+      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -113,44 +136,58 @@ package Cmsis.Device.LPTIM is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
+   subtype CFGR_CKSEL_Field is Cmsis.Device.Bit;
+   subtype CFGR_CKPOL_Field is Cmsis.Device.UInt2;
+   subtype CFGR_CKFLT_Field is Cmsis.Device.UInt2;
+   subtype CFGR_TRGFLT_Field is Cmsis.Device.UInt2;
+   subtype CFGR_PRESC_Field is Cmsis.Device.UInt3;
+   subtype CFGR_TRIGSEL_Field is Cmsis.Device.UInt3;
+   subtype CFGR_TRIGEN_Field is Cmsis.Device.UInt2;
+   subtype CFGR_TIMOUT_Field is Cmsis.Device.Bit;
+   subtype CFGR_WAVE_Field is Cmsis.Device.Bit;
+   subtype CFGR_WAVPOL_Field is Cmsis.Device.Bit;
+   subtype CFGR_PRELOAD_Field is Cmsis.Device.Bit;
+   subtype CFGR_COUNTMODE_Field is Cmsis.Device.Bit;
+   subtype CFGR_ENC_Field is Cmsis.Device.Bit;
+
    --  Configuration Register
    type CFGR_Register is record
       --  Clock selector
-      CKSEL          : HAL.Bit := 16#0#;
+      CKSEL          : CFGR_CKSEL_Field := 16#0#;
       --  Clock Polarity
-      CKPOL          : HAL.UInt2 := 16#0#;
+      CKPOL          : CFGR_CKPOL_Field := 16#0#;
       --  Configurable digital filter for external clock
-      CKFLT          : HAL.UInt2 := 16#0#;
+      CKFLT          : CFGR_CKFLT_Field := 16#0#;
       --  unspecified
-      Reserved_5_5   : HAL.Bit := 16#0#;
+      Reserved_5_5   : Cmsis.Device.Bit := 16#0#;
       --  Configurable digital filter for trigger
-      TRGFLT         : HAL.UInt2 := 16#0#;
+      TRGFLT         : CFGR_TRGFLT_Field := 16#0#;
       --  unspecified
-      Reserved_8_8   : HAL.Bit := 16#0#;
+      Reserved_8_8   : Cmsis.Device.Bit := 16#0#;
       --  Clock prescaler
-      PRESC          : HAL.UInt3 := 16#0#;
+      PRESC          : CFGR_PRESC_Field := 16#0#;
       --  unspecified
-      Reserved_12_12 : HAL.Bit := 16#0#;
+      Reserved_12_12 : Cmsis.Device.Bit := 16#0#;
       --  Trigger selector
-      TRIGSEL        : HAL.UInt3 := 16#0#;
+      TRIGSEL        : CFGR_TRIGSEL_Field := 16#0#;
       --  unspecified
-      Reserved_16_16 : HAL.Bit := 16#0#;
+      Reserved_16_16 : Cmsis.Device.Bit := 16#0#;
       --  Trigger enable and polarity
-      TRIGEN         : HAL.UInt2 := 16#0#;
+      TRIGEN         : CFGR_TRIGEN_Field := 16#0#;
       --  Timeout enable
-      TIMOUT         : HAL.Bit := 16#0#;
+      TIMOUT         : CFGR_TIMOUT_Field := 16#0#;
       --  Waveform shape
-      WAVE           : HAL.Bit := 16#0#;
+      WAVE           : CFGR_WAVE_Field := 16#0#;
       --  Waveform shape polarity
-      WAVPOL         : HAL.Bit := 16#0#;
+      WAVPOL         : CFGR_WAVPOL_Field := 16#0#;
       --  Registers update mode
-      PRELOAD        : HAL.Bit := 16#0#;
+      PRELOAD        : CFGR_PRELOAD_Field := 16#0#;
       --  counter mode enabled
-      COUNTMODE      : HAL.Bit := 16#0#;
+      COUNTMODE      : CFGR_COUNTMODE_Field := 16#0#;
       --  Encoder mode enable
-      ENC            : HAL.Bit := 16#0#;
+      ENC            : CFGR_ENC_Field := 16#0#;
       --  unspecified
-      Reserved_25_31 : HAL.UInt7 := 16#0#;
+      Reserved_25_31 : Cmsis.Device.UInt7 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -176,16 +213,20 @@ package Cmsis.Device.LPTIM is
       Reserved_25_31 at 0 range 25 .. 31;
    end record;
 
+   subtype CR_ENABLE_Field is Cmsis.Device.Bit;
+   subtype CR_SNGSTRT_Field is Cmsis.Device.Bit;
+   subtype CR_CNTSTRT_Field is Cmsis.Device.Bit;
+
    --  Control Register
    type CR_Register is record
       --  LPTIM Enable
-      ENABLE        : HAL.Bit := 16#0#;
+      ENABLE        : CR_ENABLE_Field := 16#0#;
       --  LPTIM start in single mode
-      SNGSTRT       : HAL.Bit := 16#0#;
+      SNGSTRT       : CR_SNGSTRT_Field := 16#0#;
       --  Timer start in continuous mode
-      CNTSTRT       : HAL.Bit := 16#0#;
+      CNTSTRT       : CR_CNTSTRT_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : HAL.UInt29 := 16#0#;
+      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -197,12 +238,14 @@ package Cmsis.Device.LPTIM is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
+   subtype CMP_CMP_Field is Cmsis.Device.UInt16;
+
    --  Compare Register
    type CMP_Register is record
       --  Compare value.
-      CMP            : HAL.UInt16 := 16#0#;
+      CMP            : CMP_CMP_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -212,12 +255,14 @@ package Cmsis.Device.LPTIM is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype ARR_ARR_Field is Cmsis.Device.UInt16;
+
    --  Autoreload Register
    type ARR_Register is record
       --  Auto reload value.
-      ARR            : HAL.UInt16 := 16#1#;
+      ARR            : ARR_ARR_Field := 16#1#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -227,12 +272,14 @@ package Cmsis.Device.LPTIM is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype CNT_CNT_Field is Cmsis.Device.UInt16;
+
    --  Counter Register
    type CNT_Register is record
       --  Read-only. Counter value.
-      CNT            : HAL.UInt16;
+      CNT            : CNT_CNT_Field;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16;
+      Reserved_16_31 : Cmsis.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

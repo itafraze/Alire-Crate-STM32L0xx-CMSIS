@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.CRC is
@@ -14,12 +13,14 @@ package Cmsis.Device.CRC is
    -- Registers --
    ---------------
 
+   subtype IDR_IDR_Field is Cmsis.Device.UInt8;
+
    --  Independent data register
    type IDR_Register is record
       --  General-purpose 8-bit data register bits
-      IDR           : HAL.UInt8 := 16#0#;
+      IDR           : IDR_IDR_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -29,20 +30,25 @@ package Cmsis.Device.CRC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype CR_RESET_Field is Cmsis.Device.Bit;
+   subtype CR_POLYSIZE_Field is Cmsis.Device.UInt2;
+   subtype CR_REV_IN_Field is Cmsis.Device.UInt2;
+   subtype CR_REV_OUT_Field is Cmsis.Device.Bit;
+
    --  Control register
    type CR_Register is record
       --  Write-only. RESET bit
-      RESET         : HAL.Bit := 16#0#;
+      RESET         : CR_RESET_Field := 16#0#;
       --  unspecified
-      Reserved_1_2  : HAL.UInt2 := 16#0#;
+      Reserved_1_2  : Cmsis.Device.UInt2 := 16#0#;
       --  Polynomial size
-      POLYSIZE      : HAL.UInt2 := 16#0#;
+      POLYSIZE      : CR_POLYSIZE_Field := 16#0#;
       --  Reverse input data
-      REV_IN        : HAL.UInt2 := 16#0#;
+      REV_IN        : CR_REV_IN_Field := 16#0#;
       --  Reverse output data
-      REV_OUT       : HAL.Bit := 16#0#;
+      REV_OUT       : CR_REV_OUT_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -63,15 +69,15 @@ package Cmsis.Device.CRC is
    --  Cyclic redundancy check calculation unit
    type CRC_Peripheral is record
       --  Data register
-      DR   : aliased HAL.UInt32;
+      DR   : aliased Cmsis.Device.UInt32;
       --  Independent data register
       IDR  : aliased IDR_Register;
       --  Control register
       CR   : aliased CR_Register;
       --  Initial CRC value
-      INIT : aliased HAL.UInt32;
+      INIT : aliased Cmsis.Device.UInt32;
       --  polynomial
-      POL  : aliased HAL.UInt32;
+      POL  : aliased Cmsis.Device.UInt32;
    end record
      with Volatile;
 

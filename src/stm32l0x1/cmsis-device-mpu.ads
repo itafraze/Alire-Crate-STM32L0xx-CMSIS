@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.MPU is
@@ -14,18 +13,22 @@ package Cmsis.Device.MPU is
    -- Registers --
    ---------------
 
+   subtype MPU_TYPER_SEPARATE_Field is Cmsis.Device.Bit;
+   subtype MPU_TYPER_DREGION_Field is Cmsis.Device.UInt8;
+   subtype MPU_TYPER_IREGION_Field is Cmsis.Device.UInt8;
+
    --  MPU type register
    type MPU_TYPER_Register is record
       --  Read-only. Separate flag
-      SEPARATE_k     : HAL.Bit;
+      SEPARATE_k     : MPU_TYPER_SEPARATE_Field;
       --  unspecified
-      Reserved_1_7   : HAL.UInt7;
+      Reserved_1_7   : Cmsis.Device.UInt7;
       --  Read-only. Number of MPU data regions
-      DREGION        : HAL.UInt8;
+      DREGION        : MPU_TYPER_DREGION_Field;
       --  Read-only. Number of MPU instruction regions
-      IREGION        : HAL.UInt8;
+      IREGION        : MPU_TYPER_IREGION_Field;
       --  unspecified
-      Reserved_24_31 : HAL.UInt8;
+      Reserved_24_31 : Cmsis.Device.UInt8;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -38,16 +41,20 @@ package Cmsis.Device.MPU is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
+   subtype MPU_CTRL_ENABLE_Field is Cmsis.Device.Bit;
+   subtype MPU_CTRL_HFNMIENA_Field is Cmsis.Device.Bit;
+   subtype MPU_CTRL_PRIVDEFENA_Field is Cmsis.Device.Bit;
+
    --  MPU control register
    type MPU_CTRL_Register is record
       --  Read-only. Enables the MPU
-      ENABLE        : HAL.Bit;
+      ENABLE        : MPU_CTRL_ENABLE_Field;
       --  Read-only. Enables the operation of MPU during hard fault
-      HFNMIENA      : HAL.Bit;
+      HFNMIENA      : MPU_CTRL_HFNMIENA_Field;
       --  Read-only. Enable priviliged software access to default memory map
-      PRIVDEFENA    : HAL.Bit;
+      PRIVDEFENA    : MPU_CTRL_PRIVDEFENA_Field;
       --  unspecified
-      Reserved_3_31 : HAL.UInt29;
+      Reserved_3_31 : Cmsis.Device.UInt29;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -59,12 +66,14 @@ package Cmsis.Device.MPU is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
+   subtype MPU_RNR_REGION_Field is Cmsis.Device.UInt8;
+
    --  MPU region number register
    type MPU_RNR_Register is record
       --  MPU region
-      REGION        : HAL.UInt8 := 16#0#;
+      REGION        : MPU_RNR_REGION_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -74,14 +83,18 @@ package Cmsis.Device.MPU is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype MPU_RBAR_REGION_Field is Cmsis.Device.UInt4;
+   subtype MPU_RBAR_VALID_Field is Cmsis.Device.Bit;
+   subtype MPU_RBAR_ADDR_Field is Cmsis.Device.UInt27;
+
    --  MPU region base address register
    type MPU_RBAR_Register is record
       --  MPU region field
-      REGION : HAL.UInt4 := 16#0#;
+      REGION : MPU_RBAR_REGION_Field := 16#0#;
       --  MPU region number valid
-      VALID  : HAL.Bit := 16#0#;
+      VALID  : MPU_RBAR_VALID_Field := 16#0#;
       --  Region base address field
-      ADDR   : HAL.UInt27 := 16#0#;
+      ADDR   : MPU_RBAR_ADDR_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -92,34 +105,44 @@ package Cmsis.Device.MPU is
       ADDR   at 0 range 5 .. 31;
    end record;
 
+   subtype MPU_RASR_ENABLE_Field is Cmsis.Device.Bit;
+   subtype MPU_RASR_SIZE_Field is Cmsis.Device.UInt5;
+   subtype MPU_RASR_SRD_Field is Cmsis.Device.UInt8;
+   subtype MPU_RASR_B_Field is Cmsis.Device.Bit;
+   subtype MPU_RASR_C_Field is Cmsis.Device.Bit;
+   subtype MPU_RASR_S_Field is Cmsis.Device.Bit;
+   subtype MPU_RASR_TEX_Field is Cmsis.Device.UInt3;
+   subtype MPU_RASR_AP_Field is Cmsis.Device.UInt3;
+   subtype MPU_RASR_XN_Field is Cmsis.Device.Bit;
+
    --  MPU region attribute and size register
    type MPU_RASR_Register is record
       --  Region enable bit.
-      ENABLE         : HAL.Bit := 16#0#;
+      ENABLE         : MPU_RASR_ENABLE_Field := 16#0#;
       --  Size of the MPU protection region
-      SIZE           : HAL.UInt5 := 16#0#;
+      SIZE           : MPU_RASR_SIZE_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : HAL.UInt2 := 16#0#;
+      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
       --  Subregion disable bits
-      SRD            : HAL.UInt8 := 16#0#;
+      SRD            : MPU_RASR_SRD_Field := 16#0#;
       --  memory attribute
-      B              : HAL.Bit := 16#0#;
+      B              : MPU_RASR_B_Field := 16#0#;
       --  memory attribute
-      C              : HAL.Bit := 16#0#;
+      C              : MPU_RASR_C_Field := 16#0#;
       --  Shareable memory attribute
-      S              : HAL.Bit := 16#0#;
+      S              : MPU_RASR_S_Field := 16#0#;
       --  memory attribute
-      TEX            : HAL.UInt3 := 16#0#;
+      TEX            : MPU_RASR_TEX_Field := 16#0#;
       --  unspecified
-      Reserved_22_23 : HAL.UInt2 := 16#0#;
+      Reserved_22_23 : Cmsis.Device.UInt2 := 16#0#;
       --  Access permission
-      AP             : HAL.UInt3 := 16#0#;
+      AP             : MPU_RASR_AP_Field := 16#0#;
       --  unspecified
-      Reserved_27_27 : HAL.Bit := 16#0#;
+      Reserved_27_27 : Cmsis.Device.Bit := 16#0#;
       --  Instruction access disable bit
-      XN             : HAL.Bit := 16#0#;
+      XN             : MPU_RASR_XN_Field := 16#0#;
       --  unspecified
-      Reserved_29_31 : HAL.UInt3 := 16#0#;
+      Reserved_29_31 : Cmsis.Device.UInt3 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.PWR is
@@ -14,34 +13,47 @@ package Cmsis.Device.PWR is
    -- Registers --
    ---------------
 
+   subtype CR_LPDS_Field is Cmsis.Device.Bit;
+   subtype CR_PDDS_Field is Cmsis.Device.Bit;
+   subtype CR_CWUF_Field is Cmsis.Device.Bit;
+   subtype CR_CSBF_Field is Cmsis.Device.Bit;
+   subtype CR_PVDE_Field is Cmsis.Device.Bit;
+   subtype CR_PLS_Field is Cmsis.Device.UInt3;
+   subtype CR_DBP_Field is Cmsis.Device.Bit;
+   subtype CR_ULP_Field is Cmsis.Device.Bit;
+   subtype CR_FWU_Field is Cmsis.Device.Bit;
+   subtype CR_VOS_Field is Cmsis.Device.UInt2;
+   subtype CR_DS_EE_KOFF_Field is Cmsis.Device.Bit;
+   subtype CR_LPRUN_Field is Cmsis.Device.Bit;
+
    --  power control register
    type CR_Register is record
       --  Low-power deep sleep
-      LPDS           : HAL.Bit := 16#0#;
+      LPDS           : CR_LPDS_Field := 16#0#;
       --  Power down deepsleep
-      PDDS           : HAL.Bit := 16#0#;
+      PDDS           : CR_PDDS_Field := 16#0#;
       --  Clear wakeup flag
-      CWUF           : HAL.Bit := 16#0#;
+      CWUF           : CR_CWUF_Field := 16#0#;
       --  Clear standby flag
-      CSBF           : HAL.Bit := 16#0#;
+      CSBF           : CR_CSBF_Field := 16#0#;
       --  Power voltage detector enable
-      PVDE           : HAL.Bit := 16#0#;
+      PVDE           : CR_PVDE_Field := 16#0#;
       --  PVD level selection
-      PLS            : HAL.UInt3 := 16#0#;
+      PLS            : CR_PLS_Field := 16#0#;
       --  Disable backup domain write protection
-      DBP            : HAL.Bit := 16#0#;
+      DBP            : CR_DBP_Field := 16#0#;
       --  Ultra-low-power mode
-      ULP            : HAL.Bit := 16#0#;
+      ULP            : CR_ULP_Field := 16#0#;
       --  Fast wakeup
-      FWU            : HAL.Bit := 16#0#;
+      FWU            : CR_FWU_Field := 16#0#;
       --  Voltage scaling range selection
-      VOS            : HAL.UInt2 := 16#2#;
+      VOS            : CR_VOS_Field := 16#2#;
       --  Deep sleep mode with Flash memory kept off
-      DS_EE_KOFF     : HAL.Bit := 16#0#;
+      DS_EE_KOFF     : CR_DS_EE_KOFF_Field := 16#0#;
       --  Low power run mode
-      LPRUN          : HAL.Bit := 16#0#;
+      LPRUN          : CR_LPRUN_Field := 16#0#;
       --  unspecified
-      Reserved_15_31 : HAL.UInt17 := 16#0#;
+      Reserved_15_31 : Cmsis.Device.UInt17 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -62,28 +74,37 @@ package Cmsis.Device.PWR is
       Reserved_15_31 at 0 range 15 .. 31;
    end record;
 
+   subtype CSR_WUF_Field is Cmsis.Device.Bit;
+   subtype CSR_SBF_Field is Cmsis.Device.Bit;
+   subtype CSR_PVDO_Field is Cmsis.Device.Bit;
+   subtype CSR_BRR_Field is Cmsis.Device.Bit;
+   subtype CSR_VOSF_Field is Cmsis.Device.Bit;
+   subtype CSR_REGLPF_Field is Cmsis.Device.Bit;
+   subtype CSR_EWUP_Field is Cmsis.Device.Bit;
+   subtype CSR_BRE_Field is Cmsis.Device.Bit;
+
    --  power control/status register
    type CSR_Register is record
       --  Read-only. Wakeup flag
-      WUF            : HAL.Bit := 16#0#;
+      WUF            : CSR_WUF_Field := 16#0#;
       --  Read-only. Standby flag
-      SBF            : HAL.Bit := 16#0#;
+      SBF            : CSR_SBF_Field := 16#0#;
       --  Read-only. PVD output
-      PVDO           : HAL.Bit := 16#0#;
+      PVDO           : CSR_PVDO_Field := 16#0#;
       --  Read-only. Backup regulator ready
-      BRR            : HAL.Bit := 16#0#;
+      BRR            : CSR_BRR_Field := 16#0#;
       --  Read-only. Voltage Scaling select flag
-      VOSF           : HAL.Bit := 16#0#;
+      VOSF           : CSR_VOSF_Field := 16#0#;
       --  Read-only. Regulator LP flag
-      REGLPF         : HAL.Bit := 16#0#;
+      REGLPF         : CSR_REGLPF_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : HAL.UInt2 := 16#0#;
+      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
       --  Enable WKUP pin
-      EWUP           : HAL.Bit := 16#0#;
+      EWUP           : CSR_EWUP_Field := 16#0#;
       --  Backup regulator enable
-      BRE            : HAL.Bit := 16#0#;
+      BRE            : CSR_BRE_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : HAL.UInt22 := 16#0#;
+      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

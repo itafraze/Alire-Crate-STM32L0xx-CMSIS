@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.RCC is
@@ -14,46 +13,62 @@ package Cmsis.Device.RCC is
    -- Registers --
    ---------------
 
+   subtype CR_HSI16ON_Field is Cmsis.Device.Bit;
+   subtype CR_HSI16KERON_Field is Cmsis.Device.Bit;
+   subtype CR_HSI16RDYF_Field is Cmsis.Device.Bit;
+   subtype CR_HSI16DIVEN_Field is Cmsis.Device.Bit;
+   subtype CR_HSI16DIVF_Field is Cmsis.Device.Bit;
+   subtype CR_HSI16OUTEN_Field is Cmsis.Device.Bit;
+   subtype CR_MSION_Field is Cmsis.Device.Bit;
+   subtype CR_MSIRDY_Field is Cmsis.Device.Bit;
+   subtype CR_HSEON_Field is Cmsis.Device.Bit;
+   subtype CR_HSERDY_Field is Cmsis.Device.Bit;
+   subtype CR_HSEBYP_Field is Cmsis.Device.Bit;
+   subtype CR_CSSLSEON_Field is Cmsis.Device.Bit;
+   subtype CR_RTCPRE_Field is Cmsis.Device.UInt2;
+   subtype CR_PLLON_Field is Cmsis.Device.Bit;
+   subtype CR_PLLRDY_Field is Cmsis.Device.Bit;
+
    --  Clock control register
    type CR_Register is record
       --  16 MHz high-speed internal clock enable
-      HSI16ON        : HAL.Bit := 16#0#;
+      HSI16ON        : CR_HSI16ON_Field := 16#0#;
       --  Read-only. High-speed internal clock enable bit for some IP kernels
-      HSI16KERON     : HAL.Bit := 16#0#;
+      HSI16KERON     : CR_HSI16KERON_Field := 16#0#;
       --  Internal high-speed clock ready flag
-      HSI16RDYF      : HAL.Bit := 16#0#;
+      HSI16RDYF      : CR_HSI16RDYF_Field := 16#0#;
       --  HSI16DIVEN
-      HSI16DIVEN     : HAL.Bit := 16#0#;
+      HSI16DIVEN     : CR_HSI16DIVEN_Field := 16#0#;
       --  Read-only. HSI16DIVF
-      HSI16DIVF      : HAL.Bit := 16#0#;
+      HSI16DIVF      : CR_HSI16DIVF_Field := 16#0#;
       --  16 MHz high-speed internal clock output enable
-      HSI16OUTEN     : HAL.Bit := 16#0#;
+      HSI16OUTEN     : CR_HSI16OUTEN_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : HAL.UInt2 := 16#0#;
+      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
       --  MSI clock enable bit
-      MSION          : HAL.Bit := 16#1#;
+      MSION          : CR_MSION_Field := 16#1#;
       --  Read-only. MSI clock ready flag
-      MSIRDY         : HAL.Bit := 16#1#;
+      MSIRDY         : CR_MSIRDY_Field := 16#1#;
       --  unspecified
-      Reserved_10_15 : HAL.UInt6 := 16#0#;
+      Reserved_10_15 : Cmsis.Device.UInt6 := 16#0#;
       --  HSE clock enable bit
-      HSEON          : HAL.Bit := 16#0#;
+      HSEON          : CR_HSEON_Field := 16#0#;
       --  Read-only. HSE clock ready flag
-      HSERDY         : HAL.Bit := 16#0#;
+      HSERDY         : CR_HSERDY_Field := 16#0#;
       --  HSE clock bypass bit
-      HSEBYP         : HAL.Bit := 16#0#;
+      HSEBYP         : CR_HSEBYP_Field := 16#0#;
       --  Clock security system on HSE enable bit
-      CSSLSEON       : HAL.Bit := 16#0#;
+      CSSLSEON       : CR_CSSLSEON_Field := 16#0#;
       --  TC/LCD prescaler
-      RTCPRE         : HAL.UInt2 := 16#0#;
+      RTCPRE         : CR_RTCPRE_Field := 16#0#;
       --  unspecified
-      Reserved_22_23 : HAL.UInt2 := 16#0#;
+      Reserved_22_23 : Cmsis.Device.UInt2 := 16#0#;
       --  PLL enable bit
-      PLLON          : HAL.Bit := 16#0#;
+      PLLON          : CR_PLLON_Field := 16#0#;
       --  Read-only. PLL clock ready flag
-      PLLRDY         : HAL.Bit := 16#0#;
+      PLLRDY         : CR_PLLRDY_Field := 16#0#;
       --  unspecified
-      Reserved_26_31 : HAL.UInt6 := 16#0#;
+      Reserved_26_31 : Cmsis.Device.UInt6 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -80,18 +95,24 @@ package Cmsis.Device.RCC is
       Reserved_26_31 at 0 range 26 .. 31;
    end record;
 
+   subtype ICSCR_HSI16CAL_Field is Cmsis.Device.UInt8;
+   subtype ICSCR_HSI16TRIM_Field is Cmsis.Device.UInt5;
+   subtype ICSCR_MSIRANGE_Field is Cmsis.Device.UInt3;
+   subtype ICSCR_MSICAL_Field is Cmsis.Device.UInt8;
+   subtype ICSCR_MSITRIM_Field is Cmsis.Device.UInt8;
+
    --  Internal clock sources calibration register
    type ICSCR_Register is record
       --  Read-only. nternal high speed clock calibration
-      HSI16CAL  : HAL.UInt8 := 16#0#;
+      HSI16CAL  : ICSCR_HSI16CAL_Field := 16#0#;
       --  High speed internal clock trimming
-      HSI16TRIM : HAL.UInt5 := 16#10#;
+      HSI16TRIM : ICSCR_HSI16TRIM_Field := 16#10#;
       --  MSI clock ranges
-      MSIRANGE  : HAL.UInt3 := 16#5#;
+      MSIRANGE  : ICSCR_MSIRANGE_Field := 16#5#;
       --  Read-only. MSI clock calibration
-      MSICAL    : HAL.UInt8 := 16#0#;
+      MSICAL    : ICSCR_MSICAL_Field := 16#0#;
       --  MSI clock trimming
-      MSITRIM   : HAL.UInt8 := 16#0#;
+      MSITRIM   : ICSCR_MSITRIM_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -104,8 +125,14 @@ package Cmsis.Device.RCC is
       MSITRIM   at 0 range 24 .. 31;
    end record;
 
+   subtype CFGR_SW_Field is Cmsis.Device.UInt2;
+   subtype CFGR_SWS_Field is Cmsis.Device.UInt2;
+   subtype CFGR_HPRE_Field is Cmsis.Device.UInt4;
+   --  CFGR_PPRE array element
+   subtype CFGR_PPRE_Element is Cmsis.Device.UInt3;
+
    --  CFGR_PPRE array
-   type CFGR_PPRE_Field_Array is array (1 .. 2) of HAL.UInt3
+   type CFGR_PPRE_Field_Array is array (1 .. 2) of CFGR_PPRE_Element
      with Component_Size => 3, Size => 6;
 
    --  Type definition for CFGR_PPRE
@@ -115,7 +142,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  PPRE as a value
-            Val : HAL.UInt6;
+            Val : Cmsis.Device.UInt6;
          when True =>
             --  PPRE as an array
             Arr : CFGR_PPRE_Field_Array;
@@ -128,36 +155,43 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 5;
    end record;
 
+   subtype CFGR_STOPWUCK_Field is Cmsis.Device.Bit;
+   subtype CFGR_PLLSRC_Field is Cmsis.Device.Bit;
+   subtype CFGR_PLLMUL_Field is Cmsis.Device.UInt4;
+   subtype CFGR_PLLDIV_Field is Cmsis.Device.UInt2;
+   subtype CFGR_MCOSEL_Field is Cmsis.Device.UInt3;
+   subtype CFGR_MCOPRE_Field is Cmsis.Device.UInt3;
+
    --  Clock configuration register
    type CFGR_Register is record
       --  System clock switch
-      SW             : HAL.UInt2 := 16#0#;
+      SW             : CFGR_SW_Field := 16#0#;
       --  Read-only. System clock switch status
-      SWS            : HAL.UInt2 := 16#0#;
+      SWS            : CFGR_SWS_Field := 16#0#;
       --  AHB prescaler
-      HPRE           : HAL.UInt4 := 16#0#;
+      HPRE           : CFGR_HPRE_Field := 16#0#;
       --  APB low-speed prescaler (APB1)
       PPRE           : CFGR_PPRE_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_14_14 : HAL.Bit := 16#0#;
+      Reserved_14_14 : Cmsis.Device.Bit := 16#0#;
       --  Wake-up from stop clock selection
-      STOPWUCK       : HAL.Bit := 16#0#;
+      STOPWUCK       : CFGR_STOPWUCK_Field := 16#0#;
       --  PLL entry clock source
-      PLLSRC         : HAL.Bit := 16#0#;
+      PLLSRC         : CFGR_PLLSRC_Field := 16#0#;
       --  unspecified
-      Reserved_17_17 : HAL.Bit := 16#0#;
+      Reserved_17_17 : Cmsis.Device.Bit := 16#0#;
       --  PLL multiplication factor
-      PLLMUL         : HAL.UInt4 := 16#0#;
+      PLLMUL         : CFGR_PLLMUL_Field := 16#0#;
       --  PLL output division
-      PLLDIV         : HAL.UInt2 := 16#0#;
+      PLLDIV         : CFGR_PLLDIV_Field := 16#0#;
       --  Microcontroller clock output selection
-      MCOSEL         : HAL.UInt3 := 16#0#;
+      MCOSEL         : CFGR_MCOSEL_Field := 16#0#;
       --  unspecified
-      Reserved_27_27 : HAL.Bit := 16#0#;
+      Reserved_27_27 : Cmsis.Device.Bit := 16#0#;
       --  Microcontroller clock output prescaler
-      MCOPRE         : HAL.UInt3 := 16#0#;
+      MCOPRE         : CFGR_MCOPRE_Field := 16#0#;
       --  unspecified
-      Reserved_31_31 : HAL.Bit := 16#0#;
+      Reserved_31_31 : Cmsis.Device.Bit := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -179,26 +213,34 @@ package Cmsis.Device.RCC is
       Reserved_31_31 at 0 range 31 .. 31;
    end record;
 
+   subtype CIER_LSIRDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_LSERDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_HSI16RDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_HSERDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_PLLRDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_MSIRDYIE_Field is Cmsis.Device.Bit;
+   subtype CIER_CSSLSE_Field is Cmsis.Device.Bit;
+
    --  Clock interrupt enable register
    type CIER_Register is record
       --  Read-only. LSI ready interrupt flag
-      LSIRDYIE      : HAL.Bit;
+      LSIRDYIE      : CIER_LSIRDYIE_Field;
       --  Read-only. LSE ready interrupt flag
-      LSERDYIE      : HAL.Bit;
+      LSERDYIE      : CIER_LSERDYIE_Field;
       --  Read-only. HSI16 ready interrupt flag
-      HSI16RDYIE    : HAL.Bit;
+      HSI16RDYIE    : CIER_HSI16RDYIE_Field;
       --  Read-only. HSE ready interrupt flag
-      HSERDYIE      : HAL.Bit;
+      HSERDYIE      : CIER_HSERDYIE_Field;
       --  Read-only. PLL ready interrupt flag
-      PLLRDYIE      : HAL.Bit;
+      PLLRDYIE      : CIER_PLLRDYIE_Field;
       --  Read-only. MSI ready interrupt flag
-      MSIRDYIE      : HAL.Bit;
+      MSIRDYIE      : CIER_MSIRDYIE_Field;
       --  unspecified
-      Reserved_6_6  : HAL.Bit;
+      Reserved_6_6  : Cmsis.Device.Bit;
       --  Read-only. LSE CSS interrupt flag
-      CSSLSE        : HAL.Bit;
+      CSSLSE        : CIER_CSSLSE_Field;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24;
+      Reserved_8_31 : Cmsis.Device.UInt24;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -215,28 +257,37 @@ package Cmsis.Device.RCC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype CIFR_LSIRDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_LSERDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_HSI16RDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_HSERDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_PLLRDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_MSIRDYF_Field is Cmsis.Device.Bit;
+   subtype CIFR_CSSLSEF_Field is Cmsis.Device.Bit;
+   subtype CIFR_CSSHSEF_Field is Cmsis.Device.Bit;
+
    --  Clock interrupt flag register
    type CIFR_Register is record
       --  Read-only. LSI ready interrupt flag
-      LSIRDYF       : HAL.Bit;
+      LSIRDYF       : CIFR_LSIRDYF_Field;
       --  Read-only. LSE ready interrupt flag
-      LSERDYF       : HAL.Bit;
+      LSERDYF       : CIFR_LSERDYF_Field;
       --  Read-only. HSI16 ready interrupt flag
-      HSI16RDYF     : HAL.Bit;
+      HSI16RDYF     : CIFR_HSI16RDYF_Field;
       --  Read-only. HSE ready interrupt flag
-      HSERDYF       : HAL.Bit;
+      HSERDYF       : CIFR_HSERDYF_Field;
       --  Read-only. PLL ready interrupt flag
-      PLLRDYF       : HAL.Bit;
+      PLLRDYF       : CIFR_PLLRDYF_Field;
       --  Read-only. MSI ready interrupt flag
-      MSIRDYF       : HAL.Bit;
+      MSIRDYF       : CIFR_MSIRDYF_Field;
       --  unspecified
-      Reserved_6_6  : HAL.Bit;
+      Reserved_6_6  : Cmsis.Device.Bit;
       --  Read-only. LSE Clock Security System Interrupt flag
-      CSSLSEF       : HAL.Bit;
+      CSSLSEF       : CIFR_CSSLSEF_Field;
       --  Read-only. Clock Security System Interrupt flag
-      CSSHSEF       : HAL.Bit;
+      CSSHSEF       : CIFR_CSSHSEF_Field;
       --  unspecified
-      Reserved_9_31 : HAL.UInt23;
+      Reserved_9_31 : Cmsis.Device.UInt23;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -254,28 +305,37 @@ package Cmsis.Device.RCC is
       Reserved_9_31 at 0 range 9 .. 31;
    end record;
 
+   subtype CICR_LSIRDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_LSERDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_HSI16RDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_HSERDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_PLLRDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_MSIRDYC_Field is Cmsis.Device.Bit;
+   subtype CICR_CSSLSEC_Field is Cmsis.Device.Bit;
+   subtype CICR_CSSHSEC_Field is Cmsis.Device.Bit;
+
    --  Clock interrupt clear register
    type CICR_Register is record
       --  Read-only. LSI ready Interrupt clear
-      LSIRDYC       : HAL.Bit;
+      LSIRDYC       : CICR_LSIRDYC_Field;
       --  Read-only. LSE ready Interrupt clear
-      LSERDYC       : HAL.Bit;
+      LSERDYC       : CICR_LSERDYC_Field;
       --  Read-only. HSI16 ready Interrupt clear
-      HSI16RDYC     : HAL.Bit;
+      HSI16RDYC     : CICR_HSI16RDYC_Field;
       --  Read-only. HSE ready Interrupt clear
-      HSERDYC       : HAL.Bit;
+      HSERDYC       : CICR_HSERDYC_Field;
       --  Read-only. PLL ready Interrupt clear
-      PLLRDYC       : HAL.Bit;
+      PLLRDYC       : CICR_PLLRDYC_Field;
       --  Read-only. MSI ready Interrupt clear
-      MSIRDYC       : HAL.Bit;
+      MSIRDYC       : CICR_MSIRDYC_Field;
       --  unspecified
-      Reserved_6_6  : HAL.Bit;
+      Reserved_6_6  : Cmsis.Device.Bit;
       --  Read-only. LSE Clock Security System Interrupt clear
-      CSSLSEC       : HAL.Bit;
+      CSSLSEC       : CICR_CSSLSEC_Field;
       --  Read-only. Clock Security System Interrupt clear
-      CSSHSEC       : HAL.Bit;
+      CSSHSEC       : CICR_CSSHSEC_Field;
       --  unspecified
-      Reserved_9_31 : HAL.UInt23;
+      Reserved_9_31 : Cmsis.Device.UInt23;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -293,24 +353,31 @@ package Cmsis.Device.RCC is
       Reserved_9_31 at 0 range 9 .. 31;
    end record;
 
+   subtype IOPRSTR_IOPARST_Field is Cmsis.Device.Bit;
+   subtype IOPRSTR_IOPBRST_Field is Cmsis.Device.Bit;
+   subtype IOPRSTR_IOPCRST_Field is Cmsis.Device.Bit;
+   subtype IOPRSTR_IOPDRST_Field is Cmsis.Device.Bit;
+   subtype IOPRSTR_IOPERST_Field is Cmsis.Device.Bit;
+   subtype IOPRSTR_IOPHRST_Field is Cmsis.Device.Bit;
+
    --  GPIO reset register
    type IOPRSTR_Register is record
       --  I/O port A reset
-      IOPARST       : HAL.Bit := 16#0#;
+      IOPARST       : IOPRSTR_IOPARST_Field := 16#0#;
       --  I/O port B reset
-      IOPBRST       : HAL.Bit := 16#0#;
+      IOPBRST       : IOPRSTR_IOPBRST_Field := 16#0#;
       --  I/O port A reset
-      IOPCRST       : HAL.Bit := 16#0#;
+      IOPCRST       : IOPRSTR_IOPCRST_Field := 16#0#;
       --  I/O port D reset
-      IOPDRST       : HAL.Bit := 16#0#;
+      IOPDRST       : IOPRSTR_IOPDRST_Field := 16#0#;
       --  I/O port E reset
-      IOPERST       : HAL.Bit := 16#0#;
+      IOPERST       : IOPRSTR_IOPERST_Field := 16#0#;
       --  unspecified
-      Reserved_5_6  : HAL.UInt2 := 16#0#;
+      Reserved_5_6  : Cmsis.Device.UInt2 := 16#0#;
       --  I/O port H reset
-      IOPHRST       : HAL.Bit := 16#0#;
+      IOPHRST       : IOPRSTR_IOPHRST_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -326,24 +393,29 @@ package Cmsis.Device.RCC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype AHBRSTR_DMARST_Field is Cmsis.Device.Bit;
+   subtype AHBRSTR_MIFRST_Field is Cmsis.Device.Bit;
+   subtype AHBRSTR_CRCRST_Field is Cmsis.Device.Bit;
+   subtype AHBRSTR_CRYPRST_Field is Cmsis.Device.Bit;
+
    --  AHB peripheral reset register
    type AHBRSTR_Register is record
       --  DMA reset
-      DMARST         : HAL.Bit := 16#0#;
+      DMARST         : AHBRSTR_DMARST_Field := 16#0#;
       --  unspecified
-      Reserved_1_7   : HAL.UInt7 := 16#0#;
+      Reserved_1_7   : Cmsis.Device.UInt7 := 16#0#;
       --  Memory interface reset
-      MIFRST         : HAL.Bit := 16#0#;
+      MIFRST         : AHBRSTR_MIFRST_Field := 16#0#;
       --  unspecified
-      Reserved_9_11  : HAL.UInt3 := 16#0#;
+      Reserved_9_11  : Cmsis.Device.UInt3 := 16#0#;
       --  Test integration module reset
-      CRCRST         : HAL.Bit := 16#0#;
+      CRCRST         : AHBRSTR_CRCRST_Field := 16#0#;
       --  unspecified
-      Reserved_13_23 : HAL.UInt11 := 16#0#;
+      Reserved_13_23 : Cmsis.Device.UInt11 := 16#0#;
       --  Crypto module reset
-      CRYPRST        : HAL.Bit := 16#0#;
+      CRYPRST        : AHBRSTR_CRYPRST_Field := 16#0#;
       --  unspecified
-      Reserved_25_31 : HAL.UInt7 := 16#0#;
+      Reserved_25_31 : Cmsis.Device.UInt7 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -359,36 +431,44 @@ package Cmsis.Device.RCC is
       Reserved_25_31 at 0 range 25 .. 31;
    end record;
 
+   subtype APB2RSTR_SYSCFGRST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_TIM21RST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_TIM22RST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_ADCRST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_SPI1RST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_USART1RST_Field is Cmsis.Device.Bit;
+   subtype APB2RSTR_DBGRST_Field is Cmsis.Device.Bit;
+
    --  APB2 peripheral reset register
    type APB2RSTR_Register is record
       --  System configuration controller reset
-      SYSCFGRST      : HAL.Bit := 16#0#;
+      SYSCFGRST      : APB2RSTR_SYSCFGRST_Field := 16#0#;
       --  unspecified
-      Reserved_1_1   : HAL.Bit := 16#0#;
+      Reserved_1_1   : Cmsis.Device.Bit := 16#0#;
       --  TIM21 timer reset
-      TIM21RST       : HAL.Bit := 16#0#;
+      TIM21RST       : APB2RSTR_TIM21RST_Field := 16#0#;
       --  unspecified
-      Reserved_3_4   : HAL.UInt2 := 16#0#;
+      Reserved_3_4   : Cmsis.Device.UInt2 := 16#0#;
       --  TIM22 timer reset
-      TIM22RST       : HAL.Bit := 16#0#;
+      TIM22RST       : APB2RSTR_TIM22RST_Field := 16#0#;
       --  unspecified
-      Reserved_6_8   : HAL.UInt3 := 16#0#;
+      Reserved_6_8   : Cmsis.Device.UInt3 := 16#0#;
       --  ADC interface reset
-      ADCRST         : HAL.Bit := 16#0#;
+      ADCRST         : APB2RSTR_ADCRST_Field := 16#0#;
       --  unspecified
-      Reserved_10_11 : HAL.UInt2 := 16#0#;
+      Reserved_10_11 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI 1 reset
-      SPI1RST        : HAL.Bit := 16#0#;
+      SPI1RST        : APB2RSTR_SPI1RST_Field := 16#0#;
       --  unspecified
-      Reserved_13_13 : HAL.Bit := 16#0#;
+      Reserved_13_13 : Cmsis.Device.Bit := 16#0#;
       --  USART1 reset
-      USART1RST      : HAL.Bit := 16#0#;
+      USART1RST      : APB2RSTR_USART1RST_Field := 16#0#;
       --  unspecified
-      Reserved_15_21 : HAL.UInt7 := 16#0#;
+      Reserved_15_21 : Cmsis.Device.UInt7 := 16#0#;
       --  DBG reset
-      DBGRST         : HAL.Bit := 16#0#;
+      DBGRST         : APB2RSTR_DBGRST_Field := 16#0#;
       --  unspecified
-      Reserved_23_31 : HAL.UInt9 := 16#0#;
+      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -410,52 +490,69 @@ package Cmsis.Device.RCC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
+   subtype APB1RSTR_TIM2RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_TIM3RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_TIM6RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_TIM7RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_WWDGRST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_SPI2RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_USART2RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_LPUART1RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_USART4RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_USART5RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_I2C1RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_I2C2RST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_CRCRST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_PWRRST_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_I2C3_Field is Cmsis.Device.Bit;
+   subtype APB1RSTR_LPTIM1RST_Field is Cmsis.Device.Bit;
+
    --  APB1 peripheral reset register
    type APB1RSTR_Register is record
       --  Timer 2 reset
-      TIM2RST        : HAL.Bit := 16#0#;
+      TIM2RST        : APB1RSTR_TIM2RST_Field := 16#0#;
       --  Timer 3 reset
-      TIM3RST        : HAL.Bit := 16#0#;
+      TIM3RST        : APB1RSTR_TIM3RST_Field := 16#0#;
       --  unspecified
-      Reserved_2_3   : HAL.UInt2 := 16#0#;
+      Reserved_2_3   : Cmsis.Device.UInt2 := 16#0#;
       --  Timer 6 reset
-      TIM6RST        : HAL.Bit := 16#0#;
+      TIM6RST        : APB1RSTR_TIM6RST_Field := 16#0#;
       --  Timer 7 reset
-      TIM7RST        : HAL.Bit := 16#0#;
+      TIM7RST        : APB1RSTR_TIM7RST_Field := 16#0#;
       --  unspecified
-      Reserved_6_10  : HAL.UInt5 := 16#0#;
+      Reserved_6_10  : Cmsis.Device.UInt5 := 16#0#;
       --  Window watchdog reset
-      WWDGRST        : HAL.Bit := 16#0#;
+      WWDGRST        : APB1RSTR_WWDGRST_Field := 16#0#;
       --  unspecified
-      Reserved_12_13 : HAL.UInt2 := 16#0#;
+      Reserved_12_13 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI2 reset
-      SPI2RST        : HAL.Bit := 16#0#;
+      SPI2RST        : APB1RSTR_SPI2RST_Field := 16#0#;
       --  unspecified
-      Reserved_15_16 : HAL.UInt2 := 16#0#;
+      Reserved_15_16 : Cmsis.Device.UInt2 := 16#0#;
       --  USART2 reset
-      USART2RST      : HAL.Bit := 16#0#;
+      USART2RST      : APB1RSTR_USART2RST_Field := 16#0#;
       --  LPUART1 reset
-      LPUART1RST     : HAL.Bit := 16#0#;
+      LPUART1RST     : APB1RSTR_LPUART1RST_Field := 16#0#;
       --  USART4 reset
-      USART4RST      : HAL.Bit := 16#0#;
+      USART4RST      : APB1RSTR_USART4RST_Field := 16#0#;
       --  USART5 reset
-      USART5RST      : HAL.Bit := 16#0#;
+      USART5RST      : APB1RSTR_USART5RST_Field := 16#0#;
       --  I2C1 reset
-      I2C1RST        : HAL.Bit := 16#0#;
+      I2C1RST        : APB1RSTR_I2C1RST_Field := 16#0#;
       --  I2C2 reset
-      I2C2RST        : HAL.Bit := 16#0#;
+      I2C2RST        : APB1RSTR_I2C2RST_Field := 16#0#;
       --  unspecified
-      Reserved_23_26 : HAL.UInt4 := 16#0#;
+      Reserved_23_26 : Cmsis.Device.UInt4 := 16#0#;
       --  CRC reset
-      CRCRST         : HAL.Bit := 16#0#;
+      CRCRST         : APB1RSTR_CRCRST_Field := 16#0#;
       --  Power interface reset
-      PWRRST         : HAL.Bit := 16#0#;
+      PWRRST         : APB1RSTR_PWRRST_Field := 16#0#;
       --  unspecified
-      Reserved_29_29 : HAL.Bit := 16#0#;
+      Reserved_29_29 : Cmsis.Device.Bit := 16#0#;
       --  I2C3 reset
-      I2C3           : HAL.Bit := 16#0#;
+      I2C3           : APB1RSTR_I2C3_Field := 16#0#;
       --  Low power timer reset
-      LPTIM1RST      : HAL.Bit := 16#0#;
+      LPTIM1RST      : APB1RSTR_LPTIM1RST_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -485,24 +582,31 @@ package Cmsis.Device.RCC is
       LPTIM1RST      at 0 range 31 .. 31;
    end record;
 
+   subtype IOPENR_IOPAEN_Field is Cmsis.Device.Bit;
+   subtype IOPENR_IOPBEN_Field is Cmsis.Device.Bit;
+   subtype IOPENR_IOPCEN_Field is Cmsis.Device.Bit;
+   subtype IOPENR_IOPDEN_Field is Cmsis.Device.Bit;
+   subtype IOPENR_IOPEEN_Field is Cmsis.Device.Bit;
+   subtype IOPENR_IOPHEN_Field is Cmsis.Device.Bit;
+
    --  GPIO clock enable register
    type IOPENR_Register is record
       --  IO port A clock enable bit
-      IOPAEN        : HAL.Bit := 16#0#;
+      IOPAEN        : IOPENR_IOPAEN_Field := 16#0#;
       --  IO port B clock enable bit
-      IOPBEN        : HAL.Bit := 16#0#;
+      IOPBEN        : IOPENR_IOPBEN_Field := 16#0#;
       --  IO port A clock enable bit
-      IOPCEN        : HAL.Bit := 16#0#;
+      IOPCEN        : IOPENR_IOPCEN_Field := 16#0#;
       --  I/O port D clock enable bit
-      IOPDEN        : HAL.Bit := 16#0#;
+      IOPDEN        : IOPENR_IOPDEN_Field := 16#0#;
       --  IO port E clock enable bit
-      IOPEEN        : HAL.Bit := 16#0#;
+      IOPEEN        : IOPENR_IOPEEN_Field := 16#0#;
       --  unspecified
-      Reserved_5_6  : HAL.UInt2 := 16#0#;
+      Reserved_5_6  : Cmsis.Device.UInt2 := 16#0#;
       --  I/O port H clock enable bit
-      IOPHEN        : HAL.Bit := 16#0#;
+      IOPHEN        : IOPENR_IOPHEN_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -518,24 +622,29 @@ package Cmsis.Device.RCC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype AHBENR_DMAEN_Field is Cmsis.Device.Bit;
+   subtype AHBENR_MIFEN_Field is Cmsis.Device.Bit;
+   subtype AHBENR_CRCEN_Field is Cmsis.Device.Bit;
+   subtype AHBENR_CRYPEN_Field is Cmsis.Device.Bit;
+
    --  AHB peripheral clock enable register
    type AHBENR_Register is record
       --  DMA clock enable bit
-      DMAEN          : HAL.Bit := 16#0#;
+      DMAEN          : AHBENR_DMAEN_Field := 16#0#;
       --  unspecified
-      Reserved_1_7   : HAL.UInt7 := 16#0#;
+      Reserved_1_7   : Cmsis.Device.UInt7 := 16#0#;
       --  NVM interface clock enable bit
-      MIFEN          : HAL.Bit := 16#1#;
+      MIFEN          : AHBENR_MIFEN_Field := 16#1#;
       --  unspecified
-      Reserved_9_11  : HAL.UInt3 := 16#0#;
+      Reserved_9_11  : Cmsis.Device.UInt3 := 16#0#;
       --  CRC clock enable bit
-      CRCEN          : HAL.Bit := 16#0#;
+      CRCEN          : AHBENR_CRCEN_Field := 16#0#;
       --  unspecified
-      Reserved_13_23 : HAL.UInt11 := 16#0#;
+      Reserved_13_23 : Cmsis.Device.UInt11 := 16#0#;
       --  Crypto clock enable bit
-      CRYPEN         : HAL.Bit := 16#0#;
+      CRYPEN         : AHBENR_CRYPEN_Field := 16#0#;
       --  unspecified
-      Reserved_25_31 : HAL.UInt7 := 16#0#;
+      Reserved_25_31 : Cmsis.Device.UInt7 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -551,40 +660,49 @@ package Cmsis.Device.RCC is
       Reserved_25_31 at 0 range 25 .. 31;
    end record;
 
+   subtype APB2ENR_SYSCFGEN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_TIM21EN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_TIM22EN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_FWEN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_ADCEN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_SPI1EN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_USART1EN_Field is Cmsis.Device.Bit;
+   subtype APB2ENR_DBGEN_Field is Cmsis.Device.Bit;
+
    --  APB2 peripheral clock enable register
    type APB2ENR_Register is record
       --  System configuration controller clock enable bit
-      SYSCFGEN       : HAL.Bit := 16#0#;
+      SYSCFGEN       : APB2ENR_SYSCFGEN_Field := 16#0#;
       --  unspecified
-      Reserved_1_1   : HAL.Bit := 16#0#;
+      Reserved_1_1   : Cmsis.Device.Bit := 16#0#;
       --  TIM21 timer clock enable bit
-      TIM21EN        : HAL.Bit := 16#0#;
+      TIM21EN        : APB2ENR_TIM21EN_Field := 16#0#;
       --  unspecified
-      Reserved_3_4   : HAL.UInt2 := 16#0#;
+      Reserved_3_4   : Cmsis.Device.UInt2 := 16#0#;
       --  TIM22 timer clock enable bit
-      TIM22EN        : HAL.Bit := 16#0#;
+      TIM22EN        : APB2ENR_TIM22EN_Field := 16#0#;
       --  unspecified
-      Reserved_6_6   : HAL.Bit := 16#0#;
+      Reserved_6_6   : Cmsis.Device.Bit := 16#0#;
       --  Firewall clock enable bit
-      FWEN           : HAL.Bit := 16#0#;
+      FWEN           : APB2ENR_FWEN_Field := 16#0#;
       --  unspecified
-      Reserved_8_8   : HAL.Bit := 16#0#;
+      Reserved_8_8   : Cmsis.Device.Bit := 16#0#;
       --  ADC clock enable bit
-      ADCEN          : HAL.Bit := 16#0#;
+      ADCEN          : APB2ENR_ADCEN_Field := 16#0#;
       --  unspecified
-      Reserved_10_11 : HAL.UInt2 := 16#0#;
+      Reserved_10_11 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI1 clock enable bit
-      SPI1EN         : HAL.Bit := 16#0#;
+      SPI1EN         : APB2ENR_SPI1EN_Field := 16#0#;
       --  unspecified
-      Reserved_13_13 : HAL.Bit := 16#0#;
+      Reserved_13_13 : Cmsis.Device.Bit := 16#0#;
       --  USART1 clock enable bit
-      USART1EN       : HAL.Bit := 16#0#;
+      USART1EN       : APB2ENR_USART1EN_Field := 16#0#;
       --  unspecified
-      Reserved_15_21 : HAL.UInt7 := 16#0#;
+      Reserved_15_21 : Cmsis.Device.UInt7 := 16#0#;
       --  DBG clock enable bit
-      DBGEN          : HAL.Bit := 16#0#;
+      DBGEN          : APB2ENR_DBGEN_Field := 16#0#;
       --  unspecified
-      Reserved_23_31 : HAL.UInt9 := 16#0#;
+      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -608,52 +726,68 @@ package Cmsis.Device.RCC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
+   subtype APB1ENR_TIM2EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_TIM3EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_TIM6EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_TIM7EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_WWDGEN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_SPI2EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_USART2EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_LPUART1EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_USART4EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_USART5EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_I2C1EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_I2C2EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_PWREN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_I2C3EN_Field is Cmsis.Device.Bit;
+   subtype APB1ENR_LPTIM1EN_Field is Cmsis.Device.Bit;
+
    --  APB1 peripheral clock enable register
    type APB1ENR_Register is record
       --  Timer2 clock enable bit
-      TIM2EN         : HAL.Bit := 16#0#;
+      TIM2EN         : APB1ENR_TIM2EN_Field := 16#0#;
       --  unspecified
-      Reserved_1_1   : HAL.Bit := 16#0#;
+      Reserved_1_1   : Cmsis.Device.Bit := 16#0#;
       --  Timer 3 clock enbale bit
-      TIM3EN         : HAL.Bit := 16#0#;
+      TIM3EN         : APB1ENR_TIM3EN_Field := 16#0#;
       --  unspecified
-      Reserved_3_3   : HAL.Bit := 16#0#;
+      Reserved_3_3   : Cmsis.Device.Bit := 16#0#;
       --  Timer 6 clock enable bit
-      TIM6EN         : HAL.Bit := 16#0#;
+      TIM6EN         : APB1ENR_TIM6EN_Field := 16#0#;
       --  Timer 7 clock enable bit
-      TIM7EN         : HAL.Bit := 16#0#;
+      TIM7EN         : APB1ENR_TIM7EN_Field := 16#0#;
       --  unspecified
-      Reserved_6_10  : HAL.UInt5 := 16#0#;
+      Reserved_6_10  : Cmsis.Device.UInt5 := 16#0#;
       --  Window watchdog clock enable bit
-      WWDGEN         : HAL.Bit := 16#0#;
+      WWDGEN         : APB1ENR_WWDGEN_Field := 16#0#;
       --  unspecified
-      Reserved_12_13 : HAL.UInt2 := 16#0#;
+      Reserved_12_13 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI2 clock enable bit
-      SPI2EN         : HAL.Bit := 16#0#;
+      SPI2EN         : APB1ENR_SPI2EN_Field := 16#0#;
       --  unspecified
-      Reserved_15_16 : HAL.UInt2 := 16#0#;
+      Reserved_15_16 : Cmsis.Device.UInt2 := 16#0#;
       --  UART2 clock enable bit
-      USART2EN       : HAL.Bit := 16#0#;
+      USART2EN       : APB1ENR_USART2EN_Field := 16#0#;
       --  LPUART1 clock enable bit
-      LPUART1EN      : HAL.Bit := 16#0#;
+      LPUART1EN      : APB1ENR_LPUART1EN_Field := 16#0#;
       --  USART4 clock enable bit
-      USART4EN       : HAL.Bit := 16#0#;
+      USART4EN       : APB1ENR_USART4EN_Field := 16#0#;
       --  USART5 clock enable bit
-      USART5EN       : HAL.Bit := 16#0#;
+      USART5EN       : APB1ENR_USART5EN_Field := 16#0#;
       --  I2C1 clock enable bit
-      I2C1EN         : HAL.Bit := 16#0#;
+      I2C1EN         : APB1ENR_I2C1EN_Field := 16#0#;
       --  I2C2 clock enable bit
-      I2C2EN         : HAL.Bit := 16#0#;
+      I2C2EN         : APB1ENR_I2C2EN_Field := 16#0#;
       --  unspecified
-      Reserved_23_27 : HAL.UInt5 := 16#0#;
+      Reserved_23_27 : Cmsis.Device.UInt5 := 16#0#;
       --  Power interface clock enable bit
-      PWREN          : HAL.Bit := 16#0#;
+      PWREN          : APB1ENR_PWREN_Field := 16#0#;
       --  unspecified
-      Reserved_29_29 : HAL.Bit := 16#0#;
+      Reserved_29_29 : Cmsis.Device.Bit := 16#0#;
       --  I2C3 clock enable bit
-      I2C3EN         : HAL.Bit := 16#0#;
+      I2C3EN         : APB1ENR_I2C3EN_Field := 16#0#;
       --  Low power timer clock enable bit
-      LPTIM1EN       : HAL.Bit := 16#0#;
+      LPTIM1EN       : APB1ENR_LPTIM1EN_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -683,24 +817,31 @@ package Cmsis.Device.RCC is
       LPTIM1EN       at 0 range 31 .. 31;
    end record;
 
+   subtype IOPSMEN_IOPASMEN_Field is Cmsis.Device.Bit;
+   subtype IOPSMEN_IOPBSMEN_Field is Cmsis.Device.Bit;
+   subtype IOPSMEN_IOPCSMEN_Field is Cmsis.Device.Bit;
+   subtype IOPSMEN_IOPDSMEN_Field is Cmsis.Device.Bit;
+   subtype IOPSMEN_IOPESMEN_Field is Cmsis.Device.Bit;
+   subtype IOPSMEN_IOPHSMEN_Field is Cmsis.Device.Bit;
+
    --  GPIO clock enable in sleep mode register
    type IOPSMEN_Register is record
       --  Port A clock enable during Sleep mode bit
-      IOPASMEN      : HAL.Bit := 16#1#;
+      IOPASMEN      : IOPSMEN_IOPASMEN_Field := 16#1#;
       --  Port B clock enable during Sleep mode bit
-      IOPBSMEN      : HAL.Bit := 16#1#;
+      IOPBSMEN      : IOPSMEN_IOPBSMEN_Field := 16#1#;
       --  Port C clock enable during Sleep mode bit
-      IOPCSMEN      : HAL.Bit := 16#1#;
+      IOPCSMEN      : IOPSMEN_IOPCSMEN_Field := 16#1#;
       --  Port D clock enable during Sleep mode bit
-      IOPDSMEN      : HAL.Bit := 16#1#;
+      IOPDSMEN      : IOPSMEN_IOPDSMEN_Field := 16#1#;
       --  Port E clock enable during Sleep mode bit
-      IOPESMEN      : HAL.Bit := 16#0#;
+      IOPESMEN      : IOPSMEN_IOPESMEN_Field := 16#0#;
       --  unspecified
-      Reserved_5_6  : HAL.UInt2 := 16#0#;
+      Reserved_5_6  : Cmsis.Device.UInt2 := 16#0#;
       --  Port H clock enable during Sleep mode bit
-      IOPHSMEN      : HAL.Bit := 16#1#;
+      IOPHSMEN      : IOPSMEN_IOPHSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -716,26 +857,32 @@ package Cmsis.Device.RCC is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype AHBSMENR_DMASMEN_Field is Cmsis.Device.Bit;
+   subtype AHBSMENR_MIFSMEN_Field is Cmsis.Device.Bit;
+   subtype AHBSMENR_SRAMSMEN_Field is Cmsis.Device.Bit;
+   subtype AHBSMENR_CRCSMEN_Field is Cmsis.Device.Bit;
+   subtype AHBSMENR_CRYPTSMEN_Field is Cmsis.Device.Bit;
+
    --  AHB peripheral clock enable in sleep mode register
    type AHBSMENR_Register is record
       --  DMA clock enable during sleep mode bit
-      DMASMEN        : HAL.Bit := 16#1#;
+      DMASMEN        : AHBSMENR_DMASMEN_Field := 16#1#;
       --  unspecified
-      Reserved_1_7   : HAL.UInt7 := 16#0#;
+      Reserved_1_7   : Cmsis.Device.UInt7 := 16#0#;
       --  NVM interface clock enable during sleep mode bit
-      MIFSMEN        : HAL.Bit := 16#1#;
+      MIFSMEN        : AHBSMENR_MIFSMEN_Field := 16#1#;
       --  SRAM interface clock enable during sleep mode bit
-      SRAMSMEN       : HAL.Bit := 16#1#;
+      SRAMSMEN       : AHBSMENR_SRAMSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_10_11 : HAL.UInt2 := 16#0#;
+      Reserved_10_11 : Cmsis.Device.UInt2 := 16#0#;
       --  CRC clock enable during sleep mode bit
-      CRCSMEN        : HAL.Bit := 16#1#;
+      CRCSMEN        : AHBSMENR_CRCSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_13_23 : HAL.UInt11 := 16#88#;
+      Reserved_13_23 : Cmsis.Device.UInt11 := 16#88#;
       --  Crypto clock enable during sleep mode bit
-      CRYPTSMEN      : HAL.Bit := 16#1#;
+      CRYPTSMEN      : AHBSMENR_CRYPTSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_25_31 : HAL.UInt7 := 16#0#;
+      Reserved_25_31 : Cmsis.Device.UInt7 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -752,36 +899,44 @@ package Cmsis.Device.RCC is
       Reserved_25_31 at 0 range 25 .. 31;
    end record;
 
+   subtype APB2SMENR_SYSCFGSMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_TIM21SMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_TIM22SMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_ADCSMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_SPI1SMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_USART1SMEN_Field is Cmsis.Device.Bit;
+   subtype APB2SMENR_DBGSMEN_Field is Cmsis.Device.Bit;
+
    --  APB2 peripheral clock enable in sleep mode register
    type APB2SMENR_Register is record
       --  System configuration controller clock enable during sleep mode bit
-      SYSCFGSMEN     : HAL.Bit := 16#1#;
+      SYSCFGSMEN     : APB2SMENR_SYSCFGSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_1_1   : HAL.Bit := 16#0#;
+      Reserved_1_1   : Cmsis.Device.Bit := 16#0#;
       --  TIM21 timer clock enable during sleep mode bit
-      TIM21SMEN      : HAL.Bit := 16#1#;
+      TIM21SMEN      : APB2SMENR_TIM21SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_3_4   : HAL.UInt2 := 16#0#;
+      Reserved_3_4   : Cmsis.Device.UInt2 := 16#0#;
       --  TIM22 timer clock enable during sleep mode bit
-      TIM22SMEN      : HAL.Bit := 16#1#;
+      TIM22SMEN      : APB2SMENR_TIM22SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_6_8   : HAL.UInt3 := 16#0#;
+      Reserved_6_8   : Cmsis.Device.UInt3 := 16#0#;
       --  ADC clock enable during sleep mode bit
-      ADCSMEN        : HAL.Bit := 16#1#;
+      ADCSMEN        : APB2SMENR_ADCSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_10_11 : HAL.UInt2 := 16#0#;
+      Reserved_10_11 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI1 clock enable during sleep mode bit
-      SPI1SMEN       : HAL.Bit := 16#1#;
+      SPI1SMEN       : APB2SMENR_SPI1SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_13_13 : HAL.Bit := 16#0#;
+      Reserved_13_13 : Cmsis.Device.Bit := 16#0#;
       --  USART1 clock enable during sleep mode bit
-      USART1SMEN     : HAL.Bit := 16#1#;
+      USART1SMEN     : APB2SMENR_USART1SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_15_21 : HAL.UInt7 := 16#0#;
+      Reserved_15_21 : Cmsis.Device.UInt7 := 16#0#;
       --  DBG clock enable during sleep mode bit
-      DBGSMEN        : HAL.Bit := 16#1#;
+      DBGSMEN        : APB2SMENR_DBGSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_23_31 : HAL.UInt9 := 16#0#;
+      Reserved_23_31 : Cmsis.Device.UInt9 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -803,52 +958,69 @@ package Cmsis.Device.RCC is
       Reserved_23_31 at 0 range 23 .. 31;
    end record;
 
+   subtype APB1SMENR_TIM2SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_TIM3SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_TIM6SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_TIM7SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_WWDGSMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_SPI2SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_USART2SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_LPUART1SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_USART4SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_USART5SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_I2C1SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_I2C2SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_CRSSMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_PWRSMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_I2C3SMEN_Field is Cmsis.Device.Bit;
+   subtype APB1SMENR_LPTIM1SMEN_Field is Cmsis.Device.Bit;
+
    --  APB1 peripheral clock enable in sleep mode register
    type APB1SMENR_Register is record
       --  Timer2 clock enable during sleep mode bit
-      TIM2SMEN       : HAL.Bit := 16#1#;
+      TIM2SMEN       : APB1SMENR_TIM2SMEN_Field := 16#1#;
       --  Timer 3 clock enable during sleep mode bit
-      TIM3SMEN       : HAL.Bit := 16#0#;
+      TIM3SMEN       : APB1SMENR_TIM3SMEN_Field := 16#0#;
       --  unspecified
-      Reserved_2_3   : HAL.UInt2 := 16#0#;
+      Reserved_2_3   : Cmsis.Device.UInt2 := 16#0#;
       --  Timer 6 clock enable during sleep mode bit
-      TIM6SMEN       : HAL.Bit := 16#1#;
+      TIM6SMEN       : APB1SMENR_TIM6SMEN_Field := 16#1#;
       --  Timer 7 clock enable during sleep mode bit
-      TIM7SMEN       : HAL.Bit := 16#0#;
+      TIM7SMEN       : APB1SMENR_TIM7SMEN_Field := 16#0#;
       --  unspecified
-      Reserved_6_10  : HAL.UInt5 := 16#8#;
+      Reserved_6_10  : Cmsis.Device.UInt5 := 16#8#;
       --  Window watchdog clock enable during sleep mode bit
-      WWDGSMEN       : HAL.Bit := 16#1#;
+      WWDGSMEN       : APB1SMENR_WWDGSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_12_13 : HAL.UInt2 := 16#0#;
+      Reserved_12_13 : Cmsis.Device.UInt2 := 16#0#;
       --  SPI2 clock enable during sleep mode bit
-      SPI2SMEN       : HAL.Bit := 16#1#;
+      SPI2SMEN       : APB1SMENR_SPI2SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_15_16 : HAL.UInt2 := 16#0#;
+      Reserved_15_16 : Cmsis.Device.UInt2 := 16#0#;
       --  UART2 clock enable during sleep mode bit
-      USART2SMEN     : HAL.Bit := 16#1#;
+      USART2SMEN     : APB1SMENR_USART2SMEN_Field := 16#1#;
       --  LPUART1 clock enable during sleep mode bit
-      LPUART1SMEN    : HAL.Bit := 16#1#;
+      LPUART1SMEN    : APB1SMENR_LPUART1SMEN_Field := 16#1#;
       --  USART4 clock enabe during sleep mode bit
-      USART4SMEN     : HAL.Bit := 16#0#;
+      USART4SMEN     : APB1SMENR_USART4SMEN_Field := 16#0#;
       --  USART5 clock enable during sleep mode bit
-      USART5SMEN     : HAL.Bit := 16#0#;
+      USART5SMEN     : APB1SMENR_USART5SMEN_Field := 16#0#;
       --  I2C1 clock enable during sleep mode bit
-      I2C1SMEN       : HAL.Bit := 16#1#;
+      I2C1SMEN       : APB1SMENR_I2C1SMEN_Field := 16#1#;
       --  I2C2 clock enable during sleep mode bit
-      I2C2SMEN       : HAL.Bit := 16#1#;
+      I2C2SMEN       : APB1SMENR_I2C2SMEN_Field := 16#1#;
       --  unspecified
-      Reserved_23_26 : HAL.UInt4 := 16#1#;
+      Reserved_23_26 : Cmsis.Device.UInt4 := 16#1#;
       --  Clock recovery system clock enable during sleep mode bit
-      CRSSMEN        : HAL.Bit := 16#1#;
+      CRSSMEN        : APB1SMENR_CRSSMEN_Field := 16#1#;
       --  Power interface clock enable during sleep mode bit
-      PWRSMEN        : HAL.Bit := 16#1#;
+      PWRSMEN        : APB1SMENR_PWRSMEN_Field := 16#1#;
       --  unspecified
-      Reserved_29_29 : HAL.Bit := 16#1#;
+      Reserved_29_29 : Cmsis.Device.Bit := 16#1#;
       --  I2C3 clock enable during sleep mode bit
-      I2C3SMEN       : HAL.Bit := 16#0#;
+      I2C3SMEN       : APB1SMENR_I2C3SMEN_Field := 16#0#;
       --  Low power timer clock enable during sleep mode bit
-      LPTIM1SMEN     : HAL.Bit := 16#1#;
+      LPTIM1SMEN     : APB1SMENR_LPTIM1SMEN_Field := 16#1#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -878,8 +1050,12 @@ package Cmsis.Device.RCC is
       LPTIM1SMEN     at 0 range 31 .. 31;
    end record;
 
+   --  CCIPR_USART1SEL array element
+   subtype CCIPR_USART1SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_USART1SEL array
-   type CCIPR_USART1SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_USART1SEL_Field_Array is array (0 .. 1)
+     of CCIPR_USART1SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_USART1SEL
@@ -889,7 +1065,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  USART1SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  USART1SEL as an array
             Arr : CCIPR_USART1SEL_Field_Array;
@@ -902,8 +1078,12 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 1;
    end record;
 
+   --  CCIPR_USART2SEL array element
+   subtype CCIPR_USART2SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_USART2SEL array
-   type CCIPR_USART2SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_USART2SEL_Field_Array is array (0 .. 1)
+     of CCIPR_USART2SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_USART2SEL
@@ -913,7 +1093,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  USART2SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  USART2SEL as an array
             Arr : CCIPR_USART2SEL_Field_Array;
@@ -926,8 +1106,12 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 1;
    end record;
 
+   --  CCIPR_LPUART1SEL array element
+   subtype CCIPR_LPUART1SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_LPUART1SEL array
-   type CCIPR_LPUART1SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_LPUART1SEL_Field_Array is array (0 .. 1)
+     of CCIPR_LPUART1SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_LPUART1SEL
@@ -937,7 +1121,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  LPUART1SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  LPUART1SEL as an array
             Arr : CCIPR_LPUART1SEL_Field_Array;
@@ -950,8 +1134,11 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 1;
    end record;
 
+   --  CCIPR_I2C1SEL array element
+   subtype CCIPR_I2C1SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_I2C1SEL array
-   type CCIPR_I2C1SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_I2C1SEL_Field_Array is array (0 .. 1) of CCIPR_I2C1SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_I2C1SEL
@@ -961,7 +1148,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  I2C1SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  I2C1SEL as an array
             Arr : CCIPR_I2C1SEL_Field_Array;
@@ -974,8 +1161,11 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 1;
    end record;
 
+   --  CCIPR_I2C3SEL array element
+   subtype CCIPR_I2C3SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_I2C3SEL array
-   type CCIPR_I2C3SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_I2C3SEL_Field_Array is array (0 .. 1) of CCIPR_I2C3SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_I2C3SEL
@@ -985,7 +1175,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  I2C3SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  I2C3SEL as an array
             Arr : CCIPR_I2C3SEL_Field_Array;
@@ -998,8 +1188,12 @@ package Cmsis.Device.RCC is
       Arr at 0 range 0 .. 1;
    end record;
 
+   --  CCIPR_LPTIM1SEL array element
+   subtype CCIPR_LPTIM1SEL_Element is Cmsis.Device.Bit;
+
    --  CCIPR_LPTIM1SEL array
-   type CCIPR_LPTIM1SEL_Field_Array is array (0 .. 1) of HAL.Bit
+   type CCIPR_LPTIM1SEL_Field_Array is array (0 .. 1)
+     of CCIPR_LPTIM1SEL_Element
      with Component_Size => 1, Size => 2;
 
    --  Type definition for CCIPR_LPTIM1SEL
@@ -1009,7 +1203,7 @@ package Cmsis.Device.RCC is
       case As_Array is
          when False =>
             --  LPTIM1SEL as a value
-            Val : HAL.UInt2;
+            Val : Cmsis.Device.UInt2;
          when True =>
             --  LPTIM1SEL as an array
             Arr : CCIPR_LPTIM1SEL_Field_Array;
@@ -1031,7 +1225,7 @@ package Cmsis.Device.RCC is
       USART2SEL      : CCIPR_USART2SEL_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_4_9   : HAL.UInt6 := 16#0#;
+      Reserved_4_9   : Cmsis.Device.UInt6 := 16#0#;
       --  LPUART1SEL0
       LPUART1SEL     : CCIPR_LPUART1SEL_Field :=
                         (As_Array => False, Val => 16#0#);
@@ -1039,7 +1233,7 @@ package Cmsis.Device.RCC is
       I2C1SEL        : CCIPR_I2C1SEL_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_14_15 : HAL.UInt2 := 16#0#;
+      Reserved_14_15 : Cmsis.Device.UInt2 := 16#0#;
       --  I2C3 clock source selection bits
       I2C3SEL        : CCIPR_I2C3SEL_Field :=
                         (As_Array => False, Val => 16#0#);
@@ -1047,7 +1241,7 @@ package Cmsis.Device.RCC is
       LPTIM1SEL      : CCIPR_LPTIM1SEL_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_20_31 : HAL.UInt12 := 16#0#;
+      Reserved_20_31 : Cmsis.Device.UInt12 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -1064,57 +1258,79 @@ package Cmsis.Device.RCC is
       Reserved_20_31 at 0 range 20 .. 31;
    end record;
 
+   subtype CSR_LSION_Field is Cmsis.Device.Bit;
+   subtype CSR_LSIRDY_Field is Cmsis.Device.Bit;
+   subtype CSR_LSIIWDGLP_Field is Cmsis.Device.Bit;
+   subtype CSR_LSEON_Field is Cmsis.Device.Bit;
+   subtype CSR_LSERDY_Field is Cmsis.Device.Bit;
+   subtype CSR_LSEBYP_Field is Cmsis.Device.Bit;
+   subtype CSR_LSEDRV_Field is Cmsis.Device.UInt2;
+   subtype CSR_CSSLSEON_Field is Cmsis.Device.Bit;
+   subtype CSR_CSSLSED_Field is Cmsis.Device.Bit;
+   subtype CSR_RTCSEL_Field is Cmsis.Device.UInt2;
+   subtype CSR_RTCEN_Field is Cmsis.Device.Bit;
+   subtype CSR_RTCRST_Field is Cmsis.Device.Bit;
+   subtype CSR_RMVF_Field is Cmsis.Device.Bit;
+   subtype CSR_FWRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_OBLRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_PINRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_PORRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_SFTRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_IWDGRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_WWDGRSTF_Field is Cmsis.Device.Bit;
+   subtype CSR_LPWRSTF_Field is Cmsis.Device.Bit;
+
    --  Control and status register
    type CSR_Register is record
       --  Internal low-speed oscillator enable
-      LSION          : HAL.Bit := 16#0#;
+      LSION          : CSR_LSION_Field := 16#0#;
       --  Read-only. Internal low-speed oscillator ready bit
-      LSIRDY         : HAL.Bit := 16#0#;
+      LSIRDY         : CSR_LSIRDY_Field := 16#0#;
       --  LSI clock input to IWDG in Ultra-low-power mode (Stop and Standby)
       --  enable bit
-      LSIIWDGLP      : HAL.Bit := 16#0#;
+      LSIIWDGLP      : CSR_LSIIWDGLP_Field := 16#0#;
       --  unspecified
-      Reserved_3_7   : HAL.UInt5 := 16#0#;
+      Reserved_3_7   : Cmsis.Device.UInt5 := 16#0#;
       --  External low-speed oscillator enable bit
-      LSEON          : HAL.Bit := 16#0#;
+      LSEON          : CSR_LSEON_Field := 16#0#;
       --  Read-only. External low-speed oscillator ready bit
-      LSERDY         : HAL.Bit := 16#0#;
+      LSERDY         : CSR_LSERDY_Field := 16#0#;
       --  External low-speed oscillator bypass bit
-      LSEBYP         : HAL.Bit := 16#0#;
+      LSEBYP         : CSR_LSEBYP_Field := 16#0#;
       --  LSEDRV
-      LSEDRV         : HAL.UInt2 := 16#0#;
+      LSEDRV         : CSR_LSEDRV_Field := 16#0#;
       --  CSSLSEON
-      CSSLSEON       : HAL.Bit := 16#0#;
+      CSSLSEON       : CSR_CSSLSEON_Field := 16#0#;
       --  CSS on LSE failure detection flag
-      CSSLSED        : HAL.Bit := 16#0#;
+      CSSLSED        : CSR_CSSLSED_Field := 16#0#;
       --  unspecified
-      Reserved_15_15 : HAL.Bit := 16#0#;
+      Reserved_15_15 : Cmsis.Device.Bit := 16#0#;
       --  RTC and LCD clock source selection bits
-      RTCSEL         : HAL.UInt2 := 16#0#;
+      RTCSEL         : CSR_RTCSEL_Field := 16#0#;
       --  RTC clock enable bit
-      RTCEN          : HAL.Bit := 16#0#;
+      RTCEN          : CSR_RTCEN_Field := 16#0#;
       --  RTC software reset bit
-      RTCRST         : HAL.Bit := 16#0#;
+      RTCRST         : CSR_RTCRST_Field := 16#0#;
       --  unspecified
-      Reserved_20_22 : HAL.UInt3 := 16#0#;
+      Reserved_20_22 : Cmsis.Device.UInt3 := 16#0#;
       --  Remove reset flag
-      RMVF           : HAL.Bit := 16#0#;
+      RMVF           : CSR_RMVF_Field := 16#0#;
       --  Firewall reset flag
-      FWRSTF         : HAL.Bit := 16#0#;
+      FWRSTF         : CSR_FWRSTF_Field := 16#0#;
       --  OBLRSTF
-      OBLRSTF        : HAL.Bit := 16#0#;
+      OBLRSTF        : CSR_OBLRSTF_Field := 16#0#;
       --  PIN reset flag
-      PINRSTF        : HAL.Bit := 16#1#;
+      PINRSTF        : CSR_PINRSTF_Field := 16#1#;
       --  POR/PDR reset flag
-      PORRSTF        : HAL.Bit := 16#1#;
+      PORRSTF        : CSR_PORRSTF_Field := 16#1#;
       --  Software reset flag
-      SFTRSTF        : HAL.Bit := 16#0#;
+      SFTRSTF        : CSR_SFTRSTF_Field := 16#0#;
       --  Independent watchdog reset flag
-      IWDGRSTF       : HAL.Bit := 16#0#;
+      IWDGRSTF       : CSR_IWDGRSTF_Field := 16#0#;
       --  Window watchdog reset flag
-      WWDGRSTF       : HAL.Bit := 16#0#;
+      WWDGRSTF       : CSR_WWDGRSTF_Field := 16#0#;
       --  Low-power reset flag
-      LPWRSTF        : HAL.Bit := 16#0#;
+      LPWRSTF        : CSR_LPWRSTF_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

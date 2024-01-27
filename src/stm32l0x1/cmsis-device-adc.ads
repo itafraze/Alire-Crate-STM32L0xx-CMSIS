@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.ADC is
@@ -14,28 +13,36 @@ package Cmsis.Device.ADC is
    -- Registers --
    ---------------
 
+   subtype ISR_ADRDY_Field is Cmsis.Device.Bit;
+   subtype ISR_EOSMP_Field is Cmsis.Device.Bit;
+   subtype ISR_EOC_Field is Cmsis.Device.Bit;
+   subtype ISR_EOS_Field is Cmsis.Device.Bit;
+   subtype ISR_OVR_Field is Cmsis.Device.Bit;
+   subtype ISR_AWD_Field is Cmsis.Device.Bit;
+   subtype ISR_EOCAL_Field is Cmsis.Device.Bit;
+
    --  interrupt and status register
    type ISR_Register is record
       --  ADC ready
-      ADRDY          : HAL.Bit := 16#0#;
+      ADRDY          : ISR_ADRDY_Field := 16#0#;
       --  End of sampling flag
-      EOSMP          : HAL.Bit := 16#0#;
+      EOSMP          : ISR_EOSMP_Field := 16#0#;
       --  End of conversion flag
-      EOC            : HAL.Bit := 16#0#;
+      EOC            : ISR_EOC_Field := 16#0#;
       --  End of sequence flag
-      EOS            : HAL.Bit := 16#0#;
+      EOS            : ISR_EOS_Field := 16#0#;
       --  ADC overrun
-      OVR            : HAL.Bit := 16#0#;
+      OVR            : ISR_OVR_Field := 16#0#;
       --  unspecified
-      Reserved_5_6   : HAL.UInt2 := 16#0#;
+      Reserved_5_6   : Cmsis.Device.UInt2 := 16#0#;
       --  Analog watchdog flag
-      AWD            : HAL.Bit := 16#0#;
+      AWD            : ISR_AWD_Field := 16#0#;
       --  unspecified
-      Reserved_8_10  : HAL.UInt3 := 16#0#;
+      Reserved_8_10  : Cmsis.Device.UInt3 := 16#0#;
       --  End Of Calibration flag
-      EOCAL          : HAL.Bit := 16#0#;
+      EOCAL          : ISR_EOCAL_Field := 16#0#;
       --  unspecified
-      Reserved_12_31 : HAL.UInt20 := 16#0#;
+      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -53,28 +60,36 @@ package Cmsis.Device.ADC is
       Reserved_12_31 at 0 range 12 .. 31;
    end record;
 
+   subtype IER_ADRDYIE_Field is Cmsis.Device.Bit;
+   subtype IER_EOSMPIE_Field is Cmsis.Device.Bit;
+   subtype IER_EOCIE_Field is Cmsis.Device.Bit;
+   subtype IER_EOSIE_Field is Cmsis.Device.Bit;
+   subtype IER_OVRIE_Field is Cmsis.Device.Bit;
+   subtype IER_AWDIE_Field is Cmsis.Device.Bit;
+   subtype IER_EOCALIE_Field is Cmsis.Device.Bit;
+
    --  interrupt enable register
    type IER_Register is record
       --  ADC ready interrupt enable
-      ADRDYIE        : HAL.Bit := 16#0#;
+      ADRDYIE        : IER_ADRDYIE_Field := 16#0#;
       --  End of sampling flag interrupt enable
-      EOSMPIE        : HAL.Bit := 16#0#;
+      EOSMPIE        : IER_EOSMPIE_Field := 16#0#;
       --  End of conversion interrupt enable
-      EOCIE          : HAL.Bit := 16#0#;
+      EOCIE          : IER_EOCIE_Field := 16#0#;
       --  End of conversion sequence interrupt enable
-      EOSIE          : HAL.Bit := 16#0#;
+      EOSIE          : IER_EOSIE_Field := 16#0#;
       --  Overrun interrupt enable
-      OVRIE          : HAL.Bit := 16#0#;
+      OVRIE          : IER_OVRIE_Field := 16#0#;
       --  unspecified
-      Reserved_5_6   : HAL.UInt2 := 16#0#;
+      Reserved_5_6   : Cmsis.Device.UInt2 := 16#0#;
       --  Analog watchdog interrupt enable
-      AWDIE          : HAL.Bit := 16#0#;
+      AWDIE          : IER_AWDIE_Field := 16#0#;
       --  unspecified
-      Reserved_8_10  : HAL.UInt3 := 16#0#;
+      Reserved_8_10  : Cmsis.Device.UInt3 := 16#0#;
       --  End of calibration interrupt enable
-      EOCALIE        : HAL.Bit := 16#0#;
+      EOCALIE        : IER_EOCALIE_Field := 16#0#;
       --  unspecified
-      Reserved_12_31 : HAL.UInt20 := 16#0#;
+      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -92,26 +107,33 @@ package Cmsis.Device.ADC is
       Reserved_12_31 at 0 range 12 .. 31;
    end record;
 
+   subtype CR_ADEN_Field is Cmsis.Device.Bit;
+   subtype CR_ADDIS_Field is Cmsis.Device.Bit;
+   subtype CR_ADSTART_Field is Cmsis.Device.Bit;
+   subtype CR_ADSTP_Field is Cmsis.Device.Bit;
+   subtype CR_ADVREGEN_Field is Cmsis.Device.Bit;
+   subtype CR_ADCAL_Field is Cmsis.Device.Bit;
+
    --  control register
    type CR_Register is record
       --  ADC enable command
-      ADEN           : HAL.Bit := 16#0#;
+      ADEN           : CR_ADEN_Field := 16#0#;
       --  ADC disable command
-      ADDIS          : HAL.Bit := 16#0#;
+      ADDIS          : CR_ADDIS_Field := 16#0#;
       --  ADC start conversion command
-      ADSTART        : HAL.Bit := 16#0#;
+      ADSTART        : CR_ADSTART_Field := 16#0#;
       --  unspecified
-      Reserved_3_3   : HAL.Bit := 16#0#;
+      Reserved_3_3   : Cmsis.Device.Bit := 16#0#;
       --  ADC stop conversion command
-      ADSTP          : HAL.Bit := 16#0#;
+      ADSTP          : CR_ADSTP_Field := 16#0#;
       --  unspecified
-      Reserved_5_27  : HAL.UInt23 := 16#0#;
+      Reserved_5_27  : Cmsis.Device.UInt23 := 16#0#;
       --  ADC Voltage Regulator Enable
-      ADVREGEN       : HAL.Bit := 16#0#;
+      ADVREGEN       : CR_ADVREGEN_Field := 16#0#;
       --  unspecified
-      Reserved_29_30 : HAL.UInt2 := 16#0#;
+      Reserved_29_30 : Cmsis.Device.UInt2 := 16#0#;
       --  ADC calibration
-      ADCAL          : HAL.Bit := 16#0#;
+      ADCAL          : CR_ADCAL_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -128,46 +150,62 @@ package Cmsis.Device.ADC is
       ADCAL          at 0 range 31 .. 31;
    end record;
 
+   subtype CFGR1_DMAEN_Field is Cmsis.Device.Bit;
+   subtype CFGR1_DMACFG_Field is Cmsis.Device.Bit;
+   subtype CFGR1_SCANDIR_Field is Cmsis.Device.Bit;
+   subtype CFGR1_RES_Field is Cmsis.Device.UInt2;
+   subtype CFGR1_ALIGN_Field is Cmsis.Device.Bit;
+   subtype CFGR1_EXTSEL_Field is Cmsis.Device.UInt3;
+   subtype CFGR1_EXTEN_Field is Cmsis.Device.UInt2;
+   subtype CFGR1_OVRMOD_Field is Cmsis.Device.Bit;
+   subtype CFGR1_CONT_Field is Cmsis.Device.Bit;
+   subtype CFGR1_AUTDLY_Field is Cmsis.Device.Bit;
+   subtype CFGR1_AUTOFF_Field is Cmsis.Device.Bit;
+   subtype CFGR1_DISCEN_Field is Cmsis.Device.Bit;
+   subtype CFGR1_AWDSGL_Field is Cmsis.Device.Bit;
+   subtype CFGR1_AWDEN_Field is Cmsis.Device.Bit;
+   subtype CFGR1_AWDCH_Field is Cmsis.Device.UInt5;
+
    --  configuration register 1
    type CFGR1_Register is record
       --  Direct memory access enable
-      DMAEN          : HAL.Bit := 16#0#;
+      DMAEN          : CFGR1_DMAEN_Field := 16#0#;
       --  Direct memery access configuration
-      DMACFG         : HAL.Bit := 16#0#;
+      DMACFG         : CFGR1_DMACFG_Field := 16#0#;
       --  Scan sequence direction
-      SCANDIR        : HAL.Bit := 16#0#;
+      SCANDIR        : CFGR1_SCANDIR_Field := 16#0#;
       --  Data resolution
-      RES            : HAL.UInt2 := 16#0#;
+      RES            : CFGR1_RES_Field := 16#0#;
       --  Data alignment
-      ALIGN          : HAL.Bit := 16#0#;
+      ALIGN          : CFGR1_ALIGN_Field := 16#0#;
       --  External trigger selection
-      EXTSEL         : HAL.UInt3 := 16#0#;
+      EXTSEL         : CFGR1_EXTSEL_Field := 16#0#;
       --  unspecified
-      Reserved_9_9   : HAL.Bit := 16#0#;
+      Reserved_9_9   : Cmsis.Device.Bit := 16#0#;
       --  External trigger enable and polarity selection
-      EXTEN          : HAL.UInt2 := 16#0#;
+      EXTEN          : CFGR1_EXTEN_Field := 16#0#;
       --  Overrun management mode
-      OVRMOD         : HAL.Bit := 16#0#;
+      OVRMOD         : CFGR1_OVRMOD_Field := 16#0#;
       --  Single / continuous conversion mode
-      CONT           : HAL.Bit := 16#0#;
+      CONT           : CFGR1_CONT_Field := 16#0#;
       --  Auto-delayed conversion mode
-      AUTDLY         : HAL.Bit := 16#0#;
+      AUTDLY         : CFGR1_AUTDLY_Field := 16#0#;
       --  Auto-off mode
-      AUTOFF         : HAL.Bit := 16#0#;
+      AUTOFF         : CFGR1_AUTOFF_Field := 16#0#;
       --  Discontinuous mode
-      DISCEN         : HAL.Bit := 16#0#;
+      DISCEN         : CFGR1_DISCEN_Field := 16#0#;
       --  unspecified
-      Reserved_17_21 : HAL.UInt5 := 16#0#;
+      Reserved_17_21 : Cmsis.Device.UInt5 := 16#0#;
       --  Enable the watchdog on a single channel or on all channels
-      AWDSGL         : HAL.Bit := 16#0#;
+      AWDSGL         : CFGR1_AWDSGL_Field := 16#0#;
       --  Analog watchdog enable
-      AWDEN          : HAL.Bit := 16#0#;
+      AWDEN          : CFGR1_AWDEN_Field := 16#0#;
       --  unspecified
-      Reserved_24_25 : HAL.UInt2 := 16#0#;
+      Reserved_24_25 : Cmsis.Device.UInt2 := 16#0#;
       --  Analog watchdog channel selection
-      AWDCH          : HAL.UInt5 := 16#0#;
+      AWDCH          : CFGR1_AWDCH_Field := 16#0#;
       --  unspecified
-      Reserved_31_31 : HAL.Bit := 16#0#;
+      Reserved_31_31 : Cmsis.Device.Bit := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -194,22 +232,28 @@ package Cmsis.Device.ADC is
       Reserved_31_31 at 0 range 31 .. 31;
    end record;
 
+   subtype CFGR2_OVSE_Field is Cmsis.Device.Bit;
+   subtype CFGR2_OVSR_Field is Cmsis.Device.UInt3;
+   subtype CFGR2_OVSS_Field is Cmsis.Device.UInt4;
+   subtype CFGR2_TOVS_Field is Cmsis.Device.Bit;
+   subtype CFGR2_CKMODE_Field is Cmsis.Device.UInt2;
+
    --  configuration register 2
    type CFGR2_Register is record
       --  Oversampler Enable
-      OVSE           : HAL.Bit := 16#0#;
+      OVSE           : CFGR2_OVSE_Field := 16#0#;
       --  unspecified
-      Reserved_1_1   : HAL.Bit := 16#0#;
+      Reserved_1_1   : Cmsis.Device.Bit := 16#0#;
       --  Oversampling ratio
-      OVSR           : HAL.UInt3 := 16#0#;
+      OVSR           : CFGR2_OVSR_Field := 16#0#;
       --  Oversampling shift
-      OVSS           : HAL.UInt4 := 16#0#;
+      OVSS           : CFGR2_OVSS_Field := 16#0#;
       --  Triggered Oversampling
-      TOVS           : HAL.Bit := 16#0#;
+      TOVS           : CFGR2_TOVS_Field := 16#0#;
       --  unspecified
-      Reserved_10_29 : HAL.UInt20 := 16#0#;
+      Reserved_10_29 : Cmsis.Device.UInt20 := 16#0#;
       --  ADC clock mode
-      CKMODE         : HAL.UInt2 := 16#0#;
+      CKMODE         : CFGR2_CKMODE_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -224,12 +268,14 @@ package Cmsis.Device.ADC is
       CKMODE         at 0 range 30 .. 31;
    end record;
 
+   subtype SMPR_SMPR_Field is Cmsis.Device.UInt3;
+
    --  sampling time register
    type SMPR_Register is record
       --  Sampling time selection
-      SMPR          : HAL.UInt3 := 16#0#;
+      SMPR          : SMPR_SMPR_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : HAL.UInt29 := 16#0#;
+      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -239,16 +285,19 @@ package Cmsis.Device.ADC is
       Reserved_3_31 at 0 range 3 .. 31;
    end record;
 
+   subtype TR_LT_Field is Cmsis.Device.UInt12;
+   subtype TR_HT_Field is Cmsis.Device.UInt12;
+
    --  watchdog threshold register
    type TR_Register is record
       --  Analog watchdog lower threshold
-      LT             : HAL.UInt12 := 16#0#;
+      LT             : TR_LT_Field := 16#0#;
       --  unspecified
-      Reserved_12_15 : HAL.UInt4 := 16#0#;
+      Reserved_12_15 : Cmsis.Device.UInt4 := 16#0#;
       --  Analog watchdog higher threshold
-      HT             : HAL.UInt12 := 16#FFF#;
+      HT             : TR_HT_Field := 16#FFF#;
       --  unspecified
-      Reserved_28_31 : HAL.UInt4 := 16#0#;
+      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -260,8 +309,11 @@ package Cmsis.Device.ADC is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
+   --  CHSELR_CHSEL array element
+   subtype CHSELR_CHSEL_Element is Cmsis.Device.Bit;
+
    --  CHSELR_CHSEL array
-   type CHSELR_CHSEL_Field_Array is array (0 .. 18) of HAL.Bit
+   type CHSELR_CHSEL_Field_Array is array (0 .. 18) of CHSELR_CHSEL_Element
      with Component_Size => 1, Size => 19;
 
    --  Type definition for CHSELR_CHSEL
@@ -271,7 +323,7 @@ package Cmsis.Device.ADC is
       case As_Array is
          when False =>
             --  CHSEL as a value
-            Val : HAL.UInt19;
+            Val : Cmsis.Device.UInt19;
          when True =>
             --  CHSEL as an array
             Arr : CHSELR_CHSEL_Field_Array;
@@ -290,7 +342,7 @@ package Cmsis.Device.ADC is
       CHSEL          : CHSELR_CHSEL_Field :=
                         (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_19_31 : HAL.UInt13 := 16#0#;
+      Reserved_19_31 : Cmsis.Device.UInt13 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -300,12 +352,14 @@ package Cmsis.Device.ADC is
       Reserved_19_31 at 0 range 19 .. 31;
    end record;
 
+   subtype DR_DATA_Field is Cmsis.Device.UInt16;
+
    --  data register
    type DR_Register is record
       --  Read-only. Converted data
-      DATA           : HAL.UInt16;
+      DATA           : DR_DATA_Field;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16;
+      Reserved_16_31 : Cmsis.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -315,12 +369,14 @@ package Cmsis.Device.ADC is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype CALFACT_CALFACT_Field is Cmsis.Device.UInt7;
+
    --  ADC Calibration factor
    type CALFACT_Register is record
       --  Calibration factor
-      CALFACT       : HAL.UInt7 := 16#0#;
+      CALFACT       : CALFACT_CALFACT_Field := 16#0#;
       --  unspecified
-      Reserved_7_31 : HAL.UInt25 := 16#0#;
+      Reserved_7_31 : Cmsis.Device.UInt25 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -330,22 +386,28 @@ package Cmsis.Device.ADC is
       Reserved_7_31 at 0 range 7 .. 31;
    end record;
 
+   subtype CCR_PRESC_Field is Cmsis.Device.UInt4;
+   subtype CCR_VREFEN_Field is Cmsis.Device.Bit;
+   subtype CCR_TSEN_Field is Cmsis.Device.Bit;
+   subtype CCR_VLCDEN_Field is Cmsis.Device.Bit;
+   subtype CCR_LFMEN_Field is Cmsis.Device.Bit;
+
    --  ADC common configuration register
    type CCR_Register is record
       --  unspecified
-      Reserved_0_17  : HAL.UInt18 := 16#0#;
+      Reserved_0_17  : Cmsis.Device.UInt18 := 16#0#;
       --  ADC prescaler
-      PRESC          : HAL.UInt4 := 16#0#;
+      PRESC          : CCR_PRESC_Field := 16#0#;
       --  VREFINT enable
-      VREFEN         : HAL.Bit := 16#0#;
+      VREFEN         : CCR_VREFEN_Field := 16#0#;
       --  Temperature sensor enable
-      TSEN           : HAL.Bit := 16#0#;
+      TSEN           : CCR_TSEN_Field := 16#0#;
       --  VLCD enable
-      VLCDEN         : HAL.Bit := 16#0#;
+      VLCDEN         : CCR_VLCDEN_Field := 16#0#;
       --  Low Frequency Mode enable
-      LFMEN          : HAL.Bit := 16#0#;
+      LFMEN          : CCR_LFMEN_Field := 16#0#;
       --  unspecified
-      Reserved_26_31 : HAL.UInt6 := 16#0#;
+      Reserved_26_31 : Cmsis.Device.UInt6 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

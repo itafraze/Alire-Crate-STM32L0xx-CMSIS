@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.SPI is
@@ -14,38 +13,53 @@ package Cmsis.Device.SPI is
    -- Registers --
    ---------------
 
+   subtype CR1_CPHA_Field is Cmsis.Device.Bit;
+   subtype CR1_CPOL_Field is Cmsis.Device.Bit;
+   subtype CR1_MSTR_Field is Cmsis.Device.Bit;
+   subtype CR1_BR_Field is Cmsis.Device.UInt3;
+   subtype CR1_SPE_Field is Cmsis.Device.Bit;
+   subtype CR1_LSBFIRST_Field is Cmsis.Device.Bit;
+   subtype CR1_SSI_Field is Cmsis.Device.Bit;
+   subtype CR1_SSM_Field is Cmsis.Device.Bit;
+   subtype CR1_RXONLY_Field is Cmsis.Device.Bit;
+   subtype CR1_DFF_Field is Cmsis.Device.Bit;
+   subtype CR1_CRCNEXT_Field is Cmsis.Device.Bit;
+   subtype CR1_CRCEN_Field is Cmsis.Device.Bit;
+   subtype CR1_BIDIOE_Field is Cmsis.Device.Bit;
+   subtype CR1_BIDIMODE_Field is Cmsis.Device.Bit;
+
    --  control register 1
    type CR1_Register is record
       --  Clock phase
-      CPHA           : HAL.Bit := 16#0#;
+      CPHA           : CR1_CPHA_Field := 16#0#;
       --  Clock polarity
-      CPOL           : HAL.Bit := 16#0#;
+      CPOL           : CR1_CPOL_Field := 16#0#;
       --  Master selection
-      MSTR           : HAL.Bit := 16#0#;
+      MSTR           : CR1_MSTR_Field := 16#0#;
       --  Baud rate control
-      BR             : HAL.UInt3 := 16#0#;
+      BR             : CR1_BR_Field := 16#0#;
       --  SPI enable
-      SPE            : HAL.Bit := 16#0#;
+      SPE            : CR1_SPE_Field := 16#0#;
       --  Frame format
-      LSBFIRST       : HAL.Bit := 16#0#;
+      LSBFIRST       : CR1_LSBFIRST_Field := 16#0#;
       --  Internal slave select
-      SSI            : HAL.Bit := 16#0#;
+      SSI            : CR1_SSI_Field := 16#0#;
       --  Software slave management
-      SSM            : HAL.Bit := 16#0#;
+      SSM            : CR1_SSM_Field := 16#0#;
       --  Receive only
-      RXONLY         : HAL.Bit := 16#0#;
+      RXONLY         : CR1_RXONLY_Field := 16#0#;
       --  Data frame format
-      DFF            : HAL.Bit := 16#0#;
+      DFF            : CR1_DFF_Field := 16#0#;
       --  CRC transfer next
-      CRCNEXT        : HAL.Bit := 16#0#;
+      CRCNEXT        : CR1_CRCNEXT_Field := 16#0#;
       --  Hardware CRC calculation enable
-      CRCEN          : HAL.Bit := 16#0#;
+      CRCEN          : CR1_CRCEN_Field := 16#0#;
       --  Output enable in bidirectional mode
-      BIDIOE         : HAL.Bit := 16#0#;
+      BIDIOE         : CR1_BIDIOE_Field := 16#0#;
       --  Bidirectional data mode enable
-      BIDIMODE       : HAL.Bit := 16#0#;
+      BIDIMODE       : CR1_BIDIMODE_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -68,26 +82,34 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype CR2_RXDMAEN_Field is Cmsis.Device.Bit;
+   subtype CR2_TXDMAEN_Field is Cmsis.Device.Bit;
+   subtype CR2_SSOE_Field is Cmsis.Device.Bit;
+   subtype CR2_FRF_Field is Cmsis.Device.Bit;
+   subtype CR2_ERRIE_Field is Cmsis.Device.Bit;
+   subtype CR2_RXNEIE_Field is Cmsis.Device.Bit;
+   subtype CR2_TXEIE_Field is Cmsis.Device.Bit;
+
    --  control register 2
    type CR2_Register is record
       --  Rx buffer DMA enable
-      RXDMAEN       : HAL.Bit := 16#0#;
+      RXDMAEN       : CR2_RXDMAEN_Field := 16#0#;
       --  Tx buffer DMA enable
-      TXDMAEN       : HAL.Bit := 16#0#;
+      TXDMAEN       : CR2_TXDMAEN_Field := 16#0#;
       --  SS output enable
-      SSOE          : HAL.Bit := 16#0#;
+      SSOE          : CR2_SSOE_Field := 16#0#;
       --  unspecified
-      Reserved_3_3  : HAL.Bit := 16#0#;
+      Reserved_3_3  : Cmsis.Device.Bit := 16#0#;
       --  Frame format
-      FRF           : HAL.Bit := 16#0#;
+      FRF           : CR2_FRF_Field := 16#0#;
       --  Error interrupt enable
-      ERRIE         : HAL.Bit := 16#0#;
+      ERRIE         : CR2_ERRIE_Field := 16#0#;
       --  RX buffer not empty interrupt enable
-      RXNEIE        : HAL.Bit := 16#0#;
+      RXNEIE        : CR2_RXNEIE_Field := 16#0#;
       --  Tx buffer empty interrupt enable
-      TXEIE         : HAL.Bit := 16#0#;
+      TXEIE         : CR2_TXEIE_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -104,28 +126,38 @@ package Cmsis.Device.SPI is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype SR_RXNE_Field is Cmsis.Device.Bit;
+   subtype SR_TXE_Field is Cmsis.Device.Bit;
+   subtype SR_CHSIDE_Field is Cmsis.Device.Bit;
+   subtype SR_UDR_Field is Cmsis.Device.Bit;
+   subtype SR_CRCERR_Field is Cmsis.Device.Bit;
+   subtype SR_MODF_Field is Cmsis.Device.Bit;
+   subtype SR_OVR_Field is Cmsis.Device.Bit;
+   subtype SR_BSY_Field is Cmsis.Device.Bit;
+   subtype SR_TIFRFE_Field is Cmsis.Device.Bit;
+
    --  status register
    type SR_Register is record
       --  Read-only. Receive buffer not empty
-      RXNE          : HAL.Bit := 16#0#;
+      RXNE          : SR_RXNE_Field := 16#0#;
       --  Read-only. Transmit buffer empty
-      TXE           : HAL.Bit := 16#1#;
+      TXE           : SR_TXE_Field := 16#1#;
       --  Read-only. Channel side
-      CHSIDE        : HAL.Bit := 16#0#;
+      CHSIDE        : SR_CHSIDE_Field := 16#0#;
       --  Read-only. Underrun flag
-      UDR           : HAL.Bit := 16#0#;
+      UDR           : SR_UDR_Field := 16#0#;
       --  CRC error flag
-      CRCERR        : HAL.Bit := 16#0#;
+      CRCERR        : SR_CRCERR_Field := 16#0#;
       --  Read-only. Mode fault
-      MODF          : HAL.Bit := 16#0#;
+      MODF          : SR_MODF_Field := 16#0#;
       --  Read-only. Overrun flag
-      OVR           : HAL.Bit := 16#0#;
+      OVR           : SR_OVR_Field := 16#0#;
       --  Read-only. Busy flag
-      BSY           : HAL.Bit := 16#0#;
+      BSY           : SR_BSY_Field := 16#0#;
       --  Read-only. TI frame format error
-      TIFRFE        : HAL.Bit := 16#0#;
+      TIFRFE        : SR_TIFRFE_Field := 16#0#;
       --  unspecified
-      Reserved_9_31 : HAL.UInt23 := 16#0#;
+      Reserved_9_31 : Cmsis.Device.UInt23 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -143,12 +175,14 @@ package Cmsis.Device.SPI is
       Reserved_9_31 at 0 range 9 .. 31;
    end record;
 
+   subtype DR_DR_Field is Cmsis.Device.UInt16;
+
    --  data register
    type DR_Register is record
       --  Data register
-      DR             : HAL.UInt16 := 16#0#;
+      DR             : DR_DR_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -158,12 +192,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype CRCPR_CRCPOLY_Field is Cmsis.Device.UInt16;
+
    --  CRC polynomial register
    type CRCPR_Register is record
       --  CRC polynomial register
-      CRCPOLY        : HAL.UInt16 := 16#7#;
+      CRCPOLY        : CRCPR_CRCPOLY_Field := 16#7#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -173,12 +209,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype RXCRCR_RxCRC_Field is Cmsis.Device.UInt16;
+
    --  RX CRC register
    type RXCRCR_Register is record
       --  Read-only. Rx CRC register
-      RxCRC          : HAL.UInt16;
+      RxCRC          : RXCRCR_RxCRC_Field;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16;
+      Reserved_16_31 : Cmsis.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -188,12 +226,14 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype TXCRCR_TxCRC_Field is Cmsis.Device.UInt16;
+
    --  TX CRC register
    type TXCRCR_Register is record
       --  Read-only. Tx CRC register
-      TxCRC          : HAL.UInt16;
+      TxCRC          : TXCRCR_TxCRC_Field;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16;
+      Reserved_16_31 : Cmsis.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -203,28 +243,37 @@ package Cmsis.Device.SPI is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype I2SCFGR_CHLEN_Field is Cmsis.Device.Bit;
+   subtype I2SCFGR_DATLEN_Field is Cmsis.Device.UInt2;
+   subtype I2SCFGR_CKPOL_Field is Cmsis.Device.Bit;
+   subtype I2SCFGR_I2SSTD_Field is Cmsis.Device.UInt2;
+   subtype I2SCFGR_PCMSYNC_Field is Cmsis.Device.Bit;
+   subtype I2SCFGR_I2SCFG_Field is Cmsis.Device.UInt2;
+   subtype I2SCFGR_I2SE_Field is Cmsis.Device.Bit;
+   subtype I2SCFGR_I2SMOD_Field is Cmsis.Device.Bit;
+
    --  I2S configuration register
    type I2SCFGR_Register is record
       --  Channel length (number of bits per audio channel)
-      CHLEN          : HAL.Bit := 16#0#;
+      CHLEN          : I2SCFGR_CHLEN_Field := 16#0#;
       --  Data length to be transferred
-      DATLEN         : HAL.UInt2 := 16#0#;
+      DATLEN         : I2SCFGR_DATLEN_Field := 16#0#;
       --  Steady state clock polarity
-      CKPOL          : HAL.Bit := 16#0#;
+      CKPOL          : I2SCFGR_CKPOL_Field := 16#0#;
       --  I2S standard selection
-      I2SSTD         : HAL.UInt2 := 16#0#;
+      I2SSTD         : I2SCFGR_I2SSTD_Field := 16#0#;
       --  unspecified
-      Reserved_6_6   : HAL.Bit := 16#0#;
+      Reserved_6_6   : Cmsis.Device.Bit := 16#0#;
       --  PCM frame synchronization
-      PCMSYNC        : HAL.Bit := 16#0#;
+      PCMSYNC        : I2SCFGR_PCMSYNC_Field := 16#0#;
       --  I2S configuration mode
-      I2SCFG         : HAL.UInt2 := 16#0#;
+      I2SCFG         : I2SCFGR_I2SCFG_Field := 16#0#;
       --  I2S Enable
-      I2SE           : HAL.Bit := 16#0#;
+      I2SE           : I2SCFGR_I2SE_Field := 16#0#;
       --  I2S mode selection
-      I2SMOD         : HAL.Bit := 16#0#;
+      I2SMOD         : I2SCFGR_I2SMOD_Field := 16#0#;
       --  unspecified
-      Reserved_12_31 : HAL.UInt20 := 16#0#;
+      Reserved_12_31 : Cmsis.Device.UInt20 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -242,16 +291,20 @@ package Cmsis.Device.SPI is
       Reserved_12_31 at 0 range 12 .. 31;
    end record;
 
+   subtype I2SPR_I2SDIV_Field is Cmsis.Device.UInt8;
+   subtype I2SPR_ODD_Field is Cmsis.Device.Bit;
+   subtype I2SPR_MCKOE_Field is Cmsis.Device.Bit;
+
    --  I2S prescaler register
    type I2SPR_Register is record
       --  I2S Linear prescaler
-      I2SDIV         : HAL.UInt8 := 16#10#;
+      I2SDIV         : I2SPR_I2SDIV_Field := 16#10#;
       --  Odd factor for the prescaler
-      ODD            : HAL.Bit := 16#0#;
+      ODD            : I2SPR_ODD_Field := 16#0#;
       --  Master clock output enable
-      MCKOE          : HAL.Bit := 16#0#;
+      MCKOE          : I2SPR_MCKOE_Field := 16#0#;
       --  unspecified
-      Reserved_10_31 : HAL.UInt22 := 16#0#;
+      Reserved_10_31 : Cmsis.Device.UInt22 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

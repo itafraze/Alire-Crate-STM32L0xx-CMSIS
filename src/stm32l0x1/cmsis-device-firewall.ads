@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.Firewall is
@@ -14,14 +13,16 @@ package Cmsis.Device.Firewall is
    -- Registers --
    ---------------
 
+   subtype FIREWALL_CSSA_ADD_Field is Cmsis.Device.UInt16;
+
    --  Code segment start address
    type FIREWALL_CSSA_Register is record
       --  unspecified
-      Reserved_0_7   : HAL.UInt8 := 16#0#;
+      Reserved_0_7   : Cmsis.Device.UInt8 := 16#0#;
       --  code segment start address
-      ADD            : HAL.UInt16 := 16#0#;
+      ADD            : FIREWALL_CSSA_ADD_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : HAL.UInt8 := 16#0#;
+      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -32,14 +33,16 @@ package Cmsis.Device.Firewall is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
+   subtype FIREWALL_CSL_LENG_Field is Cmsis.Device.UInt14;
+
    --  Code segment length
    type FIREWALL_CSL_Register is record
       --  unspecified
-      Reserved_0_7   : HAL.UInt8 := 16#0#;
+      Reserved_0_7   : Cmsis.Device.UInt8 := 16#0#;
       --  code segment length
-      LENG           : HAL.UInt14 := 16#0#;
+      LENG           : FIREWALL_CSL_LENG_Field := 16#0#;
       --  unspecified
-      Reserved_22_31 : HAL.UInt10 := 16#0#;
+      Reserved_22_31 : Cmsis.Device.UInt10 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -50,14 +53,16 @@ package Cmsis.Device.Firewall is
       Reserved_22_31 at 0 range 22 .. 31;
    end record;
 
+   subtype FIREWALL_NVDSSA_ADD_Field is Cmsis.Device.UInt16;
+
    --  Non-volatile data segment start address
    type FIREWALL_NVDSSA_Register is record
       --  unspecified
-      Reserved_0_7   : HAL.UInt8 := 16#0#;
+      Reserved_0_7   : Cmsis.Device.UInt8 := 16#0#;
       --  Non-volatile data segment start address
-      ADD            : HAL.UInt16 := 16#0#;
+      ADD            : FIREWALL_NVDSSA_ADD_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : HAL.UInt8 := 16#0#;
+      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -68,14 +73,16 @@ package Cmsis.Device.Firewall is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
+   subtype FIREWALL_NVDSL_LENG_Field is Cmsis.Device.UInt14;
+
    --  Non-volatile data segment length
    type FIREWALL_NVDSL_Register is record
       --  unspecified
-      Reserved_0_7   : HAL.UInt8 := 16#0#;
+      Reserved_0_7   : Cmsis.Device.UInt8 := 16#0#;
       --  Non-volatile data segment length
-      LENG           : HAL.UInt14 := 16#0#;
+      LENG           : FIREWALL_NVDSL_LENG_Field := 16#0#;
       --  unspecified
-      Reserved_22_31 : HAL.UInt10 := 16#0#;
+      Reserved_22_31 : Cmsis.Device.UInt10 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -86,14 +93,16 @@ package Cmsis.Device.Firewall is
       Reserved_22_31 at 0 range 22 .. 31;
    end record;
 
+   subtype FIREWALL_VDSSA_ADD_Field is Cmsis.Device.UInt10;
+
    --  Volatile data segment start address
    type FIREWALL_VDSSA_Register is record
       --  unspecified
-      Reserved_0_5   : HAL.UInt6 := 16#0#;
+      Reserved_0_5   : Cmsis.Device.UInt6 := 16#0#;
       --  Volatile data segment start address
-      ADD            : HAL.UInt10 := 16#0#;
+      ADD            : FIREWALL_VDSSA_ADD_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -104,14 +113,16 @@ package Cmsis.Device.Firewall is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype FIREWALL_VDSL_LENG_Field is Cmsis.Device.UInt10;
+
    --  Volatile data segment length
    type FIREWALL_VDSL_Register is record
       --  unspecified
-      Reserved_0_5   : HAL.UInt6 := 16#0#;
+      Reserved_0_5   : Cmsis.Device.UInt6 := 16#0#;
       --  Non-volatile data segment length
-      LENG           : HAL.UInt10 := 16#0#;
+      LENG           : FIREWALL_VDSL_LENG_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -122,16 +133,20 @@ package Cmsis.Device.Firewall is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype FIREWALL_CR_FPA_Field is Cmsis.Device.Bit;
+   subtype FIREWALL_CR_VDS_Field is Cmsis.Device.Bit;
+   subtype FIREWALL_CR_VDE_Field is Cmsis.Device.Bit;
+
    --  Configuration register
    type FIREWALL_CR_Register is record
       --  Firewall pre alarm
-      FPA           : HAL.Bit := 16#0#;
+      FPA           : FIREWALL_CR_FPA_Field := 16#0#;
       --  Volatile data shared
-      VDS           : HAL.Bit := 16#0#;
+      VDS           : FIREWALL_CR_VDS_Field := 16#0#;
       --  Volatile data execution
-      VDE           : HAL.Bit := 16#0#;
+      VDE           : FIREWALL_CR_VDE_Field := 16#0#;
       --  unspecified
-      Reserved_3_31 : HAL.UInt29 := 16#0#;
+      Reserved_3_31 : Cmsis.Device.UInt29 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

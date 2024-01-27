@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.DMA is
@@ -14,66 +13,95 @@ package Cmsis.Device.DMA is
    -- Registers --
    ---------------
 
+   subtype ISR_GIF1_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF1_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF1_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF1_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF2_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF2_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF2_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF2_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF3_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF3_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF3_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF3_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF4_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF4_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF4_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF4_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF5_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF5_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF5_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF5_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF6_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF6_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF6_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF6_Field is Cmsis.Device.Bit;
+   subtype ISR_GIF7_Field is Cmsis.Device.Bit;
+   subtype ISR_TCIF7_Field is Cmsis.Device.Bit;
+   subtype ISR_HTIF7_Field is Cmsis.Device.Bit;
+   subtype ISR_TEIF7_Field is Cmsis.Device.Bit;
+
    --  interrupt status register
    type ISR_Register is record
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF1           : HAL.Bit;
+      GIF1           : ISR_GIF1_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF1          : HAL.Bit;
+      TCIF1          : ISR_TCIF1_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF1          : HAL.Bit;
+      HTIF1          : ISR_HTIF1_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF1          : HAL.Bit;
+      TEIF1          : ISR_TEIF1_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF2           : HAL.Bit;
+      GIF2           : ISR_GIF2_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF2          : HAL.Bit;
+      TCIF2          : ISR_TCIF2_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF2          : HAL.Bit;
+      HTIF2          : ISR_HTIF2_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF2          : HAL.Bit;
+      TEIF2          : ISR_TEIF2_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF3           : HAL.Bit;
+      GIF3           : ISR_GIF3_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF3          : HAL.Bit;
+      TCIF3          : ISR_TCIF3_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF3          : HAL.Bit;
+      HTIF3          : ISR_HTIF3_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF3          : HAL.Bit;
+      TEIF3          : ISR_TEIF3_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF4           : HAL.Bit;
+      GIF4           : ISR_GIF4_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF4          : HAL.Bit;
+      TCIF4          : ISR_TCIF4_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF4          : HAL.Bit;
+      HTIF4          : ISR_HTIF4_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF4          : HAL.Bit;
+      TEIF4          : ISR_TEIF4_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF5           : HAL.Bit;
+      GIF5           : ISR_GIF5_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF5          : HAL.Bit;
+      TCIF5          : ISR_TCIF5_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF5          : HAL.Bit;
+      HTIF5          : ISR_HTIF5_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF5          : HAL.Bit;
+      TEIF5          : ISR_TEIF5_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF6           : HAL.Bit;
+      GIF6           : ISR_GIF6_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF6          : HAL.Bit;
+      TCIF6          : ISR_TCIF6_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF6          : HAL.Bit;
+      HTIF6          : ISR_HTIF6_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF6          : HAL.Bit;
+      TEIF6          : ISR_TEIF6_Field;
       --  Read-only. Channel x global interrupt flag (x = 1 ..7)
-      GIF7           : HAL.Bit;
+      GIF7           : ISR_GIF7_Field;
       --  Read-only. Channel x transfer complete flag (x = 1 ..7)
-      TCIF7          : HAL.Bit;
+      TCIF7          : ISR_TCIF7_Field;
       --  Read-only. Channel x half transfer flag (x = 1 ..7)
-      HTIF7          : HAL.Bit;
+      HTIF7          : ISR_HTIF7_Field;
       --  Read-only. Channel x transfer error flag (x = 1 ..7)
-      TEIF7          : HAL.Bit;
+      TEIF7          : ISR_TEIF7_Field;
       --  unspecified
-      Reserved_28_31 : HAL.UInt4;
+      Reserved_28_31 : Cmsis.Device.UInt4;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -110,66 +138,95 @@ package Cmsis.Device.DMA is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
+   subtype IFCR_CGIF1_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF1_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF1_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF1_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF2_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF2_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF2_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF2_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF3_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF3_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF3_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF3_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF4_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF4_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF4_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF4_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF5_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF5_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF5_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF5_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF6_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF6_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF6_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF6_Field is Cmsis.Device.Bit;
+   subtype IFCR_CGIF7_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTCIF7_Field is Cmsis.Device.Bit;
+   subtype IFCR_CHTIF7_Field is Cmsis.Device.Bit;
+   subtype IFCR_CTEIF7_Field is Cmsis.Device.Bit;
+
    --  interrupt flag clear register
    type IFCR_Register is record
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF1          : HAL.Bit := 16#0#;
+      CGIF1          : IFCR_CGIF1_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF1         : HAL.Bit := 16#0#;
+      CTCIF1         : IFCR_CTCIF1_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF1         : HAL.Bit := 16#0#;
+      CHTIF1         : IFCR_CHTIF1_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF1         : HAL.Bit := 16#0#;
+      CTEIF1         : IFCR_CTEIF1_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF2          : HAL.Bit := 16#0#;
+      CGIF2          : IFCR_CGIF2_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF2         : HAL.Bit := 16#0#;
+      CTCIF2         : IFCR_CTCIF2_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF2         : HAL.Bit := 16#0#;
+      CHTIF2         : IFCR_CHTIF2_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF2         : HAL.Bit := 16#0#;
+      CTEIF2         : IFCR_CTEIF2_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF3          : HAL.Bit := 16#0#;
+      CGIF3          : IFCR_CGIF3_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF3         : HAL.Bit := 16#0#;
+      CTCIF3         : IFCR_CTCIF3_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF3         : HAL.Bit := 16#0#;
+      CHTIF3         : IFCR_CHTIF3_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF3         : HAL.Bit := 16#0#;
+      CTEIF3         : IFCR_CTEIF3_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF4          : HAL.Bit := 16#0#;
+      CGIF4          : IFCR_CGIF4_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF4         : HAL.Bit := 16#0#;
+      CTCIF4         : IFCR_CTCIF4_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF4         : HAL.Bit := 16#0#;
+      CHTIF4         : IFCR_CHTIF4_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF4         : HAL.Bit := 16#0#;
+      CTEIF4         : IFCR_CTEIF4_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF5          : HAL.Bit := 16#0#;
+      CGIF5          : IFCR_CGIF5_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF5         : HAL.Bit := 16#0#;
+      CTCIF5         : IFCR_CTCIF5_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF5         : HAL.Bit := 16#0#;
+      CHTIF5         : IFCR_CHTIF5_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF5         : HAL.Bit := 16#0#;
+      CTEIF5         : IFCR_CTEIF5_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF6          : HAL.Bit := 16#0#;
+      CGIF6          : IFCR_CGIF6_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF6         : HAL.Bit := 16#0#;
+      CTCIF6         : IFCR_CTCIF6_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF6         : HAL.Bit := 16#0#;
+      CHTIF6         : IFCR_CHTIF6_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF6         : HAL.Bit := 16#0#;
+      CTEIF6         : IFCR_CTEIF6_Field := 16#0#;
       --  Write-only. Channel x global interrupt clear (x = 1 ..7)
-      CGIF7          : HAL.Bit := 16#0#;
+      CGIF7          : IFCR_CGIF7_Field := 16#0#;
       --  Write-only. Channel x transfer complete clear (x = 1 ..7)
-      CTCIF7         : HAL.Bit := 16#0#;
+      CTCIF7         : IFCR_CTCIF7_Field := 16#0#;
       --  Write-only. Channel x half transfer clear (x = 1 ..7)
-      CHTIF7         : HAL.Bit := 16#0#;
+      CHTIF7         : IFCR_CHTIF7_Field := 16#0#;
       --  Write-only. Channel x transfer error clear (x = 1 ..7)
-      CTEIF7         : HAL.Bit := 16#0#;
+      CTEIF7         : IFCR_CTEIF7_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : HAL.UInt4 := 16#0#;
+      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -206,34 +263,47 @@ package Cmsis.Device.DMA is
       Reserved_28_31 at 0 range 28 .. 31;
    end record;
 
+   subtype CCR_EN_Field is Cmsis.Device.Bit;
+   subtype CCR_TCIE_Field is Cmsis.Device.Bit;
+   subtype CCR_HTIE_Field is Cmsis.Device.Bit;
+   subtype CCR_TEIE_Field is Cmsis.Device.Bit;
+   subtype CCR_DIR_Field is Cmsis.Device.Bit;
+   subtype CCR_CIRC_Field is Cmsis.Device.Bit;
+   subtype CCR_PINC_Field is Cmsis.Device.Bit;
+   subtype CCR_MINC_Field is Cmsis.Device.Bit;
+   subtype CCR_PSIZE_Field is Cmsis.Device.UInt2;
+   subtype CCR_MSIZE_Field is Cmsis.Device.UInt2;
+   subtype CCR_PL_Field is Cmsis.Device.UInt2;
+   subtype CCR_MEM2MEM_Field is Cmsis.Device.Bit;
+
    --  channel x configuration register
    type CCR_Register is record
       --  Channel enable
-      EN             : HAL.Bit := 16#0#;
+      EN             : CCR_EN_Field := 16#0#;
       --  Transfer complete interrupt enable
-      TCIE           : HAL.Bit := 16#0#;
+      TCIE           : CCR_TCIE_Field := 16#0#;
       --  Half transfer interrupt enable
-      HTIE           : HAL.Bit := 16#0#;
+      HTIE           : CCR_HTIE_Field := 16#0#;
       --  Transfer error interrupt enable
-      TEIE           : HAL.Bit := 16#0#;
+      TEIE           : CCR_TEIE_Field := 16#0#;
       --  Data transfer direction
-      DIR            : HAL.Bit := 16#0#;
+      DIR            : CCR_DIR_Field := 16#0#;
       --  Circular mode
-      CIRC           : HAL.Bit := 16#0#;
+      CIRC           : CCR_CIRC_Field := 16#0#;
       --  Peripheral increment mode
-      PINC           : HAL.Bit := 16#0#;
+      PINC           : CCR_PINC_Field := 16#0#;
       --  Memory increment mode
-      MINC           : HAL.Bit := 16#0#;
+      MINC           : CCR_MINC_Field := 16#0#;
       --  Peripheral size
-      PSIZE          : HAL.UInt2 := 16#0#;
+      PSIZE          : CCR_PSIZE_Field := 16#0#;
       --  Memory size
-      MSIZE          : HAL.UInt2 := 16#0#;
+      MSIZE          : CCR_MSIZE_Field := 16#0#;
       --  Channel priority level
-      PL             : HAL.UInt2 := 16#0#;
+      PL             : CCR_PL_Field := 16#0#;
       --  Memory to memory mode
-      MEM2MEM        : HAL.Bit := 16#0#;
+      MEM2MEM        : CCR_MEM2MEM_Field := 16#0#;
       --  unspecified
-      Reserved_15_31 : HAL.UInt17 := 16#0#;
+      Reserved_15_31 : Cmsis.Device.UInt17 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -254,12 +324,14 @@ package Cmsis.Device.DMA is
       Reserved_15_31 at 0 range 15 .. 31;
    end record;
 
+   subtype CNDTR_NDT_Field is Cmsis.Device.UInt16;
+
    --  channel x number of data register
    type CNDTR_Register is record
       --  Number of data to transfer
-      NDT            : HAL.UInt16 := 16#0#;
+      NDT            : CNDTR_NDT_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -269,24 +341,32 @@ package Cmsis.Device.DMA is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype CSELR_C1S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C2S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C3S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C4S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C5S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C6S_Field is Cmsis.Device.UInt4;
+   subtype CSELR_C7S_Field is Cmsis.Device.UInt4;
+
    --  channel selection register
    type CSELR_Register is record
       --  DMA channel 1 selection
-      C1S            : HAL.UInt4 := 16#0#;
+      C1S            : CSELR_C1S_Field := 16#0#;
       --  DMA channel 2 selection
-      C2S            : HAL.UInt4 := 16#0#;
+      C2S            : CSELR_C2S_Field := 16#0#;
       --  DMA channel 3 selection
-      C3S            : HAL.UInt4 := 16#0#;
+      C3S            : CSELR_C3S_Field := 16#0#;
       --  DMA channel 4 selection
-      C4S            : HAL.UInt4 := 16#0#;
+      C4S            : CSELR_C4S_Field := 16#0#;
       --  DMA channel 5 selection
-      C5S            : HAL.UInt4 := 16#0#;
+      C5S            : CSELR_C5S_Field := 16#0#;
       --  DMA channel 6 selection
-      C6S            : HAL.UInt4 := 16#0#;
+      C6S            : CSELR_C6S_Field := 16#0#;
       --  DMA channel 7 selection
-      C7S            : HAL.UInt4 := 16#0#;
+      C7S            : CSELR_C7S_Field := 16#0#;
       --  unspecified
-      Reserved_28_31 : HAL.UInt4 := 16#0#;
+      Reserved_28_31 : Cmsis.Device.UInt4 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -317,57 +397,57 @@ package Cmsis.Device.DMA is
       --  channel x number of data register
       CNDTR1 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR1  : aliased HAL.UInt32;
+      CPAR1  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR1  : aliased HAL.UInt32;
+      CMAR1  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR2   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR2 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR2  : aliased HAL.UInt32;
+      CPAR2  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR2  : aliased HAL.UInt32;
+      CMAR2  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR3   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR3 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR3  : aliased HAL.UInt32;
+      CPAR3  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR3  : aliased HAL.UInt32;
+      CMAR3  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR4   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR4 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR4  : aliased HAL.UInt32;
+      CPAR4  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR4  : aliased HAL.UInt32;
+      CMAR4  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR5   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR5 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR5  : aliased HAL.UInt32;
+      CPAR5  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR5  : aliased HAL.UInt32;
+      CMAR5  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR6   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR6 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR6  : aliased HAL.UInt32;
+      CPAR6  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR6  : aliased HAL.UInt32;
+      CMAR6  : aliased Cmsis.Device.UInt32;
       --  channel x configuration register
       CCR7   : aliased CCR_Register;
       --  channel x number of data register
       CNDTR7 : aliased CNDTR_Register;
       --  channel x peripheral address register
-      CPAR7  : aliased HAL.UInt32;
+      CPAR7  : aliased Cmsis.Device.UInt32;
       --  channel x memory address register
-      CMAR7  : aliased HAL.UInt32;
+      CMAR7  : aliased Cmsis.Device.UInt32;
       --  channel selection register
       CSELR  : aliased CSELR_Register;
    end record

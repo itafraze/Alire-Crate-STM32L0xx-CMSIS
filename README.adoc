@@ -56,8 +56,8 @@ STM32L0x1 MCUs are generated with command:
 +
 [source,bash]
 ----
-svd2ada --gen-interrupts --gen-uint-always --no-uint-subtypes \
-   --base-types-package HAL --package Cmsis.Device --output src/stm32l0x1/ \
+svd2ada --gen-interrupts --gen-uint-always --package Cmsis.Device \
+   --output src/stm32l0x1/ \
    src/stm32l0x1/stm32l0x1.svd
 ----
 +
@@ -83,7 +83,7 @@ generated with, for example, executing:
 +
 [source,bash]
 ----
-startup_gen -P stm32l0xx_cmsis.gpr \
+startup-gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
 

@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.NVIC is
@@ -14,16 +13,21 @@ package Cmsis.Device.NVIC is
    -- Registers --
    ---------------
 
+   subtype IPR0_PRI_0_Field is Cmsis.Device.UInt8;
+   subtype IPR0_PRI_1_Field is Cmsis.Device.UInt8;
+   subtype IPR0_PRI_2_Field is Cmsis.Device.UInt8;
+   subtype IPR0_PRI_3_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 0
    type IPR0_Register is record
       --  priority for interrupt 0
-      PRI_0 : HAL.UInt8 := 16#0#;
+      PRI_0 : IPR0_PRI_0_Field := 16#0#;
       --  priority for interrupt 1
-      PRI_1 : HAL.UInt8 := 16#0#;
+      PRI_1 : IPR0_PRI_1_Field := 16#0#;
       --  priority for interrupt 2
-      PRI_2 : HAL.UInt8 := 16#0#;
+      PRI_2 : IPR0_PRI_2_Field := 16#0#;
       --  priority for interrupt 3
-      PRI_3 : HAL.UInt8 := 16#0#;
+      PRI_3 : IPR0_PRI_3_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -35,16 +39,21 @@ package Cmsis.Device.NVIC is
       PRI_3 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR1_PRI_4_Field is Cmsis.Device.UInt8;
+   subtype IPR1_PRI_5_Field is Cmsis.Device.UInt8;
+   subtype IPR1_PRI_6_Field is Cmsis.Device.UInt8;
+   subtype IPR1_PRI_7_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 1
    type IPR1_Register is record
       --  priority for interrupt n
-      PRI_4 : HAL.UInt8 := 16#0#;
+      PRI_4 : IPR1_PRI_4_Field := 16#0#;
       --  priority for interrupt n
-      PRI_5 : HAL.UInt8 := 16#0#;
+      PRI_5 : IPR1_PRI_5_Field := 16#0#;
       --  priority for interrupt n
-      PRI_6 : HAL.UInt8 := 16#0#;
+      PRI_6 : IPR1_PRI_6_Field := 16#0#;
       --  priority for interrupt n
-      PRI_7 : HAL.UInt8 := 16#0#;
+      PRI_7 : IPR1_PRI_7_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -56,16 +65,21 @@ package Cmsis.Device.NVIC is
       PRI_7 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR2_PRI_8_Field is Cmsis.Device.UInt8;
+   subtype IPR2_PRI_9_Field is Cmsis.Device.UInt8;
+   subtype IPR2_PRI_10_Field is Cmsis.Device.UInt8;
+   subtype IPR2_PRI_11_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 2
    type IPR2_Register is record
       --  priority for interrupt n
-      PRI_8  : HAL.UInt8 := 16#0#;
+      PRI_8  : IPR2_PRI_8_Field := 16#0#;
       --  priority for interrupt n
-      PRI_9  : HAL.UInt8 := 16#0#;
+      PRI_9  : IPR2_PRI_9_Field := 16#0#;
       --  priority for interrupt n
-      PRI_10 : HAL.UInt8 := 16#0#;
+      PRI_10 : IPR2_PRI_10_Field := 16#0#;
       --  priority for interrupt n
-      PRI_11 : HAL.UInt8 := 16#0#;
+      PRI_11 : IPR2_PRI_11_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -77,16 +91,21 @@ package Cmsis.Device.NVIC is
       PRI_11 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR3_PRI_12_Field is Cmsis.Device.UInt8;
+   subtype IPR3_PRI_13_Field is Cmsis.Device.UInt8;
+   subtype IPR3_PRI_14_Field is Cmsis.Device.UInt8;
+   subtype IPR3_PRI_15_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 3
    type IPR3_Register is record
       --  priority for interrupt n
-      PRI_12 : HAL.UInt8 := 16#0#;
+      PRI_12 : IPR3_PRI_12_Field := 16#0#;
       --  priority for interrupt n
-      PRI_13 : HAL.UInt8 := 16#0#;
+      PRI_13 : IPR3_PRI_13_Field := 16#0#;
       --  priority for interrupt n
-      PRI_14 : HAL.UInt8 := 16#0#;
+      PRI_14 : IPR3_PRI_14_Field := 16#0#;
       --  priority for interrupt n
-      PRI_15 : HAL.UInt8 := 16#0#;
+      PRI_15 : IPR3_PRI_15_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -98,16 +117,21 @@ package Cmsis.Device.NVIC is
       PRI_15 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR4_PRI_16_Field is Cmsis.Device.UInt8;
+   subtype IPR4_PRI_17_Field is Cmsis.Device.UInt8;
+   subtype IPR4_PRI_18_Field is Cmsis.Device.UInt8;
+   subtype IPR4_PRI_19_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 4
    type IPR4_Register is record
       --  priority for interrupt n
-      PRI_16 : HAL.UInt8 := 16#0#;
+      PRI_16 : IPR4_PRI_16_Field := 16#0#;
       --  priority for interrupt n
-      PRI_17 : HAL.UInt8 := 16#0#;
+      PRI_17 : IPR4_PRI_17_Field := 16#0#;
       --  priority for interrupt n
-      PRI_18 : HAL.UInt8 := 16#0#;
+      PRI_18 : IPR4_PRI_18_Field := 16#0#;
       --  priority for interrupt n
-      PRI_19 : HAL.UInt8 := 16#0#;
+      PRI_19 : IPR4_PRI_19_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -119,16 +143,21 @@ package Cmsis.Device.NVIC is
       PRI_19 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR5_PRI_20_Field is Cmsis.Device.UInt8;
+   subtype IPR5_PRI_21_Field is Cmsis.Device.UInt8;
+   subtype IPR5_PRI_22_Field is Cmsis.Device.UInt8;
+   subtype IPR5_PRI_23_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 5
    type IPR5_Register is record
       --  priority for interrupt n
-      PRI_20 : HAL.UInt8 := 16#0#;
+      PRI_20 : IPR5_PRI_20_Field := 16#0#;
       --  priority for interrupt n
-      PRI_21 : HAL.UInt8 := 16#0#;
+      PRI_21 : IPR5_PRI_21_Field := 16#0#;
       --  priority for interrupt n
-      PRI_22 : HAL.UInt8 := 16#0#;
+      PRI_22 : IPR5_PRI_22_Field := 16#0#;
       --  priority for interrupt n
-      PRI_23 : HAL.UInt8 := 16#0#;
+      PRI_23 : IPR5_PRI_23_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -140,16 +169,21 @@ package Cmsis.Device.NVIC is
       PRI_23 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR6_PRI_24_Field is Cmsis.Device.UInt8;
+   subtype IPR6_PRI_25_Field is Cmsis.Device.UInt8;
+   subtype IPR6_PRI_26_Field is Cmsis.Device.UInt8;
+   subtype IPR6_PRI_27_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 6
    type IPR6_Register is record
       --  priority for interrupt n
-      PRI_24 : HAL.UInt8 := 16#0#;
+      PRI_24 : IPR6_PRI_24_Field := 16#0#;
       --  priority for interrupt n
-      PRI_25 : HAL.UInt8 := 16#0#;
+      PRI_25 : IPR6_PRI_25_Field := 16#0#;
       --  priority for interrupt n
-      PRI_26 : HAL.UInt8 := 16#0#;
+      PRI_26 : IPR6_PRI_26_Field := 16#0#;
       --  priority for interrupt n
-      PRI_27 : HAL.UInt8 := 16#0#;
+      PRI_27 : IPR6_PRI_27_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -161,16 +195,21 @@ package Cmsis.Device.NVIC is
       PRI_27 at 0 range 24 .. 31;
    end record;
 
+   subtype IPR7_PRI_28_Field is Cmsis.Device.UInt8;
+   subtype IPR7_PRI_29_Field is Cmsis.Device.UInt8;
+   subtype IPR7_PRI_30_Field is Cmsis.Device.UInt8;
+   subtype IPR7_PRI_31_Field is Cmsis.Device.UInt8;
+
    --  Interrupt Priority Register 7
    type IPR7_Register is record
       --  priority for interrupt n
-      PRI_28 : HAL.UInt8 := 16#0#;
+      PRI_28 : IPR7_PRI_28_Field := 16#0#;
       --  priority for interrupt n
-      PRI_29 : HAL.UInt8 := 16#0#;
+      PRI_29 : IPR7_PRI_29_Field := 16#0#;
       --  priority for interrupt n
-      PRI_30 : HAL.UInt8 := 16#0#;
+      PRI_30 : IPR7_PRI_30_Field := 16#0#;
       --  priority for interrupt n
-      PRI_31 : HAL.UInt8 := 16#0#;
+      PRI_31 : IPR7_PRI_31_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -189,13 +228,13 @@ package Cmsis.Device.NVIC is
    --  Nested Vectored Interrupt Controller
    type NVIC_Peripheral is record
       --  Interrupt Set Enable Register
-      ISER : aliased HAL.UInt32;
+      ISER : aliased Cmsis.Device.UInt32;
       --  Interrupt Clear Enable Register
-      ICER : aliased HAL.UInt32;
+      ICER : aliased Cmsis.Device.UInt32;
       --  Interrupt Set-Pending Register
-      ISPR : aliased HAL.UInt32;
+      ISPR : aliased Cmsis.Device.UInt32;
       --  Interrupt Clear-Pending Register
-      ICPR : aliased HAL.UInt32;
+      ICPR : aliased Cmsis.Device.UInt32;
       --  Interrupt Priority Register 0
       IPR0 : aliased IPR0_Register;
       --  Interrupt Priority Register 1

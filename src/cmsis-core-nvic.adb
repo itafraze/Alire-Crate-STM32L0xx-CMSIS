@@ -22,13 +22,15 @@
 --       - Implement procedure Disable_IRQ
 --       - Use *_Barrier in NVIC's IRQ-related procedures
 --       - Reformat comments for GNATdoc
+--       - Remove HAL dependency
+--       - Implement IRQ_To_Bit_Mask
 --
 ------------------------------------------------------------------------------
 
-with Interfaces;
-with HAL;
-   use type HAL.UInt8;
 with Cmsis.Device.NVIC;
+   use Cmsis.Device;
+   use Cmsis.Device.NVIC;
+   use type Cmsis.Device.NVIC.IPR0_PRI_0_Field;
 with Cmsis.Device.SCB;
 
 package body Cmsis.Core.NVIC is
@@ -36,21 +38,20 @@ package body Cmsis.Core.NVIC is
    --  - Based on source files
    --    - CMSIS:Core/Include/core_cm0plus.h
 
-   subtype NVIC_PRI_Type is HAL.UInt8;
+   ---------------------------------------------------------------------------
+   function IRQ_To_Bit_Mask (IRQ : Interrupt_Type)
+      return UInt32
+   is
+      (Shift_Left (UInt32 (2#1#), IRQ'Enum_Rep))
+   with Inline;
 
    ---------------------------------------------------------------------------
    procedure Enable_IRQ (IRQ : Interrupt_Type)
    is
-      use Interfaces;
-      use Cmsis.Device.NVIC;
-
-      subtype NVIC_ISER_Type is HAL.UInt32;
-
-      Bit_0 : constant Unsigned_32 := 2#1#;
    begin
 
       Compiler_Barrier;
-      NVIC_Periph.ISER := NVIC_ISER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+      NVIC_Periph.ISER := IRQ_To_Bit_Mask (IRQ);
       Compiler_Barrier;
 
    end Enable_IRQ;
@@ -58,15 +59,9 @@ package body Cmsis.Core.NVIC is
    ---------------------------------------------------------------------------
    procedure Disable_IRQ (IRQ : Interrupt_Type)
    is
-      use Interfaces;
-      use Cmsis.Device.NVIC;
-
-      subtype NVIC_ICER_Type is HAL.UInt32;
-
-      Bit_0 : constant Unsigned_32 := 2#1#;
    begin
 
-      NVIC_Periph.ICER := NVIC_ICER_Type (Shift_Left (Bit_0, IRQ'Enum_Rep));
+      NVIC_Periph.ICER := IRQ_To_Bit_Mask (IRQ);
       Data_Synchronization_Barrier;
       Instruction_Synchronization_Barrier;
 
@@ -74,29 +69,29 @@ package body Cmsis.Core.NVIC is
 
    ---------------------------------------------------------------------------
    function Priority_To_PRI_Value (Priority : Priority_Type)
-      return NVIC_PRI_Type
-      is (NVIC_PRI_Type (Priority) * (2 ** 6))
-      with Inline;
-   --  Implementation notes:
-   --  - Each PRI_N field is 8 bits wide, but the processor implements only
-   --    bits[7:6] of each field, and bits[5:0] read as zero and ignore
-   --    writes.
+      return IPR0_PRI_0_Field
+   is
+      --  Implementation notes:
+      --  - Each PRI_N field is 8 bits wide, but the processor implements only
+      --    bits[7:6] of each field, and bits[5:0] read as zero and ignore
+      --    writes.
+      (Shift_Left (IPR0_PRI_0_Field (Priority), 6))
+   with Inline;
 
    ---------------------------------------------------------------------------
    procedure Set_Priority (IRQ      : Interrupt_Type;
                            Priority : Priority_Type)
    is
-      use Cmsis.Device.NVIC;
-
       --  NVIC support up to 32 interrupts. The first device-specific
       --  interrupt has the IRQ value 0.
       type NVIC_PRI_Range_Type is range 0 .. Interrupt_Type'Last'Enum_Rep;
 
       --  Map the array of PRI registers
-      NVIC_PRI_Fields_Array : array (NVIC_PRI_Range_Type) of NVIC_PRI_Type
+      NVIC_PRI_Fields_Array : array (NVIC_PRI_Range_Type) of IPR0_PRI_0_Field
          with Address => NVIC_Periph.IPR0'Address, Volatile, Import;
 
-      PRI_Value : constant NVIC_PRI_Type := Priority_To_PRI_Value (Priority);
+      PRI_Value : constant IPR0_PRI_0_Field :=
+         Priority_To_PRI_Value (Priority);
    begin
 
       NVIC_PRI_Fields_Array (IRQ'Enum_Rep) := PRI_Value;
@@ -109,7 +104,8 @@ package body Cmsis.Core.NVIC is
    is
       use Cmsis.Device.SCB;
 
-      PRI_Value : constant NVIC_PRI_Type := Priority_To_PRI_Value (Priority);
+      PRI_Value : constant IPR0_PRI_0_Field :=
+         Priority_To_PRI_Value (Priority);
    begin
 
       case IRQ is

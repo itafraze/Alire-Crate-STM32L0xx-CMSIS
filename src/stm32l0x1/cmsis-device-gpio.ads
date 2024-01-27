@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.GPIO is
@@ -14,8 +13,11 @@ package Cmsis.Device.GPIO is
    -- Registers --
    ---------------
 
+   --  MODER_MODE array element
+   subtype MODER_MODE_Element is Cmsis.Device.UInt2;
+
    --  MODER_MODE array
-   type MODER_MODE_Field_Array is array (0 .. 15) of HAL.UInt2
+   type MODER_MODE_Field_Array is array (0 .. 15) of MODER_MODE_Element
      with Component_Size => 2, Size => 32;
 
    --  GPIO port mode register
@@ -25,7 +27,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  MODE as a value
-            Val : HAL.UInt32;
+            Val : Cmsis.Device.UInt32;
          when True =>
             --  MODE as an array
             Arr : MODER_MODE_Field_Array;
@@ -39,8 +41,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 31;
    end record;
 
+   --  OTYPER_OT array element
+   subtype OTYPER_OT_Element is Cmsis.Device.Bit;
+
    --  OTYPER_OT array
-   type OTYPER_OT_Field_Array is array (0 .. 15) of HAL.Bit
+   type OTYPER_OT_Field_Array is array (0 .. 15) of OTYPER_OT_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for OTYPER_OT
@@ -50,7 +55,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  OT as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  OT as an array
             Arr : OTYPER_OT_Field_Array;
@@ -68,7 +73,7 @@ package Cmsis.Device.GPIO is
       --  Port x configuration bits (y = 0..15)
       OT             : OTYPER_OT_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -78,8 +83,12 @@ package Cmsis.Device.GPIO is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  OSPEEDR_OSPEED array element
+   subtype OSPEEDR_OSPEED_Element is Cmsis.Device.UInt2;
+
    --  OSPEEDR_OSPEED array
-   type OSPEEDR_OSPEED_Field_Array is array (0 .. 15) of HAL.UInt2
+   type OSPEEDR_OSPEED_Field_Array is array (0 .. 15)
+     of OSPEEDR_OSPEED_Element
      with Component_Size => 2, Size => 32;
 
    --  GPIO port output speed register
@@ -89,7 +98,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  OSPEED as a value
-            Val : HAL.UInt32;
+            Val : Cmsis.Device.UInt32;
          when True =>
             --  OSPEED as an array
             Arr : OSPEEDR_OSPEED_Field_Array;
@@ -103,8 +112,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 31;
    end record;
 
+   --  PUPDR_PUPD array element
+   subtype PUPDR_PUPD_Element is Cmsis.Device.UInt2;
+
    --  PUPDR_PUPD array
-   type PUPDR_PUPD_Field_Array is array (0 .. 15) of HAL.UInt2
+   type PUPDR_PUPD_Field_Array is array (0 .. 15) of PUPDR_PUPD_Element
      with Component_Size => 2, Size => 32;
 
    --  GPIO port pull-up/pull-down register
@@ -114,7 +126,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  PUPD as a value
-            Val : HAL.UInt32;
+            Val : Cmsis.Device.UInt32;
          when True =>
             --  PUPD as an array
             Arr : PUPDR_PUPD_Field_Array;
@@ -128,8 +140,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 31;
    end record;
 
+   --  IDR_ID array element
+   subtype IDR_ID_Element is Cmsis.Device.Bit;
+
    --  IDR_ID array
-   type IDR_ID_Field_Array is array (0 .. 15) of HAL.Bit
+   type IDR_ID_Field_Array is array (0 .. 15) of IDR_ID_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for IDR_ID
@@ -139,7 +154,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  ID as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  ID as an array
             Arr : IDR_ID_Field_Array;
@@ -157,7 +172,7 @@ package Cmsis.Device.GPIO is
       --  Read-only. Port input data bit (y = 0..15)
       ID             : IDR_ID_Field;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16;
+      Reserved_16_31 : Cmsis.Device.UInt16;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -167,8 +182,11 @@ package Cmsis.Device.GPIO is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  ODR_OD array element
+   subtype ODR_OD_Element is Cmsis.Device.Bit;
+
    --  ODR_OD array
-   type ODR_OD_Field_Array is array (0 .. 15) of HAL.Bit
+   type ODR_OD_Field_Array is array (0 .. 15) of ODR_OD_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for ODR_OD
@@ -178,7 +196,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  OD as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  OD as an array
             Arr : ODR_OD_Field_Array;
@@ -196,7 +214,7 @@ package Cmsis.Device.GPIO is
       --  Port output data bit (y = 0..15)
       OD             : ODR_OD_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -206,8 +224,11 @@ package Cmsis.Device.GPIO is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   --  BSRR_BS array element
+   subtype BSRR_BS_Element is Cmsis.Device.Bit;
+
    --  BSRR_BS array
-   type BSRR_BS_Field_Array is array (0 .. 15) of HAL.Bit
+   type BSRR_BS_Field_Array is array (0 .. 15) of BSRR_BS_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for BSRR_BS
@@ -217,7 +238,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  BS as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  BS as an array
             Arr : BSRR_BS_Field_Array;
@@ -230,8 +251,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 15;
    end record;
 
+   --  BSRR_BR array element
+   subtype BSRR_BR_Element is Cmsis.Device.Bit;
+
    --  BSRR_BR array
-   type BSRR_BR_Field_Array is array (0 .. 15) of HAL.Bit
+   type BSRR_BR_Field_Array is array (0 .. 15) of BSRR_BR_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for BSRR_BR
@@ -241,7 +265,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  BR as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  BR as an array
             Arr : BSRR_BR_Field_Array;
@@ -269,8 +293,11 @@ package Cmsis.Device.GPIO is
       BR at 0 range 16 .. 31;
    end record;
 
+   --  LCKR_LCK array element
+   subtype LCKR_LCK_Element is Cmsis.Device.Bit;
+
    --  LCKR_LCK array
-   type LCKR_LCK_Field_Array is array (0 .. 15) of HAL.Bit
+   type LCKR_LCK_Field_Array is array (0 .. 15) of LCKR_LCK_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for LCKR_LCK
@@ -280,7 +307,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  LCK as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  LCK as an array
             Arr : LCKR_LCK_Field_Array;
@@ -293,14 +320,16 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 15;
    end record;
 
+   subtype LCKR_LCKK_Field is Cmsis.Device.Bit;
+
    --  GPIO port configuration lock register
    type LCKR_Register is record
       --  Port x lock bit y (y= 0..15)
       LCK            : LCKR_LCK_Field := (As_Array => False, Val => 16#0#);
       --  Port x lock bit y (y= 0..15)
-      LCKK           : HAL.Bit := 16#0#;
+      LCKK           : LCKR_LCKK_Field := 16#0#;
       --  unspecified
-      Reserved_17_31 : HAL.UInt15 := 16#0#;
+      Reserved_17_31 : Cmsis.Device.UInt15 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -311,8 +340,11 @@ package Cmsis.Device.GPIO is
       Reserved_17_31 at 0 range 17 .. 31;
    end record;
 
+   --  AFRL_AFSEL array element
+   subtype AFRL_AFSEL_Element is Cmsis.Device.UInt4;
+
    --  AFRL_AFSEL array
-   type AFRL_AFSEL_Field_Array is array (0 .. 7) of HAL.UInt4
+   type AFRL_AFSEL_Field_Array is array (0 .. 7) of AFRL_AFSEL_Element
      with Component_Size => 4, Size => 32;
 
    --  GPIO alternate function low register
@@ -322,7 +354,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  AFSEL as a value
-            Val : HAL.UInt32;
+            Val : Cmsis.Device.UInt32;
          when True =>
             --  AFSEL as an array
             Arr : AFRL_AFSEL_Field_Array;
@@ -336,8 +368,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 31;
    end record;
 
+   --  AFRH_AFSEL array element
+   subtype AFRH_AFSEL_Element is Cmsis.Device.UInt4;
+
    --  AFRH_AFSEL array
-   type AFRH_AFSEL_Field_Array is array (8 .. 15) of HAL.UInt4
+   type AFRH_AFSEL_Field_Array is array (8 .. 15) of AFRH_AFSEL_Element
      with Component_Size => 4, Size => 32;
 
    --  GPIO alternate function high register
@@ -347,7 +382,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  AFSEL as a value
-            Val : HAL.UInt32;
+            Val : Cmsis.Device.UInt32;
          when True =>
             --  AFSEL as an array
             Arr : AFRH_AFSEL_Field_Array;
@@ -361,8 +396,11 @@ package Cmsis.Device.GPIO is
       Arr at 0 range 0 .. 31;
    end record;
 
+   --  BRR_BR array element
+   subtype BRR_BR_Element is Cmsis.Device.Bit;
+
    --  BRR_BR array
-   type BRR_BR_Field_Array is array (0 .. 15) of HAL.Bit
+   type BRR_BR_Field_Array is array (0 .. 15) of BRR_BR_Element
      with Component_Size => 1, Size => 16;
 
    --  Type definition for BRR_BR
@@ -372,7 +410,7 @@ package Cmsis.Device.GPIO is
       case As_Array is
          when False =>
             --  BR as a value
-            Val : HAL.UInt16;
+            Val : Cmsis.Device.UInt16;
          when True =>
             --  BR as an array
             Arr : BRR_BR_Field_Array;
@@ -390,7 +428,7 @@ package Cmsis.Device.GPIO is
       --  Write-only. Port x Reset bit y (y= 0 .. 15)
       BR             : BRR_BR_Field := (As_Array => False, Val => 16#0#);
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;

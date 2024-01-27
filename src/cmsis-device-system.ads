@@ -22,6 +22,7 @@
 --       - Make procedure Init visible the start-up code
 --       - Reformat comments for GNATdoc
 --       - Rename package to Cmsis.Device.System
+--       - Remove HAL dependency
 --
 ------------------------------------------------------------------------------
 

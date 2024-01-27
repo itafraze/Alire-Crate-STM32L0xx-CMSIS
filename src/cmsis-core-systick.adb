@@ -20,6 +20,7 @@
 --       - First version
 --    2024.01 E. Zarfati
 --       - Reformat comments for GNATdoc
+--       - Remove HAL dependency
 --
 ------------------------------------------------------------------------------
 
@@ -48,9 +49,9 @@ package body Cmsis.Core.SysTick is
          others    => <>);
    begin
 
-      STK_Periph.RVR.RELOAD := HAL.UInt24 (Ticks - 1);
+      STK_Periph.RVR.RELOAD := RVR_RELOAD_Field (Ticks - 1);
       NVIC.Set_Priority (IRQ_SYSTEM_TICK, 3);
-      STK_Periph.CVR.CURRENT := 0;
+      STK_Periph.CVR.CURRENT := CVR_CURRENT_Field (0);
       STK_Periph.CSR := CSR_Field_Value;
 
    end Config;

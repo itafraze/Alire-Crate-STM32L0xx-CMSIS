@@ -4,7 +4,6 @@ pragma Style_Checks (Off);
 
 pragma Restrictions (No_Elaboration_Code);
 
-with HAL;
 with System;
 
 package Cmsis.Device.I2C is
@@ -14,52 +13,73 @@ package Cmsis.Device.I2C is
    -- Registers --
    ---------------
 
+   subtype CR1_PE_Field is Cmsis.Device.Bit;
+   subtype CR1_TXIE_Field is Cmsis.Device.Bit;
+   subtype CR1_RXIE_Field is Cmsis.Device.Bit;
+   subtype CR1_ADDRIE_Field is Cmsis.Device.Bit;
+   subtype CR1_NACKIE_Field is Cmsis.Device.Bit;
+   subtype CR1_STOPIE_Field is Cmsis.Device.Bit;
+   subtype CR1_TCIE_Field is Cmsis.Device.Bit;
+   subtype CR1_ERRIE_Field is Cmsis.Device.Bit;
+   subtype CR1_DNF_Field is Cmsis.Device.UInt4;
+   subtype CR1_ANFOFF_Field is Cmsis.Device.Bit;
+   subtype CR1_TXDMAEN_Field is Cmsis.Device.Bit;
+   subtype CR1_RXDMAEN_Field is Cmsis.Device.Bit;
+   subtype CR1_SBC_Field is Cmsis.Device.Bit;
+   subtype CR1_NOSTRETCH_Field is Cmsis.Device.Bit;
+   subtype CR1_WUPEN_Field is Cmsis.Device.Bit;
+   subtype CR1_GCEN_Field is Cmsis.Device.Bit;
+   subtype CR1_SMBHEN_Field is Cmsis.Device.Bit;
+   subtype CR1_SMBDEN_Field is Cmsis.Device.Bit;
+   subtype CR1_ALERTEN_Field is Cmsis.Device.Bit;
+   subtype CR1_PECEN_Field is Cmsis.Device.Bit;
+
    --  Control register 1
    type CR1_Register is record
       --  Peripheral enable
-      PE             : HAL.Bit := 16#0#;
+      PE             : CR1_PE_Field := 16#0#;
       --  TX Interrupt enable
-      TXIE           : HAL.Bit := 16#0#;
+      TXIE           : CR1_TXIE_Field := 16#0#;
       --  RX Interrupt enable
-      RXIE           : HAL.Bit := 16#0#;
+      RXIE           : CR1_RXIE_Field := 16#0#;
       --  Address match interrupt enable (slave only)
-      ADDRIE         : HAL.Bit := 16#0#;
+      ADDRIE         : CR1_ADDRIE_Field := 16#0#;
       --  Not acknowledge received interrupt enable
-      NACKIE         : HAL.Bit := 16#0#;
+      NACKIE         : CR1_NACKIE_Field := 16#0#;
       --  STOP detection Interrupt enable
-      STOPIE         : HAL.Bit := 16#0#;
+      STOPIE         : CR1_STOPIE_Field := 16#0#;
       --  Transfer Complete interrupt enable
-      TCIE           : HAL.Bit := 16#0#;
+      TCIE           : CR1_TCIE_Field := 16#0#;
       --  Error interrupts enable
-      ERRIE          : HAL.Bit := 16#0#;
+      ERRIE          : CR1_ERRIE_Field := 16#0#;
       --  Digital noise filter
-      DNF            : HAL.UInt4 := 16#0#;
+      DNF            : CR1_DNF_Field := 16#0#;
       --  Analog noise filter OFF
-      ANFOFF         : HAL.Bit := 16#0#;
+      ANFOFF         : CR1_ANFOFF_Field := 16#0#;
       --  unspecified
-      Reserved_13_13 : HAL.Bit := 16#0#;
+      Reserved_13_13 : Cmsis.Device.Bit := 16#0#;
       --  DMA transmission requests enable
-      TXDMAEN        : HAL.Bit := 16#0#;
+      TXDMAEN        : CR1_TXDMAEN_Field := 16#0#;
       --  DMA reception requests enable
-      RXDMAEN        : HAL.Bit := 16#0#;
+      RXDMAEN        : CR1_RXDMAEN_Field := 16#0#;
       --  Slave byte control
-      SBC            : HAL.Bit := 16#0#;
+      SBC            : CR1_SBC_Field := 16#0#;
       --  Clock stretching disable
-      NOSTRETCH      : HAL.Bit := 16#0#;
+      NOSTRETCH      : CR1_NOSTRETCH_Field := 16#0#;
       --  Wakeup from STOP enable
-      WUPEN          : HAL.Bit := 16#0#;
+      WUPEN          : CR1_WUPEN_Field := 16#0#;
       --  General call enable
-      GCEN           : HAL.Bit := 16#0#;
+      GCEN           : CR1_GCEN_Field := 16#0#;
       --  SMBus Host address enable
-      SMBHEN         : HAL.Bit := 16#0#;
+      SMBHEN         : CR1_SMBHEN_Field := 16#0#;
       --  SMBus Device Default address enable
-      SMBDEN         : HAL.Bit := 16#0#;
+      SMBDEN         : CR1_SMBDEN_Field := 16#0#;
       --  SMBUS alert enable
-      ALERTEN        : HAL.Bit := 16#0#;
+      ALERTEN        : CR1_ALERTEN_Field := 16#0#;
       --  PEC enable
-      PECEN          : HAL.Bit := 16#0#;
+      PECEN          : CR1_PECEN_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : HAL.UInt8 := 16#0#;
+      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -89,32 +109,44 @@ package Cmsis.Device.I2C is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
+   subtype CR2_SADD_Field is Cmsis.Device.UInt10;
+   subtype CR2_RD_WRN_Field is Cmsis.Device.Bit;
+   subtype CR2_ADD10_Field is Cmsis.Device.Bit;
+   subtype CR2_HEAD10R_Field is Cmsis.Device.Bit;
+   subtype CR2_START_Field is Cmsis.Device.Bit;
+   subtype CR2_STOP_Field is Cmsis.Device.Bit;
+   subtype CR2_NACK_Field is Cmsis.Device.Bit;
+   subtype CR2_NBYTES_Field is Cmsis.Device.UInt8;
+   subtype CR2_RELOAD_Field is Cmsis.Device.Bit;
+   subtype CR2_AUTOEND_Field is Cmsis.Device.Bit;
+   subtype CR2_PECBYTE_Field is Cmsis.Device.Bit;
+
    --  Control register 2
    type CR2_Register is record
       --  Slave address bit (master mode)
-      SADD           : HAL.UInt10 := 16#0#;
+      SADD           : CR2_SADD_Field := 16#0#;
       --  Transfer direction (master mode)
-      RD_WRN         : HAL.Bit := 16#0#;
+      RD_WRN         : CR2_RD_WRN_Field := 16#0#;
       --  10-bit addressing mode (master mode)
-      ADD10          : HAL.Bit := 16#0#;
+      ADD10          : CR2_ADD10_Field := 16#0#;
       --  10-bit address header only read direction (master receiver mode)
-      HEAD10R        : HAL.Bit := 16#0#;
+      HEAD10R        : CR2_HEAD10R_Field := 16#0#;
       --  Start generation
-      START          : HAL.Bit := 16#0#;
+      START          : CR2_START_Field := 16#0#;
       --  Stop generation (master mode)
-      STOP           : HAL.Bit := 16#0#;
+      STOP           : CR2_STOP_Field := 16#0#;
       --  NACK generation (slave mode)
-      NACK           : HAL.Bit := 16#0#;
+      NACK           : CR2_NACK_Field := 16#0#;
       --  Number of bytes
-      NBYTES         : HAL.UInt8 := 16#0#;
+      NBYTES         : CR2_NBYTES_Field := 16#0#;
       --  NBYTES reload mode
-      RELOAD         : HAL.Bit := 16#0#;
+      RELOAD         : CR2_RELOAD_Field := 16#0#;
       --  Automatic end mode (master mode)
-      AUTOEND        : HAL.Bit := 16#0#;
+      AUTOEND        : CR2_AUTOEND_Field := 16#0#;
       --  Packet error checking byte
-      PECBYTE        : HAL.Bit := 16#0#;
+      PECBYTE        : CR2_PECBYTE_Field := 16#0#;
       --  unspecified
-      Reserved_27_31 : HAL.UInt5 := 16#0#;
+      Reserved_27_31 : Cmsis.Device.UInt5 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -134,18 +166,22 @@ package Cmsis.Device.I2C is
       Reserved_27_31 at 0 range 27 .. 31;
    end record;
 
+   subtype OAR1_OA1_Field is Cmsis.Device.UInt10;
+   subtype OAR1_OA1MODE_Field is Cmsis.Device.Bit;
+   subtype OAR1_OA1EN_Field is Cmsis.Device.Bit;
+
    --  Own address register 1
    type OAR1_Register is record
       --  Interface address
-      OA1            : HAL.UInt10 := 16#0#;
+      OA1            : OAR1_OA1_Field := 16#0#;
       --  Own Address 1 10-bit mode
-      OA1MODE        : HAL.Bit := 16#0#;
+      OA1MODE        : OAR1_OA1MODE_Field := 16#0#;
       --  unspecified
-      Reserved_11_14 : HAL.UInt4 := 16#0#;
+      Reserved_11_14 : Cmsis.Device.UInt4 := 16#0#;
       --  Own Address 1 enable
-      OA1EN          : HAL.Bit := 16#0#;
+      OA1EN          : OAR1_OA1EN_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -158,20 +194,24 @@ package Cmsis.Device.I2C is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype OAR2_OA2_Field is Cmsis.Device.UInt7;
+   subtype OAR2_OA2MSK_Field is Cmsis.Device.UInt3;
+   subtype OAR2_OA2EN_Field is Cmsis.Device.Bit;
+
    --  Own address register 2
    type OAR2_Register is record
       --  unspecified
-      Reserved_0_0   : HAL.Bit := 16#0#;
+      Reserved_0_0   : Cmsis.Device.Bit := 16#0#;
       --  Interface address
-      OA2            : HAL.UInt7 := 16#0#;
+      OA2            : OAR2_OA2_Field := 16#0#;
       --  Own Address 2 masks
-      OA2MSK         : HAL.UInt3 := 16#0#;
+      OA2MSK         : OAR2_OA2MSK_Field := 16#0#;
       --  unspecified
-      Reserved_11_14 : HAL.UInt4 := 16#0#;
+      Reserved_11_14 : Cmsis.Device.UInt4 := 16#0#;
       --  Own Address 2 enable
-      OA2EN          : HAL.Bit := 16#0#;
+      OA2EN          : OAR2_OA2EN_Field := 16#0#;
       --  unspecified
-      Reserved_16_31 : HAL.UInt16 := 16#0#;
+      Reserved_16_31 : Cmsis.Device.UInt16 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -185,20 +225,26 @@ package Cmsis.Device.I2C is
       Reserved_16_31 at 0 range 16 .. 31;
    end record;
 
+   subtype TIMINGR_SCLL_Field is Cmsis.Device.UInt8;
+   subtype TIMINGR_SCLH_Field is Cmsis.Device.UInt8;
+   subtype TIMINGR_SDADEL_Field is Cmsis.Device.UInt4;
+   subtype TIMINGR_SCLDEL_Field is Cmsis.Device.UInt4;
+   subtype TIMINGR_PRESC_Field is Cmsis.Device.UInt4;
+
    --  Timing register
    type TIMINGR_Register is record
       --  SCL low period (master mode)
-      SCLL           : HAL.UInt8 := 16#0#;
+      SCLL           : TIMINGR_SCLL_Field := 16#0#;
       --  SCL high period (master mode)
-      SCLH           : HAL.UInt8 := 16#0#;
+      SCLH           : TIMINGR_SCLH_Field := 16#0#;
       --  Data hold time
-      SDADEL         : HAL.UInt4 := 16#0#;
+      SDADEL         : TIMINGR_SDADEL_Field := 16#0#;
       --  Data setup time
-      SCLDEL         : HAL.UInt4 := 16#0#;
+      SCLDEL         : TIMINGR_SCLDEL_Field := 16#0#;
       --  unspecified
-      Reserved_24_27 : HAL.UInt4 := 16#0#;
+      Reserved_24_27 : Cmsis.Device.UInt4 := 16#0#;
       --  Timing prescaler
-      PRESC          : HAL.UInt4 := 16#0#;
+      PRESC          : TIMINGR_PRESC_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -212,22 +258,28 @@ package Cmsis.Device.I2C is
       PRESC          at 0 range 28 .. 31;
    end record;
 
+   subtype TIMEOUTR_TIMEOUTA_Field is Cmsis.Device.UInt12;
+   subtype TIMEOUTR_TIDLE_Field is Cmsis.Device.Bit;
+   subtype TIMEOUTR_TIMOUTEN_Field is Cmsis.Device.Bit;
+   subtype TIMEOUTR_TIMEOUTB_Field is Cmsis.Device.UInt12;
+   subtype TIMEOUTR_TEXTEN_Field is Cmsis.Device.Bit;
+
    --  Status register 1
    type TIMEOUTR_Register is record
       --  Bus timeout A
-      TIMEOUTA       : HAL.UInt12 := 16#0#;
+      TIMEOUTA       : TIMEOUTR_TIMEOUTA_Field := 16#0#;
       --  Idle clock timeout detection
-      TIDLE          : HAL.Bit := 16#0#;
+      TIDLE          : TIMEOUTR_TIDLE_Field := 16#0#;
       --  unspecified
-      Reserved_13_14 : HAL.UInt2 := 16#0#;
+      Reserved_13_14 : Cmsis.Device.UInt2 := 16#0#;
       --  Clock timeout enable
-      TIMOUTEN       : HAL.Bit := 16#0#;
+      TIMOUTEN       : TIMEOUTR_TIMOUTEN_Field := 16#0#;
       --  Bus timeout B
-      TIMEOUTB       : HAL.UInt12 := 16#0#;
+      TIMEOUTB       : TIMEOUTR_TIMEOUTB_Field := 16#0#;
       --  unspecified
-      Reserved_28_30 : HAL.UInt3 := 16#0#;
+      Reserved_28_30 : Cmsis.Device.UInt3 := 16#0#;
       --  Extended clock timeout enable
-      TEXTEN         : HAL.Bit := 16#0#;
+      TEXTEN         : TIMEOUTR_TEXTEN_Field := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -242,46 +294,64 @@ package Cmsis.Device.I2C is
       TEXTEN         at 0 range 31 .. 31;
    end record;
 
+   subtype ISR_TXE_Field is Cmsis.Device.Bit;
+   subtype ISR_TXIS_Field is Cmsis.Device.Bit;
+   subtype ISR_RXNE_Field is Cmsis.Device.Bit;
+   subtype ISR_ADDR_Field is Cmsis.Device.Bit;
+   subtype ISR_NACKF_Field is Cmsis.Device.Bit;
+   subtype ISR_STOPF_Field is Cmsis.Device.Bit;
+   subtype ISR_TC_Field is Cmsis.Device.Bit;
+   subtype ISR_TCR_Field is Cmsis.Device.Bit;
+   subtype ISR_BERR_Field is Cmsis.Device.Bit;
+   subtype ISR_ARLO_Field is Cmsis.Device.Bit;
+   subtype ISR_OVR_Field is Cmsis.Device.Bit;
+   subtype ISR_PECERR_Field is Cmsis.Device.Bit;
+   subtype ISR_TIMEOUT_Field is Cmsis.Device.Bit;
+   subtype ISR_ALERT_Field is Cmsis.Device.Bit;
+   subtype ISR_BUSY_Field is Cmsis.Device.Bit;
+   subtype ISR_DIR_Field is Cmsis.Device.Bit;
+   subtype ISR_ADDCODE_Field is Cmsis.Device.UInt7;
+
    --  Interrupt and Status register
    type ISR_Register is record
       --  Transmit data register empty (transmitters)
-      TXE            : HAL.Bit := 16#1#;
+      TXE            : ISR_TXE_Field := 16#1#;
       --  Transmit interrupt status (transmitters)
-      TXIS           : HAL.Bit := 16#0#;
+      TXIS           : ISR_TXIS_Field := 16#0#;
       --  Read-only. Receive data register not empty (receivers)
-      RXNE           : HAL.Bit := 16#0#;
+      RXNE           : ISR_RXNE_Field := 16#0#;
       --  Read-only. Address matched (slave mode)
-      ADDR           : HAL.Bit := 16#0#;
+      ADDR           : ISR_ADDR_Field := 16#0#;
       --  Read-only. Not acknowledge received flag
-      NACKF          : HAL.Bit := 16#0#;
+      NACKF          : ISR_NACKF_Field := 16#0#;
       --  Read-only. Stop detection flag
-      STOPF          : HAL.Bit := 16#0#;
+      STOPF          : ISR_STOPF_Field := 16#0#;
       --  Read-only. Transfer Complete (master mode)
-      TC             : HAL.Bit := 16#0#;
+      TC             : ISR_TC_Field := 16#0#;
       --  Read-only. Transfer Complete Reload
-      TCR            : HAL.Bit := 16#0#;
+      TCR            : ISR_TCR_Field := 16#0#;
       --  Read-only. Bus error
-      BERR           : HAL.Bit := 16#0#;
+      BERR           : ISR_BERR_Field := 16#0#;
       --  Read-only. Arbitration lost
-      ARLO           : HAL.Bit := 16#0#;
+      ARLO           : ISR_ARLO_Field := 16#0#;
       --  Read-only. Overrun/Underrun (slave mode)
-      OVR            : HAL.Bit := 16#0#;
+      OVR            : ISR_OVR_Field := 16#0#;
       --  Read-only. PEC Error in reception
-      PECERR         : HAL.Bit := 16#0#;
+      PECERR         : ISR_PECERR_Field := 16#0#;
       --  Read-only. Timeout or t_low detection flag
-      TIMEOUT        : HAL.Bit := 16#0#;
+      TIMEOUT        : ISR_TIMEOUT_Field := 16#0#;
       --  Read-only. SMBus alert
-      ALERT          : HAL.Bit := 16#0#;
+      ALERT          : ISR_ALERT_Field := 16#0#;
       --  unspecified
-      Reserved_14_14 : HAL.Bit := 16#0#;
+      Reserved_14_14 : Cmsis.Device.Bit := 16#0#;
       --  Read-only. Bus busy
-      BUSY           : HAL.Bit := 16#0#;
+      BUSY           : ISR_BUSY_Field := 16#0#;
       --  Read-only. Transfer direction (Slave mode)
-      DIR            : HAL.Bit := 16#0#;
+      DIR            : ISR_DIR_Field := 16#0#;
       --  Read-only. Address match code (Slave mode)
-      ADDCODE        : HAL.UInt7 := 16#0#;
+      ADDCODE        : ISR_ADDCODE_Field := 16#0#;
       --  unspecified
-      Reserved_24_31 : HAL.UInt8 := 16#0#;
+      Reserved_24_31 : Cmsis.Device.UInt8 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -308,32 +378,42 @@ package Cmsis.Device.I2C is
       Reserved_24_31 at 0 range 24 .. 31;
    end record;
 
+   subtype ICR_ADDRCF_Field is Cmsis.Device.Bit;
+   subtype ICR_NACKCF_Field is Cmsis.Device.Bit;
+   subtype ICR_STOPCF_Field is Cmsis.Device.Bit;
+   subtype ICR_BERRCF_Field is Cmsis.Device.Bit;
+   subtype ICR_ARLOCF_Field is Cmsis.Device.Bit;
+   subtype ICR_OVRCF_Field is Cmsis.Device.Bit;
+   subtype ICR_PECCF_Field is Cmsis.Device.Bit;
+   subtype ICR_TIMOUTCF_Field is Cmsis.Device.Bit;
+   subtype ICR_ALERTCF_Field is Cmsis.Device.Bit;
+
    --  Interrupt clear register
    type ICR_Register is record
       --  unspecified
-      Reserved_0_2   : HAL.UInt3 := 16#0#;
+      Reserved_0_2   : Cmsis.Device.UInt3 := 16#0#;
       --  Write-only. Address Matched flag clear
-      ADDRCF         : HAL.Bit := 16#0#;
+      ADDRCF         : ICR_ADDRCF_Field := 16#0#;
       --  Write-only. Not Acknowledge flag clear
-      NACKCF         : HAL.Bit := 16#0#;
+      NACKCF         : ICR_NACKCF_Field := 16#0#;
       --  Write-only. Stop detection flag clear
-      STOPCF         : HAL.Bit := 16#0#;
+      STOPCF         : ICR_STOPCF_Field := 16#0#;
       --  unspecified
-      Reserved_6_7   : HAL.UInt2 := 16#0#;
+      Reserved_6_7   : Cmsis.Device.UInt2 := 16#0#;
       --  Write-only. Bus error flag clear
-      BERRCF         : HAL.Bit := 16#0#;
+      BERRCF         : ICR_BERRCF_Field := 16#0#;
       --  Write-only. Arbitration lost flag clear
-      ARLOCF         : HAL.Bit := 16#0#;
+      ARLOCF         : ICR_ARLOCF_Field := 16#0#;
       --  Write-only. Overrun/Underrun flag clear
-      OVRCF          : HAL.Bit := 16#0#;
+      OVRCF          : ICR_OVRCF_Field := 16#0#;
       --  Write-only. PEC Error flag clear
-      PECCF          : HAL.Bit := 16#0#;
+      PECCF          : ICR_PECCF_Field := 16#0#;
       --  Write-only. Timeout detection flag clear
-      TIMOUTCF       : HAL.Bit := 16#0#;
+      TIMOUTCF       : ICR_TIMOUTCF_Field := 16#0#;
       --  Write-only. Alert flag clear
-      ALERTCF        : HAL.Bit := 16#0#;
+      ALERTCF        : ICR_ALERTCF_Field := 16#0#;
       --  unspecified
-      Reserved_14_31 : HAL.UInt18 := 16#0#;
+      Reserved_14_31 : Cmsis.Device.UInt18 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -353,12 +433,14 @@ package Cmsis.Device.I2C is
       Reserved_14_31 at 0 range 14 .. 31;
    end record;
 
+   subtype PECR_PEC_Field is Cmsis.Device.UInt8;
+
    --  PEC register
    type PECR_Register is record
       --  Read-only. Packet error checking register
-      PEC           : HAL.UInt8;
+      PEC           : PECR_PEC_Field;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24;
+      Reserved_8_31 : Cmsis.Device.UInt24;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -368,12 +450,14 @@ package Cmsis.Device.I2C is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype RXDR_RXDATA_Field is Cmsis.Device.UInt8;
+
    --  Receive data register
    type RXDR_Register is record
       --  Read-only. 8-bit receive data
-      RXDATA        : HAL.UInt8;
+      RXDATA        : RXDR_RXDATA_Field;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24;
+      Reserved_8_31 : Cmsis.Device.UInt24;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
@@ -383,12 +467,14 @@ package Cmsis.Device.I2C is
       Reserved_8_31 at 0 range 8 .. 31;
    end record;
 
+   subtype TXDR_TXDATA_Field is Cmsis.Device.UInt8;
+
    --  Transmit data register
    type TXDR_Register is record
       --  8-bit transmit data
-      TXDATA        : HAL.UInt8 := 16#0#;
+      TXDATA        : TXDR_TXDATA_Field := 16#0#;
       --  unspecified
-      Reserved_8_31 : HAL.UInt24 := 16#0#;
+      Reserved_8_31 : Cmsis.Device.UInt24 := 16#0#;
    end record
      with Volatile_Full_Access, Object_Size => 32,
           Bit_Order => System.Low_Order_First;
