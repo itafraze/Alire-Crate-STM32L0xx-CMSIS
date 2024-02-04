@@ -38,7 +38,8 @@ package CMSIS.Core.SysTick is
    --  time keeping, time measurement, or as an interrupt source for tasks
    --  that need to be executed regularly.
 
-   type Ticks_Type is range 1 .. CMSIS.Device.UInt24'Last + 1;
+   type Ticks_Type is new Natural
+      range 1 .. Natural (CMSIS.Device.UInt24'Last) + 1;
    --  Type of SysTick's Tick value
    --
    --  Notes:
