@@ -18,8 +18,32 @@
 ##  Revision History:
 ##    2024.01 E. Zarfati
 ##       - First version
+##    2024.02 E. Zarfati
+##       - Add TUI configuration
+##       - Rename file and add program file already loaded warning
 ##
 ##----------------------------------------------------------------------------
 
-echo \n(gdbinit) Loading program...\n
-file ./bin/tests.elf
+echo \n(gdbinit) WARN: Assuming program file is already loaded!\n
+
+echo \n(gdbinit) Connecting to target...\n
+target extended-remote localhost:4444
+
+echo \n(gdbinit) Configuring GDB behaviour...\n
+set print pretty on
+set pagination off
+
+echo \n(gdbinit) Configuring TUI mode...\n
+set tui border-kind acs
+set tui compact-source on
+set tui tab-width 3
+tui new-layout mine {-horizontal src 1 asm 1} 2 status 0 regs 1 cmd 1
+tui enable
+layout mine
+
+echo \n(gdbinit) Running up to main...\n
+b main
+c
+d 1
+
+echo \n(gdbinit) Happy debugging...\n

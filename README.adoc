@@ -110,7 +110,7 @@ $ alr config --set alias.emu \
 ----
 $ alr config --set alias.gdbemu \
    "exec sh -- \
-   -c arm-eabi-gdb\\ -q\\ -x\\ ./share/tests/gdbinit.1\\ -x\\ ./share/tests/gdbinit-emu.2"
+   -c arm-eabi-gdb\\ -q\\ -ex\\ \"file ./bin/tests.elf\"\\ -x\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/gdbinit-emu"
 ----
 +
 In two separated terminals execute the following commands start GNATemu
