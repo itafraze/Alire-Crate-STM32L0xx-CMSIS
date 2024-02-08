@@ -54,9 +54,9 @@ svd2ada` and built with `alr with gnat-native` once the `gnat-native`
 toolchain is added as dependency. As an example, the device files for
 STM32L0x1 MCUs are generated with command:
 +
-[source,bash]
+[source,console]
 ----
-svd2ada --gen-interrupts --gen-uint-always --package CMSIS.Device \
+$ svd2ada --gen-interrupts --gen-uint-always --package CMSIS.Device \
    --output src/stm32l0x1/ \
    src/stm32l0x1/stm32l0x1.svd
 ----
@@ -81,9 +81,9 @@ retrieved with `alr get startup-gen` and built with `alr with gnat-native`
 once the `gnat-native` toolchain is added as dependency. The files cen be
 generated with, for example, executing:
 +
-[source,bash]
+[source,console]
 ----
-startup-gen -P stm32l0xx_cmsis.gpr \
+$ startup-gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
 
@@ -99,14 +99,14 @@ Edition, which ships also the `arm-eabi-gnatemu` binary, at AdaCore's
 link:https://www.adacore.com/download[Download page].
 +
 .Local alias to launch target emulation
-[source, console]
+[source,console]
 ----
 $ alr config --set alias.emu \
    "exec -P1 arm-eabi-gnatemu"
 ----
 +
 .Local alias to launch GDB with target emulation
-[source, console]
+[source,console]
 ----
 $ alr config --set alias.gdbemu \
    "exec sh -- \
@@ -126,4 +126,51 @@ $ alr emu
 [source,console]
 ----
 $ alr gdbemu
+----
+
+Target commands::
+To simplify the operations on the target device created the following Alire
+aliases that use spefic OpenOCD configuration files for the scope.
++
+Verify the connectivity with the target with `alr target-info`, defined by:
++
+.Local alias to get info from the target device
+[source,console]
+----
+$ alr config --set alias.target-info \
+   "exec sh -- \
+   -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-info.cfg"
+----
++
+A new chip may require unlocking before flashing is possible. To this end
+issue command `alr target-unlock`, defined by:
++
+.Local alias to unlock the target device
+[source,console]
+----
+$ alr config --set alias.target-unlock \
+   "exec sh -- \
+   -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-unlock.cfg"
+----
++
+Get the device ready for flashing by erasing it first with `alr
+target-erase`, defined by:
++
+.Local alias to erase the target device
+[source,console]
+----
+$ alr config --set alias.target-erase \
+   "exec sh -- \
+   -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-erase.cfg"
+----
++
+To flash the software on the target device, for example for the `tests`
+subproject, create alias `target-program` as:
++
+.Local alias to program the tests project
+[source,console]
+----
+$ alr config --set alias.target-program \
+   "exec sh -- \
+   -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -c\\ 'program\\ ./bin/tests.elf\\ verify\\ reset'\\ -c\\ 'halt'\\ -c\\ 'shutdown'"
 ----
