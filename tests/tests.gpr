@@ -4,7 +4,7 @@ with "stm32l0xx_cmsis.gpr";
 project Tests is
 
    --  The list of languages of the sources of the project.
-   for Languages use ("Ada");
+   for Languages use ("Ada", "ASM_CPP");
 
    --  Target platform and Runtime environment
    for Target use "arm-eabi";
@@ -31,6 +31,7 @@ project Tests is
 
    package Linker is
       for Switches ("Ada") use (
+         "-T", "aunit.ld",
          "-T", Stm32l0xx_Cmsis.Linker.Default_Script,
          "-Wl,--print-memory-usage");
    end Linker;
