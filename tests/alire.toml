@@ -21,6 +21,9 @@ stm32l0xx_cmsis = "validation"
 stm32l0xx_cmsis.Device = "stm32l011d4"
 stm32l0xx_cmsis.With_Startup = false
 
+[gpr-externals]
+EMU_MODE = ["run", "debug"]
+
 [gpr-set-externals]
 AUNIT_RUNTIME = "zfp-cross"
 AUNIT_BUILD_MODE = "Install"

@@ -36,21 +36,40 @@ project Tests is
          "-Wl,--print-memory-usage");
    end Linker;
 
+   type Emulation_Mode_Type is ("run", "debug");
    package Emulator is
-      for Switches use (
-         "--eargs",
-            "--semihosting-config", "enable=on,target=native",
-         "--eargs-end",
-         "--add-memory=" & "name=FLASH," &
-            "size=" & Stm32l0xx_Cmsis.Flash_Size &
-            ",addr=" & Stm32l0xx_Cmsis.Flash_Addr,
-         "--add-memory=" & "name=SRAM," &
-            "size=" & Stm32l0xx_Cmsis.Sram_Size &
-            ",addr=" & Stm32l0xx_Cmsis.Sram_Addr,
-         "--gdb=4444",
-         "--freeze-on-startup",
-         "./" & Project'Exec_Dir & "tests" & Builder'Executable_Suffix
+      Mode : Emulation_Mode_Type := external ("EMU_MODE", "run");
+
+      Switches := (
+         "--eargs"
+            , "-monitor", "none"
+            , "-serial", "none"
+            , "--semihosting-config", "enable=on,target=native"
+         , "--eargs-end"
+         , "--add-memory="
+            & "name=FLASH"
+            & ",read-only=on"
+            & ",size=" & Stm32l0xx_Cmsis.Flash_Size
+            & ",addr=" & Stm32l0xx_Cmsis.Flash_Addr
+         , "--add-memory="
+            & "name=SRAM"
+            & ",size=" & Stm32l0xx_Cmsis.Sram_Size
+            & ",addr=" & Stm32l0xx_Cmsis.Sram_Addr
+         , "--add-memory="
+            & "name=AUNIT_FLASH,read-only=on,size=0x00100000,addr=0x60000000"
+         , "--add-memory="
+            & "name=AUNIT_SRAM,size=0x00100000,addr=0x70000000"
+         , "--serial=null"
       );
-      --   arm-eabi-gdb -q -ex 'file bin/tests.elf' -ex 'target remote localhost:1234'
+      case Mode is
+      when "debug" =>
+         Switches := Switches & (
+            "--gdb=4444",
+            "--freeze-on-startup"
+         );
+      when others => null;
+      end case;
+
+      for Switches use Switches;
    end Emulator;
 end Tests;
