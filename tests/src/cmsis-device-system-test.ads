@@ -16,32 +16,17 @@
 ------------------------------------------------------------------------------
 --
 --  Revision History:
---    2024.01 E. Zarfati
+--    2024.02 E. Zarfati
 --       - First version
 --
 ------------------------------------------------------------------------------
 
-with Ada.Text_IO;
-with AUnit.Reporter.Text;
-with AUnit.Run;
-with Suite;
+with AUnit.Test_Suites;
 
-procedure Tests
-is
-   use Ada.Text_IO;
-   use AUnit.Reporter.Text;
-   use AUnit.Run;
+package CMSIS.Device.System.Test is
 
-   Reporter : Text_Reporter;
-   --
+   -------------------------------------------------------------------------
+   function Suite
+      return AUnit.Test_Suites.Access_Test_Suite;
 
-   procedure Runner is new Test_Runner (Suite.Suite);
-   --
-begin
-
-   --  Works with semihosting
-   Put_Line ("Welcome to STM32L0xx CMSIS library's tests");
-
-   Runner (Reporter);
-
-end Tests;
+end CMSIS.Device.System.Test;

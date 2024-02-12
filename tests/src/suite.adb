@@ -16,32 +16,27 @@
 ------------------------------------------------------------------------------
 --
 --  Revision History:
---    2024.01 E. Zarfati
+--    2024.02 E. Zarfati
 --       - First version
 --
 ------------------------------------------------------------------------------
 
-with Ada.Text_IO;
-with AUnit.Reporter.Text;
-with AUnit.Run;
-with Suite;
+with CMSIS.Device.System.Test;
 
-procedure Tests
-is
-   use Ada.Text_IO;
-   use AUnit.Reporter.Text;
-   use AUnit.Run;
+package body Suite is
 
-   Reporter : Text_Reporter;
-   --
+   Result : aliased AUnit.Test_Suites.Test_Suite;
+   --  Statically allocated test suite
 
-   procedure Runner is new Test_Runner (Suite.Suite);
-   --
-begin
+   function Suite
+      return AUnit.Test_Suites.Access_Test_Suite
+   is
+   begin
 
-   --  Works with semihosting
-   Put_Line ("Welcome to STM32L0xx CMSIS library's tests");
+      Result.Add_Test (CMSIS.Device.System.Test.Suite);
 
-   Runner (Reporter);
+      return Result'Access;
 
-end Tests;
+   end Suite;
+
+end Suite;
