@@ -35,7 +35,8 @@ is
    Reporter : Text_Reporter;
    --
 
-   procedure Runner is new Test_Runner (Suite.Suite);
+   procedure Runner
+      is new Test_Runner (Suite.Suite);
    --
 
    procedure Os_Abort
@@ -43,8 +44,9 @@ is
    --
 begin
 
-   New_Line; Put_Line ("Welcome to STM32L0xx CMSIS library tests");
+   New_Line; Put_Line ("STM32L0xx CMSIS library tests start");
 
+   Set_Use_ANSI_Colors (Reporter, True);
    Runner (Reporter);
 
    New_Line; Put_Line ("STM32L0xx CMSIS library tests completed");
