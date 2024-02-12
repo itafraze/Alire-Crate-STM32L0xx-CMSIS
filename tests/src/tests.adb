@@ -37,11 +37,17 @@ is
 
    procedure Runner is new Test_Runner (Suite.Suite);
    --
+
+   procedure Os_Abort
+      with Import, External_Name => "abort", No_Return;
+   --
 begin
 
-   --  Works with semihosting
-   Put_Line ("Welcome to STM32L0xx CMSIS library's tests");
+   New_Line; Put_Line ("Welcome to STM32L0xx CMSIS library tests");
 
    Runner (Reporter);
+
+   New_Line; Put_Line ("STM32L0xx CMSIS library tests completed");
+   Os_Abort;
 
 end Tests;
