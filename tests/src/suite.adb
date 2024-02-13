@@ -16,40 +16,27 @@
 ------------------------------------------------------------------------------
 --
 --  Revision History:
---    2024.01 E. Zarfati
+--    2024.02 E. Zarfati
 --       - First version
 --
 ------------------------------------------------------------------------------
 
-with Ada.Text_IO;
-with AUnit.Reporter.Text;
-with AUnit.Run;
-with Suite;
+with CMSIS.Device.System.Test;
 
-procedure Tests
-is
-   use Ada.Text_IO;
-   use AUnit.Reporter.Text;
-   use AUnit.Run;
+package body Suite is
 
-   Reporter : Text_Reporter;
-   --
+   Result : aliased AUnit.Test_Suites.Test_Suite;
+   --  Statically allocated test suite
 
-   procedure Runner
-      is new Test_Runner (Suite.Suite);
-   --
+   function Suite
+      return AUnit.Test_Suites.Access_Test_Suite
+   is
+   begin
 
-   procedure Os_Abort
-      with Import, External_Name => "abort", No_Return;
-   --
-begin
+      Result.Add_Test (CMSIS.Device.System.Test.Suite);
 
-   New_Line; Put_Line ("STM32L0xx CMSIS library tests start");
+      return Result'Access;
 
-   Set_Use_ANSI_Colors (Reporter, True);
-   Runner (Reporter);
+   end Suite;
 
-   New_Line; Put_Line ("STM32L0xx CMSIS library tests completed");
-   Os_Abort;
-
-end Tests;
+end Suite;

@@ -9,6 +9,7 @@ maintainers-logins = ["ezetec"]
 [[depends-on]]
 stm32l0xx_cmsis = "*"
 gnat_arm_elf = "^13.2.1"
+aunit = "^24.0.0"
 
 [[pins]]
 stm32l0xx_cmsis = { path='..' }
@@ -18,7 +19,14 @@ stm32l0xx_cmsis = "validation"
 
 [configuration.values]
 stm32l0xx_cmsis.Device = "stm32l011d4"
-stm32l0xx_cmsis.With_Startup = true
+stm32l0xx_cmsis.With_Startup = false
+
+[gpr-externals]
+EMU_MODE = ["run", "debug"]
+
+[gpr-set-externals]
+AUNIT_RUNTIME = "zfp-cross"
+AUNIT_BUILD_MODE = "Install"
 
 [[actions]]
 type = "post-build"

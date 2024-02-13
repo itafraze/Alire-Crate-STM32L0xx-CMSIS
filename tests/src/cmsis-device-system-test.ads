@@ -16,40 +16,26 @@
 ------------------------------------------------------------------------------
 --
 --  Revision History:
---    2024.01 E. Zarfati
+--    2024.02 E. Zarfati
 --       - First version
 --
 ------------------------------------------------------------------------------
 
-with Ada.Text_IO;
-with AUnit.Reporter.Text;
-with AUnit.Run;
-with Suite;
+with AUnit.Test_Fixtures;
 
-procedure Tests
-is
-   use Ada.Text_IO;
-   use AUnit.Reporter.Text;
-   use AUnit.Run;
+with AUnit.Test_Suites;
 
-   Reporter : Text_Reporter;
-   --
+package CMSIS.Device.System.Test is
 
-   procedure Runner
-      is new Test_Runner (Suite.Suite);
-   --
+   type Reset_Fixture is
+      new AUnit.Test_Fixtures.Test_Fixture with null record;
+   --  System status after reset
 
-   procedure Os_Abort
-      with Import, External_Name => "abort", No_Return;
-   --
-begin
+   -------------------------------------------------------------------------
+   overriding procedure Set_Up (T : in out Reset_Fixture);
 
-   New_Line; Put_Line ("STM32L0xx CMSIS library tests start");
+   -------------------------------------------------------------------------
+   function Suite
+      return AUnit.Test_Suites.Access_Test_Suite;
 
-   Set_Use_ANSI_Colors (Reporter, True);
-   Runner (Reporter);
-
-   New_Line; Put_Line ("STM32L0xx CMSIS library tests completed");
-   Os_Abort;
-
-end Tests;
+end CMSIS.Device.System.Test;

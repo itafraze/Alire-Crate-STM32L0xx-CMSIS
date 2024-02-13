@@ -30,7 +30,7 @@ link:https://github.com/STMicroelectronics/cmsis_device_l0/tree/v1.9.3[v1.9.3]
 
 |link:./src/[`src/`] | Library source files
 
-|link:./tests/[`tests/`] | Library test files
+|link:./tests/[`tests/`] | Library test subproject
 
 |===
 
@@ -87,39 +87,44 @@ $ startup-gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
 
+Alire aliases::
+Alire aliases can be configured to simplify frequent toolchain operations,
+especially if involving the `.gpr` project file or environment variables
+provided by Alire. Script file link:make-aliases.sh[make-aliases.sh] is
+provided to configure the following aliases:
++
+* `alr emu`: (tests subproject) Execute tests in emulated environment;
+* `alr emugdb`: (tests subproject) Execute tests in emulated environment with
+GDB server enabled;
+* `alr gdbemu`: (tests subproject) Launch GDB and connect to emulated
+tests instance.
++
+These aliases use GNATemu and GDB, hence they require `arm-eabi-gnatemu` and
+`arm-eabi-gdb` to be available in `$PATH`. At the time of writing, the former
+is not available through Alire. However non-GNATPro users may still find
+available ARM ELF GNAT Community Edition, which ships also the
+`arm-eabi-gnatemu` binary, at AdaCore's
+link:https://www.adacore.com/download[Download page].
+
 Tests and debug on emulated target::
 The target platform can be emulated using GNATemu. Sub-crate project
 link:./tests/tests.gpr[`tests/tests.gpr`] supplies the `Emulator` package with
-minimal working configuration. First, from within the `tests` project
-directory create the following Alire aliases to simplify the launch of GNATemu
-and GDB. They require `arm-eabi-gnatemu` and `arm-eabi-gdb` to be available in
-`$PATH`. At the time of writing, the former is not available through Alire.
-However non-GNATPro users may still find available ARM ELF GNAT Community
-Edition, which ships also the `arm-eabi-gnatemu` binary, at AdaCore's
-link:https://www.adacore.com/download[Download page].
+minimal working configuration. To run `tests` in the emulated environment,
+execute from within the sub-project folder the following command.
 +
-.Local alias to launch target emulation
+.Start tests in emulation environment
 [source,console]
 ----
-$ alr config --set alias.emu \
-   "exec -P1 arm-eabi-gnatemu"
+$ alr emu
 ----
 +
-.Local alias to launch GDB with target emulation
-[source,console]
-----
-$ alr config --set alias.gdbemu \
-   "exec sh -- \
-   -c arm-eabi-gdb\\ -q\\ -ex\\ \"file ./bin/tests.elf\"\\ -x\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/gdbinit-emu"
-----
-+
-In two separated terminals execute the following commands start GNATemu
-followed by GDB.
+To debug `tests`, within its folder run the following commands, in two
+separated terminals, to start GNATemu followed by GDB.
 +
 .Start GNATemu
 [source,console]
 ----
-$ alr emu
+$ alr emugdb
 ----
 +
 .Start GDB
