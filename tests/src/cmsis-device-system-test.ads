@@ -21,9 +21,18 @@
 --
 ------------------------------------------------------------------------------
 
+with AUnit.Test_Fixtures;
+
 with AUnit.Test_Suites;
 
 package CMSIS.Device.System.Test is
+
+   type Reset_Fixture is
+      new AUnit.Test_Fixtures.Test_Fixture with null record;
+   --  System status after reset
+
+   -------------------------------------------------------------------------
+   overriding procedure Set_Up (T : in out Reset_Fixture);
 
    -------------------------------------------------------------------------
    function Suite

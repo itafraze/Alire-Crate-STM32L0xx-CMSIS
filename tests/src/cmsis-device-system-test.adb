@@ -21,15 +21,14 @@
 --
 ------------------------------------------------------------------------------
 
-with AUnit.Test_Fixtures;
+with AUnit.Assertions;
 with AUnit.Test_Caller;
+with CMSIS.Device.SCB;
+with GNAT.Debug_Utilities;
 
 package body CMSIS.Device.System.Test
 is
-
-   type Reset_Fixture is
-      new AUnit.Test_Fixtures.Test_Fixture with null record;
-   --
+   use AUnit.Assertions;
 
    package Caller
       is new AUnit.Test_Caller (Reset_Fixture);
@@ -39,10 +38,53 @@ is
    --  Statically allocated test suite
 
    -------------------------------------------------------------------------
+   overriding procedure Set_Up (T : in out Reset_Fixture)
+   is
+      --
+      --
+      pragma Unreferenced (T);
+
+      use CMSIS.Device.SCB;
+
+   begin
+
+      --  An implementation can include configuration input signals that
+      --  determine the reset value of the TBLOFF field, otherwise it resets
+      --  to zero.
+      SCB_Periph.VTOR.Reserved_0_6 := 0;
+      SCB_Periph.VTOR.TBLOFF := 0;
+
+   end Set_Up;
+
+   -------------------------------------------------------------------------
    procedure Init_Writes_TBLOFF (T : in out Reset_Fixture)
    is
+      --  CMSIS.Device.System.Init writes the location of the interrupt vector
+      --  table in TBLOFF field in register VTOR
+      --
+      --  Implementation notes:
+      --  - Bound to Reset_Fixture as CMSIS.Device.System.Init should be
+      --    already executed from within the start-up code
+      pragma Unreferenced (T);
+
+      use GNAT.Debug_Utilities;
+      use CMSIS.Device.SCB;
+      use type Standard.System.Address;
+
+      VTOR_Register : Standard.System.Address
+         with Volatile, Import, Address => SCB_Periph.VTOR'Address;
+
+      First_IVT_Entry : UInt32
+         with Volatile, Import, External_Name => "__vectors";
    begin
-      null;
+
+      Init;
+
+      Assert (VTOR_Register = First_IVT_Entry'Address,
+              "VTOR has not been assigned IVT address: "
+                  & Image (VTOR_Register) & " /= "
+                  & Image (First_IVT_Entry'Address));
+
    end Init_Writes_TBLOFF;
 
    -------------------------------------------------------------------------
