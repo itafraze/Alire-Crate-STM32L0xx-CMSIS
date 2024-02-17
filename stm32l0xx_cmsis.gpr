@@ -34,6 +34,12 @@ project Stm32l0xx_Cmsis is
    case Device_Category is
       when "1" => Source_Dirs := Source_Dirs & (
          Device_Source_Base_Dir & "category-1");
+      when "2" => Source_Dirs := Source_Dirs & (
+         Device_Source_Base_Dir & "category-2-3-5");
+      when "3" => Source_Dirs := Source_Dirs & (
+         Device_Source_Base_Dir & "category-2-3-5");
+      when "5" => Source_Dirs := Source_Dirs & (
+         Device_Source_Base_Dir & "category-2-3-5");
       when others =>
    end case;
 
