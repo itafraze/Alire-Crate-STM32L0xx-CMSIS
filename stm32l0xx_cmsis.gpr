@@ -10,7 +10,10 @@ project Stm32l0xx_Cmsis is
 
    --  Target platform and Runtime environment
    for Target use "arm-eabi";
-   for Runtime ("Ada") use "light-cortex-m0p";
+   case Stm32l0xx_Cmsis_Config.Runtime is
+      when "light" => for Runtime ("Ada") use "light-cortex-m0p";
+      when others =>
+   end case;
 
    --  Programming languages
    for Languages use ("Ada");
