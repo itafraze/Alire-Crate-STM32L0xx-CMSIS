@@ -36,6 +36,7 @@ package CMSIS.Device.TIM.Instances is
       (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4);
    --
 
+   -------------------------------------------------------------------------
    function Supports_Counter_Mode_Select (Instance : Instance_Type)
       return Boolean
       is (Instance'Valid)
@@ -45,5 +46,16 @@ package CMSIS.Device.TIM.Instances is
    --  Implementation notes:
    --  - Based on define IS_TIM_COUNTER_MODE_SELECT_INSTANCE is
    --    cmsis_device_l0:Include/stm32l011xx.h
+
+   -------------------------------------------------------------------------
+   function Supports_Clock_Division (Instance : Instance_Type)
+      return Boolean
+      renames Supports_Counter_Mode_Select;
+   --  Check whether the instance supports clock division
+   --
+   --  Implementation notes:
+   --  - Based on define IS_TIM_CLOCK_DIVISION_INSTANCE is
+   --    cmsis_device_l0:Include/stm32l011xx.h
+   --  - Reuse the same implementation
 
 end CMSIS.Device.TIM.Instances;
