@@ -21,6 +21,8 @@
 --
 ------------------------------------------------------------------------------
 
+with Ada.Unchecked_Conversion;
+
 package CMSIS.Device.TIM.Instances is
    --  Timer (TIM) peripherals implemented in category 5 devices
 
@@ -34,6 +36,22 @@ package CMSIS.Device.TIM.Instances is
 
    type Channel_Type is
       (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4);
+   --
+
+   type Advanced_Peripheral_Access_Type is
+      access all TIM2_Peripheral;
+   --
+
+   type TIM21_Peripheral_Access_Type is
+      access all TIM21_Peripheral;
+   --
+
+   type TIM22_Peripheral_Access_Type is
+      access all TIM22_Peripheral;
+   --
+
+   type TIM6_Peripheral_Access_Type is
+      access all TIM6_Peripheral;
    --
 
    -------------------------------------------------------------------------
@@ -57,5 +75,29 @@ package CMSIS.Device.TIM.Instances is
    --  - Based on define IS_TIM_CLOCK_DIVISION_INSTANCE is
    --    cmsis_device_l0:Include/stm32l071xx.h
    --  - Reuse the same implementation
+
+   -------------------------------------------------------------------------
+   function To_Advanced_Peripheral_Access_Type is
+      new Ada.Unchecked_Conversion (TIM21_Peripheral_Access_Type,
+                                    Advanced_Peripheral_Access_Type);
+   function To_Advanced_Peripheral_Access_Type is
+      new Ada.Unchecked_Conversion (TIM22_Peripheral_Access_Type,
+                                    Advanced_Peripheral_Access_Type);
+   function To_Advanced_Peripheral_Access_Type is
+      new Ada.Unchecked_Conversion (TIM6_Peripheral_Access_Type,
+                                    Advanced_Peripheral_Access_Type);
+
+   TIMx : constant array (All_Instance_Type)
+      of Advanced_Peripheral_Access_Type := [
+         TIM2  => TIM2_Periph'Access,
+         TIM21 => To_Advanced_Peripheral_Access_Type (TIM21_Periph'Access),
+         TIM22 => To_Advanced_Peripheral_Access_Type (TIM22_Periph'Access),
+         TIM6  => To_Advanced_Peripheral_Access_Type (TIM6_Periph'Access),
+         TIM3  => TIM3_Periph'Access,
+         TIM7  => To_Advanced_Peripheral_Access_Type (TIM7_Periph'Access)];
+   --    Implementation notes:
+   --  -  Simplify access to the TIM peripherals through a common interface.
+   --     However, not all peripherals have the same capabilities, hence make
+   --     use of `Support_*` functions to discriminate their capabilities
 
 end CMSIS.Device.TIM.Instances;
