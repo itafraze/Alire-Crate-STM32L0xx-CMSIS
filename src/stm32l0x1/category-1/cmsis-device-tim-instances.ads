@@ -22,15 +22,15 @@
 ------------------------------------------------------------------------------
 
 package CMSIS.Device.TIM.Instances is
-   --  Timer (TIM) peripherals implemented in category 3 devices
+   --  Timer (TIM) peripherals implemented in category 1 devices
 
    type All_Instance_Type is
       (TIM2, TIM21, TIM22, TIM6, TIM3, TIM7);
    --  All possible timer (TIM) peripherals for the family of devices
 
    subtype Instance_Type is All_Instance_Type
-      range TIM2 .. TIM6;
-   --  Available timer (TIM) peripherals for category 3 devices
+      range TIM2 .. TIM21;
+   --  Available timer (TIM) peripherals for category 1 devices
 
    type Channel_Type is
       (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4);
