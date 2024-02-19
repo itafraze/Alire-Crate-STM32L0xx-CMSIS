@@ -28,11 +28,22 @@ package CMSIS.Device.TIM.Instances is
       (TIM2, TIM21, TIM22, TIM6, TIM3, TIM7);
    --  All possible timer (TIM) peripherals for the family of devices
 
-   subtype Instance_Type is All_Instance_Type;
+   subtype Instance_Type is
+      All_Instance_Type;
    --  Available timer (TIM) peripherals for category 5 devices
 
    type Channel_Type is
       (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4);
    --
+
+   function Supports_Counter_Mode_Select (Instance : Instance_Type)
+      return Boolean
+      is (Instance in TIM2 .. TIM22 | TIM3)
+      with Inline;
+   --  Check whether the instance supports counting mode selection
+   --
+   --  Implementation notes:
+   --  - Based on define IS_TIM_COUNTER_MODE_SELECT_INSTANCE is
+   --    cmsis_device_l0:Include/stm32l071xx.h
 
 end CMSIS.Device.TIM.Instances;
