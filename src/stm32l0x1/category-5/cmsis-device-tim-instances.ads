@@ -62,7 +62,7 @@ package CMSIS.Device.TIM.Instances is
    --  Check whether the instance supports counting mode selection
    --
    --  Implementation notes:
-   --  - Based on define IS_TIM_COUNTER_MODE_SELECT_INSTANCE is
+   --  - Based on define IS_TIM_COUNTER_MODE_SELECT_INSTANCE in
    --    cmsis_device_l0:Include/stm32l071xx.h
 
    -------------------------------------------------------------------------
@@ -72,9 +72,20 @@ package CMSIS.Device.TIM.Instances is
    --  Check whether the instance supports clock division
    --
    --  Implementation notes:
-   --  - Based on define IS_TIM_CLOCK_DIVISION_INSTANCE is
+   --  - Based on define IS_TIM_CLOCK_DIVISION_INSTANCE in
    --    cmsis_device_l0:Include/stm32l071xx.h
-   --  - Reuse the same implementation
+   --  - Reuse the equivalent implementation
+
+   ---------------------------------------------------------------------------
+   function Supports_Slave_Mode (Instance : Instance_Type)
+      return Boolean
+      renames Supports_Counter_Mode_Select;
+   --  Check whether the Slave mode available
+   --
+   --  Implementation notes:
+   --  - Based on define IS_TIM_SLAVE_INSTANCE in
+   --    cmsis_device_l0:Include/stm32l071xx.h
+   --  - Reuse the equivalent implementation
 
    -------------------------------------------------------------------------
    function To_Advanced_Peripheral_Access_Type is
