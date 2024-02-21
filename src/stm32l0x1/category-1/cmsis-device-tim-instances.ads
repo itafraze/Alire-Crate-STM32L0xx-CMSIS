@@ -25,6 +25,12 @@ with Ada.Unchecked_Conversion;
 
 package CMSIS.Device.TIM.Instances is
    --  Timer (TIM) peripherals implemented in category 1 devices
+   --
+   --  Implementation Notes:
+   --  - Based on
+   --    - cmsis_device_l0:Include/stm32l011xx.h
+   --    - cmsis_device_l0:Include/stm32l021xx.h
+   --  - Most `IS_TIM_...` defines are converted to `Supports_...` functions
 
    type All_Instance_Type is
       (TIM2, TIM21, TIM22, TIM6, TIM3, TIM7);
@@ -55,37 +61,146 @@ package CMSIS.Device.TIM.Instances is
    --
 
    ---------------------------------------------------------------------------
-   function Supports_Counter_Mode_Select (Instance : Instance_Type)
-      return Boolean
-      is (Instance'Valid)
+   function Is_Instance (Instance : All_Instance_Type)
+      return Boolean is
+      (Instance'Valid)
       with Inline;
-   --  Check whether the instance supports counting mode selection
-   --
-   --  Implementation notes:
-   --  - Based on define IS_TIM_COUNTER_MODE_SELECT_INSTANCE in
-   --    cmsis_device_l0:Include/stm32l011xx.h
+   --  All supported instances
 
    ---------------------------------------------------------------------------
-   function Supports_Clock_Division (Instance : Instance_Type)
+   function Supports_CC1 (Instance : All_Instance_Type)
       return Boolean
-      renames Supports_Counter_Mode_Select;
+      renames Is_Instance;
+   --  Check whether the instance supports at least 1 capture/compare channel
+
+   ---------------------------------------------------------------------------
+   function Supports_CC2 (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports at least 2 capture/compare channel
+
+   ---------------------------------------------------------------------------
+   function Supports_CC3 (Instance : All_Instance_Type)
+      return Boolean is
+      (Instance = TIM2)
+      with Inline;
+   --  Check whether the instance supports at least 3 capture/compare channel
+
+   ---------------------------------------------------------------------------
+   function Supports_CC4 (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports at least 4 capture/compare channel
+
+   ---------------------------------------------------------------------------
+   function Supports_DMA_Update (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports DMA requests generation (UDE)
+
+   ---------------------------------------------------------------------------
+   function Supports_DMA_Capture_Compare (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports DMA requests generation (CCxDE)
+
+   ---------------------------------------------------------------------------
+   function Supports_DMA_Burst (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports DMA burst feature
+
+   ---------------------------------------------------------------------------
+   function Supports_Outputs (Instance : All_Instance_Type;
+                              Channel : Channel_Type)
+      return Boolean is
+      (((Instance = TIM2) and then Channel'Valid)
+         or else ((Instance = TIM21)
+                  and then (Channel in CHANNEL_1 | CHANNEL_2)))
+      with Inline;
+   --  Check whether the instance have output(s) available
+
+   ---------------------------------------------------------------------------
+   function Supports_Clock_Division (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
    --  Check whether the instance supports clock division
-   --
-   --  Implementation notes:
-   --  - Based on define IS_TIM_CLOCK_DIVISION_INSTANCE in
-   --    cmsis_device_l0:Include/stm32l011xx.h
-   --  - Reuse the equivalent implementation
 
    ---------------------------------------------------------------------------
-   function Supports_Slave_Mode (Instance : Instance_Type)
+   function Supports_Clock_Source_1_ETRF (Instance : All_Instance_Type)
       return Boolean
-      renames Supports_Counter_Mode_Select;
-   --  Check whether the Slave mode available
-   --
-   --  Implementation notes:
-   --  - Based on define IS_TIM_SLAVE_INSTANCE in
-   --    cmsis_device_l0:Include/stm32l011xx.h
-   --  - Reuse the equivalent implementation
+      renames Is_Instance;
+   --  Check whether the instance supports external clock mode 1 for ETRF
+   --  input
+
+   ---------------------------------------------------------------------------
+   function Supports_Clock_Source_2_ETRF (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports external clock mode 2 for ETRF
+   --  input
+
+   ---------------------------------------------------------------------------
+   function Supports_Clock_Source_1_TIx (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports external clock mode 1 for TIX
+   --  inputs
+
+   ---------------------------------------------------------------------------
+   function Supports_Clock_Source_ITRx (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports internal trigger inputs (ITRX)
+
+   ---------------------------------------------------------------------------
+   function Supports_Counter_Mode_Select (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports counting mode selection
+
+   ---------------------------------------------------------------------------
+   function Supports_Encoder (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports encoder interface
+
+   ---------------------------------------------------------------------------
+   function Supports_External_Trigger (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports external trigger input available
+
+   ---------------------------------------------------------------------------
+   function Supports_Master_Mode (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports master mode available (TIMx_CR2.MMS
+   --  available)
+
+   ---------------------------------------------------------------------------
+   function Supports_Slave_Mode (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports Slave mode
+
+   ---------------------------------------------------------------------------
+   function Supports_Remapping (Instance : All_Instance_Type)
+      return Boolean
+      renames Is_Instance;
+   --  Check whether the instance supports remapping capability
+
+   ---------------------------------------------------------------------------
+   function Supports_OCxREF_Clear (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports output(s) OCXEC register
+
+   ---------------------------------------------------------------------------
+   function Supports_XOR (Instance : All_Instance_Type)
+      return Boolean
+      renames Supports_CC3;
+   --  Check whether the instance supports Timer input XOR function
 
    ---------------------------------------------------------------------------
    function To_Advanced_Peripheral_Access_Type is
