@@ -22,18 +22,31 @@
 ------------------------------------------------------------------------------
 
 package CMSIS.Device.DMA.Instances is
+   --  Direct Access Memory (DMA) peripherals implemented in category 1
+   --  devices
 
    type Instance_Type is
       (DMA1);
-   --
+   --  Direct Access Memory (DMA) peripherals for category 1 devices
 
-   type Channel_Type is
-      (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4, CHANNEL_5);
+   type All_Channel_Type is
+      (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4, CHANNEL_5, CHANNEL_6,
+         CHANNEL_7);
+   --  All possible Direct Access Memory (DMA) channels for the family of
+   --  devices
+
+   subtype Channel_Type is
+      All_Channel_Type range CHANNEL_1 .. CHANNEL_5;
+   --  Direct Access Memory (DMA) channels for category 1 devices
+
+   type Peripheral_Access_Type is
+      not null access all DMA1_Peripheral;
    --
 
    DMAx : constant array (Instance_Type) of
-      not null access DMA1_Peripheral := [
+      Peripheral_Access_Type := [
          DMA1 => DMA1_Periph'Access];
-   --
+   --    Implementation notes:
+   --  -  Simplify access to the DMA peripherals through a common interface
 
 end CMSIS.Device.DMA.Instances;
