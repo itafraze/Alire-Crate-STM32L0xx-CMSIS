@@ -10,9 +10,34 @@ maintainers-logins = ["ezetec"]
 gnat_arm_elf = "^13.2.1"
 
 [build-switches]
-"*".Ada_Version = "Ada2022"
+"*".ada_version  = "Ada2022"
+
+[build-switches.release]
+optimization    = "size"       # "-Os", "-gnatn", "-ffunction-sections", "-fdata-sections"
+debug_info      = "no"         #
+runtime_checks  = "none"       # "-gnatp"
+compile_checks  = "none"       #
+contracts       = "no"         #
+style_checks    = "yes"        # "-gnaty3", "-gnatya", "-gnatyA", "-gnatyB", "-gnatyb", "-gnatyc", "-gnaty-d", "-gnatye", "-gnatyf", "-gnatyh", "-gnatyi", "-gnatyI", "-gnatyk", "-gnatyl", "-gnatym", "-gnatyn", "-gnatyO", "-gnatyp", "-gnatyr", "-gnatyS", "-gnatyt", "-gnatyu", "-gnatyx"
+
+[build-switches.validation]
+optimization    = "size"       # "-Os", "-gnatn", "-ffunction-sections", "-fdata-sections"
+debug_info      = "no"         #
+runtime_checks  = "everything" # "-gnato"
+compile_checks  = "errors"     # "-gnatwa", "-gnatw.X", "-gnatVa", "-gnatwe"
+contracts       = "yes"        # "-gnata"
+style_checks    = "yes"        # "-gnaty3", "-gnatya", "-gnatyA", "-gnatyB", "-gnatyb", "-gnatyc", "-gnaty-d", "-gnatye", "-gnatyf", "-gnatyh", "-gnatyi", "-gnatyI", "-gnatyk", "-gnatyl", "-gnatym", "-gnatyn", "-gnatyO", "-gnatyp", "-gnatyr", "-gnatyS", "-gnatyt", "-gnatyu", "-gnatyx"
+
+[build-switches.development]
+optimization    = "debug"      # "-Os", "-gnatn", "-ffunction-sections", "-fdata-sections"
+debug_info      = "yes"        # "-g"
+runtime_checks  = "default"    #
+compile_checks  = "warnings"   # "-gnatwa", "-gnatw.X", "-gnatVa"
+contracts       = "yes"        # "-gnata"
+style_checks    = "no"         #
 
 [configuration.variables]
 Device = {type = "Enum", values = ["stm32l011d4"], default = "stm32l011d4"}
 With_Startup = {type = "Boolean", default = true}
 Runtime = {type = "Enum", values = ["light"], default = "light"}
+Disable_Restrictions = {type = "Boolean", default = false}
