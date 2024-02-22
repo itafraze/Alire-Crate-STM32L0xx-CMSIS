@@ -23,7 +23,20 @@ project Tests is
    end Builder;
 
    package Compiler is
-      for Default_Switches ("Ada") use Tests_Config.Ada_Compiler_Switches;
+      Switches := Tests_Config.Ada_Compiler_Switches;
+      case Tests_Config.Build_Profile is
+         when "development" =>
+            Switches := Switches &
+               ("-gnatw_a", "-gnatwc", "-gnatVd", "-gnatVa", "-gnatr",
+               "-gnatyy", "-fgnat-encodings=gdb");
+         when "validation" =>
+            Switches := Switches &
+               ("-gnatw_a", "-gnatwc", "-gnatVd", "-gnatyy",
+               "-fno-strict-aliasing");
+         when "release" =>
+            Switches := Switches & ("-gnatyy", "-fno-strict-aliasing");
+      end case;
+      for Default_Switches ("Ada") use Switches;
    end Compiler;
 
    package Binder is

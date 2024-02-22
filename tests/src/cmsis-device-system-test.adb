@@ -57,6 +57,7 @@ is
    end Set_Up;
 
    -------------------------------------------------------------------------
+   procedure Init_Writes_TBLOFF (T : in out Reset_Fixture);
    procedure Init_Writes_TBLOFF (T : in out Reset_Fixture)
    is
       --  CMSIS.Device.System.Init writes the location of the interrupt vector
