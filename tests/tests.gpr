@@ -19,6 +19,7 @@ project Tests is
    package Builder is
       for Switches ("tests") use ("--create-map-file");
       for Executable_Suffix use ".elf";
+      for Global_Configuration_Pragmas use "tests.adc";
    end Builder;
 
    package Compiler is
