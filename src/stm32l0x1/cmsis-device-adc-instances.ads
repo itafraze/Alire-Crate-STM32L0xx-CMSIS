@@ -22,13 +22,7 @@
 ------------------------------------------------------------------------------
 
 package CMSIS.Device.ADC.Instances is
-   --  Timer (ADC) peripherals implemented in category 1 devices
-   --
-   --  Implementation Notes:
-   --  - Based on
-   --    - cmsis_device_l0:Include/stm32l011xx.h
-   --    - cmsis_device_l0:Include/stm32l021xx.h
-   --  - Most `IS_ADC_...` defines are converted to `Supports_...` functions
+   --  Analog-to-Digital Converter (ADC) peripherals
 
    type All_Instance_Type is
       (ADC1);
