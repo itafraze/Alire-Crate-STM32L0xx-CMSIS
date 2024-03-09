@@ -35,9 +35,9 @@ package CMSIS.Device.ADC.Instances is
    --  device
 
    type All_Channel_Type is
-      (CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4, CHANNEL_5, CHANNEL_6,
-      CHANNEL_7, CHANNEL_8, CHANNEL_9, CHANNEL_10, CHANNEL_11, CHANNEL_12,
-      CHANNEL_13, CHANNEL_14, CHANNEL_15, CHANNEL_16, V_SENSE, V_REFINT);
+      (CHANNEL_0, CHANNEL_1, CHANNEL_2, CHANNEL_3, CHANNEL_4, CHANNEL_5,
+         CHANNEL_6, CHANNEL_7, CHANNEL_8, CHANNEL_9, CHANNEL_10, CHANNEL_11,
+         CHANNEL_12, CHANNEL_13, CHANNEL_14, CHANNEL_15, V_SENSE, V_REFINT);
    --  All possible Analog-to-Digital Converter (ADC) channels for the
    --  family of devices
 
