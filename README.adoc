@@ -7,12 +7,13 @@ Emanuele Zarfati <zarfati.tecno@gmail.com>
 
 This repository provides the
 link:https://www.arm.com/technologies/cmsis[Common Microcontroller Software
-Interface Standard] (CMSIS) library for STMicroelectronics's MCU series
+Interface Standard] (CMSIS) library for the STMicroelectronics
 link:https://www.st.com/en/microcontrollers-microprocessors/stm32l0-series.html[STM32L0]
-and intended to be distribute through the link:https://alire.ada.dev/[Alire]
-package manager. This library, ported from C to Ada, is based on:
+MCU series and is intended to be distributed via the
+link:https://alire.ada.dev/[Alire] package manager. This library, ported from
+C to Ada, is based on the following projects:
 
-.Sources
+.Credits
 [cols="3,^1",width=75%,frame=none,grid=rows,role=center]
 |===
 |Project|Version
@@ -50,6 +51,19 @@ License for the specific language governing permissions and limitations under
 the License.
 
 == Development
+
+Requests and reporting::
+Please report bugs or feature requests to the project maintainers, preferably
+using the
+link:https://gitlab.com/ezetec-alire-crates/stm32l0xx-cmsis/-/issues[issues
+tracker].
+
+Workflow:: The project development workflow is inspired by the
+link:https://nvie.com/posts/a-successful-git-branching-model/[GitFlow]
+branching model. Although strict naming conventions are not enforced,
+`feature` branches should branch from `develop` and `fix` branches from `main`
+or latest `release`.
+
 
 System View Description (SVD) files::
 The link:https://github.com/AdaCore/svd2ada[svd2ada] utility is used to
