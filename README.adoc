@@ -1,7 +1,7 @@
 = Alire Crate - STM32L0xx CMSIS
 Emanuele Zarfati <zarfati.tecno@gmail.com>
 :copyright: Copyright (C) 2024 Emanuele Zarfati. All rights reserved.
-:toc:
+:toc: preamble
 :toclevels: 2
 :hide-uri-scheme:
 
@@ -37,47 +37,63 @@ link:https://github.com/STMicroelectronics/cmsis_device_l0/tree/v1.9.3[v1.9.3]
 
 |link:./tests/[`tests/`] | Library test subproject
 
+|link:./tests/[`share/`] | Utilities shared with Alire projects using this one
+
 |===
 
-== License
+== Support status
 
-Licensed under the link:http://www.apache.org/licenses/LICENSE-2.0[Apache
-License, Version 2.0].
+Development of this library has started to support the STM32L011D4 MCU.
+Despite efforts to port the entire STMicroelectronics cmsis_device_l0 project
+from C to Ada, support for the entire family cannot yet be guaranteed due to
+lack of testing.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations under
-the License.
+.Supported lines
+[cols="2,1,1",width=75%,frame=none,grid=rows,role=center]
+|===
+| Line | SVD | Testing
+
+| L0x0 | |
+
+| L0x1 | ✔ | stm32l011d4
+
+| L0x2 | |
+
+| L0x3 | |
+
+|===
 
 == Development
 
-Requests and reporting::
+=== Requests and reporting
+
 Please report bugs or feature requests to the project maintainers, preferably
 using the
 link:https://gitlab.com/ezetec-alire-crates/stm32l0xx-cmsis/-/issues[issues
 tracker].
 
-Workflow::
+=== Workflow
+
 The main development takes place on the `develop` branch. Small,
 self-contained updates can be committed directly to the `develop` branch,
 while more impacting one should have dedicated `feature` branches.
 
-System View Description (SVD) files::
+=== System View Description (SVD) files
+
 The link:https://github.com/AdaCore/svd2ada[svd2ada] utility is used to
 generate the source files with descriptions of the memory-mapped registers of
 peripherals. This utility can be retrieved through Alire with `alr get
 svd2ada` and built with `alr with gnat-native` once the `gnat-native`
 toolchain is added as dependency. As an example, the device files for
 STM32L0x1 MCUs are generated with command:
-+
+
 [source,console]
 ----
 $ svd2ada --gen-interrupts --gen-uint-always --package CMSIS.Device \
    --output src/stm32l0x1/ \
    src/stm32l0x1/stm32l0x1.svd
 ----
-+
+
 The official SVD files can be obtained directly from STMicroelectronics,
 located within the CAD resources section of each device webpage (for example
 link:https://www.st.com/en/microcontrollers-microprocessors/stm32l011d4.html#cad-resources[stm32l011d4's
@@ -89,7 +105,8 @@ to date. Unfavourably, these patched SVD cannot be supplied to `svd2ada` as
 the tool does not yet support the latest SVD specification. As a consequence,
 the device files here committed contain errors. Double check them before use.
 
-Startup file and linker script::
+=== Startup file and linker script
+
 The link:https://github.com/AdaCore/startup-gen[startup-gen] utility is used
 to generate the startup file `crt0.S` and the linker script `link.ld` based on
 the template files `crt0.S.tmplt` and `link.ld.tmplt` respectively. Similarly
@@ -97,25 +114,26 @@ to link:https://github.com/AdaCore/svd2ada[svd2ada], this utility can be
 retrieved with `alr get startup-gen` and built with `alr with gnat-native`
 once the `gnat-native` toolchain is added as dependency. The files cen be
 generated with, for example, executing:
-+
+
 [source,console]
 ----
 $ startup-gen -P stm32l0xx_cmsis.gpr \
    -l share/stm32l0xx_cmsis/link.ld -s src/stm32l0x1/startup/crt0.S
 ----
 
-Alire aliases::
+=== Alire aliases
+
 Alire aliases can be configured to simplify frequent toolchain operations,
 especially if involving the `.gpr` project file or environment variables
 provided by Alire. Script file link:make-aliases.sh[make-aliases.sh] is
 provided to configure the following aliases:
-+
+
 * `alr emu`: (tests subproject) Execute tests in emulated environment;
 * `alr emugdb`: (tests subproject) Execute tests in emulated environment with
 GDB server enabled;
 * `alr gdbemu`: (tests subproject) Launch GDB and connect to emulated
 tests instance.
-+
+
 These aliases use GNATemu and GDB, hence they require `arm-eabi-gnatemu` and
 `arm-eabi-gdb` to be available in `$PATH`. At the time of writing, the former
 is not available through Alire. However non-GNATPro users may still find
@@ -123,39 +141,40 @@ available ARM ELF GNAT Community Edition, which ships also the
 `arm-eabi-gnatemu` binary, at AdaCore's
 link:https://www.adacore.com/download[Download page].
 
-Tests and debug on emulated target::
+=== Tests and debug on emulated target
+
 The target platform can be emulated using GNATemu. Sub-crate project
 link:./tests/tests.gpr[`tests/tests.gpr`] supplies the `Emulator` package with
 minimal working configuration. To run `tests` in the emulated environment,
 execute from within the sub-project folder the following command.
-+
+
 .Start tests in emulation environment
 [source,console]
 ----
 $ alr emu
 ----
-+
+
 To debug `tests`, within its folder run the following commands, in two
 separated terminals, to start GNATemu followed by GDB.
-+
+
 .Start GNATemu
 [source,console]
 ----
 $ alr emugdb
 ----
-+
+
 .Start GDB
 [source,console]
 ----
 $ alr gdbemu
 ----
 
-Target commands::
+=== Target commands
 To simplify the operations on the target device, create the following Alire
 aliases that use specific OpenOCD configuration files for the scope.
-+
+
 Verify the connectivity with the target with `alr target-info`, defined by:
-+
+
 .Local alias to get info from the target device
 [source,console]
 ----
@@ -163,10 +182,10 @@ $ alr config --set alias.target-info \
    "exec sh -- \
    -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-info.cfg"
 ----
-+
+
 A new chip may require unlocking before flashing is possible. To this end
 issue command `alr target-unlock`, defined by:
-+
+
 .Local alias to unlock the target device
 [source,console]
 ----
@@ -174,10 +193,10 @@ $ alr config --set alias.target-unlock \
    "exec sh -- \
    -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-unlock.cfg"
 ----
-+
+
 Get the device ready for flashing by erasing it first with `alr
 target-erase`, defined by:
-+
+
 .Local alias to erase the target device
 [source,console]
 ----
@@ -185,10 +204,10 @@ $ alr config --set alias.target-erase \
    "exec sh -- \
    -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-erase.cfg"
 ----
-+
+
 To flash the software on the target device, for example for the `tests`
 subproject, create alias `target-program` as:
-+
+
 .Local alias to program the tests project
 [source,console]
 ----
@@ -196,3 +215,14 @@ $ alr config --set alias.target-program \
    "exec sh -- \
    -c openocd\\ -f\\ \${STM32L0XX_CMSIS_ALIRE_PREFIX}/share/stm32l0xx_cmsis/openocd-init.cfg\\ -c\\ 'program\\ ./bin/tests.elf\\ verify\\ reset'\\ -c\\ 'halt'\\ -c\\ 'shutdown'"
 ----
+
+== License
+
+Licensed under the link:http://www.apache.org/licenses/LICENSE-2.0[Apache
+License, Version 2.0].
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
