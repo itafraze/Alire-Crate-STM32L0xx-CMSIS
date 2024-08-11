@@ -170,6 +170,7 @@ $ alr gdbemu
 ----
 
 === Target commands
+
 To simplify the operations on the target device, create the following Alire
 aliases that use specific OpenOCD configuration files for the scope.
 
