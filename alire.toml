@@ -4,7 +4,7 @@ version = "0.6.3-dev"
 
 authors = ["Emanuele Zarfati"]
 maintainers = ["Emanuele Zarfati <zarfati.tecno@gmail.com>"]
-maintainers-logins = ["ezetec"]
+maintainers-logins = ["itafraze"]
 
 [[depends-on]]
 gnat_arm_elf = "^13.2.1"
