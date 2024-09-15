@@ -1,10 +1,10 @@
 name = "stm32l0xx_cmsis"
 description = "CMSIS library for STMicroelectronics' STM32L0 MCU series"
 long-description = """
-Common Microcontroller Software Interface Standard (CMSIS) library for the 
+Common Microcontroller Software Interface Standard (CMSIS) library for the
 STMicroelectronics STM32L0 series of microcontrollers, ported from C to Ada.
 """
-version = "0.7.0-dev"
+version = "0.7.1-dev"
 tags = ["arm", "embedded", "cmsis"]
 notes = "Development version"
 
