@@ -25,8 +25,13 @@ package CMSIS.Device.DMA.Instances is
    --  Direct Access Memory (DMA) peripherals implemented in category 1
    --  devices
 
-   type Instance_Type is
+   type All_Instance_Type is
       (DMA1);
+   --  All possible  Direct Access Memory (DMA) peripherals for the family of
+   --  devices
+
+   subtype Instance_Type is
+      All_Instance_Type;
    --  Direct Access Memory (DMA) peripherals for category 1 devices
 
    type All_Channel_Type is
