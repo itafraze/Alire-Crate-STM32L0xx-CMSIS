@@ -20,6 +20,9 @@
 --       - First version
 --       - Reformat comments for GNATdoc
 --       - Capitalise CMSIS
+--    2024.10 E. Zarfati
+--       - Add Enable/Disable_Interrupts
+--       - Add Get/Set_PRIMASK
 --
 ------------------------------------------------------------------------------
 
@@ -32,9 +35,10 @@ package body CMSIS.Core is
    --    - CMSIS:Core/Include/cmsis_gcc.h
 
    ---------------------------------------------------------------------------
-   procedure Compiler_Barrier
-   is
+   procedure Compiler_Barrier is
+   --
       use System.Machine_Code;
+      --
    begin
 
       Asm ("",
@@ -44,9 +48,10 @@ package body CMSIS.Core is
    end Compiler_Barrier;
 
    ---------------------------------------------------------------------------
-   procedure Data_Synchronization_Barrier
-   is
+   procedure Data_Synchronization_Barrier is
+   --
       use System.Machine_Code;
+      --
    begin
 
       Asm ("dsb 0xF",
@@ -56,9 +61,10 @@ package body CMSIS.Core is
    end Data_Synchronization_Barrier;
 
    ---------------------------------------------------------------------------
-   procedure Instruction_Synchronization_Barrier
-   is
+   procedure Instruction_Synchronization_Barrier is
+   --
       use System.Machine_Code;
+      --
    begin
 
       Asm ("isb 0xF",
@@ -66,5 +72,63 @@ package body CMSIS.Core is
            Volatile => True);
 
    end Instruction_Synchronization_Barrier;
+
+   ---------------------------------------------------------------------------
+   procedure Enable_Interrupts is
+   --
+      use System.Machine_Code;
+      --
+   begin
+
+      Asm ("cpsie i",
+           Clobber => "memory",
+           Volatile => True);
+
+   end Enable_Interrupts;
+
+   ---------------------------------------------------------------------------
+   procedure Disable_Interrupts is
+   --
+      use System.Machine_Code;
+      --
+   begin
+
+      Asm ("cpsid i",
+           Clobber => "memory",
+           Volatile => True);
+
+   end Disable_Interrupts;
+
+   ---------------------------------------------------------------------------
+   function Get_PRIMASK
+      return UInt32 is
+   --
+      use System.Machine_Code;
+      --
+      PRIMASK : UInt32;
+      --  Returned value
+   begin
+
+      Asm ("mrs %0, PRIMASK",
+           Outputs => UInt32'Asm_Output ("=r", PRIMASK),
+           Volatile => True);
+
+      return PRIMASK;
+
+   end Get_PRIMASK;
+
+   ---------------------------------------------------------------------------
+   procedure Set_PRIMASK (PRIMASK : UInt32) is
+   --
+      use System.Machine_Code;
+      --
+   begin
+
+      Asm ("MSR primask, %0",
+           Inputs => UInt32'Asm_Input ("r", PRIMASK),
+           Clobber => "memory",
+           Volatile => True);
+
+   end Set_PRIMASK;
 
 end CMSIS.Core;

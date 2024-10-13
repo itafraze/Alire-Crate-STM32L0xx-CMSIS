@@ -4,7 +4,7 @@ long-description = """
 Common Microcontroller Software Interface Standard (CMSIS) library for the
 STMicroelectronics STM32L0 series of microcontrollers, ported from C to Ada.
 """
-version = "0.7.2-dev"
+version = "0.7.3-dev"
 tags = ["arm", "embedded", "cmsis", "stm32", "cortex-m0"]
 notes = "Development version"
 

@@ -22,8 +22,14 @@
 --       - Add interface Compiler_Barrier
 --       - Reformat comments for GNATdoc
 --       - Capitalise CMSIS
+--    2024.10 E. Zarfati
+--       - Add Enable/Disable_Interrupts
+--       - Add Get/Set_PRIMASK
 --
 ------------------------------------------------------------------------------
+
+with CMSIS.Device;
+   use CMSIS.Device;
 
 package CMSIS.Core is
    --  Standardized API for the Cortex-M processor core and peripherals.
@@ -70,5 +76,45 @@ package CMSIS.Core is
    --  Instruction Synchronization Barrier flushes the pipeline in the
    --  processor, so that all instructions following the ISB are fetched from
    --  cache or memory, after the instruction has been completed.
+
+   ---------------------------------------------------------------------------
+   procedure Enable_Interrupts
+      with Inline;
+   --  Enable IRQ Interrupts
+   --
+   --  Enables IRQ interrupts by clearing special-purpose register PRIMASK.
+   --
+   --  Notes:
+   --  - Can only be executed in Privileged modes.
+
+   ---------------------------------------------------------------------------
+   procedure Disable_Interrupts
+      with Inline;
+   --  Disable IRQ Interrupts
+   --
+   --  Enables IRQ interrupts by clearing special-purpose register PRIMASK.
+   --
+   --  Notes:
+   --  - Can only be executed in Privileged modes.
+
+   ---------------------------------------------------------------------------
+   function Get_PRIMASK
+      return UInt32
+      with Inline;
+   --  Get Priority Mask
+   --
+   --  Returns the current state of the priority mask bit from the Priority
+   --  Mask Register.
+   --
+   --  @return Priority Mask register value
+
+   ---------------------------------------------------------------------------
+   procedure Set_PRIMASK (PRIMASK : UInt32)
+      with Inline;
+   --  Set Priority Mask
+   --
+   --  Assigns the given value to the Priority Mask Register.
+   --
+   --  @param PRIMASK register value
 
 end CMSIS.Core;
